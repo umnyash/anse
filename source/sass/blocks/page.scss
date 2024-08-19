@@ -1,0 +1,27 @@
+.page__body {
+  min-width: 360px;
+  margin: 0;
+  font: 400 16px/19px $main-font-family;
+  color: var(--text-color);
+  background-color: var(--background-color);
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.page__inner {
+  position: relative;
+  z-index: 0;
+  display: grid;
+  box-sizing: border-box;
+  height: 100vh;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
+  overflow-y: auto;
+
+  @supports (height: 100dvh) {
+    height: 100dvh;
+  }
+}

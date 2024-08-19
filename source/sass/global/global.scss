@@ -1,0 +1,18 @@
+:root {
+  --text-color: #454545;
+  --text-weak-color: #898c92;
+  --text-light-color: #ffffff;
+  --background-color: #ffffff;
+  --background-additional-color: #f8f8f8;
+  --brand-color: #faafd4;
+  --accent-color: #f4371c;
+  --overlay-color: rgba(69, 69, 69, 0.2);
+
+  --edge-indent: 10px;
+  --grid-column-gap: 10px;
+
+  @media (min-width: $laptop-width) {
+    --edge-indent: 40px;
+    --grid-column-gap: 20px;
+  }
+}

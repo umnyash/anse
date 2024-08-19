@@ -1,0 +1,27 @@
+extends layout/layout
+
+block variables
+  - var title = 'UI Kit | Anse'
+  - var page = 'ui-kit'
+
+block content
+  style
+    .
+      .ui-kit__section {
+        margin-bottom: 80px;
+      }
+
+      .ui-kit__group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .ui-kit__group + .ui-kit__group {
+        margin-top: 16px;
+      }
+
+  .ui-kit.container
+    .ui-kit__section
+      .ui-kit__group
