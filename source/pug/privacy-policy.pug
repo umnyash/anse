@@ -1,0 +1,13 @@
+extends layout/layout
+
+block variables
+  - var title = 'Политика конфиденциальности | Anse'
+  - var page = 'not-found'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: 'Политика конфиденциальности'
+    }
+  ]})
+  +privacy-policy
