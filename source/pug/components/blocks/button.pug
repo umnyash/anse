@@ -1,0 +1,9 @@
+mixin button({ tag, text, type, href, target, rel, opener } = {})
+  #{tag}.button(
+    type= type
+    href= href
+    target= target
+    rel= rel
+    data-modal-opener= opener
+  )&attributes(attributes)
+    span.button__inner!= text

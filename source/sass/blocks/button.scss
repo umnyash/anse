@@ -1,0 +1,37 @@
+.button {
+  display: inline-flex;
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
+  align-items: center;
+  text-align: center;
+  font-family: $main-font-family;
+  font-weight: 500;
+  text-decoration: none;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  transition-property: border-color, color, background-size;
+  transition-duration: $duration-m;
+  transition-timing-function: ease;
+}
+
+.button__inner {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+[class*="button--simple"] {
+  font-size: 16px;
+  line-height: 1;
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+  }
+}
+
+.button--simple-primary {
+  color: var(--brand-color);
+}

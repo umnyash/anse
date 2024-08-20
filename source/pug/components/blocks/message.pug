@@ -1,0 +1,9 @@
+mixin message
+  article.message&attributes(attributes)
+    .container
+      .message__header
+        h1.message__heading Ой, что-то пошло не так
+        picture.message__image-wrapper.media.media--contain
+          img.message__image.media__image(src='img/decor/404.webp' srcset='img/decor/404@2x.webp 2x' width='330' height='390' alt='Одиноко лежащая розовая шуба из экомеха.')
+      p.message__text Такой страницы не существует
+      +button({ tag: 'a', text: 'Вернуться на главную', href: 'index.html' })(class='button--simple-primary')
