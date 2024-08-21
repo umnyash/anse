@@ -1,6 +1,6 @@
 mixin breadcrumbs-list({ links })
-  .breadcrumbs-list
-    ol.breadcrumbs__items&attributes(attributes)
+  .breadcrumbs-list&attributes(attributes)
+    ol.breadcrumbs__items
       li.breadcrumbs__item
         a.breadcrumbs__link(href='index.html') Главная
       each link in links
