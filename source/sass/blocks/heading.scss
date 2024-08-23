@@ -1,0 +1,21 @@
+.heading {
+  font-family: $main-font-family;
+  font-weight: 400;
+  line-height: 1;
+
+  @media (min-width: $laptop-width) {
+    font-weight: 300;
+  }
+}
+
+.heading--size_l {
+  font-size: 28px;
+
+  @media (min-width: $laptop-width) {
+    font-size: 44px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 58px;
+  }
+}

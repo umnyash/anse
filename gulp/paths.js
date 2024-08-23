@@ -52,6 +52,8 @@ export default {
 
   processScripts: {
     src: [
+      `${pathSrc}/js/util.js`,
+      `${pathSrc}/js/modules/*.js`,
       `${pathSrc}/js/main.js`,
     ],
     watch: `${pathSrc}/js/**/*.js`,

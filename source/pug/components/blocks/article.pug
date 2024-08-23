@@ -1,0 +1,10 @@
+mixin article({ heading, breadcrumbs, grid = 'standard' } = {})
+  article.article(class= grid && `article--grid_${grid}`)&attributes(attributes)
+    .container
+      .article__inner
+        .article__breadcrumbs
+          +breadcrumbs-list({ links: breadcrumbs })
+        .article__content
+          h1.article__heading.heading.heading--size_l= heading
+          .article__main
+            block
