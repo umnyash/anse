@@ -6,4 +6,5 @@ mixin button({ tag, text, type, href, target, rel, opener } = {})
     rel= rel
     data-modal-opener= opener
   )&attributes(attributes)
-    span.button__inner!= text
+    span.button__inner
+      span.button__text!= text

@@ -1,0 +1,59 @@
+.company-card {
+  text-align: center;
+  font: 400 16px/19px $main-font-family;
+  color: var(--text-weak-color);
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.company-card__logo {
+  --logo-color: var(--brand-color);
+
+  display: block;
+  width: 208px;
+  height: auto;
+  margin: 0 auto 20px;
+
+  @media (min-width: $laptop-width) {
+    width: 405px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 36px;
+  }
+}
+
+.company-card__text {
+  margin: 10px auto;
+
+  @media (min-width: $wide-mobile-width) {
+    width: 84%;
+  }
+}
+
+.company-card__slogan {
+  margin: 10px auto;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--text-color);
+
+  @media (min-width: $wide-mobile-width) {
+    width: 84%;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 32px;
+  }
+}
+
+.company-card__button {
+  width: 100%;
+  margin: 10px 0 0;
+
+  @media (min-width: $desktop-width) {
+    margin-top: 30px;
+  }
+}

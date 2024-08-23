@@ -1,0 +1,6 @@
+mixin logo({ interactive = true } = {})
+  - const tag = interactive ? 'a' : 'span';
+
+  #{tag}.logo(href= interactive && page !== 'index' && 'index.html')&attributes(attributes)
+    svg.logo__image(width='68' height='31' role='img' aria-label='Логотип Ansé.')
+      use(href='img/logo.svg#logo')

@@ -1,0 +1,10 @@
+mixin company-card
+  article.company-card&attributes(attributes)
+    +logo({ interactive: false })(class='company-card__logo')
+    p.company-card__text История продолжается
+    p.company-card__slogan Станьте частью нашей истории
+    +button({
+      tag: 'a',
+      text: 'Выбрать шубу под себя',
+      href: 'catalog.html'
+    })(class='company-card__button button--solid-primary')

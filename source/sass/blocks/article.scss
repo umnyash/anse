@@ -364,6 +364,19 @@
   }
 }
 
+.article__company-card-wrapper {
+  max-width: 500px;
+  margin: 64px auto 0;
+
+  @media (min-width: $laptop-width) {
+    margin-top: 46px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 66px;
+  }
+}
+
 .article--topic_document .article__main {
 
   /* stylelint-disable */

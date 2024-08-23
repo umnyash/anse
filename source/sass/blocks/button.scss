@@ -10,8 +10,9 @@
   text-decoration: none;
   color: inherit;
   background: transparent;
+  overflow: hidden;
   cursor: pointer;
-  transition-property: border-color, color, background-size;
+  transition-property: border-color, color, background-size, box-shadow;
   transition-duration: $duration-m;
   transition-timing-function: ease;
 }
@@ -24,8 +25,32 @@
 }
 
 [class*="button--simple"] {
+  position: relative;
   font-size: 16px;
   line-height: 1;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -4px;
+    left: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transition-property: transform;
+    transition-duration: $duration-m;
+    transition-timing-function: ease-in-out;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+
+  &:active::after {
+    transform: translateY(-2px) scaleX(1);
+    transition-duration: $duration-xs;
+  }
 
   @media (min-width: $desktop-width) {
     font-size: 18px;
@@ -34,4 +59,36 @@
 
 .button--simple-primary {
   color: var(--brand-color);
+}
+
+.button--solid-primary {
+  position: relative;
+  padding: 0 15px;
+  border: 1px solid var(--background-dark-color);
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--text-light-color);
+  background: linear-gradient(var(--background-dark-color), var(--background-dark-color)) no-repeat bottom center / 100% 100%;
+  background-origin: border-box;
+
+  &:hover {
+    color: var(--text-color);
+    background-size: 100% 0;
+  }
+
+  &:active {
+    color: var(--text-color);
+    background-size: 100% 0;
+    box-shadow: inset 2px 2px 2px 0 var(--brand-color);
+    transition-duration: $duration-xs;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+  }
+
+  .button__text {
+    padding: 15px 0;
+  }
 }
