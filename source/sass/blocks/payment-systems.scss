@@ -1,0 +1,64 @@
+.payment-systems {
+  font: 400 12px/14px $main-font-family;
+
+  @media (min-width: $laptop-width) {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+.payment-systems__list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  align-items: center;
+
+  @media (min-width: $laptop-width) {
+    column-gap: 20px;
+  }
+}
+
+.payment-systems__list-item * {
+  max-width: 40px;
+  max-height: 19px;
+}
+
+.payment-systems__offer {
+  display: flex;
+  margin: 10px 0 0;
+  column-gap: 10px;
+  align-items: center;
+}
+
+.payment-systems__offer-text {
+  width: 216px;
+  margin: 0;
+
+  @media (min-width: $laptop-width) {
+    width: auto;
+  }
+}
+
+.payment-systems__offer-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: color $duration-m;
+
+  &[href]:hover {
+    color: var(--brand-color);
+  }
+
+  &[href]:active {
+    color: var(--text-color);
+  }
+}
+
+.payment-systems__offer-image {
+  flex-shrink: 0;
+  max-width: 114px;
+  max-height: 28px;
+}

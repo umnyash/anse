@@ -1,5 +1,5 @@
-mixin article({ heading, breadcrumbs, grid = 'standard' } = {})
-  article.article(class= grid && `article--grid_${grid}`)&attributes(attributes)
+mixin article({ heading, breadcrumbs } = {})
+  article.article&attributes(attributes)
     .container
       .article__inner
         .article__breadcrumbs

@@ -1,0 +1,16 @@
+mixin payment-systems
+  .payment-systems
+    ul.payment-systems__list
+      li.payment-systems__list-item
+        img(src='img/icons.svg#payment_mastercard' width='30' height='19' alt='Mastercard.')
+      li.payment-systems__list-item
+        img(src='img/icons.svg#payment_visa' width='40' height='19' alt='Visa.')
+      li.payment-systems__list-item
+        img(src='img/icons.svg#payment_mir' width='36' height='17' alt='Мир.')
+      li.payment-systems__list-item
+        img(src='img/icons.svg#payment_sbp' width='31' height='17' alt='Система быстрых платежей.')
+      li.payment-systems__list-item
+        img(src='img/icons/payment/ya-pay.webp' width='30' height='19' alt='Яндекс Пэй.')
+    .payment-systems__offer
+      p.payment-systems__offer-text Безопасная оплата через сервис #[a.payment-systems__offer-link(href='https://payment.alfabank.ru/' target='_blank' rel='nofollow noopener') (https://payment.alfabank.ru/)]
+      img.payment-systems__offer-image(src='img/icons/payment/alfabank.webp' width='114' height='28' alt='Альфа-Банк.')
