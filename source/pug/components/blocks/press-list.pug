@@ -1,0 +1,6 @@
+mixin press-list({ previews })
+  .press-list
+    ul.press-list__items
+      each preview in previews
+        li.press-list__item
+          +press-preview({ preview })
