@@ -1,0 +1,7 @@
+mixin video({ poster })
+  .video&attributes(attributes)
+    video(class='video__player' src='files/video.mp4' playsinline controls)
+    img.video__poster(src= poster alt='')
+    .video__play-button-wrapper
+      button.video__play-button
+        span.visually-hidden Воспроизвести

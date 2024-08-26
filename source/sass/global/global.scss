@@ -1,6 +1,7 @@
 :root {
   --text-color: #454545;
   --text-color-40: rgba(69, 69, 69, 0.4);
+  --text-color-30: rgba(69, 69, 69, 0.3);
   --text-weak-color: #898c92;
   --text-light-color: #ffffff;
   --background-color: #ffffff;
@@ -9,6 +10,8 @@
   --brand-color: #faafd4;
   --accent-color: #f4371c;
   --overlay-color: rgba(69, 69, 69, 0.2);
+  --border-color: #e0e0e0;
+  --border-light-color: #f8f8f8;
 
   --edge-indent: 10px;
   --grid-column-gap: 10px;
@@ -17,4 +20,8 @@
     --edge-indent: 40px;
     --grid-column-gap: 20px;
   }
+}
+
+button {
+  color: #0000ff;
 }

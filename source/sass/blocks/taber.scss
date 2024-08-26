@@ -1,0 +1,71 @@
+.taber__panel {
+  &--hidden {
+    // (1)
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+.taber--fancy {
+  .taber__list {
+    display: grid;
+    margin: 0 0 20px;
+    font: 500 14px/1 $main-font-family;
+    padding: 2px;
+    border-radius: 4px;
+    grid-template-columns: 1fr 1fr;
+    color: var(--text-color-30);
+    background: var(--background-additional-color);
+
+    @media (min-width: $laptop-width) {
+      padding: 4px;
+      font-size: 16px;
+    }
+  }
+
+  .taber__tab {
+    display: block;
+    padding: 9px;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition-property: color, background-color;
+    transition-duration: $duration-m;
+    transition-timing-function: ease-in-out;
+
+    @media (min-width: $laptop-width) {
+      padding: 12px;
+    }
+
+    &:hover {
+      color: var(--text-color);
+    }
+
+    &:active {
+      color: var(--brand-color);
+      transition-duration: $duration-xs;
+    }
+  }
+
+  .taber__tab--active {
+    color: var(--brand-color);
+    background: var(--background-color);
+    pointer-events: none;
+  }
+}
+
+/* (1)
+ * Почему просто не задавать display: none?
+ * При переключении на вкладку с таблицей в которой используется
+ * кастомный скролл (плагин Scrollbar), было заметно как таблица
+ * восстанавливала высоту их схлопнутого состояния.
+ */

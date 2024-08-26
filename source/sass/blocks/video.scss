@@ -1,0 +1,87 @@
+.video {
+  position: relative;
+  z-index: 0;
+}
+
+.video__player {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--background-dark-color);
+}
+
+.video__poster {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+
+  &--hidden {
+    display: none;
+  }
+}
+
+.video__play-button-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+
+  &--hidden {
+    display: none;
+  }
+}
+
+.video__play-button {
+  display: grid;
+  box-sizing: border-box;
+  width: 63px;
+  height: 63px;
+  padding: 0;
+  border: 1px solid var(--background-color);
+  border-radius: 50%;
+  place-items: center;
+  background: var(--background-color);
+  cursor: pointer;
+  transition-property: background-color, opacity;
+  transition-duration: $duration-m;
+  transition-timing-function: ease-in-out;
+
+  &::before {
+    content: "";
+    width: 14px;
+    height: 15px;
+    margin-left: 4px;
+    background: var(--brand-color);
+    mask: url("../img/icons.svg#controls_play");
+    transition: background-color $duration-m ease-in-out;
+  }
+
+  &:hover {
+    background: transparent;
+
+    &::before {
+      background: var(--background-color);
+    }
+  }
+
+  &:active {
+    background: transparent;
+    opacity: 0.5;
+    transition-timing-function: $duration-xs;
+
+    &::before {
+      background: var(--background-color);
+    }
+  }
+}

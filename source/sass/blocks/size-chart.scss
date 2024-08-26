@@ -1,0 +1,136 @@
+.size-chart {
+  font: 400 14px/1 $main-font-family;
+  color: var(--text-weak-color);
+
+  @media (min-width: $laptop-width) {
+    font-size: 18px;
+  }
+
+  > div {
+    // overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  p {
+    margin: 20px 0 0;
+    font-size: 16px;
+    line-height: 19px;
+
+    @media (min-width: $desktop-width) {
+      font-size: 18px;
+      line-height: 22px;
+    }
+  }
+
+  table {
+    min-width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+
+  thead {
+    border-top: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 500;
+    color: var(--text-color);
+
+    @media (min-width: $laptop-width) {
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    @media (min-width: $desktop-width) {
+      font-size: 16px;
+      line-height: 19px;
+    }
+  }
+
+  thead th {
+    box-sizing: border-box;
+    padding: 10px 12px;
+    font: inherit;
+    white-space: nowrap;
+
+    @media (min-width: $laptop-width) {
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+  }
+
+  thead th:nth-child(-n + 2) {
+    @media (min-width: $laptop-width) {
+      width: 60px;
+      min-width: 60px;
+    }
+  }
+
+  thead th:nth-child(n + 3) {
+    @media (min-width: $desktop-width) {
+      width: 157px;
+    }
+  }
+
+  tbody tr:nth-child(2n) {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  tbody th {
+    vertical-align: middle;
+    font: inherit;
+  }
+
+  tbody td {
+    padding: 0 8px;
+  }
+
+  tbody tr:nth-child(odd) td {
+    padding-top: 15px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--border-light-color);
+
+    @media (min-width: $laptop-width) {
+      padding-bottom: 4px;
+    }
+  }
+
+  tbody tr:nth-child(even) td {
+    padding-top: 4px;
+    padding-bottom: 16px;
+
+    @media (min-width: $laptop-width) {
+      padding-top: 5px;
+    }
+  }
+
+  .simplebar-track.simplebar-horizontal {
+    position: static;
+    height: auto;
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      border-radius: 1000px;
+      background: var(--border-color);
+    }
+  }
+
+  .simplebar-track .simplebar-scrollbar {
+    position: relative;
+    z-index: 1;
+    height: 2px;
+    margin-top: 10px;
+
+    &::before {
+      inset: 0;
+      background: var(--background-dark-color);
+      opacity: 1;
+      border-radius: 1000px;
+    }
+  }
+}

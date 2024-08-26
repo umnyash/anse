@@ -36,13 +36,13 @@
 }
 
 .article__main {
-  img {
+  img:not([class]) {
     display: block;
     max-width: 100%;
     height: auto;
   }
 
-  > img {
+  > img:not([class]) {
     width: 100%;
   }
 
@@ -147,16 +147,33 @@
   }
 
   button {
+    display: flex;
+    border: none;
+    padding: 0;
+    column-gap: 5px;
+    align-items: center;
+    font: 500 14px/1 $main-font-family;
+    color: var(--text-color);
+    background: transparent;
+    cursor: pointer;
+
+    @media (min-width: $laptop-width) {
+      column-gap: 10px;
+      font-size: 18px;
+    }
+  }
+
+  button span:empty {
     position: relative;
     display: block;
     box-sizing: border-box;
     width: 22px;
     height: 22px;
+    flex-shrink: 0;
     border: 1px solid var(--brand-color);
     border-radius: 50%;
     background: var(--brand-color);
     transition: background-color $duration-m ease-in-out;
-    cursor: pointer;
 
     @media (min-width: $laptop-width) {
       width: 28px;
@@ -193,7 +210,7 @@
     }
   }
 
-  span {
+  button + span {
     position: absolute;
     z-index: 1;
     top: calc(100% + 5px);
@@ -219,26 +236,9 @@
       padding-top: 7px;
       font-size: 16px;
     }
-
-    display: none;
   }
 
-  p:nth-of-type(1) span {
-    right: 0;
-    display: block;
-  }
-
-  p:nth-of-type(2) span {
-    left: 0;
-    display: block;
-  }
-
-  p:nth-of-type(3) span {
-    right: 0;
-    display: block;
-  }
-
-  button[aria-expanded="true"] {
+  button[aria-expanded="true"] span:empty {
     background: var(--background-additional-color);
 
     &::before {
@@ -355,6 +355,33 @@
   /* stylelint-enable */
 }
 
+.article__video {
+  display: grid;
+  margin: 60px 0 20px;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 500;
+  row-gap: 10px;
+
+  @media (min-width: $laptop-width) {
+    margin-top: 40px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 60px;
+    font-size: 18px;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.article__video-wrapper .video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
 .article__seasons-slider-wrapper {
   margin: 20px 0 10px;
 
@@ -384,6 +411,7 @@
   margin: 10px 0;
 }
 
+/* Политика конфиденциальности и публичная оферта */
 .article--topic_document .article__main {
 
   /* stylelint-disable */
@@ -475,6 +503,7 @@
   }
 }
 
+/* Доставка и оплата */
 .article--topic_delivery-and-payment .article__main {
   h2 {
     margin: 60px 0 20px;
@@ -554,6 +583,7 @@
   }
 }
 
+/* Правила ухода */
 .article--topic_rules .article__main {
   color: var(--text-color);
 
@@ -586,6 +616,81 @@
   }
 }
 
+/* Как подобрать размер */
+.article--topic_size-guide {
+  font-size: 14px;
+  line-height: 1;
+  color: var(--text-color);
+
+  .article__taber-wrapper {
+    margin: 20px 0;
+
+    @media (min-width: $laptop-width) {
+      // margin-top: 22px 0;
+    }
+  }
+
+  .article__photos {
+    width: 162px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .article__photos button + span {
+    line-height: 13px;
+
+    @media (min-width: $laptop-width) {
+      top: calc(100% + 10px);
+      padding: 7px 16px;
+      line-height: 1;
+    }
+  }
+
+  .article__photos p:nth-of-type(1) button + span {
+    left: -40px;
+
+    @media (min-width: $wide-mobile-width) {
+      left: -24px;
+    }
+  }
+
+  .article__photos p:nth-of-type(2) button + span {
+    right: -36px;
+
+    @media (min-width: $wide-mobile-width) {
+      right: -24px;
+    }
+  }
+
+  .article__photos p:nth-of-type(3) button + span {
+    left: -40px;
+
+    @media (min-width: $wide-mobile-width) {
+      left: -24px;
+    }
+  }
+
+  .article__wide-button-wrapper {
+    display: grid;
+    margin: 20px 0 0;
+  }
+}
+
+/* Производство */
+.article--topic_production {
+  .article__photos p:nth-of-type(1) button + span {
+    right: 0;
+  }
+
+  .article__photos p:nth-of-type(2) button + span {
+    left: 0;
+  }
+
+  .article__photos p:nth-of-type(3) button + span {
+    right: 0;
+  }
+}
+
 .article__main.article__main > :first-child {
   margin-top: 0;
 }
@@ -594,12 +699,14 @@
   margin-bottom: 0;
 }
 
+/* Статья во всю ширину и хлебными крошками слева. */
 .article--grid_wide .article__main {
   @media (min-width: $laptop-width) {
     padding-left: 10px;
   }
 }
 
+/* Статья в колонке и хлебными крошками сверху. */
 .article--grid_standard {
   .article__inner {
     @media (min-width: $laptop-width) {

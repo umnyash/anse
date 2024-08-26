@@ -1,0 +1,13 @@
+mixin size-guide
+  +article({
+    heading: 'Как подобрать размер',
+    breadcrumbs: [{ text: 'Как подобрать размер' }]
+  })(class='article--topic_size-guide article--grid_standard')
+    .article__taber-wrapper
+      +size-guide-taber
+    .article__wide-button-wrapper
+      +button({
+        tag: 'a',
+        text: 'Связаться с менеджером',
+        href: '#'
+      })(class='button--solid-primary')
