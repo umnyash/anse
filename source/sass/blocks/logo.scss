@@ -1,4 +1,6 @@
 .logo {
+  --logo-color: currentColor;
+
   display: block;
   color: inherit;
 }
@@ -8,4 +10,17 @@
   width: 100%;
   height: auto;
   max-height: 100%;
+}
+
+.logo[href] {
+  transition: color $duration-m ease-in-out;
+
+  &:hover {
+    color: var(--brand-color);
+  }
+
+  &:active {
+    color: var(--text-weak-color);
+    transition-duration: $duration-xs;
+  }
 }

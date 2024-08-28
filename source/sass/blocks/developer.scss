@@ -1,0 +1,43 @@
+.developer {
+  position: relative;
+  font: 400 16px/19px $additional-font-family;
+  text-decoration: none;
+  color: inherit;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -4px;
+    left: 0;
+    height: 1px;
+    background: var(--brand-color);
+    transform: scaleX(0);
+    transition-property: transform;
+    transition-duration: $duration-m;
+    transition-timing-function: ease-in-out;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+
+  &:active::after {
+    transform: translateY(-2px) scaleX(1);
+    transition-duration: $duration-xs;
+  }
+}
+
+.developer__accent {
+  font: 500 14px/17px $main-font-family;
+  color: var(--brand-color);
+
+  @media (min-width: $laptop-width) {
+    font-weight: 400;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+}

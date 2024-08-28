@@ -1,0 +1,32 @@
+.socials-list__items {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  gap: 12px 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.socials-list__link {
+  display: block;
+}
+
+.socials-list__link > * {
+  display: block;
+  max-width: 25px;
+  max-height: 22px;
+  fill: var(--text-color);
+  transition:
+    fill $duration-m ease-in-out,
+    transform $duration-xs ease-in;
+}
+
+.socials-list__link:hover > * {
+  fill: var(--brand-color);
+}
+
+.socials-list__link:active > * {
+  fill: var(--brand-color);
+  transform: scale(0.85);
+}

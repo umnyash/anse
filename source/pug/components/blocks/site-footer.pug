@@ -1,2 +1,39 @@
+mixin site-footer__navigation-item({ text, href, targetPage })
+  li.site-footer__navigation-item
+    a.site-footer__navigation-link(href= targetPage !== page && href)&attributes(attributes)= text
+
 mixin site-footer
-  footer.site-footer&attributes(attributes) FOOTER
+  footer.site-footer&attributes(attributes)
+    .container
+      .site-footer__inner
+        +logo(class='site-footer__logo')
+        .site-footer__contacts
+          a.site-footer__contacts-link(href='tel:+78005006127') 8 800 500 61 27
+          a.site-footer__contacts-link(href='mailto:info@anse-shop.ru') info@anse-shop.ru
+          +socials-list(class='site-footer__socials')
+        .site-footer__navigation.site-footer__navigation--catalog
+          .site-footer__navigation-heading Каталог
+          ul.site-footer__navigation-list
+            +site-footer__navigation-item({ text: 'Шубы', href: '#!', targetPage: '' })
+            +site-footer__navigation-item({ text: 'Не шубы', href: '#!', targetPage: '' })
+            +site-footer__navigation-item({ text: 'Аксессуары', href: '#!', targetPage: '' })
+        .site-footer__navigation.site-footer__navigation--buyers
+          .site-footer__navigation-heading Покупателям
+          ul.site-footer__navigation-list
+            +site-footer__navigation-item({ text: 'Магазин ANSE в СПб', href: 'shop.html', targetPage: 'shop' })
+            +site-footer__navigation-item({ text: 'Доставка и оплата', href: 'delivery-and-payment.html', targetPage: 'delivery-and-payment' })
+            +site-footer__navigation-item({ text: 'Как подобрать размер', href: 'size-guide.html', targetPage: 'size-guide' })
+            +site-footer__navigation-item({ text: 'Правила ухода', href: 'care-rules.html', targetPage: 'care-rules' })
+        .site-footer__navigation.site-footer__navigation--company
+          .site-footer__navigation-heading О компании
+          ul.site-footer__navigation-list
+            +site-footer__navigation-item({ text: 'Производство', href: 'production.html', targetPage: 'production' })
+            +site-footer__navigation-item({ text: 'Отзывы', href: 'reviews.html', targetPage: 'reviews' })
+            +site-footer__navigation-item({ text: 'Звезды', href: 'celebrities.html', targetPage: 'celebrities' })
+            +site-footer__navigation-item({ text: 'Пресса о нас', href: 'press.html', targetPage: 'press' })
+        .site-footer__subscription-form-wrapper
+          +subscription-form
+        a.site-footer__link.site-footer__link--privacy-policy(href='privacy-policy.html') Политика конфиденциальности
+        a.site-footer__link.site-footer__link--public-offer(href='public-offer.html') Публичная оферта
+        a.site-footer__link.site-footer__link--cookies(href='#!') Cookies
+        +developer(class='site-footer__developer')

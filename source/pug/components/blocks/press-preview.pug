@@ -1,6 +1,6 @@
 mixin press-preview({ preview })
   article.press-preview
-    img.press-preview__logo(src= preview.logo.image alt= preview.logo.alt)
+    img.press-preview__logo(src= preview.logo.image alt= preview.logo.alt loading='lazy')
     if preview.author
       p.press-preview__author= preview.author
     h2= preview.heading
@@ -12,4 +12,4 @@ mixin press-preview({ preview })
       target: '_blank',
       rel: 'nofollow noopener'
     })(class='press-preview__link button--simple-primary')
-    img.press-preview__image(src= preview.image alt='')
+    img.press-preview__image(src= preview.image alt='' loading='lazy')

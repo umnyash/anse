@@ -1,0 +1,21 @@
+mixin socials-list__logo({ icon, alt, width, height })
+  svg(width= width height=height role='img' aria-label= alt)&attributes(attributes)
+    use(href= icon)
+
+mixin socials-list__item({ name, href })
+  li.socials-list__item
+    a.socials-list__link(href= href target='_blank' rel='noopener')
+      case name
+        when 'vk'
+          +socials-list__logo({ icon: 'img/icons.svg#socials_vk', alt: 'VK.', width: 25, height: 15 })
+        when 'whatsapp'
+          +socials-list__logo({ icon: 'img/icons.svg#socials_whatsapp', alt: 'WhatsApp.',  width: 22, height: 22 })
+        when 'telegram'
+          +socials-list__logo({ icon: 'img/icons.svg#socials_telegram', alt: 'Telegram.', width: 22, height: 19 })
+
+mixin socials-list
+  .socials-list&attributes(attributes)
+    ul.socials-list__items
+      +socials-list__item({ name: 'vk', href: 'https://vk.com/write-43319912' })
+      +socials-list__item({ name: 'whatsapp', href: 'https://wa.me/79312252158' })
+      +socials-list__item({ name: 'telegram', href: 'https://t.me/my_anse' })

@@ -1,0 +1,14 @@
+mixin subscription-form
+  form.subscription-form(action='https://fakestoreapi.com/products' method='post' target='_blank')&attributes(attributes)
+    p.subscription-form__heading Подписаться на скидки и&nbsp;новинки
+    .subscription-form__field
+      label.subscription-form__field-inner
+        span.visually-hidden E-mail:
+        span.subscription-form__field-control-wrapper
+          input.subscription-form__field-control(name='email' type='email' placeholder='Ваш e-mail' required data-name='email')
+    +button({
+      tag: 'button',
+      type: 'submit',
+      text: 'Подписаться'
+    })(class='subscription-form__submit-button button--solid-primary')
+    small.subscription-form__comment Подписываясь на рассылку, Вы соглашаетесь с&nbsp;условиями #[a.subscription-form__comment-link(href='privacy-policy.html' target='_blank') Политики конфиденциальности]
