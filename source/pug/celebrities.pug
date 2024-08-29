@@ -1,0 +1,13 @@
+extends layout/layout
+
+block variables
+  - var title = 'Звёзды | Anse'
+  - var page = 'celebrities'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: 'Звёзды'
+    }
+  ]})
+  +celebrities({ celebrities })

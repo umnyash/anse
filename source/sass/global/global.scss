@@ -17,6 +17,10 @@
   --edge-indent: 10px;
   --grid-column-gap: 10px;
 
+  @media (min-width: $tablet-width) {
+    --edge-indent: 20px;
+  }
+
   @media (min-width: $laptop-width) {
     --edge-indent: 40px;
     --grid-column-gap: 20px;

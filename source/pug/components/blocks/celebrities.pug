@@ -1,0 +1,6 @@
+mixin celebrities({ celebrities })
+  .celebrities&attributes(attributes)
+    .container
+      .celebrities__inner
+        h1.celebrities__heading.heading.heading--size_l Звёзды
+        +celebrities-list({ celebrities, button: true })

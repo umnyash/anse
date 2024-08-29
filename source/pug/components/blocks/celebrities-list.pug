@@ -1,0 +1,13 @@
+mixin celebrities-list({ celebrities = [], button } = {})
+  .celebrities-list&attributes(attributes)
+    ul.celebrities-list__items
+      each celebrity in celebrities
+        li.celebrities-list__item
+          picture.celebrities-list__image-wrapper
+            img.celebrities-list__image(src=`img/celebrities/${celebrity.image}` width='750' height='1030' alt= celebrity.title loading='lazy')
+          p.celebrities-list__title= celebrity.title
+    +button({
+      tag: 'button',
+      type: 'button',
+      text: 'Показать еще фото звезд'
+    })(class='celebrities-list__button button--solid-primary')

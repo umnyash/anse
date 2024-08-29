@@ -1,0 +1,238 @@
+.celebrities-list {
+  --celebrities-list-row-gap: 10px;
+
+  font: 400 14px/17px $main-font-family;
+
+  @media (min-width: $tablet-width) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (min-width: $laptop-width) {
+    --celebrities-list-row-gap: 20px;
+
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.celebrities-list__items {
+  display: grid;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--celebrities-list-row-gap) var(--grid-column-gap);
+
+  @media (min-width: $tablet-width) {
+    grid-column: 1 / -1;
+    margin-bottom: calc(var(--celebrities-list-row-gap) * (-1));
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 0;
+    grid-auto-flow: dense;
+  }
+}
+
+.celebrities-list__item {
+  @media (min-width: $tablet-width) {
+    display: contents;
+  }
+}
+
+.celebrities-list__image-wrapper {
+  position: relative;
+  display: block;
+  aspect-ratio: 180 / 241;
+
+  @media (min-width: $laptop-width) {
+    aspect-ratio: 285 / 382;
+  }
+
+  @media (min-width: $desktop-width) {
+    aspect-ratio: 365 / 489;
+  }
+}
+
+.celebrities-list__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.celebrities-list__title {
+  margin: 10px 0 0;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: var(--celebrities-list-row-gap);
+  }
+}
+
+
+.celebrities-list__item:nth-child(10n - 9) {
+  @media (min-width: $tablet-width) {
+    .celebrities-list__image-wrapper {
+      grid-column: 1 / 3;
+      grid-row: span 3;
+      aspect-ratio: auto;
+    }
+
+    .celebrities-list__title {
+      grid-column: 1 / 3;
+    }
+  }
+}
+
+/* stylelint-disable */
+.celebrities-list__item:nth-child(10n - 8),
+.celebrities-list__item:nth-child(10n - 6) {
+  @media (min-width: $tablet-width) {
+
+    .celebrities-list__image-wrapper,
+    .celebrities-list__title {
+      grid-column: 3 / 4;
+    }
+  }
+}
+
+.celebrities-list__item:nth-child(10n - 7),
+.celebrities-list__item:nth-child(10n - 5) {
+  @media (min-width: $tablet-width) {
+
+    .celebrities-list__image-wrapper,
+    .celebrities-list__title {
+      grid-column: 4 / 5;
+    }
+  }
+}
+
+.celebrities-list__item:nth-child(10n - 2),
+.celebrities-list__item:nth-child(10n - 4) {
+  @media (min-width: $tablet-width) {
+
+    .celebrities-list__image-wrapper,
+    .celebrities-list__title {
+      grid-column: 1 / 2;
+    }
+  }
+}
+
+.celebrities-list__item:nth-child(10n - 1),
+.celebrities-list__item:nth-child(10n - 3) {
+  @media (min-width: $tablet-width) {
+
+    .celebrities-list__image-wrapper,
+    .celebrities-list__title {
+      grid-column: 2 / 3;
+    }
+  }
+}
+
+.celebrities-list__item:nth-child(10n) {
+  @media (min-width: $tablet-width) {
+    .celebrities-list__image-wrapper {
+      grid-column: 3 / 5;
+      grid-row: span 3;
+      aspect-ratio: auto;
+    }
+
+    .celebrities-list__title {
+      grid-column: 3 / 5;
+    }
+  }
+}
+
+/* Если первое фото из десятки в четвёрке последних, то располагать по обычному */
+.celebrities-list__item:nth-child(10n - 9):last-child,
+.celebrities-list__item:nth-child(10n - 9):nth-last-child(2),
+.celebrities-list__item:nth-child(10n - 9):nth-last-child(3),
+.celebrities-list__item:nth-child(10n - 9):nth-last-child(4) {
+  @media (min-width: $tablet-width) {
+    .celebrities-list__image-wrapper {
+      grid-column: 1 / 2;
+      grid-row: span 1;
+      aspect-ratio: 365 / 489;
+    }
+
+    .celebrities-list__title {
+      grid-column: 1 / 2;
+    }
+  }
+}
+
+/* Если второе фото из десятки в тройке последних, то располагать по обычному */
+.celebrities-list__item:nth-child(10n - 8):last-child,
+.celebrities-list__item:nth-child(10n - 8):nth-last-child(2),
+.celebrities-list__item:nth-child(10n - 8):nth-last-child(3) {
+  @media (min-width: $tablet-width) {
+
+    .celebrities-list__image-wrapper,
+    .celebrities-list__title {
+      grid-column: 2 / 3;
+    }
+  }
+}
+
+/* Если третье фото из десятки последнее или предпоследнее, то располагать по обычному */
+.celebrities-list__item:nth-child(10n - 7):last-child,
+.celebrities-list__item:nth-child(10n - 7):nth-last-child(2) {
+  @media (min-width: $tablet-width) {
+
+    .celebrities-list__image-wrapper,
+    .celebrities-list__title {
+      grid-column: 3 / 4;
+    }
+  }
+}
+
+/* Если четвёртое фото из десятки последнее, то располагать по обычному */
+.celebrities-list__item:nth-child(10n - 6):last-child {
+  @media (min-width: $tablet-width) {
+
+    .celebrities-list__image-wrapper,
+    .celebrities-list__title {
+      grid-column: 4 / 5;
+    }
+  }
+}
+
+/* Если восьмое фото из десятки последнее или предпоследнее, то располагать по обычному */
+.celebrities-list__item:nth-child(10n - 2):last-child,
+.celebrities-list__item:nth-child(10n - 2):nth-last-child(2) {
+  @media (min-width: $tablet-width) {
+
+    .celebrities-list__image-wrapper,
+    .celebrities-list__title {
+      grid-column: 3 / 4;
+    }
+  }
+}
+
+/* Если девятое фото из десятки последнее, то располагать по обычному */
+.celebrities-list__item:nth-child(10n - 1):last-child {
+  @media (min-width: $tablet-width) {
+
+    .celebrities-list__image-wrapper,
+    .celebrities-list__title {
+      grid-column: 4 / 5;
+    }
+  }
+}
+
+/* stylelint-enable */
+
+.celebrities-list__button {
+  width: 100%;
+  margin: 20px 0 0;
+
+  @media (min-width: $tablet-width) {
+    grid-column: 2 / 4;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 30px;
+  }
+}

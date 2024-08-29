@@ -6,13 +6,15 @@ export default {
 
   copyAssets: {
     src: [
+      `${pathSrc}/img/**/*.webp`,
       `${pathSrc}/fonts/**/*.*`,
       `${pathSrc}/*.ico`,
       `${pathSrc}/*.webmanifest`,
       `${pathSrc}/vendor/**/*.*`,
-      `${pathSrc}/files/*.*`
+      `${pathSrc}/files/*.*`,
     ],
     watch: [
+      `${pathSrc}/img/**/*.webp`,
       `${pathSrc}/fonts/**/*.*`,
       `${pathSrc}/*.ico`,
       `${pathSrc}/*.webmanifest`,
