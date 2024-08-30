@@ -1,0 +1,136 @@
+.reviews-intro {
+  font: 400 16px/19px $main-font-family;
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.reviews-intro__heading {
+  margin: 0 0 20px;
+
+  @media (min-width: $laptop-width) {
+    margin-bottom: 30px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 40px;
+  }
+}
+
+.reviews-intro__statistics {
+  margin: 0 0 20px;
+
+  @media (min-width: $laptop-width) {
+    margin-bottom: 30px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 40px;
+  }
+}
+
+.reviews-intro__quote {
+  blockquote {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 300;
+
+    @media (min-width: $laptop-width) {
+      letter-spacing: -2px;
+    }
+
+    @media (min-width: $desktop-width) {
+      font-size: 28px;
+    }
+  }
+
+  p {
+    margin: 10px 0 0;
+    color: var(--text-weak-color);
+  }
+}
+
+.reviews-intro__slider-wrapper {
+  display: grid;
+  margin: 0 calc(var(--edge-indent) * (-1));
+  grid-template-columns: 100%;
+  align-items: center;
+
+  @media (min-width: $tablet-width) {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+.reviews-intro__slider {
+  grid-area: 1 / 1 / 2 / 2;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 var(--edge-indent);
+
+  @media (min-width: $tablet-width) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.reviews-intro__slider-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.reviews-intro__slider-item {
+  width: 285px;
+
+  @media (min-width: $laptop-width) {
+    width: auto;
+  }
+}
+
+.reviews-intro__slider-item--quote {
+  @media (max-width: ($wide-tablet-width - 1)) {
+    display: none;
+  }
+
+  .reviews-intro__quote {
+    padding-right: 8px;
+  }
+}
+
+.reviews-intro__slider-image-wrapper {
+  width: 100%;
+  height: 368px;
+
+  @media (min-width: $desktop-width) {
+    height: 471px;
+  }
+}
+
+.reviews-intro__slider-arrows {
+  grid-area: 1 / 1 / 2 / 2;
+  z-index: 1;
+  margin: 0 5px;
+
+  @media (min-width: $tablet-width) {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
+  @media (min-width: $laptop-width) {
+    margin-right: -20px;
+    margin-left: -20px;
+  }
+}
+
+.reviews-intro__inner > .reviews-intro__quote {
+  margin: 0 0 10px;
+
+  @media (min-width: $wide-tablet-width) {
+    display: none;
+  }
+}

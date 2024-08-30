@@ -1,0 +1,13 @@
+.slider-pagination {
+  position: relative;
+}
+
+.slider-pagination.swiper-pagination-progressbar {
+  height: 2px;
+  background: var(--border-color);
+}
+
+.slider-pagination .swiper-pagination-progressbar-fill {
+  border-radius: 100px;
+  background: var(--background-dark-color);
+}

@@ -1,0 +1,27 @@
+mixin consumers-photos
+  section.consumers-photos&attributes(attributes)
+    .container
+      .consumers-photos__inner
+        h2.consumers-photos__heading.heading.heading--size_l.heading--alter Фотографии клиентов
+        p Нас носят с удовольствием, ведь мы создаём с вами и шьём для вас. Каждая шубка - это ваша обратная связь, наша ручная работа и много много любви.
+        +button({
+          tag: 'a',
+          text: 'Еще 4000 фото от наших клиентов в группе ВК',
+          href: 'https://vk.com/album-43319912_164415151',
+          target: '_blank',
+          rel: 'noopener'
+        })(class='consumers-photos__link button--simple-primary')
+        .consumers-photos__slider-wrapper
+          .consumers-photos__slider.swiper
+            ul.consumers-photos__slider-list.swiper-wrapper
+              each i in [1, 2, 3, 4, 5, 6, 7]
+                li.consumers-photos__slider-item.swiper-slide
+                  picture.consumers-photos__slider-image-wrapper.media.media--cover.media--position_top
+                    img.consumers-photos__slider-image.media__image(src=`img/consumers/consumer-${i}.webp` width='365' height='489' alt='' loading='lazy')
+          +slider-arrows(class='reviews-intro__slider-arrows')
+          .consumers-photos__slider-pagination.slider-pagination
+        +button({
+          tag: 'a',
+          text: 'Перейти в каталог',
+          href: 'catalog.html'
+        })(class='consumers-photos__button button--solid-primary')

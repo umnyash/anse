@@ -1,0 +1,61 @@
+.location-info {
+  font: 400 16px/19px $main-font-family;
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.location-info__groups {
+  display: grid;
+  margin: 0;
+  row-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+  column-gap: var(--grid-column-gap);
+
+  @media (min-width: $laptop-width) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: $desktop-width) {
+    row-gap: 40px;
+  }
+}
+
+.location-info__group-heading {
+  margin: 0 0 10px;
+  line-height: 1;
+  font-weight: 500;
+
+  @media (min-width: $laptop-width) {
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 400;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 32px;
+  }
+}
+
+.location-info__group-content {
+  margin: 0;
+}
+
+.location-info__text {
+  margin: 0;
+  color: var(--text-weak-color);
+}
+
+.location-info__text + .location-info__text {
+  margin: 10px 0 0;
+}
+
+.location-info__link {
+  margin: 10px 0 0;
+}
+
+.location-info__group--contacts {
+  grid-column: 1 / -1;
+}

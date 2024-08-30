@@ -8,6 +8,10 @@
   &--cover .media__image {
     object-fit: cover;
   }
+
+  &--position_top .media__image {
+    object-position: top center;
+  }
 }
 
 .media__image {

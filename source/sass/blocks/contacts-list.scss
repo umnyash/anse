@@ -1,0 +1,154 @@
+.contacts-list {
+  font: 400 16px/1 $main-font-family;
+
+  @media (min-width: $laptop-width) {
+    font-family: $additional-font-family;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+  }
+}
+
+.contacts-list__items {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.contacts-list__link {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: color $duration-m ease-in-out;
+}
+
+.contacts-list__text {
+  @media (min-width: $laptop-width) {
+    margin-top: 2px;
+  }
+}
+
+.contacts-list__link svg,
+.contacts-list__link img {
+  flex-shrink: 0;
+  fill: currentColor;
+  transition:
+    fill $duration-m ease-in-out,
+    transform $duration-xs ease-in;
+}
+
+.contacts-list__link:hover {
+  color: var(--text-weak-color);
+
+  svg {
+    fill: var(--brand-color);
+    will-change: transform;
+  }
+}
+
+/* stylelint-disable */
+.contacts-list__link:active {
+
+  img,
+  svg {
+    transform: scale(0.85);
+  }
+}
+
+/* stylelint-enable */
+
+.contacts-list__link--phone svg,
+.contacts-list__link--phone img {
+  width: 25px;
+  height: 25px;
+
+  @media (min-width: $laptop-width) {
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+.contacts-list__link--telegram svg,
+.contacts-list__link--telegram img {
+  width: 22px;
+  height: 19px;
+
+  @media (min-width: $laptop-width) {
+    width: 20px;
+    height: 18px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 24px;
+    height: 20px;
+  }
+}
+
+.contacts-list__link--vk svg,
+.contacts-list__link--vk img {
+  width: 25px;
+  height: 15px;
+
+  @media (min-width: $laptop-width) {
+    width: 22px;
+    height: 16px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 27px;
+    height: 17px;
+  }
+}
+
+.contacts-list__link--whatsapp svg,
+.contacts-list__link--whatsapp img {
+  width: 22px;
+  height: 22px;
+
+  @media (min-width: $laptop-width) {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.contacts-list--big {
+  @media (min-width: $laptop-width) {
+    font-size: 18px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 20px;
+  }
+}
+
+.contacts-list--compact .contacts-list__items {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: start;
+  align-items: center;
+  gap: 20px 30px;
+
+  @media (min-width: 610px) {
+    grid-template-columns: repeat(4, auto);
+    column-gap: 24px;
+    justify-content: space-between;
+  }
+
+  @media (min-width: $desktop-width) {
+    gap: 24px 48px;
+    justify-content: start;
+  }
+}

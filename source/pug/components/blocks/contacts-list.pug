@@ -1,0 +1,26 @@
+mixin contacts-list__icon({ icon, width, height })
+  svg(width= width height=height aria-hidden='true')&attributes(attributes)
+    use(href= icon)
+
+mixin contacts-list({ items } = {})
+  .contacts-list&attributes(attributes)
+    ul.contacts-list__items
+      each item in items
+        li.contacts-list__item
+          case item
+            when 'vk'
+              a.contacts-list__link.contacts-list__link--vk(href='https://vk.com/write-43319912' target='_blank' rel='noopener')
+                +contacts-list__icon({ icon: 'img/icons.svg#socials_vk', width: 25, height: 15 })
+                span.contacts-list__text ВКонтакте
+            when 'whatsapp'
+              a.contacts-list__link.contacts-list__link--whatsapp(href='https://wa.me/79312252158' target='_blank' rel='noopener')
+                +contacts-list__icon({ icon: 'img/icons.svg#socials_whatsapp', width: 22, height: 22 })
+                span.contacts-list__text  Whats App
+            when 'telegram'
+              a.contacts-list__link.contacts-list__link--telegram(href='https://t.me/my_anse' target='_blank' rel='noopener')
+                +contacts-list__icon({ icon: 'img/icons.svg#socials_telegram', width: 22, height: 19 })
+                span.contacts-list__text Telegram
+            when 'phone'
+              a.contacts-list__link.contacts-list__link--phone(href='tel:+78005006127')
+                +contacts-list__icon({ icon: 'img/icons.svg#phone', width: 22, height: 22 })
+                span.contacts-list__text 8 800 500 61 27

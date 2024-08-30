@@ -1,0 +1,15 @@
+extends layout/layout
+
+block variables
+  - var title = 'Отзывы | Anse'
+  - var page = 'reviews'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: 'Отзывы'
+    }
+  ]})
+  +reviews-intro
+  +consumers-photos
+  +reviews

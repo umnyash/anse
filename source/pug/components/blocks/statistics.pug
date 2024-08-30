@@ -1,0 +1,24 @@
+mixin statistics
+  section.statistics&attributes(attributes)
+    .container
+      .statistics__inner
+        h2.statistics__heading.heading.heading--size_l.heading--alter Закажите онлайн
+        p.statistics__text Находитесь не в Санкт-Петербурге? Мы&nbsp;доставим вашу мечту по&nbsp;всей&nbsp;России!
+        .statistics__list-wrapper
+          +statistics-list({
+            items: [
+              {
+                key: '2000+',
+                value: 'онлайн-заказов ежегодно'
+              },
+              {
+                key: '100%',
+                value: 'знаем, как подобрать шубу, которая сядет безупречно'
+              },
+            ]
+          })
+        +button({
+          tag: 'a',
+          text: 'Перейти в каталог',
+          href: 'catalog.html'
+        })(class='statistics__button button--solid-primary')

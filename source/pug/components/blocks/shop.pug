@@ -1,0 +1,22 @@
+mixin shop
+  .shop&attributes(attributes)
+    .container
+      .shop__inner
+        .shop__breadcrumbs
+          +breadcrumbs-list({ links: [{ text: 'Магазин' }] })
+        h1.shop__heading.heading.heading--size_l Магазин ANSE в #[span.nobr Санкт-Петербурге]
+        .shop__slider-wrapper
+          .shop__main-slider.swiper
+            ul.shop__main-slider-list.swiper-wrapper
+              each i in [1, 2, 3, 4, 5, 6]
+                li.shop__main-slider-item.swiper-slide
+                  picture.shop__main-slider-image-wrapper.media.media--cover.media--position_top
+                    img.shop__main-slider-image.media__image(src=`img/shop/shop-${i}.webp` width='365' height='457' alt='' loading='lazy')
+          .shop__thumbnails-slider.swiper
+            ul.shop__thumbnails-slider-list.swiper-wrapper
+              each i in [1, 2, 3, 4, 5, 6]
+                li.shop__thumbnails-slider-item.swiper-slide
+                  picture.shop__thumbnails-slider-image-wrapper.media.media--cover.media--position_top
+                    img.shop__thumbnails-slider-image.media__image(src=`img/shop/shop-${i}.webp` width='365' height='457' alt='' loading='lazy')
+          +slider-arrows(class='shop__slider-arrows')
+        +location-info(class='shop__location-info')

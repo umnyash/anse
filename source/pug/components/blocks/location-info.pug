@@ -1,0 +1,22 @@
+mixin location-info
+  .location-info&attributes(attributes)
+    dl.location-info__groups
+      .location-info__group
+        dt.location-info__group-heading Адрес магазина
+        dd.location-info__group-content
+          p.location-info__text ул. Рылеева, д.21#[br] 6 мин. пешком от м. Чернышевская
+          +button({
+            tag: 'a',
+            text: 'Показать на карте',
+            href: 'https://yandex.ru/maps/-/CDwEMP6C',
+            target: '_blank',
+            rel: 'nofollow noopener'
+          })(class='location-info__link button--simple-primary')
+      .location-info__group
+        dt.location-info__group-heading График работы
+        dd.location-info__group-content
+          p.location-info__text Ежедневно, с 11:00 до 20:00
+      .location-info__group.location-info__group--contacts
+        dt.location-info__group-heading Контакты
+        dd.location-info__group-content
+          +contacts-list({ items: ['phone', 'vk', 'telegram', 'whatsapp'] })(class='contacts-list--big contacts-list--compact')
