@@ -227,6 +227,106 @@ function initArticleSeasons(wrapperElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * consumers-photos-slider.js
+ */
+function initConsumersPhotosSlider(sliderWrapperElement) {
+  const sliderElement = sliderWrapperElement.querySelector('.consumers-photos__slider');
+  const prevButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--prev');
+  const nextButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--next');
+  const paginationElement = sliderWrapperElement.querySelector('.slider-pagination');
+  new Swiper(sliderElement, {
+    slidesPerView: 'auto',
+    spaceBetween: 10,
+    navigation: {
+      prevEl: prevButtonElement,
+      nextEl: nextButtonElement,
+      disabledClass: 'slider-arrows__button--disabled',
+      lockClass: 'slider-arrows__button--hidden'
+    },
+    pagination: {
+      el: paginationElement,
+      type: 'progressbar'
+      // modifierClass: 'slider-pagination--'
+    },
+    grabCursor: true,
+    breakpoints: {
+      1280: {
+        slidesPerView: 4,
+        spaceBetween: 20
+      }
+    }
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * reviews-intro-slider.js
+ */
+function initReviewsIntroSlider(sliderWrapperElement) {
+  const sliderElement = sliderWrapperElement.querySelector('.reviews-intro__slider');
+  const prevButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--prev');
+  const nextButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--next');
+  new Swiper(sliderElement, {
+    slidesPerView: 'auto',
+    spaceBetween: 10,
+    navigation: {
+      prevEl: prevButtonElement,
+      nextEl: nextButtonElement,
+      disabledClass: 'slider-arrows__button--disabled',
+      lockClass: 'slider-arrows__button--hidden'
+    },
+    grabCursor: true,
+    breakpoints: {
+      1280: {
+        slidesPerView: 4,
+        spaceBetween: 20
+      }
+    }
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * shop-slider.js
+ */
+function initShopSlider(sliderWrapperElement) {
+  const mainSliderElement = sliderWrapperElement.querySelector('.shop__main-slider');
+  const thumbnailsSliderElement = sliderWrapperElement.querySelector('.shop__thumbnails-slider');
+  const prevButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--prev');
+  const nextButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--next');
+  const thumbnailsSwiper = new Swiper(thumbnailsSliderElement, {
+    watchSlidesProgress: true,
+    slidesPerView: 'auto',
+    spaceBetween: 10
+  });
+  new Swiper(mainSliderElement, {
+    spaceBetween: 10,
+    navigation: {
+      prevEl: prevButtonElement,
+      nextEl: nextButtonElement,
+      disabledClass: 'slider-arrows__button--disabled',
+      lockClass: 'slider-arrows__button--hidden'
+    },
+    grabCursor: true,
+    thumbs: {
+      swiper: thumbnailsSwiper,
+      slideThumbActiveClass: 'shop__thumbnails-slider-item--active'
+    },
+    breakpoints: {
+      390: {
+        slidesPerView: 'auto',
+        spaceBetween: 10
+      },
+      1280: {
+        slidesPerView: 4,
+        spaceBetween: 20
+      }
+    }
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * size-chart.js
  */
 function initSizeChart(sizeChartElement) {
@@ -245,4 +345,7 @@ document.querySelectorAll('.article__seasons-slider-wrapper').forEach(initArticl
 document.querySelectorAll('.taber').forEach(taberElement => new Taber(taberElement));
 document.querySelectorAll('.size-chart').forEach(initSizeChart);
 document.querySelectorAll('.video').forEach(videoElement => new Video(videoElement));
+document.querySelectorAll('.shop__slider-wrapper').forEach(initShopSlider);
+document.querySelectorAll('.reviews-intro__slider-wrapper').forEach(initReviewsIntroSlider);
+document.querySelectorAll('.consumers-photos__slider-wrapper').forEach(initConsumersPhotosSlider);
 /* * * * * * * * * * * * * * * * * * * * * * * */
