@@ -1,0 +1,19 @@
+mixin review({ review })
+  - var formattedDate =  new Date(review.date).toLocaleDateString('ru-RU');
+
+  article.review&attributes(attributes)
+    footer.review__footer
+      p.review__author= review.author
+      time.review__date(datetime= review.date)= formattedDate
+    .review__text-wrapper.review__text-wrapper--clipped
+      p.review__text= review.text
+      button.review__toggle-button(type='button')
+        span.review__toggle-button-text Скрыть
+        span.review__toggle-button-text-clipped Читать полностью
+    .review__slider-wrapper
+      .review__slider.swiper
+        ul.review__slider-list.swiper-wrapper
+          each photo in review.photos
+            li.review__slider-item.swiper-slide
+              picture.review__slider-image-wrapper.media.media--cover.media--position_top
+                img.review__slider-image.media__image(src= photo width='102' height='128' alt='' loading='lazy')

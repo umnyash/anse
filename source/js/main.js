@@ -9,4 +9,12 @@ document.querySelectorAll('.video').forEach((videoElement) => new Video(videoEle
 document.querySelectorAll('.shop__slider-wrapper').forEach(initShopSlider);
 document.querySelectorAll('.reviews-intro__slider-wrapper').forEach(initReviewsIntroSlider);
 document.querySelectorAll('.consumers-photos__slider-wrapper').forEach(initConsumersPhotosSlider);
+document.querySelectorAll('.simple-filter__slider-wrapper').forEach(initSimpleFilterSlider);
+document.querySelectorAll('.review__slider-wrapper').forEach(initReviewSlider);
+
+let reviews = null;
+let reviewsElement = document.querySelector('.reviews');
+if (reviewsElement) {
+  reviews = new Reviews(reviewsElement);
+}
 /* * * * * * * * * * * * * * * * * * * * * * * */

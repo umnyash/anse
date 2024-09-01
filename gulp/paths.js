@@ -58,6 +58,7 @@ export default {
       `${pathSrc}/js/const.js`,
       `${pathSrc}/js/util.js`,
       `${pathSrc}/js/classes/taber.js`,
+      `${pathSrc}/js/classes/reviews.js`,
       `${pathSrc}/js/classes/video.js`,
       `${pathSrc}/js/modules/*.js`,
       `${pathSrc}/js/main.js`,

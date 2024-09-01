@@ -1,0 +1,12 @@
+mixin reviews-list({ reviews, button })
+  .reviews-list&attributes(attributes)
+    ul.reviews-list__items
+      each review in reviews
+        li.reviews-list__item
+          +review({ review })
+    if button
+      +button({
+        tag: 'button',
+        type: 'button',
+        text: 'Показать ещё отзывы'
+      })(class='reviews-list__button button--solid-primary')

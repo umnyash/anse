@@ -236,11 +236,11 @@
     text-decoration-color $duration-xs ease-in,
     color $duration-m ease-in-out;
 
-  &:hover {
+  &[href]:hover {
     color: var(--brand-color);
   }
 
-  &:active {
+  &[href]:active {
     text-decoration-color: currentColor;
     color: var(--brand-color);
   }

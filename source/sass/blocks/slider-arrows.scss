@@ -1,16 +1,26 @@
+.slider-arrows {
+  visibility: hidden;
+}
+
 .slider-arrows__list {
   display: flex;
+  height: 100%;
   padding: 0;
   margin: 0;
   list-style: none;
   gap: 8px;
   justify-content: space-between;
   align-items: center;
-  visibility: hidden;
 
   @media (min-width: $desktop-width) {
     gap: 12px;
   }
+}
+
+.slider-arrows__item {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .slider-arrows__button {
@@ -77,6 +87,41 @@
   display: none;
 }
 
+.slider-arrows__button--disabled-hidden {
+  display: none;
+}
+
 .slider-arrows__button--prev {
   transform: scale(-1);
+}
+
+.slider-arrows--alter {
+  .slider-arrows__item {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 334%;
+      visibility: visible;
+      pointer-events: none;
+    }
+  }
+
+  .slider-arrows__item:first-child::before {
+    left: 0;
+    background: linear-gradient(to right, var(--background-additional-color) 25%, transparent);
+  }
+
+  .slider-arrows__item:last-child::before {
+    right: 0;
+    background: linear-gradient(to left, var(--background-additional-color) 25%, transparent);
+  }
+
+  .slider-arrows__button {
+    position: relative;
+    z-index: 1;
+  }
 }
