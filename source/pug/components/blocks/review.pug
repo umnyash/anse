@@ -6,7 +6,7 @@ mixin review({ review })
       p.review__author= review.author
       time.review__date(datetime= review.date)= formattedDate
     .review__text-wrapper.review__text-wrapper--clipped
-      p.review__text= review.text
+      blockquote.review__text= review.text
       button.review__toggle-button(type='button')
         span.review__toggle-button-text Скрыть
         span.review__toggle-button-text-clipped Читать полностью

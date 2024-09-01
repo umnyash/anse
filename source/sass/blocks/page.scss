@@ -24,6 +24,20 @@
   @supports (height: 100dvh) {
     height: 100dvh;
   }
+
+  > .simplebar-track .simplebar-scrollbar::before {
+    background: #000000;
+  }
+
+  > .simplebar-track .simplebar-scrollbar.simplebar-visible::before {
+    opacity: 0.73;
+  }
+
+  @media (pointer: coarse) {
+    > .simplebar-track .simplebar-scrollbar.simplebar-visible::before {
+      opacity: 0;
+    }
+  }
 }
 
 .message {

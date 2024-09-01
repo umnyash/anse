@@ -7,7 +7,7 @@ function initConsumersPhotosSlider(sliderWrapperElement) {
   const nextButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--next');
   const paginationElement = sliderWrapperElement.querySelector('.slider-pagination');
 
-  new Swiper(sliderElement, {
+  const slider = new Swiper(sliderElement, {
     slidesPerView: 'auto',
     spaceBetween: 10,
     navigation: {
@@ -19,9 +19,7 @@ function initConsumersPhotosSlider(sliderWrapperElement) {
     pagination: {
       el: paginationElement,
       type: 'progressbar',
-      // modifierClass: 'slider-pagination--'
     },
-    grabCursor: true,
     breakpoints: {
       1280: {
         slidesPerView: 4,
@@ -29,5 +27,7 @@ function initConsumersPhotosSlider(sliderWrapperElement) {
       },
     }
   });
+
+  return slider;
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */

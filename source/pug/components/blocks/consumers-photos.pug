@@ -13,12 +13,12 @@ mixin consumers-photos
         })(class='consumers-photos__link button--simple-primary')
         .consumers-photos__slider-wrapper
           .consumers-photos__slider.swiper
-            ul.consumers-photos__slider-list.swiper-wrapper
+            ul.consumers-photos__slider-list.swiper-wrapper(data-modal-opener='consumers-photos')
               each i in [1, 2, 3, 4, 5, 6, 7]
                 li.consumers-photos__slider-item.swiper-slide
                   picture.consumers-photos__slider-image-wrapper.media.media--cover.media--position_top
                     img.consumers-photos__slider-image.media__image(src=`img/consumers/consumer-${i}.webp` width='365' height='489' alt='' loading='lazy')
-          +slider-arrows(class='reviews-intro__slider-arrows')
+          +slider-arrows(class='consumers-photos__slider-arrows')
           .consumers-photos__slider-pagination.slider-pagination
         +button({
           tag: 'a',

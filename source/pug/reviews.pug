@@ -13,3 +13,9 @@ block content
   +reviews-intro
   +consumers-photos
   +reviews({ reviews })
+
+block modals
+  +modal(class='modal--with_gallery-slider' data-modal='consumers-photos')
+    +consumers-photos-modal-gallery-slider(class='modal__gallery-slider')
+  +modal(class='modal--with_gallery-slider' data-modal='reviews-intro-photos')
+    +reviews-intro-photos-modal-gallery-slider(class='modal__gallery-slider')

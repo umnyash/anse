@@ -1,6 +1,22 @@
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * util.js
  */
+function lockPageScroll() {
+  const bodyWidth = document.body.clientWidth;
+  document.body.classList.add('scroll-lock');
+
+  if (document.body.clientWidth === bodyWidth) {
+    return;
+  }
+
+  document.body.style.paddingRight = `${document.body.clientWidth - bodyWidth}px`;
+}
+
+function unlockPageScroll() {
+  document.body.classList.remove('scroll-lock');
+  document.body.style.paddingRight = '0';
+}
+
 function createElementByString(template) {
   const newElement = document.createElement('div');
   newElement.innerHTML = template;

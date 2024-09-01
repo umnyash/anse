@@ -60,6 +60,7 @@ export default {
       `${pathSrc}/js/classes/taber.js`,
       `${pathSrc}/js/classes/reviews.js`,
       `${pathSrc}/js/classes/video.js`,
+      `${pathSrc}/js/classes/modal.js`,
       `${pathSrc}/js/modules/*.js`,
       `${pathSrc}/js/main.js`,
     ],

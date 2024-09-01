@@ -1,26 +1,32 @@
 /* * * * * * * * * * * * * * * * * * * * * * * *
- * reviews-intro-slider.js
+ * gallery-slider.js
  */
-function initReviewsIntroSlider(sliderWrapperElement) {
-  const sliderElement = sliderWrapperElement.querySelector('.reviews-intro__slider');
+function initGallerySlider(sliderWrapperElement) {
+  const sliderElement = sliderWrapperElement.querySelector('.gallery-slider__slider');
   const prevButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--prev');
   const nextButtonElement = sliderWrapperElement.querySelector('.slider-arrows__button--next');
 
-  new Swiper(sliderElement, {
-    slidesPerView: 'auto',
-    spaceBetween: 10,
+  const slider = new Swiper(sliderElement, {
+    effect: 'creative',
+    creativeEffect: {
+      prev: {
+        shadow: true,
+        translate: ['-20%', 0, -1],
+      },
+      next: {
+        translate: ['100%', 0, 0],
+      },
+    },
+    speed: 500,
     navigation: {
       prevEl: prevButtonElement,
       nextEl: nextButtonElement,
       disabledClass: 'slider-arrows__button--disabled',
       lockClass: 'slider-arrows__button--hidden',
     },
-    breakpoints: {
-      1280: {
-        slidesPerView: 4,
-        spaceBetween: 20,
-      },
-    }
+    grabCursor: true,
   });
+
+  return slider;
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
