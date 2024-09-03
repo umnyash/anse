@@ -8,6 +8,11 @@
   }
 }
 
+.heading__accent {
+  font-family: $decorative-font-family;
+  font-weight: 400;
+}
+
 .heading--size_l {
   font-size: 28px;
 
@@ -17,6 +22,18 @@
 
   @media (min-width: $desktop-width) {
     font-size: 58px;
+  }
+
+  .heading__accent {
+    font-size: 42px;
+
+    @media (min-width: $laptop-width) {
+      font-size: 80px;
+    }
+
+    @media (min-width: $desktop-width) {
+      font-size: 100px;
+    }
   }
 }
 

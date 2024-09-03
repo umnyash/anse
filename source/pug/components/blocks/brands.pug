@@ -1,0 +1,16 @@
+mixin brands
+  section.brands&attributes(attributes)
+    .container
+      .brands__inner
+        h2.brands__heading.heading.heading--size_l.heading--alter #[span.heading__accent Пресса] об ANSE
+        +button({ tag: 'a', text: 'Смотреть все', href: 'press.html' })(class='brands__button button--simple-primary')
+        .brands__slider.swiper
+          ul.brands__slider-list.swiper-wrapper
+            each i in [1, 2, 3]
+              li.brands__slider-item.swiper-slide
+                img(src='img/brands/vogue.webp' width='276' height='90' alt='VOGUE' loading='lazy')
+              li.brands__slider-item.swiper-slide
+                img(src='img/brands/woman-hit.webp' width='444' height='90' alt='Woman Hit' loading='lazy')
+              li.brands__slider-item.swiper-slide
+                img(src='img/brands/cosmopolitan.webp' width='396' height='90' alt='COSMOPOLITAN' loading='lazy')
+        +slider-arrows(class='brands__slider-arrows')

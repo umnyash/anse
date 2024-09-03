@@ -1,0 +1,39 @@
+-
+  const categories = [
+    {
+      name: 'Sale',
+      image: 'sale'
+    },
+    {
+      name: 'Аксессуары',
+      image: 'accessories'
+    },
+    {
+      name: 'Шубы Premier',
+      image: 'fur-coats-premier'
+    },
+    {
+      name: 'Шубы Classic',
+      image: 'fur-coats-classic'
+    },
+    {
+      name: 'Шубы Limited',
+      image: 'fur-coats-limited'
+    },
+    {
+      name: 'Новая коллекция',
+      image: 'new-collection'
+    }
+  ];
+
+mixin categories
+  section.categories&attributes(attributes)
+    .container
+      .categories__inner
+        h2.visually-hidden Категории
+        ul.categories__list
+          each item in categories
+            li.categories__item
+              picture.categories__image-wrapper.media.media--cover.media--position_top
+                img.categories__image.media__image(src=`img/categories/${item.image}.webp` srcset=`img/categories/${item.image}@2x.webp` width='237' height='376' alt='' loading='lazy')
+              a.categories__link(href='catalog.html')= item.name
