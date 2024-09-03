@@ -351,6 +351,41 @@ function initArticleSeasons(wrapperElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * brands-slider.js
+ */
+function initBrandsSlider(brandsElement) {
+  const sliderElement = brandsElement.querySelector('.brands__slider');
+  const prevButtonElement = brandsElement.querySelector('.slider-arrows__button--prev');
+  const nextButtonElement = brandsElement.querySelector('.slider-arrows__button--next');
+  new Swiper(sliderElement, {
+    slidesPerView: 'auto',
+    spaceBetween: 28,
+    grabCursor: true,
+    navigation: {
+      prevEl: prevButtonElement,
+      nextEl: nextButtonElement,
+      disabledClass: 'slider-arrows__button--disabled',
+      lockClass: 'slider-arrows__button--hidden'
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 'auto',
+        spaceBetween: 60
+      },
+      1280: {
+        slidesPerView: 'auto',
+        spaceBetween: 103
+      },
+      1600: {
+        slidesPerView: 'auto',
+        spaceBetween: 144
+      }
+    }
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * consumers-photos-slider.js
  */
 function initConsumersPhotosSlider(sliderWrapperElement) {
@@ -603,7 +638,7 @@ function initSizeChart(sizeChartElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * main.js
  */
-initPageScrollbar(document.querySelector('.page__inner'));
+// initPageScrollbar(document.querySelector('.page__panel'));
 document.querySelectorAll('.article__photos').forEach(initArticlePhotos);
 document.querySelectorAll('.article__seasons-slider-wrapper').forEach(initArticleSeasons);
 document.querySelectorAll('.taber').forEach(taberElement => new Taber(taberElement));
@@ -612,6 +647,7 @@ document.querySelectorAll('.video').forEach(videoElement => new Video(videoEleme
 document.querySelectorAll('.shop__slider-wrapper').forEach(initShopSlider);
 document.querySelectorAll('.simple-filter__slider-wrapper').forEach(initSimpleFilterSlider);
 document.querySelectorAll('.review__slider-wrapper').forEach(initReviewSlider);
+document.querySelectorAll('.brands').forEach(initBrandsSlider);
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {
