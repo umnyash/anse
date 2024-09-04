@@ -1,0 +1,24 @@
+mixin product-card({ product, headingTag })
+  - const badges = [product.sale && 'sale', product.new && 'new'].filter(Boolean)
+
+  article.product-card&attributes(attributes)
+    .product-card__link-wrapper
+      #{headingTag}.product-card__heading
+        a.product-card__link(href='product.html')= product.title
+      .product-card__images
+        picture.product-card__image-wrapper-primary.media.media--cover.media--position_top
+          img.product-card__image.media__image(src= product.image width='365' height='563' alt='' loading='lazy')
+        picture.product-card__image-wrapper-secondary.media.media--cover.media--position_top
+          img.product-card__image.media__image(src='img/products/product-additional.webp' width='365' height='563' alt='' loading='lazy')
+        if badges.length
+          +product-badges({ badges })(class='product-card__badges product-badges--light')
+        ol.product-card__sizes
+          each size in ['xxs', 'xs', 's', 'm', 'l', 'xl']
+            li.product-card__sizes-item(class= size !== 'xs' && size !== 'l' && 'product-card__sizes-item--active')= size
+    .product-card__price-wrapper
+      if product.sale
+        s.product-card__price.product-card__price--old= `${product.price} ₽`
+        p.product-card__price= `${product.price} ₽`
+      else
+        p.product-card__price= `${product.price} ₽`
+    p.product-card__installments Долями по 6 995 ₽

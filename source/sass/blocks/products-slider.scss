@@ -1,0 +1,23 @@
+.products-slider__list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.products-slider__item {
+  display: grid;
+  width: 180px;
+  height: auto;
+
+  @media (min-width: $wide-mobile-width) {
+    width: auto;
+  }
+}
+
+.products-slider__pagination.products-slider__pagination {
+  margin: 20px 0 0;
+
+  @media (min-width: $wide-tablet-width) {
+    display: none;
+  }
+}

@@ -1,0 +1,20 @@
+mixin catalog-preview
+  .catalog-preview&attributes(attributes)
+    .container
+      .catalog-preview__inner
+        .taber.taber--simple#catalog-preview-taber
+          ul.taber__list
+            li.taber__tab-wrapper
+              a.taber__tab Шубы
+            li.taber__tab-wrapper
+              a.taber__tab Не шубы
+          section.taber__panel
+            h2.visually-hidden Шубы
+            +products-slider({ products, headingTag: 'h3' })
+            .catalog-preview__link-wrapper
+              +button({ tag: 'a', text: 'Смотреть все', href: 'catalog.html' })(class='button--simple-primary')
+          section.taber__panel
+            h2.visually-hidden Не шубы
+            +products-slider({ products, headingTag: 'h3' })
+            .catalog-preview__link-wrapper
+              +button({ tag: 'a', text: 'Смотреть все', href: 'catalog.html' })(class='button--simple-primary')

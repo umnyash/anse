@@ -1,0 +1,5 @@
+mixin product-badges({ badges })
+  .product-badges&attributes(attributes)
+    ul.product-badges__list
+      each badge in badges
+        li.product-badges__item= badge

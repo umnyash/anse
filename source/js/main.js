@@ -11,6 +11,7 @@ document.querySelectorAll('.shop__slider-wrapper').forEach(initShopSlider);
 document.querySelectorAll('.simple-filter__slider-wrapper').forEach(initSimpleFilterSlider);
 document.querySelectorAll('.review__slider-wrapper').forEach(initReviewSlider);
 document.querySelectorAll('.brands').forEach(initBrandsSlider);
+document.querySelectorAll('.catalog-preview .products-slider').forEach(initCatalogPreviewSlider);
 
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');

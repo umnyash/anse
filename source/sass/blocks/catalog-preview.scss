@@ -1,0 +1,16 @@
+.catalog-preview__link-wrapper {
+  display: flex;
+  margin: 20px 0 0;
+  justify-content: center;
+
+  @media (min-width: $tablet-width) {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 20px);
+    margin: 0;
+  }
+
+  @media (min-width: $desktop-width) {
+    bottom: calc(100% + 30px);
+  }
+}
