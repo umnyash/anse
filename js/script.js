@@ -3,6 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * const.js
  */
+const LAPTOP_WIDTH_MEDIA_QUERY = '(min-width: 1280px)';
 const MODAL_ANIMATION_DURATION = 500; // Соответствует $duration-l в variables.scss
 
 const KeyCode = Object.freeze({
@@ -19,16 +20,12 @@ const KeyCode = Object.freeze({
  * util.js
  */
 function lockPageScroll() {
-  const bodyWidth = document.body.clientWidth;
-  document.body.classList.add('scroll-lock');
-  if (document.body.clientWidth === bodyWidth) {
-    return;
-  }
-  document.body.style.paddingRight = `${document.body.clientWidth - bodyWidth}px`;
+  const pageScrollWrapperElement = document.querySelector('.simplebar-content-wrapper');
+  pageScrollWrapperElement.classList.add('scroll-lock');
 }
 function unlockPageScroll() {
-  document.body.classList.remove('scroll-lock');
-  document.body.style.paddingRight = '0';
+  const pageScrollWrapperElement = document.querySelector('.simplebar-content-wrapper');
+  pageScrollWrapperElement.classList.remove('scroll-lock');
 }
 function createElementByString(template) {
   const newElement = document.createElement('div');
@@ -63,6 +60,24 @@ function debounce(callback) {
     }
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(_this, rest), timeoutDelay);
+  };
+}
+function throttleAndDebounce(func, wait) {
+  let lastTime = 0;
+  let timeout;
+  return function () {
+    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+    const now = new Date().getTime();
+    if (now - lastTime >= wait) {
+      lastTime = now;
+      func.apply(this, args);
+    }
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func.apply(this, args);
+    }, wait);
   };
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
@@ -512,10 +527,23 @@ function initGallerySlider(sliderWrapperElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * menu.js
+ */
+function initMenu(menuElement) {
+  const openerElement = document.querySelector('.site-header__burger');
+  menuElement.addEventListenerClick;
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * page-scrollbar.js
  */
 function initPageScrollbar(pageInnerElement) {
-  new SimpleBar(pageInnerElement);
+  return new SimpleBar(pageInnerElement, {
+    classNames: {
+      contentEl: 'page__inner'
+    }
+  });
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -659,6 +687,74 @@ function initSimpleFilterSlider(sliderWrapperElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * site-header.js
+ */
+function initSiteHeader(headerElement, pageScrollWrapperElement) {
+  // Скрытие/отобржение шапки при прокрутке.
+  let pageScrollY = 0;
+  const onPageScroll = () => {
+    const headerHeight = headerElement.offsetHeight;
+    if (pageScrollWrapperElement.scrollTop > 0) {
+      headerElement.classList.add('site-header--sticked');
+    }
+    if (pageScrollWrapperElement.scrollTop > pageScrollY && pageScrollWrapperElement.scrollTop > headerHeight) {
+      headerElement.classList.add('site-header--hidden');
+    } else {
+      headerElement.classList.remove('site-header--hidden');
+      if (pageScrollWrapperElement.scrollTop === 0) {
+        headerElement.classList.remove('site-header--sticked');
+      }
+    }
+    pageScrollY = pageScrollWrapperElement.scrollTop;
+  };
+  onPageScroll();
+  pageScrollWrapperElement.addEventListener('scroll', throttleAndDebounce(onPageScroll, 200));
+
+  // Бургер-меню
+  const burgerElement = headerElement.querySelector('.site-header__burger');
+  const openBurgerMenu = () => {
+    headerElement.classList.add('site-header--menu-open');
+    burgerElement.ariaExpanded = true;
+    lockPageScroll();
+  };
+  const closeBurgerMenu = () => {
+    headerElement.classList.remove('site-header--menu-open');
+    burgerElement.ariaExpanded = false;
+    unlockPageScroll();
+  };
+  burgerElement.addEventListener('click', () => {
+    const isExpanded = burgerElement.ariaExpanded === 'true';
+    if (isExpanded) {
+      closeBurgerMenu();
+    } else {
+      openBurgerMenu();
+    }
+  });
+  laptopWidthMediaQueryList.addEventListener('change', () => {
+    closeBurgerMenu();
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * site-navigation-scrollbar.js
+ */
+function initSiteNavigation(navigationElement) {
+  navigationElement.addEventListener('click', evt => {
+    if (laptopWidthMediaQueryList.matches) {
+      return;
+    }
+    const openerElement = evt.target.closest('.site-navigation__link--opener');
+    if (!openerElement) {
+      return;
+    }
+    evt.preventDefault();
+    openerElement.classList.toggle('site-navigation__link--active');
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * size-chart.js
  */
 function initSizeChart(sizeChartElement) {
@@ -672,7 +768,10 @@ function initSizeChart(sizeChartElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * main.js
  */
-// initPageScrollbar(document.querySelector('.page__panel'));
+const laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
+const simpleBar = initPageScrollbar(document.querySelector('.page__scroll-wrapper'));
+initSiteHeader(document.querySelector('.site-header'), simpleBar.getScrollElement());
+initSiteNavigation(document.querySelector('.site-navigation'));
 document.querySelectorAll('.article__photos').forEach(initArticlePhotos);
 document.querySelectorAll('.article__seasons-slider-wrapper').forEach(initArticleSeasons);
 document.querySelectorAll('.taber').forEach(taberElement => new Taber(taberElement));
