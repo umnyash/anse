@@ -21,12 +21,11 @@ html.page(lang='ru')
     meta(name='description' content='«Anse» — магазин верхней одежды собственного производства, преимущественнно из экомеха, на любой сезон!')
     meta(name='keywords' content='Купить шубы из экомеха в интернет-магазине, женские шубы из искусственного меха недорого, Anse, женские шубы, шубы из искусственного меха, магазин шуб, интернет-магазин шуб, экомех, Мария Кошкина.')
   body.page__body
-    .page__panel
-      .page__inner
-        +site-header(class='page__site-header')
-        main.page__content
-          block content
-        +site-footer(class='page__site-footer')
+    .page__scroll-wrapper
+      +site-header(class='page__site-header')
+      main.page__content
+        block content
+      +site-footer(class='page__site-footer')
     block modals
     script(src='vendor/swiper/swiper-bundle.min.js')
     script(src='vendor/simplebar/simplebar.min.js')

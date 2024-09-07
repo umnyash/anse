@@ -1,2 +1,21 @@
 mixin site-header
-  header.site-header&attributes(attributes) HEADER
+  header.site-header&attributes(attributes)
+    .site-header__message
+      .container
+        p Доступна оплата в рассрочку
+    .site-header__inner
+      .site-header__container.container
+        nav.site-header__main-navigation
+          .site-header__buttons-1
+            button.site-header__burger(type='button' aria-expanded='false')
+              span.visually-hidden Меню
+            button.site-header__search-button.site-header__search-button--1(type='button' aria-expanded='false')
+              span.site-header__search-button-text Поиск
+          .site-header__logo
+            +logo
+          .site-header__buttons-2
+              button.site-header__search-button.site-header__search-button--2(type='button' aria-expanded='false')
+                span.visually-hidden Поиск
+              +user-navigation
+          .site-header__site-navigation-wrapper
+            +site-navigation(class='site-header__site-navigation')

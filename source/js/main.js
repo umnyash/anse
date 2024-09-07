@@ -1,7 +1,11 @@
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * main.js
  */
-// initPageScrollbar(document.querySelector('.page__panel'));
+const laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
+const simpleBar = initPageScrollbar(document.querySelector('.page__scroll-wrapper'));
+
+initSiteHeader(document.querySelector('.site-header'), simpleBar.getScrollElement());
+initSiteNavigation(document.querySelector('.site-navigation'));
 document.querySelectorAll('.article__photos').forEach(initArticlePhotos);
 document.querySelectorAll('.article__seasons-slider-wrapper').forEach(initArticleSeasons);
 document.querySelectorAll('.taber').forEach((taberElement) => new Taber(taberElement));

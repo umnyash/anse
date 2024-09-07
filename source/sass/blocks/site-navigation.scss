@@ -1,0 +1,228 @@
+.site-navigation {
+  box-sizing: border-box;
+  /* stylelint-disable-next-line */
+  font: 400 18px/1.222 $main-font-family;
+
+  @media (max-width: ($laptop-width - 1)) {
+    padding-bottom: 20px;
+    overflow-y: auto;
+  }
+
+  @media (min-width: $laptop-width) {
+    font-size: 16px;
+    /* stylelint-disable-next-line */
+    line-height: 1.1875;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+    /* stylelint-disable-next-line */
+    line-height: 1.22;
+  }
+}
+
+.site-navigation__list--level_1 {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @media (min-width: $laptop-width) {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  @media (min-width: $desktop-width) {
+    gap: 28px;
+  }
+}
+
+.site-navigation__list--level_1 > .site-navigation__item + .site-navigation__item {
+  @media (max-width: ($laptop-width - 1)) {
+    margin-top: 25px;
+  }
+}
+
+.site-navigation__list--level_2 {
+  padding: 0 0 0 20px;
+  margin: 12px 0 0;
+  list-style: none;
+
+  @media (min-width: $laptop-width) {
+    position: absolute;
+    z-index: 0;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: grid;
+    padding: 41px 0 36px;
+    margin: 0;
+    grid-template-columns: repeat(3, auto);
+    justify-content: space-between;
+    align-items: start;
+    background: var(--background-color);
+    opacity: 0;
+    visibility: hidden;
+    transition-property: opacity, visibility;
+    transition-duration: $duration-m;
+    transition-timing-function: ease-in-out;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: -100vw;
+      bottom: 0;
+      left: -100vw;
+      z-index: -1;
+      background: var(--background-color);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 20px;
+      right: -100vw;
+      left: -100vw;
+      z-index: -1;
+      height: 1px;
+      background: var(--border-light-color);
+    }
+  }
+}
+
+.site-navigation__list--level_2 .site-navigation__item + .site-navigation__item {
+  margin-top: 20px;
+
+  @media (min-width: $laptop-width) {
+    margin: 0;
+  }
+}
+
+.site-navigation__list--level_3 {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.site-navigation__list--level_3 .site-navigation__item + .site-navigation__item {
+  margin-top: 10px;
+}
+
+.site-navigation__link {
+  text-decoration: none;
+  color: inherit;
+  transition: color $duration-s ease-in-out;
+
+  &[href]:hover {
+    color: var(--brand-color);
+  }
+}
+
+.site-navigation__list--level_3 .site-navigation__link {
+  color: var(--text-weak-color);
+}
+
+.site-navigation__link--opener {
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+  justify-content: space-between;
+
+  &::after {
+    content: "";
+    width: 18px;
+    height: 10px;
+    background: currentColor;
+    mask: url("../img/icons.svg#controls_arrow-without-tail");
+    transition: transform $duration-s ease-in-out;
+
+    @media (min-width: $laptop-width) {
+      width: 12px;
+    }
+  }
+}
+
+.site-navigation__title {
+  margin: 0 0 10px;
+  line-height: 1;
+  font-weight: 500;
+
+  @media (min-width: $laptop-width) {
+    margin-bottom: 20px;
+  }
+}
+
+// Скрытие вложенного меню на мобильной версии
+@media (max-width: ($laptop-width - 1)) {
+  .site-navigation__link--opener.site-navigation__link--active {
+    color: var(--brand-color);
+
+    &::after {
+      transform: rotate(-180deg);
+    }
+  }
+
+  .site-navigation__list--level_2 {
+    transition-property: margin, line-height, color;
+    transition-duration: $duration-s;
+    transition-timing-function: ease-in-out;
+  }
+
+  .site-navigation__list--level_2 > .site-navigation__item {
+    transition-property: margin, line-height, color;
+    transition-duration: $duration-s;
+    transition-timing-function: ease-in-out;
+    overflow: hidden;
+  }
+
+  .site-navigation__title {
+    transition-property: margin, line-height, color;
+    transition-duration: $duration-s;
+    transition-timing-function: ease-in-out;
+  }
+
+  .site-navigation__link--opener:not(.site-navigation__link--active) + .site-navigation__list--level_2 {
+    margin-top: 0;
+  }
+
+  .site-navigation__link--opener:not(.site-navigation__link--active) + .site-navigation__list--level_2 > .site-navigation__item {
+    line-height: 0;
+  }
+
+  .site-navigation__link--opener:not(.site-navigation__link--active) + .site-navigation__list--level_2 .site-navigation__title {
+    margin-bottom: 0;
+    line-height: 0;
+    color: transparent;
+  }
+
+  .site-navigation__link--opener:not(.site-navigation__link--active) + .site-navigation__list--level_2 .site-navigation__link {
+    margin-bottom: 0;
+    line-height: 0;
+    color: transparent;
+  }
+
+  .site-navigation__link--opener:not(.site-navigation__link--active) + .site-navigation__list--level_2 .site-navigation__item {
+    margin-top: 0;
+  }
+}
+
+// Отображение меню на десктопе по наведению мыши
+@media (min-width: $laptop-width) {
+  .site-navigation__list--level_1 .site-navigation__item:hover {
+    .site-navigation__link--opener {
+      color: var(--brand-color);
+
+      &::after {
+        transform: rotate(-180deg);
+      }
+    }
+
+    .site-navigation__link--opener + .site-navigation__list--level_2 {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

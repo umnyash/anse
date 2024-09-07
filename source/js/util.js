@@ -2,19 +2,13 @@
  * util.js
  */
 function lockPageScroll() {
-  const bodyWidth = document.body.clientWidth;
-  document.body.classList.add('scroll-lock');
-
-  if (document.body.clientWidth === bodyWidth) {
-    return;
-  }
-
-  document.body.style.paddingRight = `${document.body.clientWidth - bodyWidth}px`;
+  const pageScrollWrapperElement = document.querySelector('.simplebar-content-wrapper');
+  pageScrollWrapperElement.classList.add('scroll-lock');
 }
 
 function unlockPageScroll() {
-  document.body.classList.remove('scroll-lock');
-  document.body.style.paddingRight = '0';
+  const pageScrollWrapperElement = document.querySelector('.simplebar-content-wrapper');
+  pageScrollWrapperElement.classList.remove('scroll-lock');
 }
 
 function createElementByString(template) {
@@ -54,6 +48,26 @@ function debounce(callback, timeoutDelay = 500) {
   return (...rest) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+function throttleAndDebounce(func, wait) {
+  let lastTime = 0;
+  let timeout;
+
+  return function (...args) {
+    const now = new Date().getTime();
+
+    if (now - lastTime >= wait) {
+      lastTime = now;
+      func.apply(this, args);
+    }
+
+    if (timeout) clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      func.apply(this, args);
+    }, wait);
   };
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */

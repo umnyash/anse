@@ -1,0 +1,81 @@
+.user-navigation__list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  @media (min-width: $laptop-width) {
+    column-gap: 25px;
+  }
+
+  @media (min-width: $desktop-width) {
+    column-gap: 20px;
+  }
+}
+
+.user-navigation__link {
+  position: relative;
+  display: block;
+  color: inherit;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 17px;
+    height: 17px;
+    background: currentColor;
+
+    @media (min-width: $desktop-width) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.user-navigation__counter {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  box-sizing: border-box;
+  min-width: 16px;
+  padding: 2px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 10px;
+  line-height: 12px;
+  color: var(--text-color);
+  background: var(--brand-color);
+
+  @media (min-width: $tablet-width) {
+    top: -10px;
+    right: -12px;
+    min-width: 20px;
+    padding: 4px 2px;
+    font-size: 11px;
+  }
+
+  @media (min-width: $desktop-width) {
+    top: -12px;
+    right: -12px;
+    min-width: 24px;
+    padding: 6px 4px 4px;
+    font-size: 12px;
+    line-height: 14px;
+  }
+}
+
+.user-navigation__link--user::before {
+  mask: url("../img/icons.svg#user");
+}
+
+.user-navigation__link--cart::before {
+  width: 16px;
+  mask: url("../img/icons.svg#cart");
+
+  @media (min-width: $desktop-width) {
+    width: 24px;
+    height: 25px;
+  }
+}

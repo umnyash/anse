@@ -1,6 +1,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * const.js
  */
+const LAPTOP_WIDTH_MEDIA_QUERY = '(min-width: 1280px)';
 const MODAL_ANIMATION_DURATION = 500; // Соответствует $duration-l в variables.scss
 
 const KeyCode = Object.freeze({

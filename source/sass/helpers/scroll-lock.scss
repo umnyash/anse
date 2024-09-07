@@ -1,3 +1,4 @@
 .scroll-lock {
-  overflow: hidden;
+  /* stylelint-disable-next-line declaration-no-important */
+  overflow: hidden !important;
 }

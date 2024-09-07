@@ -1,0 +1,10 @@
+mixin user-navigation
+  .user-navigation&attributes(attributes)
+    ul.user-navigation__list
+      li.user-navigation__item
+        a.user-navigation__link.user-navigation__link--user(href='account.html')
+          span.visually-hidden Личный кабинет
+      li.user-navigation__item
+        a.user-navigation__link.user-navigation__link--cart(href='cart.html')
+          span.visually-hidden Корзина
+          span.user-navigation__counter 15
