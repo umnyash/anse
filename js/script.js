@@ -614,6 +614,40 @@ function initReviewsIntroSlider(sliderWrapperElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * search-form.js
+ */
+function initSearch(searchWrapperElement) {
+  const controlElement = searchWrapperElement.querySelector('.search-form__field-control');
+  const clearButtonElement = searchWrapperElement.querySelector('.search-form__field-clear-button');
+  const updateClearButtonStatus = () => {
+    setTimeout(() => {
+      clearButtonElement.classList.toggle('search-form__field-clear-button--hidden', !controlElement.value);
+    });
+  };
+  updateClearButtonStatus();
+  controlElement.addEventListener('input', () => {
+    updateClearButtonStatus();
+  });
+  searchWrapperElement.addEventListener('click', evt => {
+    const controlLabelElement = evt.target.closest('.search__placeholder .button');
+    const clearButtonElement = evt.target.closest('.search-form__field-clear-button');
+    if (clearButtonElement) {
+      controlElement.value = '';
+      updateClearButtonStatus();
+      controlElement.focus();
+      controlElement.dispatchEvent(inputEvent);
+      controlElement.dispatchEvent(changeEvent);
+      return;
+    }
+    if (controlLabelElement) {
+      controlElement.focus();
+      controlElement.selectionStart = controlElement.value.length;
+    }
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * shop-slider.js
  */
 function initShopSlider(sliderWrapperElement) {
@@ -708,7 +742,7 @@ function initSiteHeader(headerElement, pageScrollWrapperElement) {
     pageScrollY = pageScrollWrapperElement.scrollTop;
   };
   onPageScroll();
-  pageScrollWrapperElement.addEventListener('scroll', throttleAndDebounce(onPageScroll, 200));
+  pageScrollWrapperElement.addEventListener('scroll', throttleAndDebounce(onPageScroll, 50));
 
   // Бургер-меню
   const burgerElement = headerElement.querySelector('.site-header__burger');
@@ -730,8 +764,30 @@ function initSiteHeader(headerElement, pageScrollWrapperElement) {
       openBurgerMenu();
     }
   });
+
+  // Поиск
+  const searchOpenerElements = headerElement.querySelectorAll('.site-header__search-button');
+  const searchCloserElements = headerElement.querySelectorAll('[class^="site-header__search-close-button"]');
+  const openSearchPanel = () => {
+    headerElement.classList.add('site-header--search-open');
+    lockPageScroll();
+  };
+  const closeSearchPanel = () => {
+    headerElement.classList.remove('site-header--search-open');
+    unlockPageScroll();
+  };
+  searchOpenerElements.forEach(openerElement => {
+    openerElement.addEventListener('click', openSearchPanel);
+  });
+  searchCloserElements.forEach(closerElement => {
+    closerElement.addEventListener('click', closeSearchPanel);
+  });
+
+  // Закрытие меню и панели поиска при ресайзе
+
   laptopWidthMediaQueryList.addEventListener('change', () => {
     closeBurgerMenu();
+    closeSearchPanel();
   });
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
@@ -769,6 +825,12 @@ function initSizeChart(sizeChartElement) {
  * main.js
  */
 const laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
+const inputEvent = new Event('input', {
+  bubbles: true
+});
+const changeEvent = new Event('change', {
+  bubbles: true
+});
 const simpleBar = initPageScrollbar(document.querySelector('.page__scroll-wrapper'));
 initSiteHeader(document.querySelector('.site-header'), simpleBar.getScrollElement());
 initSiteNavigation(document.querySelector('.site-navigation'));
@@ -782,6 +844,7 @@ document.querySelectorAll('.simple-filter__slider-wrapper').forEach(initSimpleFi
 document.querySelectorAll('.review__slider-wrapper').forEach(initReviewSlider);
 document.querySelectorAll('.brands').forEach(initBrandsSlider);
 document.querySelectorAll('.catalog-preview .products-slider').forEach(initCatalogPreviewSlider);
+document.querySelectorAll('.search, .site-header__search').forEach(initSearch);
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {
