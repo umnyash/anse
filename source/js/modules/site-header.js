@@ -25,7 +25,7 @@ function initSiteHeader(headerElement, pageScrollWrapperElement) {
   };
 
   onPageScroll();
-  pageScrollWrapperElement.addEventListener('scroll', throttleAndDebounce(onPageScroll, 200));
+  pageScrollWrapperElement.addEventListener('scroll', throttleAndDebounce(onPageScroll, 50));
 
   // Бургер-меню
   const burgerElement = headerElement.querySelector('.site-header__burger');
@@ -52,8 +52,33 @@ function initSiteHeader(headerElement, pageScrollWrapperElement) {
     }
   });
 
+  // Поиск
+  const searchOpenerElements = headerElement.querySelectorAll('.site-header__search-button');
+  const searchCloserElements = headerElement.querySelectorAll('[class^="site-header__search-close-button"]');
+
+  const openSearchPanel = () => {
+    headerElement.classList.add('site-header--search-open');
+    lockPageScroll();
+  };
+
+  const closeSearchPanel = () => {
+    headerElement.classList.remove('site-header--search-open');
+    unlockPageScroll();
+  };
+
+  searchOpenerElements.forEach((openerElement) => {
+    openerElement.addEventListener('click', openSearchPanel);
+  });
+
+  searchCloserElements.forEach((closerElement) => {
+    closerElement.addEventListener('click', closeSearchPanel);
+  });
+
+  // Закрытие меню и панели поиска при ресайзе
+
   laptopWidthMediaQueryList.addEventListener('change', () => {
     closeBurgerMenu();
+    closeSearchPanel();
   });
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */

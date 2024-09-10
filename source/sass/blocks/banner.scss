@@ -1,26 +1,26 @@
-.banner {
+.main-banner {
   display: grid;
   grid-template-columns: 100%;
   color: var(--text-light-color);
 }
 
-.banner__container-wrapper {
+.main-banner__container-wrapper {
   grid-area: 1 / 1 / 2 / 2;
   z-index: 1;
 }
 
-.banner__container {
+.main-banner__container {
   height: 100%;
 }
 
-.banner__inner {
+.main-banner__inner {
   display: grid;
   height: 100%;
   place-items: center;
   overflow: hidden;
 }
 
-.banner__slogan {
+.main-banner__slogan {
   position: relative;
   padding-right: 128px;
   margin: 0 0 74px;
@@ -40,7 +40,7 @@
   }
 }
 
-.banner__slogan-accent {
+.main-banner__slogan-accent {
   position: absolute;
   top: calc(100% - 34px);
   left: 61px;
@@ -62,11 +62,12 @@
   }
 }
 
-.banner__background-wrappper {
+.main-banner__background-wrappper {
   grid-area: 1 / 1 / 2 / 2;
   width: 100%;
   max-width: 1920px;
   height: 100vh;
+  min-height: 500px;
   max-height: 820px;
   margin: 0 auto;
   background: var(--background-dark-color);

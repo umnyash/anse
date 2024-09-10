@@ -1,8 +1,8 @@
 mixin site-header
-  header.site-header&attributes(attributes)
+  header.site-header(class= page === 'index' && 'site-header--transparent')&attributes(attributes)
     .site-header__message
       .container
-        p Доступна оплата в рассрочку
+        a(href='#!') Доступна оплата в рассрочку
     .site-header__inner
       .site-header__container.container
         nav.site-header__main-navigation
@@ -17,5 +17,21 @@ mixin site-header
               button.site-header__search-button.site-header__search-button--2(type='button' aria-expanded='false')
                 span.visually-hidden Поиск
               +user-navigation
+          button.site-header__search-close-button-1(type='button')
+              span.visually-hidden Закрыть
           .site-header__site-navigation-wrapper
             +site-navigation(class='site-header__site-navigation')
+      .site-header__search
+        .container
+          .site-header__search-inner
+            +search-form({ value: query })
+            button.site-header__search-close-button-2(type='button') Закрыть
+            .site-header__search-list
+              p.site-header__search-list-title Популярные товары
+              ul.site-header__search-list-items
+                li.site-header__search-list-item
+                  a.site-header__search-list-link(href='#') Шуба белая
+                li.site-header__search-list-item
+                  a.site-header__search-list-link(href='#') Варежки
+                li.site-header__search-list-item
+                  a.site-header__search-list-link(href='#') Шуба красная

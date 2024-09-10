@@ -2,6 +2,7 @@
   box-sizing: border-box;
   /* stylelint-disable-next-line */
   font: 400 18px/1.222 $main-font-family;
+  color: var(--text-color);
 
   @media (max-width: ($laptop-width - 1)) {
     padding-bottom: 20px;

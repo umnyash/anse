@@ -1,0 +1,8 @@
+extends layout/layout
+
+block variables
+  - var title = 'Поиск товаров | Anse'
+  - var page = 'search'
+
+block content
+  +search({ query: 'Шуба белая' })

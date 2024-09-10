@@ -1,0 +1,14 @@
+mixin search-form({ value })
+  form.search-form(action='https://echo.htmlacademy.ru' method='get' target='_blank')&attributes(attributes)
+    .search-form__field
+      .search-form__field-inner
+        label.search-form__field-label
+          span.visually-hidden Поиск:
+          input.search-form__field-control(name='query' type='search' value= value placeholder='Найти' required)
+        button.search-form__field-clear-button(type='button')
+          span.visually-hidden Очистить
+    +button({
+      tag: 'button',
+      type: 'submit',
+      text: 'Найти'
+    })(class='search-form__submit-button button--solid-primary')

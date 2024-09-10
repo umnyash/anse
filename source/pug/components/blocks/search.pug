@@ -1,0 +1,22 @@
+mixin search({ query, foundItems })
+  .search&attributes(attributes)
+    .container
+      .search__inner
+        h1.visually-hidden Поиск товаров
+        .search__form-wrapper
+          +search-form({ value: query })
+        if query && foundItems
+          .search__products
+            +products-list({ products: foundItems, pagination: true })
+        else if query
+          .search__placeholder
+            p.search__placeholder-text!= `По запросу «${query}» товаров не&nbsp;найдено`
+            +button({
+              tag: 'button',
+              type: 'button',
+              text: 'Изменить запрос',
+            })(class='button--simple-primary')
+        section.search__offer
+          h2.search__offer-heading Не нашли, что искали?
+          .search__offer-list-wrapper
+            +products-list({ products })

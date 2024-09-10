@@ -1,12 +1,12 @@
-mixin banner
-  .banner&attributes(attributes)
-    .banner__container-wrapper
-      .banner__container.container
-        .banner__inner
-          p.banner__slogan Надень ANSE #[span.banner__slogan-accent тебя увидят]
-    picture.banner__background-wrappper.media.media--cover.media--position_top
+mixin main-banner
+  .main-banner&attributes(attributes)
+    .main-banner__container-wrapper
+      .main-banner__container.container
+        .main-banner__inner
+          p.main-banner__slogan Надень ANSE #[span.main-banner__slogan-accent тебя увидят]
+    picture.main-banner__background-wrappper.media.media--cover.media--position_top
       source(media='(min-width: 1601px)' srcset='img/banners/main/main-banner-wide-desktop.webp 1x, img/banners/main/main-banner-wide-desktop@2x.webp 2x')
       source(media='(min-width: 1281px)' srcset='img/banners/main/main-banner-desktop.webp 1x, img/banners/main/main-banner-desktop@2x.webp 2x')
       source(media='(min-width: 769px)' srcset='img/banners/main/main-banner-laptop.webp 1x, img/banners/main/main-banner-laptop@2x.webp 2x')
       source(media='(min-width: 391px)' srcset='img/banners/main/main-banner-tablet.webp 1x, img/banners/main/main-banner-tablet@2x.webp 2x')
-      img.banner__background.media__image(src='img/banners/main/main-banner.webp' srcset='img/banners/main/main-banner@2x.webp 2x' alt='Девушка красуется в стильной шубе.')
+      img.main-banner__background.media__image(src='img/banners/main/main-banner.webp' srcset='img/banners/main/main-banner@2x.webp 2x' alt='Девушка красуется в стильной шубе.')

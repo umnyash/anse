@@ -2,6 +2,8 @@
  * main.js
  */
 const laptopWidthMediaQueryList = window.matchMedia(LAPTOP_WIDTH_MEDIA_QUERY);
+const inputEvent = new Event('input', { bubbles: true });
+const changeEvent = new Event('change', { bubbles: true });
 const simpleBar = initPageScrollbar(document.querySelector('.page__scroll-wrapper'));
 
 initSiteHeader(document.querySelector('.site-header'), simpleBar.getScrollElement());
@@ -16,6 +18,7 @@ document.querySelectorAll('.simple-filter__slider-wrapper').forEach(initSimpleFi
 document.querySelectorAll('.review__slider-wrapper').forEach(initReviewSlider);
 document.querySelectorAll('.brands').forEach(initBrandsSlider);
 document.querySelectorAll('.catalog-preview .products-slider').forEach(initCatalogPreviewSlider);
+document.querySelectorAll('.search, .site-header__search').forEach(initSearch);
 
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');

@@ -73,3 +73,27 @@
 .message {
   height: 100%;
 }
+
+.page__site-header:not(.site-header--transparent) + .page__content {
+  padding-top: 76px;
+
+  @media (min-width: $laptop-width) {
+    padding-top: 165px;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding-top: 185px;
+  }
+}
+
+.search {
+  margin-top: 10px;
+
+  @media (min-width: $laptop-width) {
+    margin-top: 0;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 10px;
+  }
+}

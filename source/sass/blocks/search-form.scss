@@ -1,0 +1,129 @@
+.search-form {
+  @media (min-width: $tablet-width) {
+    display: grid;
+    min-height: 50px;
+    grid-template-columns: 1fr auto;
+    column-gap: 10px;
+  }
+
+  @media (min-width: $laptop-width) {
+    column-gap: 20px;
+  }
+}
+
+.search-form__field {
+  font: 500 16px/20px $main-font-family;
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+.search-form__field-inner {
+  display: grid;
+  box-sizing: border-box;
+  padding: 0 15px;
+  height: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 10px;
+  align-items: center;
+  transition: border-color $duration-m ease-in-out;
+
+  &::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background: var(--text-weak-color-3);
+    mask: url("../img/icons.svg#search");
+    transition: background-color $duration-m ease-in-out;
+  }
+
+  &:focus-within {
+    border-color: currentColor;
+
+    &::before {
+      background: var(--text-weak-color);
+    }
+  }
+
+  @media (min-width: $laptop-width) {
+    padding-right: 11px;
+  }
+}
+
+.search-form__field-control {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 13px 0;
+  border: none;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  outline: none;
+
+  @media (min-width: $desktop-width) {
+    padding: 12px 0;
+  }
+
+  &::placeholder {
+    color: var(--text-weak-color-3);
+    opacity: 1;
+  }
+}
+
+.search-form__field-clear-button {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  color: var(--text-weak-color-3);
+  background: transparent;
+  cursor: pointer;
+  transition-property: color, opacity, visibility, transform;
+  transition-duration: $duration-m;
+  transition-timing-function: ease-out;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: currentColor;
+    mask: url("../img/icons.svg#controls_cross");
+    transition: background-color $duration-m;
+  }
+
+  &:hover {
+    color: var(--brand-color);
+  }
+
+  &:active {
+    color: var(--brand-color);
+    transform: scale(0.85);
+    transition-duration: $duration-s;
+    transition-timing-function: ease-in;
+  }
+
+  &--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.search-form__submit-button {
+  @media (max-width: ($tablet-width - 1)) {
+    @include visually-hidden;
+  }
+
+  @media (min-width: $tablet-width) {
+    min-width: 138px;
+  }
+
+  @media (min-width: $desktop-width) {
+    min-width: 177px;
+  }
+}

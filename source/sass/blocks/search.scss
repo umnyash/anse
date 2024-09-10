@@ -1,0 +1,62 @@
+.search {
+  font-family: $main-font-family;
+  font-weight: 400;
+}
+
+.search__form-wrapper {
+  margin: 0 0 20px;
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 30px;
+  }
+}
+
+.search__products {
+  margin: 0 0 20px;
+
+  @media (min-width: $laptop-width) {
+    margin-bottom: 100px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 120px;
+  }
+}
+
+.search__placeholder {
+  text-align: center;
+  padding: 0 8px;
+  margin: 30px 0;
+  font-size: 18px;
+  line-height: 22px;
+
+  @media (min-width: $laptop-width) {
+    margin: 40px 0;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin: 60px 0 64px;
+    font-size: 20px;
+    line-height: 1;
+  }
+}
+
+.search__placeholder-text {
+  margin: 0 0 6px;
+}
+
+.search__offer-heading {
+  margin: 0 0 10px;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 400;
+
+  @media (min-width: $laptop-width) {
+    margin-bottom: 20px;
+    font-size: 28px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 32px;
+  }
+}
