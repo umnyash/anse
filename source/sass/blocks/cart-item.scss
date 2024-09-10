@@ -1,0 +1,14 @@
+.cart-item__image-wrapper {
+  width: 180px;
+  height: 228px;
+
+  @media (min-width: $laptop-width) {
+    width: 139px;
+    height: 176px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 180px;
+    height: 228px;
+  }
+}

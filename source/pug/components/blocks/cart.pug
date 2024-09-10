@@ -1,0 +1,26 @@
+mixin cart({ empty } = {})
+  .cart&attributes(attributes)
+    .container
+      .cart__inner
+        if empty
+          | В корзине пока ничего нет, перейти в каталог
+        else
+          h1.cart__heading.heading.heading--size_l Корзина
+          a.cart__clear-button Очистить все
+          form.cart__form(action='https://fakestoreapi.com/products' method='post' target='_blank')&attributes(attributes)
+            ul.cart__products-list
+              each product in cartItems.slice(0, 3)
+                li.cart__products-item
+                  +cart-item({ product })
+            section.cart__products
+              h2.cart__products-heading Недоступные товары
+              ul.cart__products-list
+                each product in cartItems.slice(3)
+                  li.cart__products-item
+                    +cart-item({ product })
+            .cart__order
+              +button({
+                tag: 'a',
+                text: 'Оформить заказ',
+                href: '#!'
+              })(class='cart__order-button button--solid-primary')

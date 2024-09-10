@@ -1,0 +1,5 @@
+mixin cart-item({ product, headingTag = 'h3' })
+  .cart-item&attributes(attributes)
+    #{headingTag}.cart-item__heading= product.title
+    picture.cart-item__image-wrapper.media.media--cover.media--position_top
+      img.cart-item__image.media__image(src= product.image width='180' height='228' alt='' loading='lazy')
