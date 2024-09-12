@@ -21,6 +21,7 @@
   width: 100%;
   justify-content: center;
   align-items: center;
+  column-gap: 10px;
 }
 
 [class*="button--simple"] {
@@ -60,6 +61,14 @@
   color: var(--brand-color);
 }
 
+.button--simple-secondary {
+  color: var(--text-weak-color);
+}
+
+.button--simple-danger {
+  color: var(--accent-color);
+}
+
 .button--solid-primary {
   position: relative;
   padding: 0 15px;
@@ -77,9 +86,8 @@
   }
 
   &:active {
-    color: var(--text-color);
+    color: var(--brand-color);
     background-size: 100% 0;
-    box-shadow: inset 2px 2px 2px 0 var(--brand-color);
     transition-duration: $duration-xs;
   }
 
@@ -89,5 +97,126 @@
 
   .button__text {
     padding: 15px 0;
+  }
+}
+
+.button--solid-secondary {
+  position: relative;
+  padding: 0 15px;
+  border: 1px solid var(--background-dark-color);
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--text-color);
+  background: linear-gradient(var(--background-dark-color), var(--background-dark-color)) no-repeat top center / 100% 0%;
+  background-origin: border-box;
+
+  &:hover {
+    color: var(--text-light-color);
+    background-size: 100% 100%;
+  }
+
+  &:active {
+    color: var(--brand-color);
+    background-size: 100% 100%;
+    transition-duration: $duration-xs;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+  }
+
+  .button__text {
+    padding: 15px 0;
+  }
+}
+
+.button--solid-secondary-alter {
+  position: relative;
+  padding: 0 15px;
+  border: 1px solid var(--border-light-color-4);
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--text-color);
+  background: linear-gradient(var(--background-dark-color), var(--background-dark-color)) no-repeat top center / 100% 0%;
+  background-origin: border-box;
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+  }
+
+  .button__text {
+    padding: 15px 0;
+  }
+
+  .button__counter {
+    display: flex;
+    box-sizing: border-box;
+    width: 21px;
+    height: 21px;
+    padding: 1px 2px 0;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    line-height: 1;
+    font-weight: 500;
+    background: var(--background-additional-color-2);
+    transition-property: color, background-color;
+    transition-duration: $duration-m;
+    transition-timing-function: ease-in-out;
+
+    @media (min-width: $desktop-width) {
+      width: 25px;
+      height: 25px;
+      font-size: 12px;
+    }
+  }
+
+  &:hover {
+    color: var(--text-light-color);
+    background-size: 100% 100%;
+
+    .button__counter {
+      color: var(--text-color);
+      background: var(--background-color);
+    }
+  }
+
+  &:active {
+    color: var(--brand-color);
+    background-size: 100% 100%;
+    transition-duration: $duration-xs;
+
+    .button__counter {
+      color: var(--text-color);
+      background: var(--background-color);
+    }
+  }
+}
+
+.button--solid-secondary-alter.button--active {
+  color: var(--text-light-color);
+  background-size: 100% 100%;
+  pointer-events: none;
+
+  .button__counter {
+    color: var(--text-color);
+    background: var(--background-color);
+  }
+}
+
+.button--solid-secondary-alter.button--size_s {
+  @media (max-width: ($laptop-width - 1)) {
+    .button__text {
+      padding: 9px 0 8px;
+    }
+
+    .button__counter {
+      width: 19px;
+      height: 19px;
+    }
   }
 }

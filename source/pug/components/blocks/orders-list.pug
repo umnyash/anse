@@ -1,0 +1,49 @@
+mixin orders-list({ set })
+  .orders-list&attributes(attributes)
+    ul.orders-list__items.folds
+      case set
+        when 'current'
+          li.orders-list__item
+            +order-card({
+              status: {
+                text: 'Ожидает оплаты',
+                modifier: 'awaiting-payment'
+              },
+              open: true
+            })
+          li.orders-list__item
+            +order-card({
+              status: {
+                text: 'Доставляется',
+                modifier: 'process-delivery'
+              },
+            })
+        when 'completed'
+          li.orders-list__item
+            +order-card({
+              status: {
+                text: 'Отменён',
+                modifier: 'cancelled'
+              },
+            })
+          li.orders-list__item
+            +order-card({
+              status: {
+                text: 'Доставлен',
+                modifier: 'delivered'
+              },
+            })
+          li.orders-list__item
+            +order-card({
+              status: {
+                text: 'Доставлен',
+                modifier: 'delivered'
+              },
+            })
+          li.orders-list__item
+            +order-card({
+              status: {
+                text: 'Доставлен',
+                modifier: 'delivered'
+              },
+            })

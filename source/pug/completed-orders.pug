@@ -1,0 +1,13 @@
+extends layout/layout
+
+block variables
+  - var title = 'Завершенные заказы | Anse'
+  - var page = 'completed-orders'
+
+block content
+  +orders({
+    orders: {
+      completed: true,
+    },
+    activeLink: 'completed'
+  })

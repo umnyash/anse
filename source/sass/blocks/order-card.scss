@@ -1,0 +1,128 @@
+.order-card {
+  font: 400 14px/17px $main-font-family;
+
+  @media (min-width: $laptop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+.order-card__heading {
+  margin: 0;
+  font: 400 20px/24px $additional-font-family;
+
+  @media (min-width: $laptop-width) {
+    font-family: $main-font-family;
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 28px;
+  }
+}
+
+.order-card__status {
+  width: max-content;
+  padding: 4px 8px;
+  margin: 8px 0 20px;
+  text-transform: lowercase;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+
+  @media (min-width: $laptop-width) {
+    margin-top: 20px;
+  }
+
+  &--awaiting-payment {
+    color: var(--text-weak-color);
+    background: var(--background-additional-color);
+  }
+
+  &--cancelled {
+    color: var(--text-light-color);
+    background: var(--error-color);
+  }
+
+  &--process-delivery {
+    color: var(--brand-color);
+    background: var(--background-additional-color);
+  }
+
+  &--delivered {
+    color: var(--text-light-color);
+    background: var(--success-color);
+  }
+}
+
+.order-card__products-list {
+  display: flex;
+  padding: 0;
+  margin: 0 0 20px;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.order-card__products-item {
+  width: 72px;
+}
+
+.order-card__products-item-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover .order-card__products-item-title {
+    color: var(--brand-color);
+  }
+}
+
+.order-card__products-item-image-wrapper {
+  width: 100%;
+  height: 91px;
+}
+
+.order-card__products-item-title {
+  max-width: 100%;
+  margin: 5px 0 0;
+  font-size: 10px;
+  line-height: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: color $duration-m ease-in-out;
+}
+
+.order-card__list {
+  display: grid;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--border-light-color);
+  margin: 0 0 20px;
+  grid-template-columns: auto auto;
+  gap: 10px 50px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-card__list-key {
+  color: var(--text-weak-color);
+}
+
+.order-card__list-value {
+  margin: 0;
+  text-align: right;
+}
+
+.order-card__footer {
+  display: grid;
+  padding-bottom: 4px; // Отступ, чтобы у кнопки button-simple была видна линия снизу, которая иначе бы обрезалась из-за overflow-hidden складки.
+  justify-items: center;
+  row-gap: 20px;
+}
+
+.order-card__primary-button {
+  width: 100%;
+}

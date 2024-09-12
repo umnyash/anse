@@ -1,0 +1,19 @@
+mixin account-menu({ vip })
+  .account-menu&attributes(attributes)
+    if vip
+      .account-menu__status Ваша#[br] персональная скидка #[span.account-menu__status-accent 15%]
+    else
+      article.account-menu__offer
+        h2 Программа лояльности
+        p.lead Совершайте покупки, чувствуйте внимание окружающих и&nbsp;вступайте в&nbsp;наш экслюзивый модный клуб Anse.
+        p Мы ценим Вашу лояльность и хотим предлагаем вам эксклюзивными преимуществами:
+        ul
+          li Закрытые показы новых и концептуальных шуб ограниченной серии с&nbsp;Марией Anse. Вы можете купить их первой.
+          li Персонализированные предложения от общей суммы покупок в 40000 и особенное предложение от суммы в 60000 рублей. Они Вам точно понравятся.
+          li Вы получаете информацию по новым лукам и&nbsp;образам первой и можете сделать приоритетный предзаказ и&nbsp;другие приятности.
+    ul.account-menu__list
+      li.account-menu__item
+        a.account-menu__link(href='profile.html') Данные профиля
+      li.account-menu__item
+        a.account-menu__link(href='current-orders.html') История заказов
+    +button({ tag: 'a', text: 'Выйти', href: '#' })(class='account-menu__logout-button button--simple-danger')

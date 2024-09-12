@@ -1,0 +1,6 @@
+mixin account({ vip } = {})
+  .account&attributes(attributes)
+    +page-header({ heading: 'Личный кабинет' })(class='account__header')
+    .account__inner
+      .account__menu-wrapper
+        +account-menu({ vip })

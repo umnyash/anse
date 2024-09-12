@@ -1,0 +1,14 @@
+mixin checkout
+  .press&attributes(attributes)
+    .press__header
+      .container
+        .press__header-inner
+          .press__breadcrumbs
+            +breadcrumbs-list({ links: [
+              {
+                text: 'Пресса о нас'
+              }
+            ]})
+          h1.press__heading.heading.heading--size_l Пресса о нас
+    .press__inner.container
+      .press__list-wrapper

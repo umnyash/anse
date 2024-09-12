@@ -1,0 +1,51 @@
+.placeholder {
+  display: flex;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 40px 0;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font: 400 18px/22px $main-font-family;
+
+  @media (min-width: $laptop-width) {
+    padding: 100px 0;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 20px;
+    line-height: 1;
+  }
+}
+
+.placeholder__heading {
+  margin: 0 auto 20px;
+  max-width: 440px;
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 400;
+
+  @media (min-width: $laptop-width) {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 32px;
+    line-height: 1;
+  }
+}
+
+.placeholder__text {
+  max-width: 440px;
+  margin: 0 auto 20px;
+}
+
+.placeholder__button {
+  align-self: center;
+  min-width: 246px;
+
+  @media (min-width: $laptop-width) {
+    min-width: 308px;
+  }
+}

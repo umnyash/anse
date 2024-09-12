@@ -1,0 +1,44 @@
+mixin order-card({ status, open })
+  article.order-card.folds__item(class= open && 'folds__item--open')&attributes(attributes)
+    .folds__item-header
+      .folds__item-header-inner
+        header.order-card__header
+          h2.order-card__heading
+            button.folds__button(type='button' aria-expanded= open && 'true') Заказ №123453634 от 28 июля 2024 года
+    .folds__item-content-wrapper
+      .folds__item-content
+        p.order-card__status(class=`order-card__status--${status.modifier}`)!= status.text
+        ul.order-card__products-list
+          each item in [2, 3]
+            li.order-card__products-item
+              a.order-card__products-item-link(href='product.html')
+                picture.order-card__products-item-image-wrapper.media.media--cover.media--position_top
+                  img.media__image(src=`img/products/product-${item}.webp` width='72' height='91' alt='' loading='lazy')
+                p.order-card__products-item-title Шуба SETTE BLACK
+        dl.order-card__list
+          dt.order-card__list-key Стоимость
+          dd.order-card__list-value 50 350 ₽
+          dt.order-card__list-key Оплата
+          dd.order-card__list-value Банковской картой
+          dt.order-card__list-key Доставка
+          dd.order-card__list-value В пункт выдачи по адресу Россия, г. Москва, ул. Тверская 47
+          dt.order-card__list-key Получатель
+          dd.order-card__list-value Бильбо Беггинс#[br] +7 (915) 222-22-22
+        footer.order-card__footer
+          if status.modifier === 'awaiting-payment'
+            +button({
+              tag: 'a',
+              text: 'Оплатить заказ',
+              href: '#'
+            })(class='order-card__primary-button button--solid-primary')
+          if status.modifier === 'cancelled'|| status.modifier === 'delivered'
+            +button({
+              tag: 'a',
+              text: 'Оставить отзыв',
+              href: '#'
+            })(class='order-card__primary-button button--solid-primary')
+          +button({
+            tag: 'a',
+            text: 'Связаться с менеджером',
+            href: '#'
+          })(class='button--simple-secondary')

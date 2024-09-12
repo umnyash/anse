@@ -1,0 +1,13 @@
+extends layout/layout
+
+block variables
+  - var title = 'Текущие заказы | Anse'
+  - var page = 'current-orders'
+
+block content
+  +orders({
+    orders: {
+      current: true,
+    },
+    activeLink: 'current'
+  })

@@ -1,0 +1,14 @@
+extends layout/layout
+
+block variables
+  - var title = 'Вход | Anse'
+  - var page = 'login'
+
+block content
+  +placeholder({
+    heading: 'Для продолжения доступа нужно авторизоваться',
+    link: {
+      text: 'Войти в личный кабинет',
+      href: '#'
+    }
+  })

@@ -1,0 +1,11 @@
+mixin placeholder({ heading, text, link })
+  .placeholder&attributes(attributes)
+    if heading
+      h1.placeholder__heading= heading
+    if text
+      p.placeholder__text= text
+    +button({
+      tag: 'a',
+      text: link.text,
+      href: link.href,
+    })(class='placeholder__button button--solid-primary')

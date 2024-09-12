@@ -1,0 +1,54 @@
+mixin orders({ orders, activeLink } = {})
+  .orders&attributes(attributes)
+    +page-header({ heading: 'История заказов' })(class='orders__header')
+    .orders__container
+      .orders__inner
+        if !orders
+          .orders__placeholder-wrapper
+            +placeholder({
+              text: 'Вы ещё ничего не покупали',
+              link: {
+                text: 'Перейти в каталог',
+                href: 'catalog.html'
+              }
+            })
+        else
+          ul.orders__navigation
+            li.orders__navigation-item
+              +button({
+                tag: 'a',
+                text: 'Текущие',
+                href: activeLink === 'completed' && '#',
+                counter: orders.current && '1',
+              })(class=`button--solid-secondary-alter button--size_s ${activeLink === 'current' && 'button--active'}`)
+            li.orders__navigation-item
+              +button({
+                tag: 'a',
+                text: 'Завершенные',
+                href: activeLink === 'current' && '#',
+                counter: orders.completed && '12',
+              })(class=`button--solid-secondary-alter button--size_s ${activeLink === 'completed' && 'button--active'}`)
+          if activeLink === 'current'
+            if orders.current
+              .order__list-wrapper
+                +orders-list({ set: 'current' })
+            else
+              +placeholder({
+                text: 'У Вас нет текущих заказов',
+                link: {
+                  text: 'Перейти в каталог',
+                  href: 'catalog.html'
+                }
+              })
+          else
+            if orders.completed
+              .orders__list-wrapper
+                +orders-list({ set: 'completed' })
+            else
+              +placeholder({
+                text: 'У Вас нет завершенных заказов',
+                link: {
+                  text: 'Перейти в каталог',
+                  href: 'catalog.html'
+                }
+              })

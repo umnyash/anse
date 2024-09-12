@@ -1,4 +1,4 @@
-mixin button({ tag, text, type, href, target, rel, opener } = {})
+mixin button({ tag, text, type, href, target, rel, opener, counter } = {})
   #{tag}.button(
     type= type
     href= href
@@ -8,3 +8,5 @@ mixin button({ tag, text, type, href, target, rel, opener } = {})
   )&attributes(attributes)
     span.button__inner
       span.button__text!= text
+      if counter
+        span.button__counter= counter
