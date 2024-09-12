@@ -1,0 +1,86 @@
+.main-banner {
+  display: grid;
+  grid-template-columns: 100%;
+  color: var(--text-light-color);
+}
+
+.main-banner__container-wrapper {
+  grid-area: 1 / 1 / 2 / 2;
+  z-index: 1;
+}
+
+.main-banner__container {
+  height: 100%;
+}
+
+.main-banner__inner {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  overflow: hidden;
+}
+
+.main-banner__slogan {
+  position: relative;
+  padding-right: 128px;
+  margin: 0 0 74px;
+  text-align: center;
+  font: 300 32px/1 $main-font-family;
+
+  @media (min-width: $tablet-width) {
+    padding-right: 170px;
+    margin-bottom: 65px;
+    font-size: 52px;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding-right: 186px;
+    margin-bottom: 28px;
+    font-size: 74px;
+  }
+}
+
+.main-banner__slogan-accent {
+  position: absolute;
+  top: calc(100% - 34px);
+  left: 61px;
+  font-family: $decorative-font-family;
+  font-size: 58px;
+  font-weight: 400;
+  color: var(--brand-color);
+  transform: rotate(-5deg);
+
+  @media (min-width: $tablet-width) {
+    left: 127px;
+    font-size: 80px;
+  }
+
+  @media (min-width: $desktop-width) {
+    top: calc(100% - 56px);
+    left: 185px;
+    font-size: 100px;
+  }
+}
+
+.main-banner__background-wrappper {
+  grid-area: 1 / 1 / 2 / 2;
+  width: 100%;
+  max-width: 1920px;
+  height: 100vh;
+  min-height: 500px;
+  max-height: 820px;
+  margin: 0 auto;
+  background: var(--background-dark-color);
+
+  @supports (height: 100dvh) {
+    height: 100dvh;
+  }
+
+  @media (min-width: $laptop-width) {
+    max-height: 800px;
+  }
+
+  @media (min-width: $desktop-width) {
+    max-height: 970px;
+  }
+}

@@ -1,86 +1,69 @@
-.main-banner {
+.banner {
   display: grid;
   grid-template-columns: 100%;
   color: var(--text-light-color);
 }
 
-.main-banner__container-wrapper {
+.banner__container-wrapper {
   grid-area: 1 / 1 / 2 / 2;
   z-index: 1;
 }
 
-.main-banner__container {
+.banner__container {
   height: 100%;
 }
 
-.main-banner__inner {
+.banner__inner {
   display: grid;
+  box-sizing: border-box;
   height: 100%;
-  place-items: center;
-  overflow: hidden;
+  padding: 40px 0;
+  align-content: end;
+
+  @media (min-width: $laptop-width) {
+    padding: 62px 0;
+  }
 }
 
-.main-banner__slogan {
-  position: relative;
-  padding-right: 128px;
-  margin: 0 0 74px;
-  text-align: center;
-  font: 300 32px/1 $main-font-family;
+.banner__heading {
+  max-width: 270px;
+  margin: 0 0 20px;
+  font: 400 24px/1 $main-font-family;
 
   @media (min-width: $tablet-width) {
-    padding-right: 170px;
-    margin-bottom: 65px;
-    font-size: 52px;
+    max-width: 500px;
+    font-size: 44px;
   }
 
   @media (min-width: $desktop-width) {
-    padding-right: 186px;
-    margin-bottom: 28px;
-    font-size: 74px;
+    max-width: 650px;
+    font-size: 58px;
   }
 }
 
-.main-banner__slogan-accent {
-  position: absolute;
-  top: calc(100% - 34px);
-  left: 61px;
-  font-family: $decorative-font-family;
-  font-size: 58px;
-  font-weight: 400;
-  color: var(--brand-color);
-  transform: rotate(-5deg);
+.banner__button {
+  @media (min-width: $tablet-width) {
+    justify-self: start;
+  }
 
   @media (min-width: $tablet-width) {
-    left: 127px;
-    font-size: 80px;
-  }
-
-  @media (min-width: $desktop-width) {
-    top: calc(100% - 56px);
-    left: 185px;
-    font-size: 100px;
+    min-width: 313px;
   }
 }
 
-.main-banner__background-wrappper {
+.banner__background-wrappper {
   grid-area: 1 / 1 / 2 / 2;
   width: 100%;
   max-width: 1920px;
-  height: 100vh;
-  min-height: 500px;
-  max-height: 820px;
+  height: 700px;
   margin: 0 auto;
   background: var(--background-dark-color);
 
-  @supports (height: 100dvh) {
-    height: 100dvh;
-  }
-
   @media (min-width: $laptop-width) {
-    max-height: 800px;
+    height: 528px;
   }
 
   @media (min-width: $desktop-width) {
-    max-height: 970px;
+    height: 720px;
   }
 }

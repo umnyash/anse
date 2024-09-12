@@ -100,6 +100,37 @@
   }
 }
 
+.button--solid-primary-light {
+  position: relative;
+  padding: 0 15px;
+  border: 1px solid var(--background-color);
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--text-color);
+  background: linear-gradient(var(--background-color), var(--background-color)) no-repeat bottom center / 100% 100%;
+  background-origin: border-box;
+
+  &:hover {
+    color: var(--text-light-color);
+    background-size: 100% 0;
+  }
+
+  &:active {
+    color: var(--brand-color);
+    background-size: 100% 0;
+    transition-duration: $duration-xs;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+  }
+
+  .button__text {
+    padding: 15px 0;
+  }
+}
+
 .button--solid-secondary {
   position: relative;
   padding: 0 15px;
