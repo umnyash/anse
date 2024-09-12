@@ -496,6 +496,49 @@ function initConsumersPhotos() {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * folds.js
+ */
+const initFolds = foldsElement => {
+  foldsElement.addEventListener('click', _ref => {
+    let {
+      target
+    } = _ref;
+    const buttonElement = target.closest('.folds__button');
+    if (!buttonElement) {
+      return;
+    }
+    const foldElement = buttonElement.closest('.folds__item');
+    const contentWrapperElement = foldElement.querySelector('.folds__item-content-wrapper');
+    const contentElement = contentWrapperElement.querySelector('.folds__item-content');
+    const contentElementHeight = contentElement.getBoundingClientRect().height;
+    contentWrapperElement.style.height = `${contentElementHeight}px`;
+    contentElement.style.position = 'absolute';
+    setTimeout(() => {
+      foldElement.classList.toggle('folds__item--open');
+    }, 20);
+    buttonElement.ariaExpanded = buttonElement.ariaExpanded === 'true' ? 'false' : 'true';
+  });
+  foldsElement.addEventListener('transitionend', _ref2 => {
+    let {
+      target
+    } = _ref2;
+    const foldElement = target.closest('.folds__item');
+    if (!foldElement || !foldElement.classList.contains('folds__item--open')) {
+      return;
+    }
+    if (target.classList.contains('folds__item-content')) {
+      target.style.position = 'static';
+    }
+    if (target.classList.contains('folds__item-content-wrapper')) {
+      setTimeout(() => {
+        target.style.height = 'auto';
+      }, 0);
+    }
+  });
+};
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * gallery-slider.js
  */
 function initGallerySlider(sliderWrapperElement) {
@@ -845,6 +888,7 @@ document.querySelectorAll('.review__slider-wrapper').forEach(initReviewSlider);
 document.querySelectorAll('.brands').forEach(initBrandsSlider);
 document.querySelectorAll('.catalog-preview .products-slider').forEach(initCatalogPreviewSlider);
 document.querySelectorAll('.search, .site-header__search').forEach(initSearch);
+document.querySelectorAll('.folds').forEach(initFolds);
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {
