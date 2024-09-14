@@ -80,6 +80,14 @@ function throttleAndDebounce(func, wait) {
     }, wait);
   };
 }
+function getPaginationButtonCreator() {
+  let slideName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Слайд';
+  return (index, className) => `
+    <button class='${className}' type='button'>
+      <span class='visually-hidden'>${slideName} ${index + 1}.</span>
+    </button>
+  `;
+}
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
@@ -498,7 +506,7 @@ function initConsumersPhotos() {
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * folds.js
  */
-const initFolds = foldsElement => {
+function initFolds(foldsElement) {
   foldsElement.addEventListener('click', _ref => {
     let {
       target
@@ -535,7 +543,8 @@ const initFolds = foldsElement => {
       }, 0);
     }
   });
-};
+}
+;
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
@@ -585,6 +594,154 @@ function initPageScrollbar(pageInnerElement) {
   return new SimpleBar(pageInnerElement, {
     classNames: {
       contentEl: 'page__inner'
+    }
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * product-info.js
+ */
+function initProductInfo(productInfoElement) {
+  const closeOpenedItems = targetFoldElement => {
+    productInfoElement.querySelectorAll('.product-info__item--open').forEach(openItemElement => {
+      if (openItemElement !== targetFoldElement) {
+        openItemElement.classList.remove('product-info__item--open');
+        openItemElement.querySelector('.product-info__button').ariaExpanded = 'false';
+      }
+    });
+  };
+  const openFirstItem = () => {
+    const firstItemElement = productInfoElement.querySelector('.product-info__item');
+    const buttonElement = firstItemElement.querySelector('.product-info__button');
+    firstItemElement.classList.add('product-info__item--open');
+    buttonElement.ariaExpanded = 'true';
+  };
+  productInfoElement.addEventListener('click', _ref3 => {
+    let {
+      target
+    } = _ref3;
+    const buttonElement = target.closest('.product-info__button');
+    if (!buttonElement) {
+      return;
+    }
+    const foldElement = buttonElement.closest('.product-info__item');
+    if (laptopWidthMediaQueryList.matches) {
+      closeOpenedItems(foldElement);
+    }
+    const contentWrapperElement = foldElement.querySelector('.product-info__content-wrapper');
+    const contentElement = contentWrapperElement.querySelector('.product-info__content');
+    const contentElementHeight = contentElement.getBoundingClientRect().height;
+    contentWrapperElement.style.height = `${contentElementHeight}px`;
+    contentElement.style.position = 'absolute';
+    setTimeout(() => {
+      foldElement.classList.toggle('product-info__item--open');
+    }, 20);
+    buttonElement.ariaExpanded = buttonElement.ariaExpanded === 'true' ? 'false' : 'true';
+  });
+  productInfoElement.addEventListener('transitionend', _ref4 => {
+    let {
+      target
+    } = _ref4;
+    const foldElement = target.closest('.product-info__item');
+    if (!foldElement || !foldElement.classList.contains('product-info__item--open')) {
+      return;
+    }
+    if (target.classList.contains('product-info__content')) {
+      target.style.position = 'static';
+    }
+    if (target.classList.contains('product-info__content-wrapper')) {
+      setTimeout(() => {
+        target.style.height = 'auto';
+      }, 0);
+    }
+  });
+  laptopWidthMediaQueryList.addEventListener('change', () => {
+    if (laptopWidthMediaQueryList.matches) {
+      closeOpenedItems();
+      openFirstItem();
+    }
+  });
+  openFirstItem();
+
+  // Custom scroll
+  productInfoElement.querySelectorAll('.product-info__content-wrapper').forEach(wrapperElement => {
+    new SimpleBar(wrapperElement, {
+      autoHide: false
+    });
+  });
+}
+;
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * product.js
+ */
+function initProduct(productElement) {
+  const sliderElement = productElement.querySelector('.product__slider');
+  new Swiper(sliderElement, {
+    effect: 'creative',
+    creativeEffect: {
+      prev: {
+        shadow: true,
+        translate: ['-20%', 0, -1]
+      },
+      next: {
+        translate: ['100%', 0, 0]
+      }
+    },
+    speed: 500,
+    pagination: {
+      el: '.product__slider-pagination',
+      bulletClass: 'product__slider-pagination-button',
+      bulletActiveClass: 'product__slider-pagination-button--current',
+      renderBullet: getPaginationButtonCreator(),
+      clickable: true
+    }
+  });
+  initProductInfo(productElement.querySelector('.product-info'));
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * products-slider.js
+ */
+function initProducts(productsElement) {
+  const sliderElement = productsElement.querySelector('.products-slider');
+  const paginationElement = productsElement.querySelector('.slider-pagination');
+  const prevButtonElement = productsElement.querySelector('.slider-arrows__button--prev');
+  const nextButtonElement = productsElement.querySelector('.slider-arrows__button--next');
+  new Swiper(sliderElement, {
+    slidesPerView: 'auto',
+    spaceBetween: 10,
+    pagination: {
+      el: paginationElement,
+      type: 'progressbar'
+    },
+    loop: true,
+    navigation: {
+      prevEl: prevButtonElement,
+      nextEl: nextButtonElement,
+      disabledClass: 'slider-arrows__button--disabled',
+      lockClass: 'slider-arrows__button--hidden'
+    },
+    breakpoints: {
+      390: {
+        slidesPerView: 2,
+        spaceBetween: 10
+      },
+      580: {
+        slidesPerView: 3,
+        spaceBetween: 10
+      },
+      790: {
+        slidesPerView: 4,
+        spaceBetween: 10
+      },
+      1280: {
+        slidesPerView: 4,
+        spaceBetween: 20
+      }
     }
   });
 }
@@ -889,6 +1046,8 @@ document.querySelectorAll('.brands').forEach(initBrandsSlider);
 document.querySelectorAll('.catalog-preview .products-slider').forEach(initCatalogPreviewSlider);
 document.querySelectorAll('.search, .site-header__search').forEach(initSearch);
 document.querySelectorAll('.folds').forEach(initFolds);
+document.querySelectorAll('.products').forEach(initProducts);
+document.querySelectorAll('.product').forEach(initProduct);
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {
