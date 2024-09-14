@@ -1,0 +1,19 @@
+.consultant-contacts__heading {
+  margin: 0 0 28px;
+
+  @media (min-width: $laptop-width) {
+    margin-bottom: 30px;
+  }
+}
+
+.consultant-contacts__list-wrapper {
+  max-width: 900px;
+
+  @media (min-width: $laptop-width) {
+    max-width: 1050px;
+  }
+
+  @media (min-width: $desktop-width) {
+    max-width: 1313px;
+  }
+}

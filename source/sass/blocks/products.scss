@@ -1,0 +1,33 @@
+.products__header {
+  display: flex;
+  margin: 0 0 20px;
+  column-gap: 13px;
+  align-items: center;
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 30px;
+    column-gap: 19px;
+  }
+}
+
+.products__heading {
+  margin: 0;
+}
+
+.products__tooltip {
+  @media (min-width: $laptop-width) {
+    margin-top: 2px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 4px;
+  }
+}
+
+.products__slider-arrows {
+  margin-left: auto;
+
+  @media (max-width: ($wide-tablet-width - 1)) {
+    display: none;
+  }
+}

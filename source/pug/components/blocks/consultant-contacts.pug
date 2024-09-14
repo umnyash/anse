@@ -1,0 +1,6 @@
+mixin consultant-contacts
+  section.consultant-contacts&attributes(attributes)
+    .container
+      h2.consultant-contacts__heading.heading.heading--size_l.heading--alter Свяжитесь с нашим консультантом
+      .consultant-contacts__list-wrapper
+        +contacts-list({ items: ['phone', 'vk', 'telegram', 'whatsapp'] })(class='contacts-list--size_xl contacts-list--row')

@@ -1,0 +1,81 @@
+mixin product__slider-item-image(name)
+  li.product__slider-item.swiper-slide
+    picture.product__slider-image-wrapper.media.media--cover.media--position_top
+      img.media__image(src=`img/product/${name}.webp` width='1140' height='1520' alt='' loading='lazy')
+
+mixin product__slider-item-video(name)
+  li.product__slider-item.swiper-slide
+    .product__slider-video-wrapper.media.media--cover.media--position_top
+      video.media__video(src=`files/${name}.mp4` playsinline muted autoplay loop)
+
+mixin product__image-wrapper(name)
+  picture.product__image-wrapper.media.media--cover.media--position_top
+    img.media__image(src=`img/product/${name}.webp` width='1140' height='1520' alt='' loading='lazy')
+
+mixin product__video-wrapper(name)
+  .product__video-wrapper.media.media--cover.media--position_top
+    video.media__video(src=`files/${name}.mp4` playsinline muted autoplay loop)
+
+mixin product
+  article.product&attributes(attributes)
+    form.product__inner(action='https://fakestoreapi.com/products' method='post' target='_blank')
+      .product__text-content
+        +breadcrumbs-list({ links: [
+          {
+            text: 'Каталог Шуб',
+            href: 'catalog.html'
+          },
+          {
+            text: 'Шуба SETTE BLACK'
+          }
+        ]})(class='product__breadcrumbs')
+        .product__heading-wrapper
+          h1.product__heading Шуба SETTE BLACK
+          +product-badges({ badges: ['sale','new'] })(class='product__badges')
+        secton.product__price-section
+          h2.visually-hidden Цена
+          s.product__price.product__price--old 34 980 ₽
+          p.product__price 20 985 ₽
+          p.product__installments
+            span.product__installments-icon
+              span.visually-hidden Долями:
+            span.product__installments-text 4 платежа по 6 995 ₽
+        section.product__size-section
+          h2.product__size-heading Размер
+          a.product__size-link(href='#') Таблица размеров
+          +size-buttons(class='product__size-buttons')
+        section.product__section.product__section--design
+          h2 Заметки дизайнера
+          div
+            p Декоративный элемент в виде нагрудного кармана.
+            p Рост модели 168 cм, грудь 87 cм, талия 62 cм, бедра 90 cм.
+        section.product__section.product__section--accessory
+          h2 Меховой пояс
+          div
+            p Идет в комплекте
+        +button({ tag: 'a', text: 'Программа лояльности', href: '#' })(class='product__offer-link button--simple-primary')
+        .product__cart
+          +button({
+            tag: 'button',
+            type: 'submit',
+            text: 'Добавить в корзину'
+          })(class='product__cart-button button--solid-primary')
+        .product__info-wrapper
+          +product-info(class='product__info')
+
+      +product__image-wrapper(1)
+      +product__video-wrapper('fur-coat-1')
+      +product__image-wrapper(2)
+      +product__image-wrapper(3)
+      +product__video-wrapper('fur-coat-2')
+      +product__image-wrapper(4)
+
+      .product__slider.swiper
+        ul.product__slider-list.swiper-wrapper
+          +product__slider-item-image(1)
+          +product__slider-item-video('fur-coat-1')
+          +product__slider-item-image(2)
+          +product__slider-item-image(3)
+          +product__slider-item-video('fur-coat-2')
+          +product__slider-item-image(4)
+        .product__slider-pagination

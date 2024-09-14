@@ -124,13 +124,75 @@
   }
 }
 
-.contacts-list--big {
+.contacts-list--size_l {
   @media (min-width: $laptop-width) {
     font-size: 18px;
   }
 
   @media (min-width: $desktop-width) {
     font-size: 20px;
+  }
+}
+
+.contacts-list--size_xl {
+  @media (min-width: $laptop-width) {
+    font-size: 20px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 24px;
+  }
+
+  .contacts-list__link--phone svg,
+  .contacts-list__link--phone img {
+    @media (min-width: $laptop-width) {
+      width: 32px;
+      height: 32px;
+    }
+
+    @media (min-width: $desktop-width) {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  .contacts-list__link--vk svg,
+  .contacts-list__link--vk img {
+    @media (min-width: $laptop-width) {
+      width: 32px;
+      height: 32px;
+    }
+
+    @media (min-width: $desktop-width) {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  .contacts-list__link--telegram svg,
+  .contacts-list__link--telegram img {
+    @media (min-width: $laptop-width) {
+      width: 28px;
+      height: 28px;
+    }
+
+    @media (min-width: $desktop-width) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  .contacts-list__link--whatsapp svg,
+  .contacts-list__link--whatsapp img {
+    @media (min-width: $laptop-width) {
+      width: 28px;
+      height: 28px;
+    }
+
+    @media (min-width: $desktop-width) {
+      width: 32px;
+      height: 32px;
+    }
   }
 }
 
@@ -150,5 +212,23 @@
   @media (min-width: $desktop-width) {
     gap: 24px 48px;
     justify-content: start;
+  }
+}
+
+.contacts-list--row .contacts-list__items {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: start;
+  align-items: center;
+  gap: 20px 30px;
+
+  @media (min-width: 610px) {
+    grid-template-columns: repeat(4, auto);
+    column-gap: 24px;
+    justify-content: space-between;
+  }
+
+  @media (min-width: $desktop-width) {
+    gap: 24px 48px;
   }
 }

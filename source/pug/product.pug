@@ -1,0 +1,17 @@
+extends layout/layout
+
+block variables
+  - var title = 'Товар | Anse'
+  - var page = 'product'
+
+block content
+  +product
+  +products({
+    heading: 'Добавьте к образу',
+    tooltipText: 'При покупке шубы, Вы сможете применить скидку 30% на все аксессуары в корзине'
+  })
+  +products({
+    heading: 'Рекомендуем'
+  })
+  +consultant-contacts
+  +advantages

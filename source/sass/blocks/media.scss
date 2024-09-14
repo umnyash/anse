@@ -1,22 +1,43 @@
 .media {
   display: block;
-
-  &--contain .media__image {
-    object-fit: contain;
-  }
-
-  &--cover .media__image {
-    object-fit: cover;
-  }
-
-  &--position_top .media__image {
-    object-position: top center;
-  }
 }
 
-.media__image {
+.media__image,
+.media__video {
   display: block;
   width: 100%;
   height: 100%;
   object-position: center;
 }
+
+.media__video {
+  background: var(--background-dark-color);
+}
+
+/* stylelint-disable */
+.media--contain {
+
+  .media__image,
+  .media__video {
+    object-fit: contain;
+  }
+}
+
+.media--cover {
+
+  .media__image,
+  .media__video {
+    object-fit: cover;
+  }
+}
+
+
+.media--position-top {
+
+  .media__image,
+  .media__video {
+    object-position: top center;
+  }
+}
+
+/* stylelint-enable */

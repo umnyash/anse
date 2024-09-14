@@ -1,0 +1,11 @@
+mixin products({ heading, tooltipText })
+  section.products&attributes(attributes)
+    .container
+      .products__inner
+        header.products__header
+          h2.products__heading.heading.heading--size_l.heading--alter= heading
+          if tooltipText
+            +tooltip({ text: tooltipText })(class='products__tooltip')
+          +slider-arrows(class='products__slider-arrows')
+        .products__slider-wrapper
+          +products-slider({ products: [...products, ...products], headingTag: 'h3' })
