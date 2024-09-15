@@ -12,7 +12,7 @@ class Modal {
     this.onOpenerClick = onOpenerClick;
 
     this.modalElement.addEventListener('click', (evt) => {
-      if (evt.target === this.modalElement || evt.target.closest('[data-modal-close-button]')) {
+      if (evt.target === this.modalElement || evt.target.closest('[data-modal-close-button]') || !evt.target.closest('.modal__inner')) {
         evt.preventDefault();
         this.close();
       }

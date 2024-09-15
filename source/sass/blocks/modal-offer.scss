@@ -1,0 +1,86 @@
+.modal-offer {
+  padding: 20px;
+  padding-right: 22px;
+  border-radius: 12px 12px 0 0;
+  font: 400 16px/19px $main-font-family;
+  background: var(--background-color);
+
+  @media (min-width: $wide-tablet-width) {
+    border-radius: 12px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  h2 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 400;
+
+    @media (min-width: $desktop-width) {
+      font-size: 32px;
+    }
+  }
+
+  p {
+    margin: 10px 0;
+  }
+
+  .lead {
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 17px;
+    color: var(--text-weak-color);
+
+    @media (min-width: $desktop-width) {
+      font-size: 16px;
+      line-height: 19px;
+    }
+  }
+
+  ul {
+    padding: 0;
+    margin: 10px 0;
+    list-style: none;
+  }
+
+  ul li {
+    position: relative;
+    padding-left: 24px;
+
+    @media (min-width: $desktop-width) {
+      padding-left: 28px;
+    }
+  }
+
+  ul li::before {
+    content: "";
+    position: absolute;
+    top: 0.45em;
+    left: 10px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
+
+    @media (min-width: $desktop-width) {
+      left: 12px;
+    }
+  }
+
+  ul li + li {
+    margin-top: 10px;
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.modal-offer__button {
+  width: 100%;
+  margin: 20px 0 0;
+}

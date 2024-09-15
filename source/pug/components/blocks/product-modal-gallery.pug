@@ -1,0 +1,19 @@
+mixin product-modal-gallery__list-item-image(name)
+  li.modal-gallery__list-item
+    picture.modal-gallery__image-wrapper.media.media--cover.media--position_top
+      img.media__image(src=`img/product/${name}.webp` width='1140' height='1520' alt='' loading='lazy')
+
+mixin product-modal-gallery__list-item-video(name)
+  li.modal-gallery__list-item
+    .modal-gallery__video-wrapper.media.media--cover.media--position_top
+      video.media__video(src=`files/${name}.mp4` playsinline muted autoplay loop)
+
+mixin product-modal-gallery
+  .modal-gallery&attributes(attributes)
+    ul.modal-gallery__list
+      +product-modal-gallery__list-item-image(1)
+      +product-modal-gallery__list-item-video('fur-coat-1')
+      +product-modal-gallery__list-item-image(2)
+      +product-modal-gallery__list-item-image(3)
+      +product-modal-gallery__list-item-video('fur-coat-2')
+      +product-modal-gallery__list-item-image(4)

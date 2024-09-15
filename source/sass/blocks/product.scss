@@ -334,6 +334,7 @@
   margin: 0 auto 20px;
   width: 100%;
   max-width: 640px;
+  cursor: pointer;
 
   @media (min-width: $laptop-width) {
     display: none;
@@ -396,22 +397,9 @@
 .product__video-wrapper {
   width: 100%;
   aspect-ratio: 3 / 4;
+  cursor: pointer;
 
   @media (max-width: ($laptop-width - 1)) {
     display: none;
   }
-
-  // @media (min-width: $laptop-width) {
-  //   grid-column: span 2;
-
-  //   &:nth-of-type(1) {
-  //     order: -1;
-  //     grid-column: span 3;
-  //   }
-
-  //   &:nth-of-type(2),
-  //   &:nth-of-type(3) {
-  //     grid-column: span 3;
-  //   }
-  // }
 }
