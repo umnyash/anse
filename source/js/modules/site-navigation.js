@@ -16,5 +16,7 @@ function initSiteNavigation(navigationElement) {
     evt.preventDefault();
     openerElement.classList.toggle('site-navigation__link--active');
   });
+
+  // new SimpleBar(navigationElement, { autoHide: false })
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */

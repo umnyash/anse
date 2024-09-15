@@ -2,7 +2,6 @@
   box-sizing: border-box;
   /* stylelint-disable-next-line */
   font: 400 18px/1.222 $main-font-family;
-  color: var(--text-color);
 
   @media (max-width: ($laptop-width - 1)) {
     padding-bottom: 20px;
@@ -20,12 +19,30 @@
     /* stylelint-disable-next-line */
     line-height: 1.22;
   }
+
+  .simplebar-track .simplebar-scrollbar::before {
+    background: #000000;
+  }
+
+  .simplebar-track .simplebar-scrollbar.simplebar-visible::before {
+    opacity: 0.73;
+  }
+
+  @media (pointer: coarse) {
+    .simplebar-track .simplebar-scrollbar.simplebar-visible::before {
+      opacity: 0;
+    }
+  }
 }
 
 .site-navigation__list--level_1 {
   padding: 0;
   margin: 0;
   list-style: none;
+
+  @media (max-width: ($laptop-width - 1)) {
+    padding-right: var(--edge-indent);
+  }
 
   @media (min-width: $laptop-width) {
     position: relative;
@@ -63,7 +80,6 @@
     grid-template-columns: repeat(3, auto);
     justify-content: space-between;
     align-items: start;
-    background: var(--background-color);
     opacity: 0;
     visibility: hidden;
     transition-property: opacity, visibility;
@@ -73,12 +89,13 @@
     &::before {
       content: "";
       position: absolute;
-      top: 0;
+      top: -100vh;
       right: -100vw;
       bottom: 0;
       left: -100vw;
       z-index: -1;
       background: var(--background-color);
+      pointer-events: none;
     }
 
     &::after {
@@ -117,6 +134,11 @@
   color: inherit;
   transition: color $duration-s ease-in-out;
 
+  @media (min-width: $laptop-width) {
+    position: relative;
+    z-index: 1;
+  }
+
   &[href]:hover {
     color: var(--brand-color);
   }
@@ -150,6 +172,7 @@
   margin: 0 0 10px;
   line-height: 1;
   font-weight: 500;
+  color: var(--text-color);
 
   @media (min-width: $laptop-width) {
     margin-bottom: 20px;

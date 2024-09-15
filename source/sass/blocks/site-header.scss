@@ -1,7 +1,10 @@
 .site-header {
   box-sizing: border-box;
+  border-bottom: 1px solid transparent;
   font: 400 16px/19px $main-font-family;
-  transition: transform $duration-m ease-in-out;
+  transition-property: transform, border-color;
+  transition-duration: $duration-s;
+  transition-timing-function: ease-in-out;
 
   @media (min-width: $desktop-width) {
     font-size: 18px;
@@ -29,7 +32,7 @@
   background: var(--brand-color);
   color: var(--text-color);
   transition-property: padding, line-height, color;
-  transition-duration: $duration-m;
+  transition-duration: $duration-s;
   transition-timing-function: ease-in-out;
   overflow: hidden;
 
@@ -51,7 +54,7 @@
 .site-header__message a {
   color: inherit;
   text-decoration: none;
-  transition: color $duration-m ease-in-out;
+  transition: color $duration-s ease-in-out;
 
   &:hover {
     color: var(--text-light-color);
@@ -71,7 +74,7 @@
     "site-navigation site-navigation site-navigation";
   column-gap: 20px;
   align-items: center;
-  transition: padding $duration-m ease-in-out;
+  transition: padding $duration-s ease-in-out;
 
   @media (min-width: $laptop-width) {
     padding: 20px 0;
@@ -94,8 +97,9 @@
   flex-wrap: wrap;
   column-gap: 20px;
   transition-property: opacity, visibility;
-  transition-duration: $duration-m;
+  transition-duration: $duration-s;
   transition-timing-function: ease-in-out;
+  z-index: 1;
 }
 
 .site-header__buttons-2 {
@@ -104,13 +108,14 @@
   align-items: center;
   justify-self: end;
   transition-property: opacity, visibility;
-  transition-duration: $duration-m;
+  transition-duration: $duration-s;
   transition-timing-function: ease-in-out;
 
   @media (min-width: $laptop-width) {
     margin: 14px 0;
     column-gap: 25px;
-    transition: margin $duration-m ease-in-out;
+    transition: margin $duration-s ease-in-out;
+    z-index: 1;
   }
 
   @media (min-width: $desktop-width) {
@@ -130,7 +135,7 @@
   background: transparent;
   cursor: pointer;
   transition-property: color, transform;
-  transition-duration: $duration-m;
+  transition-duration: $duration-s;
   transition-timing-function: ease-in-out;
 
   &:hover {
@@ -144,7 +149,7 @@
     height: 13px;
     background: currentColor;
     mask: url("../img/icons.svg#controls_burger");
-    transition: opacity $duration-m ease-in-out;
+    transition: opacity $duration-s ease-in-out;
   }
 
   &::after {
@@ -155,7 +160,7 @@
     background: currentColor;
     mask: url("../img/icons.svg#controls_cross");
     opacity: 0;
-    transition: opacity $duration-m ease-in-out;
+    transition: opacity $duration-s ease-in-out;
   }
 
   @media (min-width: $laptop-width) {
@@ -172,7 +177,7 @@
   background: transparent;
   cursor: pointer;
   transition-property: color, opacity, transform, visibility;
-  transition-duration: $duration-m;
+  transition-duration: $duration-s;
   transition-timing-function: ease-in-out;
 
   &::before {
@@ -223,10 +228,11 @@
     position: absolute;
     top: 20px;
     left: 50%;
+    z-index: 1;
     width: 97px;
     transform: translateX(-50%);
     transition-property: top, left, width, transform;
-    transition-duration: $duration-m;
+    transition-duration: $duration-s;
     transition-timing-function: ease-in-out;
   }
 
@@ -245,6 +251,7 @@
   transition-timing-function: ease-in-out;
 
   @media (max-width: ($laptop-width - 1)) {
+    margin-right: calc(var(--edge-indent) * (-1));
     opacity: 0;
     visibility: hidden;
   }
@@ -287,13 +294,13 @@
   background: var(--background-color);
   transform: translateY(-100%);
   transition-property: top, transform;
-  transition-duration: $duration-m;
+  transition-duration: $duration-s;
   transition-timing-function: ease-in-out;
   pointer-events: none;
 
   @media (min-width: $laptop-width) {
     top: 0;
-    z-index: 0;
+    z-index: 1;
     padding-bottom: 32px;
   }
 
@@ -331,7 +338,7 @@
   opacity: 0;
   visibility: hidden;
   transition-property: color, opacity, visibility, transform;
-  transition-duration: $duration-m;
+  transition-duration: $duration-s;
   transition-timing-function: ease-out;
 
   &::after {
@@ -341,7 +348,7 @@
     height: 100%;
     background: currentColor;
     mask: url("../img/icons.svg#controls_cross");
-    transition: background-color $duration-m;
+    transition: background-color $duration-s;
   }
 
   &:hover {
@@ -370,7 +377,7 @@
   color: var(--text-weak-color);
   background: transparent;
   cursor: pointer;
-  transition: color $duration-m ease-in-out;
+  transition: color $duration-s ease-in-out;
 
   &:hover {
     color: var(--brand-color);
@@ -431,7 +438,7 @@
   text-decoration: none;
   color: var(--text-weak-color);
   transition-property: color, background-color;
-  transition-duration: $duration-m;
+  transition-duration: $duration-s;
   transition-timing-function: ease-in-out;
 
   &:hover {
@@ -441,7 +448,7 @@
 }
 
 .site-header--sticked {
-  border-bottom: 1px solid var(--border-light-color);
+  border-bottom-color: var(--border-light-color);
 
   .site-header__message {
     padding-top: 0;
@@ -584,13 +591,63 @@
   transform: translateY(calc(-100% - 20px));
 }
 
-.site-header--transparent:not(.site-header--sticked):not(.site-header--menu-open):not(.site-header--search-open) {
+.site-header--transparent:not(.site-header--menu-open):not(.site-header--search-open) {
   .site-header__inner {
-    color: var(--text-light-color);
-    background: transparent;
+    transition: background-color $duration-s ease-in-out;
   }
 
   .site-header__container {
-    background: transparent;
+    transition: background-color $duration-s ease-in-out;
+  }
+}
+
+.site-header--transparent:not(.site-header--sticked):not(.site-header--menu-open):not(.site-header--search-open) {
+  @media (max-width: ($laptop-width - 1)) {
+    .site-header__inner {
+      color: var(--text-light-color);
+      background: transparent;
+    }
+
+    .site-header__container {
+      background: transparent;
+    }
+  }
+}
+
+.site-header--transparent:not(.site-header--sticked):not(.site-header--menu-open):not(.site-header--search-open) {
+  @media (min-width: $laptop-width) {
+    .site-header__inner {
+      color: var(--text-light-color);
+      background: transparent;
+    }
+
+    .site-header__container {
+      background: transparent;
+    }
+  }
+}
+
+.site-header--transparent:not(.site-header--sticked):not(.site-header--menu-open).site-header--search-open {
+  @media (min-width: $laptop-width) {
+    .site-header__inner {
+      color: var(--text-light-color);
+      background: transparent;
+    }
+
+    .site-header__container {
+      background: transparent;
+    }
+  }
+}
+
+.site-header--transparent:not(.site-header--sticked).site-header--menu-open:not(.site-header--search-open) {
+  @media (min-width: $laptop-width) {
+    .site-header__inner {
+      background: transparent;
+    }
+
+    .site-header__container {
+      background: transparent;
+    }
   }
 }

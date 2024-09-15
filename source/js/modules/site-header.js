@@ -74,6 +74,23 @@ function initSiteHeader(headerElement, pageScrollWrapperElement) {
     closerElement.addEventListener('click', closeSearchPanel);
   });
 
+  // Изменение цвета шапки при открытии меню на декстопной версии (нужно для главной страницы, где шапка transparent)
+  const siteNavigationLinkOpenerElements = headerElement.querySelectorAll('.site-navigation__link--opener');
+  siteNavigationLinkOpenerElements.forEach((openerElement) => {
+    openerElement.parentElement.addEventListener('mouseover', () => {
+      if (laptopWidthMediaQueryList.matches) {
+        headerElement.classList.add('site-header--menu-open');
+      }
+    });
+  })
+  siteNavigationLinkOpenerElements.forEach((openerElement) => {
+    openerElement.parentElement.addEventListener('mouseout', () => {
+      if (laptopWidthMediaQueryList.matches) {
+        headerElement.classList.remove('site-header--menu-open');
+      }
+    });
+  });
+
   // Закрытие меню и панели поиска при ресайзе
 
   laptopWidthMediaQueryList.addEventListener('change', () => {

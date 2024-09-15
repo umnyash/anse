@@ -51,8 +51,8 @@
   text-align: center;
   font-size: 10px;
   line-height: 12px;
-  color: var(--text-color);
-  background: var(--brand-color);
+  color: var(--text-light-color);
+  background: var(--accent-color);
 
   @media (min-width: $tablet-width) {
     top: -10px;
