@@ -1,0 +1,11 @@
+mixin modal-gallery({ items })
+  .modal-gallery&attributes(attributes)
+    ul.modal-gallery__list
+      each item in items
+        li.modal-gallery__list-item
+          if item.endsWith('webp')
+            picture.modal-gallery__image-wrapper.media.media--cover.media--position_top
+              img.media__image(src= item  width='1140' height='1520' alt='' loading='lazy')
+          else
+            .modal-gallery__video-wrapper.media.media--cover.media--position_top
+              video.media__video(src= item  playsinline muted autoplay loop)

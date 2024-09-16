@@ -32,14 +32,7 @@ mixin product
         .product__heading-wrapper
           h1.product__heading Шуба SETTE BLACK
           +product-badges({ badges: ['sale','new'] })(class='product__badges')
-        secton.product__price-section
-          h2.visually-hidden Цена
-          s.product__price.product__price--old 34 980 ₽
-          p.product__price 20 985 ₽
-          p.product__installments
-            span.product__installments-icon
-              span.visually-hidden Долями:
-            span.product__installments-text 4 платежа по 6 995 ₽
+        +price-section(class='product__price-section')
         section.product__size-section
           h2.product__size-heading Размер
           a.product__size-link(href='#' data-modal-opener='size-chart') Таблица размеров

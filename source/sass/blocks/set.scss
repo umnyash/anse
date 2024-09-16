@@ -1,0 +1,248 @@
+.set {
+  font: 400 16px/19px $main-font-family;
+
+  @media (min-width: $laptop-width) {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+.set__inner {
+  display: grid;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  grid-template-columns: 100%;
+
+  @media (min-width: $wide-tablet-width) {
+    grid-template-columns: 50% 1fr;
+    align-items: start;
+  }
+
+  @media (min-width: $laptop-width) {
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--grid-column-gap);
+  }
+}
+
+.set__text-content {
+  padding: 0 10px;
+
+  @media (min-width: $tablet-width) {
+    padding: 0 20px;
+  }
+
+  @media (min-width: $laptop-width) {
+    padding: 0 40px 0 0;
+  }
+}
+
+.set__breadcrumbs {
+  margin: 0 0 20px;
+
+  @media (min-width: $laptop-width) {
+    margin-top: 10px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 30px;
+  }
+}
+
+.set__heading {
+  margin: 0 0 20px;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 400;
+
+  @media (min-width: $laptop-width) {
+    font-size: 28px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 32px;
+  }
+}
+
+.set__text {
+  margin: 10px 0;
+}
+
+.set__price-section {
+  margin: 20px 0;
+
+  @media (min-width: $laptop-width) {
+    margin-bottom: 0;
+  }
+}
+
+.set__list {
+  margin: 40px 0 20px;
+
+  @media (min-width: $laptop-width) {
+    margin: 30px 0;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin: 40px 0;
+  }
+}
+
+.set__list-heading {
+  margin: 0 0 20px;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 400;
+
+  @media (min-width: $laptop-width) {
+    margin-bottom: 10px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+}
+
+.set__list-items {
+  max-width: 532px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.set__list-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  align-items: center;
+  font-size: 14px;
+  line-height: 17px;
+
+  @media (min-width: $desktop-width) {
+    column-gap: 20px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.set__list-item__description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.set__list-item + .set__list-item {
+  margin-top: 10px;
+}
+
+.set__list-item-heading {
+  margin: 0;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+
+  @media (min-width: $desktop-width) {
+    font-size: 24px;
+    line-height: 29px;
+  }
+}
+
+.set__list-item-link {
+  text-decoration: none;
+  color: inherit;
+  transition: color $duration-m ease-in-out;
+
+  &:hover {
+    color: var(--brand-color);
+  }
+}
+
+.set__list-item-text {
+  margin: 0;
+  color: var(--text-weak-color);
+}
+
+.set__list-item-image-wrapper {
+  order: -1;
+  width: 110px;
+  height: 140px;
+
+  @media (min-width: $laptop-width) {
+    width: 100px;
+    height: 127px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 140px;
+    height: 177px;
+  }
+}
+
+.set__cart-button {
+  width: 100%;
+}
+
+.set__slider {
+  order: -1;
+  margin: 0 auto 20px;
+  width: 100%;
+  max-width: 640px;
+  cursor: pointer;
+
+  @media (min-width: $wide-tablet-width) {
+    max-width: 100%;
+  }
+}
+
+.set__slider-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @media (min-width: $laptop-width) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.set__slider-image-wrapper,
+.set__slider-video-wrapper {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+}
+
+.set__slider-pagination.set__slider-pagination {
+  position: absolute;
+  bottom: 20px;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 5px;
+  justify-content: center;
+
+  @media (min-width: $laptop-width) {
+    display: none;
+  }
+}
+
+.set__slider-pagination-button {
+  width: 40px;
+  height: 2px;
+  padding: 0;
+  border: none;
+  border-radius: 100px;
+  background: var(--text-weak-color-3);
+  transition: backround-color $duration-m ease-in-out;
+
+  &--current {
+    background: var(--text-color);
+  }
+}

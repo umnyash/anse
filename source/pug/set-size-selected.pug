@@ -1,0 +1,22 @@
+extends layout/layout
+
+block variables
+  - var title = 'Сет | Anse'
+  - var page = 'set'
+
+block content
+  +set({ sizeSelected: true })
+  +products({
+    heading: 'Рекомендуем сеты'
+  })
+
+block modals
+  +modal(class='modal--with_gallery' data-modal='set-gallery')
+    +modal-gallery({
+      items: [
+        'img/set/product-1.webp',
+        'img/set/product-2.webp',
+        'img/set/product-3.webp',
+        'img/set/product-4.webp',
+      ]
+    })(class='modal__gallery')

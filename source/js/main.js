@@ -24,6 +24,7 @@ document.querySelectorAll('.products').forEach(initProducts);
 document.querySelectorAll('.product').forEach(initProduct);
 document.querySelectorAll('[data-modal="offer"]').forEach((modalElement) => new Modal(modalElement));
 document.querySelectorAll('[data-modal="size-chart"]').forEach((modalElement) => new Modal(modalElement));
+document.querySelectorAll('.set').forEach(initSet);
 
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');

@@ -17,9 +17,18 @@ block content
   +advantages
 
 block modals
-  +modal(class='modal--with_gallery' data-modal='product-gallery')
-    +product-modal-gallery(class='modal__gallery')
   +modal(class='modal--with_offer' data-modal='offer')
     +modal-offer(class='modal__offer')
   +modal(class='modal--with_size-chart' data-modal='size-chart')
     +size-chart(class='modal__size-chart')
+  +modal(class='modal--with_gallery' data-modal='product-gallery')
+    +modal-gallery({
+      items: [
+        'img/product/1.webp',
+        'files/fur-coat-1.mp4',
+        'img/product/2.webp',
+        'img/product/3.webp',
+        'files/fur-coat-2.mp4',
+        'img/product/4.webp',
+      ]
+    })(class='modal__gallery')

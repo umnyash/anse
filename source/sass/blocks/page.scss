@@ -161,7 +161,8 @@
   }
 }
 
-.product {
+.product,
+.set {
   margin-top: 10px;
 
   @media (min-width: $laptop-width) {

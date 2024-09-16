@@ -1,0 +1,59 @@
+mixin set({ sizeSelected } = {})
+  article.set&attributes(attributes)
+    form.set__inner(action='https://fakestoreapi.com/products' method='post' target='_blank')
+      .set__text-content
+        +breadcrumbs-list({ links: [
+          {
+            text: 'Каталог Шуб',
+            href: 'catalog.html'
+          },
+          {
+            text: 'Сет с шубой SETTE BLACK'
+          }
+        ]})(class='set__breadcrumbs')
+        h1.set__heading Сет с шубой SETTE BLACK
+        p.set__text Как только вы завершите оформление заказа в нашем магазине, вам понадобится перейти по предложенной вам ссылке на "Заказ". Там вы сможете выбрать подходящий способ оплаты. Для выбора способа оплаты с помощью карты нажмите кнопку «Оплатить картой». Система сама откроет окно для ввода реквизитов карты.
+        p.set__text Рост модели 168 cм, грудь 87 cм, талия 62 cм, бедра 90 cм.#[br] Размер на модели S
+        +price-section(class='set__price-section')
+        section.set__list
+          h2.set__list-heading Состав сета
+          ul.set__list-items
+            li.set__list-item
+              .set__list-item__description
+                h3.set__list-item-heading
+                  a.set__list-item-link(href='product.html' target='_blank') Шуба SETTE BLACK
+                p.set__list-item-text Комплектация: шуба, чехол для шубы, инструкция по возврату, памятка по уходу, плечики
+                if sizeSelected
+                  p.set__list-item-text Размер: S
+                +button({
+                  tag: 'a',
+                  text: sizeSelected ? 'Выбрать другой размер' : 'Выбрать размер',
+                  href: '#'
+                })(class='button--simple-primary')
+              picture.set__list-item-image-wrapper.media.media--cover.media--position_top
+                img.media__image(src='img/set/product-1.webp' width='140' height='177' alt='' loading='lazy')
+            li.set__list-item
+              .set__list-item__description
+                h3.set__list-item-heading
+                  a.set__list-item-link(href='product.html' target='_blank') Сумка
+              picture.set__list-item-image-wrapper.media.media--cover.media--position_top
+                img.media__image(src='img/set/product-3.webp' width='140' height='177' alt='' loading='lazy')
+            li.set__list-item
+              .set__list-item__description
+                h3.set__list-item-heading
+                  a.set__list-item-link(href='product.html' target='_blank') Варежки
+              picture.set__list-item-image-wrapper.media.media--cover.media--position_top
+                img.media__image(src='img/set/product-5.webp' width='140' height='177' alt='' loading='lazy')
+        .set__cart
+          +button({
+            tag: 'button',
+            type: 'submit',
+            text: 'Добавить в корзину'
+          })(class='set__cart-button button--solid-primary')
+      .set__slider
+        ul.set__slider-list
+          each number in [1, 2, 3, 4]
+            li.set__slider-item(data-modal-opener='set-gallery')
+              picture.set__slider-image-wrapper.media.media--cover.media--position_top
+                img.media__image(src=`img/set/product-${number}.webp` width='395' height='526' alt='' loading='lazy')
+        .set__slider-pagination

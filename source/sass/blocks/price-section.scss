@@ -1,0 +1,62 @@
+.price-section {
+  display: flex;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-end;
+
+  @media (min-width: $laptop-width) {
+    margin-bottom: 0;
+  }
+}
+
+.price-section__price {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1;
+
+  &--old {
+    position: relative;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 17px;
+    color: var(--text-color-40);
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0.67em;
+      right: 0;
+      left: 0;
+      height: 1px;
+      background: currentColor;
+    }
+  }
+}
+
+.price-section__installments {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  column-gap: 8px;
+  align-items: center;
+  font-size: 14px;
+  line-height: 17px;
+  color: var(--text-weak-color);
+}
+
+.price-section__installments-icon {
+  flex-shrink: 0;
+  padding: 5px 8px 4px;
+  background: var(--background-dark-color);
+  border-radius: 4px;
+
+  &::before {
+    display: block;
+    content: "";
+    width: 65px;
+    height: 10px;
+    background: var(--text-light-color);
+    mask: url("../img/icons.svg#parts-with-text");
+  }
+}
