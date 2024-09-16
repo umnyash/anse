@@ -875,6 +875,84 @@ function initSearch(searchWrapperElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * set-slider.js
+ */
+function initSetSlider(sliderElement) {
+  const listElement = sliderElement.querySelector('.set__slider-list');
+  const slideElements = listElement.querySelectorAll('.set__slider-item');
+  let slider = null;
+  const init = () => {
+    sliderElement.classList.add('swiper');
+    listElement.classList.add('swiper-wrapper');
+    slideElements.forEach(sliderElement => sliderElement.classList.add('swiper-slide'));
+    slider = new Swiper(sliderElement, {
+      effect: 'creative',
+      creativeEffect: {
+        prev: {
+          shadow: true,
+          translate: ['-20%', 0, -1]
+        },
+        next: {
+          translate: ['100%', 0, 0]
+        }
+      },
+      speed: 500,
+      pagination: {
+        el: '.set__slider-pagination',
+        bulletClass: 'set__slider-pagination-button',
+        bulletActiveClass: 'set__slider-pagination-button--current',
+        renderBullet: getPaginationButtonCreator(),
+        clickable: true
+      }
+    });
+  };
+  const destroy = () => {
+    slider?.destroy();
+    sliderElement.classList.remove('swiper');
+    listElement.classList.remove('swiper-wrapper');
+    slideElements.forEach(sliderElement => sliderElement.classList.remove('swiper-slide'));
+  };
+  const switchSliderMode = () => {
+    if (laptopWidthMediaQueryList.matches) {
+      destroy();
+    } else {
+      init();
+    }
+  };
+  laptopWidthMediaQueryList.addEventListener('change', switchSliderMode);
+  switchSliderMode();
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * set.js
+ */
+function initSet(setElement) {
+  const sliderElement = setElement.querySelector('.set__slider');
+  const slideElements = Array.from(sliderElement.querySelectorAll('.set__slider-item'));
+  console.log(slideElements);
+  const modalElement = document.querySelector('[data-modal="set-gallery"]');
+  const modalMediaElements = modalElement.querySelectorAll('.modal-gallery__list-item');
+  new SimpleBar(modalElement, {
+    autoHide: false
+  });
+  console.log(modalMediaElements);
+  new Modal(modalElement, {
+    onOpenerClick: evt => {
+      const slideElementIndex = slideElements.indexOf(evt.currentTarget);
+      console.log('Click on', evt.currentTarget);
+      setTimeout(() => {
+        modalMediaElements[slideElementIndex].scrollIntoView({
+          behavior: 'smooth'
+        });
+      }, 400);
+    }
+  });
+  initSetSlider(sliderElement);
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * shop-slider.js
  */
 function initShopSlider(sliderWrapperElement) {
@@ -1096,6 +1174,7 @@ document.querySelectorAll('.products').forEach(initProducts);
 document.querySelectorAll('.product').forEach(initProduct);
 document.querySelectorAll('[data-modal="offer"]').forEach(modalElement => new Modal(modalElement));
 document.querySelectorAll('[data-modal="size-chart"]').forEach(modalElement => new Modal(modalElement));
+document.querySelectorAll('.set').forEach(initSet);
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {
