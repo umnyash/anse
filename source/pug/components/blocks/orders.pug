@@ -30,7 +30,7 @@ mixin orders({ orders, activeLink } = {})
               })(class=`button--solid-secondary-alter button--size_s ${activeLink === 'completed' && 'button--active'}`)
           if activeLink === 'current'
             if orders.current
-              .order__list-wrapper
+              .orders__list-wrapper
                 +orders-list({ set: 'current' })
             else
               +placeholder({

@@ -612,9 +612,7 @@
       background: transparent;
     }
   }
-}
 
-.site-header--transparent:not(.site-header--sticked):not(.site-header--menu-open):not(.site-header--search-open) {
   @media (min-width: $laptop-width) {
     .site-header__inner {
       color: var(--text-light-color);

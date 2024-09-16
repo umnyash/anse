@@ -71,10 +71,6 @@
   flex-grow: 1;
 }
 
-.message {
-  height: 100%;
-}
-
 .page__site-header:not(.site-header--transparent) + .page__content {
   padding-top: 76px;
 
@@ -87,7 +83,35 @@
   }
 }
 
-.search {
+.page__content > * {
+  margin-top: 60px;
+
+  @media (min-width: $laptop-width) {
+    margin-top: 100px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 120px;
+  }
+}
+
+.page__content > :last-child {
+  margin-bottom: 60px;
+
+  @media (min-width: $laptop-width) {
+    margin-bottom: 80px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-bottom: 100px;
+  }
+}
+
+.main-banner {
+  margin-top: 0;
+}
+
+.breadcrumbs {
   margin-top: 10px;
 
   @media (min-width: $laptop-width) {
@@ -96,5 +120,107 @@
 
   @media (min-width: $desktop-width) {
     margin-top: 10px;
+  }
+}
+
+.breadcrumbs + * {
+  margin-top: 10px;
+
+  @media (min-width: $laptop-width) {
+    margin-top: 20px;
+  }
+}
+
+.article {
+  margin-top: 10px;
+
+  @media (min-width: $laptop-width) {
+    // margin-top: 0;
+    margin-top: 10px;
+  }
+
+  @media (min-width: $desktop-width) {
+    // margin-top: 10px;
+    margin-top: 20px;
+  }
+}
+
+.article--grid_wide {
+  margin-top: 10px;
+
+  @media (min-width: $laptop-width) {
+    margin-top: 0;
+  }
+}
+
+.shop {
+  margin-top: 10px;
+
+  @media (min-width: $desktop-width) {
+    margin-top: 20px;
+  }
+}
+
+.product {
+  margin-top: 10px;
+
+  @media (min-width: $laptop-width) {
+    margin-top: 0;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 10px;
+  }
+}
+
+.message.message {
+  height: 100%;
+  margin: 0;
+}
+
+.search.search {
+  margin-top: 10px;
+
+  @media (min-width: $laptop-width) {
+    margin-top: 0;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 10px;
+    margin-bottom: 54px;
+  }
+}
+
+.account.account {
+  margin: 0;
+}
+
+.orders.orders {
+  margin: 0;
+}
+
+.press.press {
+  margin-top: 10px;
+  margin-bottom: 0;
+
+  @media (min-width: $laptop-width) {
+    margin-top: 0;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 10px;
+  }
+}
+
+.consumers-photos + .reviews {
+  margin-top: 30px;
+  margin-bottom: 0;
+
+  @media (min-width: $laptop-width) {
+    margin-top: 50px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 60px;
   }
 }

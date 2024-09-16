@@ -78,6 +78,10 @@
   @media (min-width: $wide-tablet-width) {
     margin-top: 10px;
   }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 20px;
+  }
 }
 
 .product__heading-wrapper {
@@ -287,6 +291,10 @@
 
     @media (min-width: $laptop-width) {
       display: inline;
+    }
+
+    @media (min-width: $desktop-width) {
+      display: block;
     }
   }
 
