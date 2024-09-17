@@ -1,0 +1,25 @@
+mixin cart-order({ promocode } = {})
+  section.cart-order&attributes(attributes)
+    h2.cart-order__heading Ваш заказ
+    dl.cart-order__list
+      dt.cart-order__list-key Товары 2 шт.
+      dd.cart-order__list-value 64 800 ₽
+      dt.cart-order__list-key Скидка
+      dd.cart-order__list-value.cart-order__list-value--accent - 6 000 ₽
+      dt.cart-order__list-key Промокод
+      dd.cart-order__list-value.cart-order__list-value--accent Промокод
+      dt.cart-order__list-key Доставка
+      dd.cart-order__list-value Будет рассчитана
+    .cart-order__offer До бесплатной доставки добавьте товаров на 12 300 ₽
+    .cart-order__promocode-wrapper
+      p.cart-order__promocode-heading Введите промокод
+      +promocode(promocode)(class='cart-order__promocode')
+    .cart-order__total
+      p.cart-order__total-text Итого
+      s.cart-order__total-price.cart-order__total-price--old 34 980 ₽
+      p.cart-order__total-price 48 500 ₽
+    +button({
+      tag: 'a',
+      text: 'Оформить заказ',
+      href: '#!'
+    })(class='cart-order__button button--solid-primary')

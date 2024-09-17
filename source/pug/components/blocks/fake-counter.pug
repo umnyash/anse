@@ -1,0 +1,4 @@
+mixin fake-counter({ value = 1 } = {})
+  .fake-counter&attributes(attributes)
+    span.visually-hidden Количество
+    .fake-counter__value= value

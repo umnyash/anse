@@ -1,0 +1,29 @@
+.fake-counter {
+  display: flex;
+  padding: 0 18px;
+  box-sizing: border-box;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  font: 600 16px/24px $main-font-family;
+
+  &::before,
+  &::after {
+    content: "";
+    width: 15px;
+    height: 34px;
+    flex-shrink: 0;
+    background: var(--text-weak-color-3);
+    mask-position: center;
+  }
+
+  &::after {
+    mask: url("../img/icons.svg#controls_plus");
+  }
+
+  &::before {
+    mask: url("../img/icons.svg#controls_minus");
+  }
+}

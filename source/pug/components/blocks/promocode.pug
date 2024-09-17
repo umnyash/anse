@@ -1,0 +1,13 @@
+mixin promocode({ value, status } = {})
+  .promocode&attributes(attributes)
+    .promocode__form(action='https://fakestoreapi.com/products' method='post' target='_blank')&attributes(attributes)
+      label.promocode__label
+        span.visually-hidden Промокод:
+        input.promocode__control(name='promocode' type='text' value= value placeholder='Промокод' required)
+      button.promocode__button(class= status === 'success' && 'promocode__button--delete' type='button')
+        span.visually-hidden Отправить
+    .promocode__text-wrapper
+      if status === 'success'
+        p.promocode__text.promocode__text--success Активирована скидка 500 ₽
+      else if status === 'error'
+        p.promocode__text.promocode__text--error Неверно введен промокод

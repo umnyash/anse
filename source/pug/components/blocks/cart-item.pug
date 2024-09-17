@@ -1,5 +1,44 @@
 mixin cart-item({ product, headingTag = 'h3' })
-  .cart-item&attributes(attributes)
-    #{headingTag}.cart-item__heading= product.title
+  -
+    const modifierClasses = [];
+    if (!product.available) modifierClasses.push('cart-item--unavailable');
+    if (product.isGift) modifierClasses.push('cart-item--gift');
+    var modifierClassesString = modifierClasses.join(' ');
+
+
+  .cart-item(class= modifierClassesString)&attributes(attributes)
+    .cart-item__text-content
+      .cart-item__description
+        #{headingTag}.cart-item__heading
+          a.cart-item__link(href='product.html' target='_blank')= product.title
+        if !product.isGift
+          p.cart-item__text.cart-item__text--big Размер: S
+          p.cart-item__text Комплектация: шуба, чехол для шубы, инструкция по возврату, памятка по уходу, плечики
+
+      .cart-item__details
+        if !product.available
+          .cart-item__status Нет в наличии
+          +button({ tag: 'a', text: 'Узнать о поступлении', href: '#' })(class='cart-item__request button--simple-primary button--simple-alter')
+        else
+          .cart-item__counter-wrapper
+            if product.isGift
+              +fake-counter
+            else
+              +counter({ min: 1 })
+              .cart-item__counter-tooltip-wrapper
+                if product.isRunningLow
+                  .cart-item__counter-tooltip Осталась 1 шт.
+
+        if product.isGift
+          p.cart-item__badge В подарок
+
+        if product.available && !product.isGift
+          .cart-item__prices
+            p.cart-item__price 20 985 ₽
+            s.cart-item__price.cart-item__price--old 34 980 ₽
+
+        if !product.isGift
+          button.cart-item__delete-button(type='button')
+            span.visually-hidden Удалить
     picture.cart-item__image-wrapper.media.media--cover.media--position_top
       img.cart-item__image.media__image(src= product.image width='180' height='228' alt='' loading='lazy')

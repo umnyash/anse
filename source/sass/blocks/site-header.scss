@@ -497,7 +497,6 @@
   @media (max-width: ($laptop-width - 1)) {
     display: grid;
     height: 100vh;
-    border-bottom: none;
     grid-template-rows: auto 1fr;
 
     @supports (height: 100dvh) {

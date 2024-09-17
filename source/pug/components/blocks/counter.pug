@@ -1,0 +1,10 @@
+mixin counter({ value = 1, min = 0 } = {})
+  .counter&attributes(attributes)
+    .counter__inner
+      label.counter__control-wrapper
+        span.visually-hidden Количество
+        input.counter__control(name='quantity' type='number' min= min step='1' value= value placeholder='1' readonly)
+      button.counter__button.counter__button--minus(type='button')
+        span.visually-hidden Минус
+      button.counter__button.counter__button--plus(type='button')
+        span.visually-hidden Плюс

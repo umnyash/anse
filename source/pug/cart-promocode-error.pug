@@ -1,0 +1,23 @@
+extends layout/layout
+
+block variables
+  - var title = 'Корзина | Anse'
+  - var page = 'cart'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: 'Корзина'
+    }
+  ]})
+  +cart({
+    promocode: {
+      status: 'error',
+      value: 'Промокод'
+    }
+  })(class='page__cart')
+  +products({
+    heading: 'Добавьте к заказу'
+  })
+  +advantages
+  +info

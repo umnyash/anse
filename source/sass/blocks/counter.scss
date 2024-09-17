@@ -1,0 +1,94 @@
+.counter {
+  font: 600 16px/24px $main-font-family;
+
+  &--disabled {
+    pointer-events: none;
+  }
+}
+
+.counter__inner {
+  display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.counter__control {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  border: none;
+  text-align: center;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  appearance: textfield;
+  outline: none;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    appearance: none;
+  }
+
+  &::placeholder {
+    opacity: 1;
+    color: var(--text-weak-color);
+  }
+
+  &:enabled {
+    cursor: pointer;
+  }
+}
+
+.counter__button {
+  display: flex;
+  height: 34px;
+  padding: 0 18px;
+  border: 0;
+  align-items: center;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 15px;
+    aspect-ratio: 1 / 1;
+    background: currentColor;
+    transition: background-color $duration-m, transform $duration-m;
+  }
+
+  &--minus {
+    order: -1;
+
+    &::after {
+      mask: url("../img/icons.svg#controls_minus");
+    }
+  }
+
+  &--plus::after {
+    mask: url("../img/icons.svg#controls_plus");
+  }
+
+  &:hover::after {
+    background: var(--brand-color);
+    will-change: transform;
+  }
+
+  &:active::after {
+    background: var(--brand-color);
+    transform: scale(0.85);
+  }
+
+  &:disabled {
+    pointer-events: none;
+
+    &::after {
+      background: var(--text-weak-color-3);
+    }
+  }
+}
