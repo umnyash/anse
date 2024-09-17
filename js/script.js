@@ -731,6 +731,46 @@ function initProduct(productElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * products-counters.js
+ */
+function initProductsCounters(productsWrapperElement) {
+  const toggleButtonsState = (controlElement, buttonMinusElement) => {
+    const minValue = +controlElement.min;
+    buttonMinusElement.disabled = controlElement.value <= minValue;
+    console.log(controlElement.value);
+  };
+  const toggleAllButtonsState = () => {
+    productsWrapperElement.querySelectorAll('.counter').forEach(counterElement => {
+      const controlElement = counterElement.querySelector('.counter__control');
+      const buttonMinusElement = counterElement.querySelector('.counter__button--minus');
+      toggleButtonsState(controlElement, buttonMinusElement);
+    });
+  };
+  toggleAllButtonsState();
+  productsWrapperElement.addEventListener('click', evt => {
+    const counterButtonElement = evt.target.closest('.counter__button');
+    if (!counterButtonElement) {
+      return;
+    }
+    const counterElement = counterButtonElement.closest('.counter');
+    const controlElement = counterElement.querySelector('.counter__control');
+    const buttonMinusElement = counterElement.querySelector('.counter__button--minus');
+    switch (true) {
+      case counterButtonElement.matches('.counter__button--minus'):
+        controlElement.stepDown();
+        break;
+      case counterButtonElement.matches('.counter__button--plus'):
+        controlElement.stepUp();
+        break;
+    }
+    toggleButtonsState(controlElement, buttonMinusElement);
+    controlElement.dispatchEvent(inputEvent);
+    controlElement.dispatchEvent(changeEvent);
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * products-slider.js
  */
 function initProducts(productsElement) {
@@ -1175,6 +1215,7 @@ document.querySelectorAll('.product').forEach(initProduct);
 document.querySelectorAll('[data-modal="offer"]').forEach(modalElement => new Modal(modalElement));
 document.querySelectorAll('[data-modal="size-chart"]').forEach(modalElement => new Modal(modalElement));
 document.querySelectorAll('.set').forEach(initSet);
+document.querySelectorAll('.cart__form, .product__cart').forEach(initProductsCounters);
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {
