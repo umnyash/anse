@@ -5,9 +5,4 @@ block variables
   - var page = 'cart'
 
 block content
-  +breadcrumbs({ links: [
-    {
-      text: 'Корзина'
-    }
-  ]})
   +cart({ empty: true })(class='page__cart')

@@ -1,9 +1,16 @@
 mixin cart({ empty, promocode } = {})
-  .cart&attributes(attributes)
-    .container
+  .cart(class= empty && 'cart--empty')&attributes(attributes)
+    .cart__container.container
       .cart__inner
         if empty
-          | В корзине пока ничего нет, перейти в каталог
+          .cart__placeholder-wrapper
+            +placeholder({
+              text: 'В корзине пока что ничего нет',
+              link: {
+                text: 'Перейти в каталог',
+                href: 'catalog.html'
+              }
+            })
         else
           h1.cart__heading.heading.heading--size_l Корзина
           button.cart__clear-button Очистить все
