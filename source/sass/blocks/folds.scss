@@ -118,3 +118,14 @@
 //     padding: 32px 64px;
 //   }
 // }
+
+.folds--small {
+  .folds__item {
+    padding: 12px;
+  }
+
+  .folds__item-header::after {
+    width: 18px;
+    height: 16px;
+  }
+}

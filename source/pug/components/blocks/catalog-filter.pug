@@ -1,0 +1,197 @@
+mixin catalog-filter
+  form.catalog-filter&attributes(attributes)
+    .catalog-filter__header
+      h2.catalog-filter__heading Фильтры
+      button.catalog-filter__close-button(type='button')
+        span.visually-hidden Закрыть
+    .catalog-filter__content
+      ul.catalog-filter__sections.folds.folds--small
+        li.catalog-filter__section.folds__item
+          .folds__item-header
+            h2.catalog-filter__section-heading
+              button.folds__button(type='button' aria-expanded='true') Размер
+          .folds__item-content-wrapper
+            .folds__item-content
+              .catalog-filter__checkboxes
+                div
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: '40',
+                    label: '40'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: '42',
+                    label: '42',
+                    checked: true
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: '44',
+                    label: '44'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: '46',
+                    label: '46'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: '48',
+                    label: '48'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: '50',
+                    label: '50'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: '52',
+                    label: '52'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: '54',
+                    label: '54'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: '56',
+                    label: '56'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: '58',
+                    label: '58'
+                  })
+                div
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: 'xs',
+                    label: 'XS'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: 's',
+                    label: 'S'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: 's-m',
+                    label: 'S-M'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: 'm',
+                    label: 'M'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: 'l',
+                    label: 'L',
+                    checked: true
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: 'l-xl',
+                    label: 'L-XL'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: 'xl',
+                    label: 'XL'
+                  })
+                  +checker({
+                    name: 'size',
+                    type: 'checkbox',
+                    value: 'xxl',
+                    label: 'XXL'
+                  })
+        li.catalog-filter__section.folds__item
+          .folds__item-header
+            h2.catalog-filter__section-heading
+              button.folds__button(type='button' aria-expanded='false') Коллекция
+          .folds__item-content-wrapper
+            .folds__item-content
+              .catalog-filter__checkboxes
+                +checker({
+                  name: 'collections',
+                  type: 'checkbox',
+                  value: 'premier',
+                  label: 'Premier'
+                })
+                +checker({
+                  name: 'collections',
+                  type: 'checkbox',
+                  value: 'limited',
+                  label: 'Limited'
+                })
+                +checker({
+                  name: 'collections',
+                  type: 'checkbox',
+                  value: 'classic',
+                  label: 'Classic',
+                  checked: true
+                })
+                +checker({
+                  name: 'collections',
+                  type: 'checkbox',
+                  value: 'autumn',
+                  label: 'Autumn',
+                  checked: true
+                })
+                +checker({
+                  name: 'collections',
+                  type: 'checkbox',
+                  value: 'winter',
+                  label: 'Winter'
+                })
+                +checker({
+                  name: 'collections',
+                  type: 'checkbox',
+                  value: 'summer',
+                  label: 'Summer',
+                  disabled: true
+                })
+                +checker({
+                  name: 'collections',
+                  type: 'checkbox',
+                  value: 'spring',
+                  label: 'Spring',
+                  disabled: true
+                })
+                +checker({
+                  name: 'collections',
+                  type: 'checkbox',
+                  value: 'new-collection',
+                  label: 'New collection'
+                })
+    .catalog-filter__footer
+      +button({
+        tag: 'button',
+        type: 'button',
+        text: 'Сбросить'
+      })(class='catalog-filter__clear-button button--simple-secondary')
+      +button({
+        tag: 'button',
+        type: 'submit',
+        text: 'Показать 83 товара'
+      })(class='catalog-filter__submit-button button--solid-primary')

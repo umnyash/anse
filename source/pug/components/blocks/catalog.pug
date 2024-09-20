@@ -1,0 +1,47 @@
+mixin catalog({ isMainCatalog, appliedFilters } = {})
+  .catalog(class= isMainCatalog && 'catalog--main')&attributes(attributes)
+    .container
+      .catalog__header
+        .catalog__heading.heading.heading--size_l= isMainCatalog ? 'Шубы' : 'Шубы с капюшоном'
+        button.catalog__filter-button(type='button') Фильтры
+
+        .catalog__sorting&attributes(attributes)
+          button.catalog__sorting-toggle-button(type='button') По популярности
+          ul.catalog__sorting-list
+            li.catalog__sorting-item
+              a.catalog__sorting-link.catalog__sorting-link--active(href='#') По популярности
+            li.catalog__sorting-item
+              a.catalog__sorting-link(href='#') По возрастанию цены
+            li.catalog__sorting-item
+              a.catalog__sorting-link(href='#') По убыванию цены
+
+        .catalog__applied-filters
+          if appliedFilters
+            ul.catalog__applied-filters-list
+              li.catalog__applied-filter-item
+                button.catalog__applied-filter-reset-button(type='button') Сбросить фильтры
+              li.catalog__applied-filter-item
+                button.catalog__applied-filter-reset-button
+                  span.visually-hidden Удалить фильтр
+                  span S
+              li.catalog__applied-filter-item
+                button.catalog__applied-filter-reset-button
+                  span.visually-hidden Удалить фильтр
+                  span 54
+
+      .catalog__body
+        .catalog__filter-wrapper
+          +catalog-filter(class='catalog__filter')
+        if isMainCatalog
+          .catalog__navigation-wrapper
+            +catalog-navigation
+        .catalog__products
+          +products-list({ products: [...products, ...products, ...products] })
+        .catalog__more-button-wrapper
+          +button({
+            tag: 'button',
+            type: 'button',
+            text: 'Открыть ещё'
+          })(class='button--simple-primary')
+        .catalog__pagination-wrapper
+          +pagination

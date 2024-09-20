@@ -26,6 +26,8 @@ document.querySelectorAll('[data-modal="offer"]').forEach((modalElement) => new 
 document.querySelectorAll('[data-modal="size-chart"]').forEach((modalElement) => new Modal(modalElement));
 document.querySelectorAll('.set').forEach(initSet);
 document.querySelectorAll('.cart__form, .product__cart').forEach(initProductsCounters);
+document.querySelectorAll('.catalog__sorting').forEach(initCatalogSorting);
+document.querySelectorAll('.catalog').forEach(initCatalogFilter);
 
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');

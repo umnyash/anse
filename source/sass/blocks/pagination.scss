@@ -1,0 +1,82 @@
+.pagination {
+  font: 400 16px/1 $main-font-family;
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+  }
+}
+
+.pagination__list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.pagination__link {
+  position: relative;
+  text-decoration: none;
+  color: var(--text-weak-color);
+  transition: color $duration-m;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+  }
+
+  &--current {
+    color: var(--brand-color);
+  }
+
+  &[href]:hover,
+  &[href]:active {
+    color: var(--text-color);
+  }
+
+  &:not([href]) {
+    cursor: default;
+  }
+}
+
+.pagination__link--prev,
+.pagination__link--next {
+  display: flex;
+  color: var(--brand-color);
+
+  &::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background: currentColor;
+    mask: url("../img/icons.svg#controls_arrow-without-tail");
+    transition: transform $duration-xs;
+  }
+
+  &[href]:hover::after {
+    will-change: transform;
+  }
+}
+
+.pagination__link--prev {
+  &[href]::after {
+    transform: rotate(90deg);
+  }
+
+  &[href]:active::after {
+    transform: translateX(-2px) rotate(90deg);
+  }
+}
+
+.pagination__link--next {
+  &[href]::after {
+    transform: rotate(-90deg);
+  }
+
+  &[href]:active::after {
+    transform: translateX(2px) rotate(-90deg);
+  }
+}

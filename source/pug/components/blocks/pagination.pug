@@ -1,0 +1,23 @@
+mixin pagination
+  .pagination&attributes(attributes)
+    ol.pagination__list&attributes(attributes)
+      li.pagination__item
+        a.pagination__link.pagination__link--prev(href='#!')
+          span.visually-hidden Назад
+      li.pagination__item
+        a.pagination__link.pagination__link--current 1
+      li.pagination__item
+        a.pagination__link(href='#!') 2
+      li.pagination__item
+        a.pagination__link.pagination__link--current 3
+      li.pagination__item
+        a.pagination__link(href='#!') 4
+      li.pagination__item
+        a.pagination__link(href='#!') 5
+      li.pagination__item
+        span.pagination__link ...
+      li.pagination__item
+        a.pagination__link(href='#!') 9
+      li.pagination__item
+        a.pagination__link.pagination__link--next(href='#!')
+          span.visually-hidden Вперёд

@@ -1,10 +1,16 @@
 extends layout/layout
 
 block variables
-  - var title = 'Каталог | Anse'
+  - var title = 'Шубы с капюшоном | Anse'
   - var page = 'catalog'
 
 block content
+  +breadcrumbs({ links: [
+    {
+      text: 'Шубы с капюшоном'
+    }
+  ]})
+  +catalog({ appliedFilters: true })
   +advantages
   +banner
   +info

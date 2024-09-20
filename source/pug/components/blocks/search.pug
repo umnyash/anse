@@ -7,7 +7,7 @@ mixin search({ query, foundItems })
           +search-form({ value: query })
         if query && foundItems
           .search__products
-            +products-list({ products: foundItems, pagination: true })
+            +products-list({ products: foundItems })
         else if query
           .search__placeholder
             p.search__placeholder-text!= `По запросу «${query}» товаров не&nbsp;найдено`
@@ -19,4 +19,4 @@ mixin search({ query, foundItems })
         section.search__offer
           h2.search__offer-heading Не нашли, что искали?
           .search__offer-list-wrapper
-            +products-list({ products })
+            +products-list({ products, headingTag: 'h3' })

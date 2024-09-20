@@ -1,0 +1,91 @@
+.checker {
+  font: 400 16px/19px $main-font-family;
+
+  @media (min-width: $laptop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+.checker__inner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  align-items: center;
+}
+
+.checker__control {
+  align-self: start;
+  appearance: none;
+  display: grid;
+  box-sizing: border-box;
+  border: none;
+  margin: 0;
+  place-items: center;
+  background: transparent;
+  transition-property: border-color, background-color;
+  transition-duration: $duration-m;
+
+  &::before {
+    transition: background-color $duration-m;
+  }
+
+  &:enabled {
+    cursor: pointer;
+  }
+}
+
+.checker__label {
+  color: var(--text-weak-color);
+  transition: color $duration-m ease-in-out;
+}
+
+.checker__control:enabled + .checker__label {
+  cursor: pointer;
+}
+
+.checker__control[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: var(--background-additional-color);
+
+  &::before {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 10px;
+    background: transparent;
+    mask: url("../img/icons.svg#controls_checkmark");
+  }
+
+  &:enabled:not(:checked):hover {
+    &::before {
+      background: var(--text-weak-color-2);
+    }
+
+    + .checker__label {
+      color: var(--text-color);
+    }
+  }
+
+  &:checked {
+    background: var(--background-dark-color);
+
+    &::before {
+      background: var(--text-light-color);
+    }
+
+    + .checker__label {
+      color: var(--text-color);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+
+    + .checker__label {
+      opacity: 0.5;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+extends layout/layout
+
+block variables
+  - var title = 'Шубы | Anse'
+  - var page = 'main-catalog'
+
+block content
+  +breadcrumbs({ links: [
+    {
+      text: 'Шубы'
+    }
+  ]})
+  +catalog({ isMainCatalog: true, appliedFilters: true })
+  +advantages
+  +banner
+  +info

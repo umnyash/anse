@@ -1,6 +1,15 @@
-mixin products-list({ products, headingTag })
+mixin products-list({ products, headingTag = 'h2', pagination, moreButton })
   .products-list&attributes(attributes)
     ul.products-list__items
       each product in products
         li.products-list__item
           +product-card({ product, headingTag })
+    if moreButton
+      +button({
+        tag: 'button',
+        type: 'button',
+        text: 'Открыть ещё'
+      })(class='products-list__more-button button--simple-primary')
+    if pagination
+      .products-list__pagination-wrapper
+        +pagination
