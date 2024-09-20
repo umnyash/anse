@@ -409,6 +409,73 @@ function initBrandsSlider(brandsElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * catalog-sorting.js
+ */
+function initCatalogFilter(catalogElement) {
+  const filterToggleButtonElement = catalogElement.querySelector('.catalog__filter-button');
+  const filterWrapperElement = catalogElement.querySelector('.catalog__filter-wrapper');
+  const catalogHeaderElement = catalogElement.querySelector('.catalog__header');
+  const filterCloseButtonElement = filterWrapperElement.querySelector('.catalog-filter__close-button');
+  const catalogBodyElement = catalogElement.querySelector('.catalog__body');
+  const checkerElements = filterWrapperElement.querySelectorAll('.checker__control');
+  const clearButtonElement = filterWrapperElement.querySelector('.catalog-filter__clear-button');
+  const clearFilter = () => {
+    checkerElements.forEach(checkerElement => {
+      checkerElement.checked = false;
+      checkerElement.dispatchEvent(inputEvent);
+    });
+  };
+  const setFilterHeight = () => {
+    filterWrapperElement.style.height = `${document.documentElement.clientHeight - catalogHeaderElement.getBoundingClientRect().bottom}px`;
+  };
+  const onWindowResize = () => {
+    if (catalogElement.classList.contains('catalog--filter-open')) {
+      setFilterHeight();
+    }
+  };
+  function openFilter() {
+    lockPageScroll();
+    setFilterHeight();
+    catalogElement.classList.add('catalog--filter-open');
+    catalogBodyElement.addEventListener('click', onCatalogBodyClick);
+  }
+  ;
+  function closeFilter() {
+    catalogElement.classList.remove('catalog--filter-open');
+    unlockPageScroll();
+    catalogBodyElement.removeEventListener('click', onCatalogBodyClick);
+  }
+  ;
+  function onCatalogBodyClick(evt) {
+    if (!evt.target.closest('.catalog__filter-wrapper')) {
+      closeFilter();
+    }
+  }
+  filterToggleButtonElement.addEventListener('click', () => {
+    if (catalogElement.classList.contains('catalog--filter-open')) {
+      closeFilter();
+    } else {
+      openFilter();
+    }
+  });
+  filterCloseButtonElement.addEventListener('click', evt => {
+    closeFilter();
+  });
+  window.addEventListener('resize', throttleAndDebounce(onWindowResize, 500));
+  new SimpleBar(catalogElement.querySelector('.catalog-filter__sections'), {
+    autoHide: false
+  });
+  laptopWidthMediaQueryList.addEventListener('change', () => {
+    closeFilter();
+  });
+  clearButtonElement.addEventListener('click', () => {
+    clearFilter();
+  });
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * catalog-preview-slider.js
  */
 function initCatalogPreviewSlider(sliderElement) {
@@ -439,6 +506,50 @@ function initCatalogPreviewSlider(sliderElement) {
       }
     }
   });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * catalog-sorting.js
+ */
+function initCatalogSorting(sortingElement) {
+  sortingElement.addEventListener('click', evt => {
+    if (evt.target.closest('.catalog__sorting-toggle-button')) {
+      if (sortingElement.classList.contains('catalog__sorting--open')) {
+        close();
+      } else {
+        open();
+      }
+    } else {
+      const linkElement = evt.target.closest('.catalog__sorting-link');
+      if (!linkElement) {
+        return;
+      }
+      sortingElement.querySelector('.catalog__sorting-toggle-button').textContent = linkElement.textContent;
+      sortingElement.querySelector('.catalog__sorting-link--active')?.classList.remove('catalog__sorting-link--active');
+      linkElement.classList.add('catalog__sorting-link--active');
+      close();
+    }
+  });
+  function onDocumentClick(evt) {
+    const targetElement = evt.target.closest('.catalog__sorting');
+    if (targetElement !== sortingElement || evt.target.matches('.catalog__sorting-list')) {
+      evt.preventDefault();
+      close();
+    }
+  }
+  function open() {
+    sortingElement.classList.add('catalog__sorting--open');
+    setTimeout(() => {
+      document.addEventListener('click', onDocumentClick);
+    }, 0);
+  }
+  ;
+  function close() {
+    sortingElement.classList.remove('catalog__sorting--open');
+    document.removeEventListener('click', onDocumentClick);
+  }
+  ;
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -1216,6 +1327,8 @@ document.querySelectorAll('[data-modal="offer"]').forEach(modalElement => new Mo
 document.querySelectorAll('[data-modal="size-chart"]').forEach(modalElement => new Modal(modalElement));
 document.querySelectorAll('.set').forEach(initSet);
 document.querySelectorAll('.cart__form, .product__cart').forEach(initProductsCounters);
+document.querySelectorAll('.catalog__sorting').forEach(initCatalogSorting);
+document.querySelectorAll('.catalog').forEach(initCatalogFilter);
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {
