@@ -1025,6 +1025,17 @@ function initSearch(searchWrapperElement) {
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
+function initSelect(selectElement) {
+  new Choices(selectElement, {
+    // eslint-disable-line
+    searchEnabled: false,
+    itemSelectText: '',
+    shouldSort: false
+    // placeholder: true,
+    // placeholderValue: 'fff',
+  });
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * set-slider.js
  */
@@ -1329,6 +1340,7 @@ document.querySelectorAll('.set').forEach(initSet);
 document.querySelectorAll('.cart__form, .product__cart').forEach(initProductsCounters);
 document.querySelectorAll('.catalog__sorting').forEach(initCatalogSorting);
 document.querySelectorAll('.catalog').forEach(initCatalogFilter);
+document.querySelectorAll('.select').forEach(initSelect);
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {
