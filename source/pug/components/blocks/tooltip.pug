@@ -1,5 +1,5 @@
-mixin tooltip({ text })
+mixin tooltip({ tooltipText })
   .tooltip&attributes(attributes)
-    button.tooltip__button(type='button' aria-label='Информация.')
+    +info-button({ text: 'Иформация.' })(class='tooltip__button')
     .tooltip__content-wrapper
-      .tooltip__content= text
+      .tooltip__content= tooltipText

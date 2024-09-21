@@ -1,0 +1,5 @@
+mixin profile({ birthDate } = {})
+  .profile&attributes(attributes)
+    +page-header({ heading: 'Данные профиля' })(class='profile__header')
+    .profile__inner
+      +profile-form({ birthDate })

@@ -1,0 +1,26 @@
+.profile {
+  display: grid;
+  box-sizing: border-box;
+  min-height: 100%;
+  padding-bottom: 40px;
+  grid-template-rows: auto 1fr;
+  background: var(--background-additional-color);
+
+  @media (min-width: $desktop-width) {
+    padding-bottom: 60px;
+  }
+}
+
+.profile__header {
+  margin: 0 0 10px;
+
+  @media (min-width: $tablet-width) {
+    margin-bottom: 20px;
+  }
+}
+
+.profile__inner {
+  @media (min-width: $wide-tablet-width) {
+    padding: 0 var(--edge-indent);
+  }
+}

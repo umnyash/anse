@@ -82,6 +82,39 @@
   color: var(--accent-color);
 }
 
+[class*="button--simple-with-icon"] {
+  &::after {
+    left: 30px;
+
+    @media (min-width: $desktop-width) {
+      left: 34px;
+    }
+  }
+
+  .button__inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 10px;
+    align-items: center;
+  }
+
+  .button__inner::before {
+    content: "";
+    background: currentColor;
+    width: 20px;
+    height: 20px;
+
+    @media (min-width: $desktop-width) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.button--simple-with-icon_location .button__inner::before {
+  mask: url("../img/icons.svg#location");
+}
+
 .button--solid-primary {
   position: relative;
   padding: 0 15px;
@@ -144,6 +177,36 @@
   }
 }
 
+.button--solid-brand {
+  position: relative;
+  padding: 0 15px;
+  border: 1px solid var(--background-additional-color);
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--brand-color);
+  background: linear-gradient(var(--background-additional-color), var(--background-additional-color)) no-repeat bottom center / 100% 100%;
+  background-origin: border-box;
+
+  &:hover {
+    background-size: 100% 0;
+  }
+
+  &:active {
+    color: var(--text-weak-color);
+    background-size: 100% 0;
+    transition-duration: $duration-xs;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+  }
+
+  .button__text {
+    padding: 15px 0;
+  }
+}
+
 .button--solid-secondary {
   position: relative;
   padding: 0 15px;
@@ -164,6 +227,53 @@
     color: var(--brand-color);
     background-size: 100% 100%;
     transition-duration: $duration-xs;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+  }
+
+  .button__text {
+    padding: 15px 0;
+  }
+}
+
+.button--solid-primary-secondary {
+  position: relative;
+  padding: 0 15px;
+  border: 1px solid var(--background-dark-color);
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--text-light-color);
+  background: linear-gradient(var(--background-dark-color), var(--background-dark-color)) no-repeat bottom center / 100% 100%;
+  background-origin: border-box;
+
+  &:hover {
+    color: var(--text-color);
+    background-size: 100% 0;
+  }
+
+  &:active {
+    color: var(--brand-color);
+    background-size: 100% 0;
+    transition-duration: $duration-xs;
+  }
+
+  @media (min-width: $laptop-width) {
+    color: var(--text-color);
+    background-size: 100% 0;
+
+    &:hover {
+      color: var(--text-light-color);
+      background-size: 100% 100%;
+    }
+
+    &:active {
+      color: var(--brand-color);
+      background-size: 100% 100%;
+      transition-duration: $duration-xs;
+    }
   }
 
   @media (min-width: $desktop-width) {

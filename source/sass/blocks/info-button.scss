@@ -1,0 +1,24 @@
+.info-button {
+  display: block;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 19px;
+    aspect-ratio: 1 / 1;
+    background: var(--brand-color);
+    mask: url("../img/icons.svg#info-fancy");
+
+    @media (min-width: $laptop-width) {
+      width: 17px;
+    }
+
+    @media (min-width: $desktop-width) {
+      width: 19px;
+    }
+  }
+}

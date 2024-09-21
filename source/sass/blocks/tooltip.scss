@@ -1,25 +1,37 @@
-.tooltip__button {
-  display: block;
-  padding: 0;
-  border: none;
-  background: transparent;
-  cursor: pointer;
+// .tooltip__button {
+//   display: block;
+//   padding: 0;
+//   border: none;
+//   background: transparent;
+//   cursor: pointer;
 
-  &::after {
-    content: "";
-    display: block;
-    width: 24px;
-    aspect-ratio: 1 / 1;
-    background: var(--brand-color);
-    mask: url("../img/icons.svg#info-fancy");
+//   &::after {
+//     content: "";
+//     display: block;
+//     width: 24px;
+//     aspect-ratio: 1 / 1;
+//     background: var(--brand-color);
+//     mask: url("../img/icons.svg#info-fancy");
 
-    @media (min-width: $laptop-width) {
-      width: 36px;
-    }
+//     @media (min-width: $laptop-width) {
+//       width: 36px;
+//     }
 
-    @media (min-width: $desktop-width) {
-      width: 40px;
-    }
+//     @media (min-width: $desktop-width) {
+//       width: 40px;
+//     }
+//   }
+// }
+
+.tooltip__button.tooltip__button::after {
+  width: 24px;
+
+  @media (min-width: $laptop-width) {
+    width: 36px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 40px;
   }
 }
 
