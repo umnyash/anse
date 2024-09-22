@@ -554,6 +554,24 @@ function initCatalogSorting(sortingElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * checkout-products-slider.js
+ */
+function initCheckoutProductsSlider(sliderElement) {
+  new Swiper(sliderElement, {
+    slidesPerView: 'auto',
+    spaceBetween: 10,
+    grabCursor: true,
+    breakpoints: {
+      1280: {
+        slidesPerView: 'auto',
+        spaceBetween: 5
+      }
+    }
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * consumers-photos-slider.js
  */
 function initConsumersPhotosSlider(sliderWrapperElement) {
@@ -1341,6 +1359,7 @@ document.querySelectorAll('.cart__form, .product__cart').forEach(initProductsCou
 document.querySelectorAll('.catalog__sorting').forEach(initCatalogSorting);
 document.querySelectorAll('.catalog').forEach(initCatalogFilter);
 document.querySelectorAll('.select').forEach(initSelect);
+document.querySelectorAll('.checkout-order__products').forEach(initCheckoutProductsSlider);
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {
