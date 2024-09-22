@@ -1,0 +1,13 @@
+.radio-button__label {
+  display: block;
+  padding: 14px 20px;
+  border: 2px solid var(--border-light-color-4);
+  border-radius: 8px;
+  font: 400 16px/19px $main-font-family;
+  transition: border-color $duration-xs ease-in-out;
+  cursor: pointer;
+}
+
+.radio-button__control:checked + .radio-button__label {
+  border-color: var(--brand-color);
+}

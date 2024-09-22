@@ -1,0 +1,93 @@
+mixin checkout-form
+  form.checkout-form(action='https://fakestoreapi.com/products' method='post' target='_blank')&attributes(attributes)
+    fieldset.checkout-form__section.checkout-form__section--delivery
+      .checkout-form__section-header
+        legend.checkout-form__section-heading Способ доставки
+      .checkout-form__region
+        +text-field({
+          type: 'text',
+          name: 'region',
+          label: {
+            text: 'Выберите Ваш регион',
+          },
+          placeholder: 'Выберите регион',
+          readonly: true
+        })(class='checkout-form__region-field text-field--button')
+      .checkout-form__delivery-company
+        p.checkout-form__field-label.field-label Выберите компанию доставки
+        ul.checkout-form__delivery-company-list
+          li.checkout-form__delivery-company-item
+            +radio-button({ name: 'delivery-company', value: 'sdek', label: 'СДЭК' })
+          li.checkout-form__delivery-company-item
+            +radio-button({ name: 'delivery-company', value: 'russian-post', label: 'Почта России' })
+          li.checkout-form__delivery-company-item
+            +radio-button({ name: 'delivery-company', value: 'self-pickup', label: 'Самовывоз' })
+      .checkout-form__delivery-method
+        p.checkout-form__field-label.field-label Выберите способ доставки
+        +delivery-methods(class='checkout-form__delivery-methods')
+      .checkout-form__self-pickup
+        p.checkout-form__self-pickup-heading Магазин ANSE в Санкт-Петербурге
+        p.checkout-form__self-pickup-text ул. Рылеева, д.21#[br] 6 мин. пешком от ст. м. Чернышевская
+        +button({
+          tag: 'a',
+          text: 'Показать на карте',
+          href: 'https://yandex.ru/maps/-/CDwEMP6C',
+          target: '_blank',
+          rel: 'nofollow noopener'
+        })(class='checkout-form__self-pickup-link button--simple-primary')
+        p.checkout-form__self-pickup-heading График работы
+        p.checkout-form__self-pickup-text Ежедневно, с 11:00 до 20:00
+    fieldset.checkout-form__section.checkout-form__section--user
+      .checkout-form__section-header
+        legend.checkout-form__section-heading Личные данные
+      +text-field({
+        type: 'text',
+        name: 'name',
+        label: {
+          text: 'ФИО',
+          hidden: 'true'
+        },
+        placeholder: 'ФИО'
+      })(class='checkout-form__name-field')
+      +text-field({
+        type: 'email',
+        name: 'email',
+        label: {
+          text: 'Email:',
+          hidden: 'true'
+        },
+        placeholder: 'Email*',
+        required: true
+      })(class='checkout-form__email-field')
+      +text-field({
+        type: 'tel',
+        name: 'phone',
+        label: {
+          text: 'Телефон:',
+          hidden: 'true'
+        },
+        placeholder: 'Телефон*',
+        required: true
+      })(class='checkout-form__phone-field')
+      +text-field({
+        type: 'number',
+        name: 'postal-code',
+        label: {
+          text: 'Индекс:',
+          hidden: 'true'
+        },
+        placeholder: 'Индекс'
+      })(class='checkout-form__phone-field')
+      +text-area({
+        name: 'commment',
+        label: {
+          text: 'Комментарий',
+          hidden: 'true'
+        },
+        placeholder: 'Комментарий к заказу',
+      })
+    fieldset.checkout-form__section.checkout-form__section--payment
+      .checkout-form__section-header
+        legend.checkout-form__section-heading Оплата
+      +payment-methods
+    +checkout-order(class='checkout-form__order')

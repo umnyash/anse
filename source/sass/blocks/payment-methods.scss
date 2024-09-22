@@ -1,0 +1,63 @@
+.payment-methods__list {
+  display: grid;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  row-gap: 20px;
+}
+
+.payment-methods__label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  align-items: center;
+  font: 400 16px/19px $main-font-family;
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  &::before {
+    content: "";
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 5px solid var(--background-additional-color);
+    background: var(--background-additional-color);
+  }
+}
+
+.payment-methods__info {
+  padding: 0 0 0 30px;
+}
+
+.payment-methods__control ~ .payment-methods__info .payment-systems {
+  margin-top: 10px;
+
+  .payment-systems__offer {
+    margin-top: 7px;
+  }
+}
+
+.payment-methods__control ~ .payment-methods__info .installments {
+  margin-top: 16px;
+}
+
+
+////////////
+.payment-methods__control:checked + .payment-methods__label::before {
+  background: var(--background-dark-color);
+}
+
+.payment-methods__control:not(:checked) {
+  & ~ .payment-methods__info .payment-systems__offer {
+    display: none;
+  }
+
+  & ~ .payment-methods__info .installments__text,
+  & ~ .payment-methods__info .installments__list {
+    display: none;
+  }
+}

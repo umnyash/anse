@@ -1,0 +1,75 @@
+.installments {
+  font: 400 16px/19px $main-font-family;
+  color: var(--text-weak-color);
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 16px;
+    margin-left: 5px;
+    background: #000000;
+    mask: url("../img/icons.svg#parts-with-text");
+  }
+}
+
+.installments__text {
+  margin: 14px 0 20px;
+  padding-right: 2px;
+}
+
+.installments__list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  @media (min-width: $tablet-width) {
+    column-gap: 48px;
+  }
+}
+
+.installments__item {
+  position: relative;
+  padding: 0 0 7px;
+  text-align: center;
+
+  @media (min-width: $wide-mobile-width) {
+    min-width: 77px;
+  }
+
+  @media (min-width: $tablet-width) {
+    min-width: 80px;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    border-radius: 100px;
+    background: var(--border-color);
+  }
+
+  &--active {
+    color: var(--text-color);
+
+    &::after {
+      background: var(--text-color);
+    }
+  }
+}
+
+.installments__item-date {
+  margin: 0 0 5px;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.installments__item-price {
+  margin: 0;
+}

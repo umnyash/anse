@@ -1,14 +1,9 @@
 mixin checkout
-  .press&attributes(attributes)
-    .press__header
+  .checkout&attributes(attributes)
+    header.checkout__header&attributes(attributes)
       .container
-        .press__header-inner
-          .press__breadcrumbs
-            +breadcrumbs-list({ links: [
-              {
-                text: 'Пресса о нас'
-              }
-            ]})
-          h1.press__heading.heading.heading--size_l Пресса о нас
-    .press__inner.container
-      .press__list-wrapper
+        .checkout__header-inner
+          h1.checkout__heading.heading.heading--size_l.heading--alter Оформление заказа
+          a.checkout__back-button(href='cart.html') Назад в корзину
+    .checkout__inner
+      +checkout-form

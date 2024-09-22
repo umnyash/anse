@@ -1,0 +1,16 @@
+mixin installments
+  .installments&attributes(attributes)
+    p.installments__text Сумма разделится на 4 равных платежа - без процентов и комиссий, как обычная оплата картой. Нажмите кнопку “Оплатить”, чтобы сделать заказ. После этого вы перейдете на страницу сервиса “Долями” и сможете оформить платеж.
+    ol.installments__list
+      li.installments__item.installments__item--active
+        p.installments__item-date Сегодня
+        p.installments__item-price 5 380 ₽
+      li.installments__item
+        p.installments__item-date 31 июля
+        p.installments__item-price 5 380 ₽
+      li.installments__item
+        p.installments__item-date 14 августа
+        p.installments__item-price 5 380 ₽
+      li.installments__item
+        p.installments__item-date 28 августа
+        p.installments__item-price 5 380 ₽

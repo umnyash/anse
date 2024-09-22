@@ -1,0 +1,247 @@
+.checkout-order {
+  background: var(--background-color);
+  padding: 0 10px 20px;
+  border-radius: 12px;
+  font: 400 14px/17px $main-font-family;
+  overflow: hidden;
+
+  @media (min-width: $tablet-width) {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  @media (min-width: $laptop-width) {
+    padding: 0 12px 12px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding: 0 20px 20px;
+  }
+}
+
+.checkout-order__folds {
+  margin-right: -10px;
+
+  @media (min-width: $tablet-width) {
+    margin-right: -20px;
+  }
+
+  @media (min-width: $laptop-width) {
+    margin-right: -12px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-right: -20px;
+  }
+}
+
+.checkout-order__fold.folds__item.folds__item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-light-color);
+  border-radius: 0;
+
+  @media (min-width: $laptop-width) {
+    padding-top: 12px;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding-top: 20px;
+  }
+
+  .folds__item-header {
+    padding-right: 10px;
+
+    @media (min-width: $tablet-width) {
+      padding-right: 20px;
+    }
+
+    @media (min-width: $laptop-width) {
+      padding-right: 12px;
+    }
+
+    @media (min-width: $desktop-width) {
+      padding-right: 20px;
+    }
+  }
+
+  .folds__item-header::after {
+    width: 14px;
+    height: 14px;
+
+    @media (min-width: $laptop-width) {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.checkout-order__heading {
+  margin: 0;
+  font: 500 20px/24px $additional-font-family;
+
+  @media (min-width: $laptop-width) {
+    font-family: $main-font-family;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 28px;
+  }
+}
+
+.checkout-order__products {
+  box-sizing: border-box;
+  padding-right: 10px;
+  margin: 20px 0 0;
+
+  @media (min-width: $tablet-width) {
+    padding-right: 20px;
+  }
+
+  @media (min-width: $laptop-width) {
+    padding-right: 12px;
+  }
+
+  @media (min-width: $desktop-width) {
+    padding-right: 20px;
+  }
+}
+
+.checkout-order__products-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.checkout-order__products-item {
+  width: 72px;
+}
+
+.checkout-order__products-item-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+
+  &[href]:hover .checkout-order__products-item-title {
+    color: var(--brand-color);
+  }
+}
+
+.checkout-order__products-item-image-wrapper {
+  width: 100%;
+  height: 91px;
+}
+
+.checkout-order__products-item-title {
+  max-width: 100%;
+  margin: 5px 0 0;
+  font-size: 10px;
+  line-height: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: color $duration-m ease-in-out;
+}
+
+.checkout-order__list {
+  display: grid;
+  margin: 20px 0 0;
+  grid-template-columns: auto auto;
+  gap: 10px 20px;
+  justify-content: space-between;
+  color: var(--text-weak-color);
+}
+
+.checkout-order__list-value {
+  margin: 0;
+  text-align: right;
+  color: var(--text-color);
+
+  &--accent {
+    color: var(--accent-color);
+  }
+}
+
+.checkout-order__list-key--total {
+  color: var(--text-color);
+}
+
+.checkout-order__total {
+  display: flex;
+  margin: 40px 0 20px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  line-height: 22px;
+
+  @media (min-width: $desktop-width) {
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
+
+.checkout-order__total-text {
+  margin: 0;
+}
+
+.checkout-order__total-price {
+  margin: 0;
+  font-weight: 500;
+}
+
+.checkout-order__button {
+  width: 100%;
+  margin: 0 0 14px;
+
+  @media (min-width: $laptop-width) {
+    margin-bottom: 20px;
+  }
+}
+
+.checkout-order__comment {
+  display: block;
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--text-weak-color);
+
+  @media (min-width: 420px) and (max-width: ($wide-tablet-width - 1)) {
+    max-width: none;
+    text-align: left;
+  }
+
+  @media (min-width: $laptop-width) {
+    line-height: 17px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 14px;
+  }
+}
+
+.checkout-order__comment-link {
+  font-weight: 500;
+  text-decoration-style: dashed;
+  text-decoration-color: transparent;
+  text-decoration-skip-ink: none;
+  color: var(--brand-color);
+  transition-property: color, text-decoration-color;
+  transition-duration: $duration-m;
+  transition-timing-function: ease-in-out;
+
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+
+  &:active {
+    color: inherit;
+    text-decoration-color: currentColor;
+    transition-timing-function: ease-in;
+  }
+}

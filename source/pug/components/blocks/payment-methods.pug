@@ -1,0 +1,13 @@
+mixin payment-methods
+  .payment-methods&attributes(attributes)
+    ul.payment-methods__list
+      li.payment-methods__item
+        input.payment-methods__control.visually-hidden(id='bank-card-payment-method-control' type='radio' name='payment-method' value='bank-card')
+        label.payment-methods__label(for='bank-card-payment-method-control') Банковской картой
+        .payment-methods__info
+          +payment-systems
+      li.payment-methods__item
+        input.payment-methods__control.visually-hidden(id='installments-payment-method-control' type='radio' name='payment-method' value='installments')
+        label.payment-methods__label(for='installments-payment-method-control') Долями - оплата покупок частями
+        .payment-methods__info
+          +installments

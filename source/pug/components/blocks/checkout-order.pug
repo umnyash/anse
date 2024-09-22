@@ -1,0 +1,37 @@
+mixin checkout-order
+  section.checkout-order&attributes(attributes)
+    .checkout-order__folds.folds.folds--small
+      .checkout-order__fold.folds__item
+        .folds__item-header
+          h2.checkout-order__heading
+            button.folds__button(type='button' aria-expanded='true') Ваш заказ
+        .folds__item-content-wrapper
+          .folds__item-content
+            .checkout-order__products.swiper
+              ul.checkout-order__products-list.swiper-wrapper
+                each i in [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]
+                  li.checkout-order__products-item.swiper-slide
+                    a.checkout-order__products-item-link(href='product.html')
+                      picture.checkout-order__products-item-image-wrapper.media.media--cover.media--position_top
+                        img.media__image(src=`img/products/product-${i}.webp` width='72' height='91' alt='' loading='lazy')
+                      p.checkout-order__products-item-title Шуба SETTE BLACK
+    dl.checkout-order__list
+      dt.checkout-order__list-key Товары 2 шт.
+      dd.checkout-order__list-value 64 800 ₽
+      dt.checkout-order__list-key Скидка
+      dd.checkout-order__list-value.checkout-order__list-value--accent - 6 000 ₽
+      dt.checkout-order__list-key Промокод
+      dd.checkout-order__list-value.checkout-order__list-value--accent Промокод
+      dt.checkout-order__list-key Доставка
+      dd.checkout-order__list-value 699 ₽
+      dt.checkout-order__list-key.checkout-order__list-key--total Итого
+      dd.checkout-order__list-value 50 350 ₽
+    .checkout-order__total
+      p.checkout-order__total-text К оплате
+      p.checkout-order__total-price 50 350 ₽
+    +button({
+      tag: 'button',
+      type: 'submit',
+      text: 'Оплатить'
+    })(class='checkout-order__button button--solid-primary')
+    small.checkout-order__comment Нажимая кнопку, я соглашаюсь с #[a.checkout-order__comment-link(href='privacy-policy.html' target='_blank') Политикой конфиденциальности] и #[a.checkout-order__comment-link(href='#' target='_blank') Условиями продажи товаров]

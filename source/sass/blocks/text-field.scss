@@ -42,3 +42,19 @@
     color: var(--text-weak-color);
   }
 }
+
+
+/* stylelint-disable */
+.text-field--button {
+
+  .text-field__control-wrapper,
+  .text-field__control {
+    cursor: pointer;
+  }
+
+  .text-field__control::placeholder {
+    color: var(--text-color);
+  }
+}
+
+/* stylelint-enable */
