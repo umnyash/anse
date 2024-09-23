@@ -1,0 +1,17 @@
+mixin order
+  article.order&attributes(attributes)
+    .order__inner
+      header.order__header
+        h1.order__heading.heading.heading--size_l Спасибо за заказ!
+        p.order__header-text №123453634
+        p.order__header-text.order__header-text--heart Теперь дело за нами
+      ol.order__list
+        li.order__list-item Передаём Ваш заказ на производство
+          span.order-list-item-icon.order-list-item-icon--flag
+        li.order__list-item Собираем и упаковываем
+          span.order__list-item-accent (3-5 рабочих дней)
+            +info-button({ text: 'Информация' })(class='order__list-item-info-button')
+          span.order-list-item-icon.order-list-item-icon--box
+        li.order__list-item Отправляем Вам
+          span.order-list-item-icon.order-list-item-icon--truck
+      +checkout-order({ isReceipt: true })(class='order__receipt')

@@ -1,0 +1,17 @@
+extends layout/layout
+
+block variables
+  - var title = 'Спасибо за заказ | Anse'
+  - var page = 'checkout-success'
+
+block content
+  +placeholder({
+    heading: 'Оплата не прошла',
+    text: 'Что-то пошло не так - попробуйте снова',
+    link: {
+      text: 'Оплатить',
+      href: '#'
+    }
+  })(class='placeholder--alter')
+  +consultant-contacts
+  +info

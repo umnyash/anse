@@ -1,15 +1,15 @@
-mixin checkout-order
-  section.checkout-order&attributes(attributes)
+mixin checkout-order({ isReceipt } = {})
+  section.checkout-order(class= isReceipt && 'checkout-order--receipt')&attributes(attributes)
     .checkout-order__folds.folds.folds--small
-      .checkout-order__fold.folds__item
+      .checkout-order__fold.folds__item.folds__item--open
         .folds__item-header
           h2.checkout-order__heading
-            button.folds__button(type='button' aria-expanded='true') Ваш заказ
+            button.folds__button(type='button' aria-expanded='true')= isReceipt ? 'Ваш чек' : 'Ваш заказ'
         .folds__item-content-wrapper
           .folds__item-content
             .checkout-order__products.swiper
               ul.checkout-order__products-list.swiper-wrapper
-                each i in [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]
+                each i in [1, 2, 3, 4, 1, 2, 3, 4]
                   li.checkout-order__products-item.swiper-slide
                     a.checkout-order__products-item-link(href='product.html')
                       picture.checkout-order__products-item-image-wrapper.media.media--cover.media--position_top
@@ -27,11 +27,19 @@ mixin checkout-order
       dt.checkout-order__list-key.checkout-order__list-key--total Итого
       dd.checkout-order__list-value 50 350 ₽
     .checkout-order__total
-      p.checkout-order__total-text К оплате
+      p.checkout-order__total-text= isReceipt ? 'Оплачено' : 'К оплате'
       p.checkout-order__total-price 50 350 ₽
-    +button({
-      tag: 'button',
-      type: 'submit',
-      text: 'Оплатить'
-    })(class='checkout-order__button button--solid-primary')
-    small.checkout-order__comment Нажимая кнопку, я соглашаюсь с #[a.checkout-order__comment-link(href='privacy-policy.html' target='_blank') Политикой конфиденциальности] и #[a.checkout-order__comment-link(href='#' target='_blank') Условиями продажи товаров]
+    if isReceipt
+      +button({
+        tag: 'a',
+        href: 'catalog.html',
+        text: 'Продолжить покупки'
+      })(class='checkout-order__button button--solid-primary')
+    else
+      +button({
+        tag: 'button',
+        type: 'submit',
+        text: 'Оплатить'
+      })(class='checkout-order__button button--solid-primary')
+    if !isReceipt
+      small.checkout-order__comment Нажимая кнопку, я соглашаюсь с #[a.checkout-order__comment-link(href='privacy-policy.html' target='_blank') Политикой конфиденциальности] и #[a.checkout-order__comment-link(href='#' target='_blank') Условиями продажи товаров]

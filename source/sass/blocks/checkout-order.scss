@@ -1,8 +1,9 @@
 .checkout-order {
-  background: var(--background-color);
+  box-sizing: border-box;
   padding: 0 10px 20px;
   border-radius: 12px;
   font: 400 14px/17px $main-font-family;
+  background: var(--background-color);
   overflow: hidden;
 
   @media (min-width: $tablet-width) {
@@ -195,17 +196,12 @@
 
 .checkout-order__button {
   width: 100%;
-  margin: 0 0 14px;
-
-  @media (min-width: $laptop-width) {
-    margin-bottom: 20px;
-  }
 }
 
 .checkout-order__comment {
   display: block;
   max-width: 300px;
-  margin: 0 auto;
+  margin: 14px 0 auto;
   text-align: center;
   font-size: 12px;
   line-height: 14px;
@@ -217,6 +213,7 @@
   }
 
   @media (min-width: $laptop-width) {
+    margin-top: 20px;
     line-height: 17px;
   }
 
@@ -244,4 +241,32 @@
     text-decoration-color: currentColor;
     transition-timing-function: ease-in;
   }
+}
+
+.checkout-order--receipt {
+  padding-bottom: 0;
+
+  @media (min-width: $tablet-width) {
+    background: var(--background-additional-color);
+    padding-bottom: 20px;
+  }
+
+  @media (min-width: $laptop-width) {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .checkout-order__fold.folds__item.folds__item {
+    @media (min-width: $tablet-width) {
+      background: var(--background-additional-color);
+    }
+
+    @media (min-width: $laptop-width) {
+      padding-top: 20px;
+    }
+  }
+
+  // .checkout-order__fold {
+  //   padding-top: 0;
+  // }
 }

@@ -49,3 +49,50 @@
     min-width: 308px;
   }
 }
+
+.placeholder--alter {
+  font-size: 16px;
+  line-height: 1;
+
+  @media (min-width: $laptop-width) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .placeholder__heading {
+    max-width: 880px;
+    margin-bottom: 10px;
+    font-size: 28px;
+    line-height: 1;
+
+    @media (min-width: $laptop-width) {
+      margin-bottom: 12px;
+      font-size: 44px;
+      line-height: 44px;
+      font-weight: 300;
+    }
+
+    @media (min-width: $desktop-width) {
+      margin-bottom: 28px;
+      font-size: 58px;
+    }
+  }
+
+  .placeholder__text {
+    max-width: 880px;
+    color: var(--text-weak-color);
+
+    @media (min-width: $laptop-width) {
+      margin-bottom: 30px;
+    }
+
+    @media (min-width: $desktop-width) {
+      margin-bottom: 44px;
+    }
+  }
+}
