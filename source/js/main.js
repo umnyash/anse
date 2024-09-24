@@ -32,6 +32,12 @@ document.querySelectorAll('.catalog').forEach(initCatalogFilter);
 document.querySelectorAll('.select').forEach(initSelect);
 document.querySelectorAll('.checkout-order__products').forEach(initCheckoutProductsSlider);
 
+let subscriptionForm = null;
+let subscriptionFormElement = document.querySelector('.subscription-form');
+if (subscriptionFormElement) {
+  subscriptionForm = new Form(subscriptionFormElement);
+}
+
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {

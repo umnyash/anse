@@ -37,9 +37,7 @@
 .subscription-form__field-control-wrapper {
   display: block;
   border-bottom: 1px solid var(--border-light-color-2);
-  // transition-property: border-color, box-shadow;
-  // transition-duration: $little-interaction-duration;
-  // transition-timing-function: $little-interaction-timing-function;
+  transition: border-color $duration-m ease-in-out;
 
   &:hover {
     border-color: currentColor;

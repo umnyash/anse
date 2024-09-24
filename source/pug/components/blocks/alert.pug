@@ -1,0 +1,8 @@
+mixin alert({ heading, button })
+  section.alert&attributes(attributes)
+    h2.alert__heading= heading
+    +button({
+      tag: 'button',
+      type: 'button',
+      text: button.text
+    })(class='alert__button button--solid-primary')

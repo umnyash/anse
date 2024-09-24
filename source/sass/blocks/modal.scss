@@ -18,7 +18,7 @@
   visibility: hidden;
   transition-property: background-color, visibility;
   transition-timing-function: ease-in-out;
-  transition-duration: $duration-l;
+  transition-duration: $duration-m;
   z-index: 10;
 
   &::backdrop {
@@ -43,7 +43,7 @@
   z-index: 0;
   box-sizing: border-box;
   width: 100%;
-  transition: transform $duration-l ease-in-out;
+  transition: transform $duration-m ease-in-out;
 }
 
 .modal__button {
@@ -160,7 +160,7 @@
       opacity: 0;
       transform: scale(0.8);
       transition-property: opacity, transform;
-      transition-duration: calc($duration-l / 1.5);
+      transition-duration: calc($duration-m / 1.5);
     }
   }
 
@@ -197,7 +197,7 @@
       opacity: 0;
       transform: scale(0.8);
       transition-property: opacity, transform;
-      transition-duration: calc($duration-l / 1.5);
+      transition-duration: calc($duration-m / 1.5);
     }
   }
 
@@ -237,7 +237,7 @@
       opacity: 0;
       transform: scale(0.8);
       transition-property: opacity, transform;
-      transition-duration: calc($duration-l / 1.5);
+      transition-duration: calc($duration-m / 1.5);
     }
   }
 
@@ -275,6 +275,16 @@
   }
 }
 
+.modal--with_alert {
+  .modal__inner {
+    padding: 20px;
+
+    @media (min-width: $wide-tablet-width) {
+      max-width: 500px;
+    }
+  }
+}
+
 // .modal--position_cover {
 //   .modal__inner {
 //     transform: translateY(-100%);
@@ -283,7 +293,7 @@
 //       opacity: 0;
 //       transform: scale(0.9);
 //       transition-property: opacity, transform;
-//       transition-duration: calc($duration-l / 1.5);
+//       transition-duration: calc($duration-m / 1.5);
 //     }
 //   }
 
@@ -341,7 +351,7 @@
     margin: auto;
     opacity: 0;
     transition-property: opacity;
-    transition-duration: calc($duration-l / 1.5);
+    transition-duration: calc($duration-m / 1.5);
 
     @media (min-width: $tablet-width) {
       width: auto;
@@ -416,7 +426,7 @@
 .modal[open] {
   background-color: var(--overlay-color);
   visibility: visible;
-  transition-duration: calc($duration-l / 1.5);
+  transition-duration: calc($duration-m / 1.5);
 
   .modal__inner {
     opacity: 1;
@@ -439,7 +449,7 @@
     opacity: 0;
     transform: scale(0.8);
     transition-property: opacity, transform;
-    transition-duration: calc($duration-l / 1.5);
+    transition-duration: calc($duration-m / 1.5);
   }
 
   .modal__gallery {
