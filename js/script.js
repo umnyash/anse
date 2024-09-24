@@ -4,8 +4,12 @@
  * const.js
  */
 const LAPTOP_WIDTH_MEDIA_QUERY = '(min-width: 1280px)';
-const MODAL_ANIMATION_DURATION = 500; // Соответствует $duration-l в variables.scss
+const MODAL_ANIMATION_DURATION = 400; // Соответствует $duration-m в variables.scss
 
+const FormEvents = {
+  SUBMIT_START: 'formSubmitStart',
+  SUBMIT_END: 'formSubmitEnd'
+};
 const KeyCode = Object.freeze({
   LEFT_ARROW: 'ArrowLeft',
   RIGHT_ARROW: 'ArrowRight',
@@ -1172,6 +1176,21 @@ function initShopSlider(sliderWrapperElement) {
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
+function showAlert(_ref5) {
+  let {
+    heading,
+    button = {},
+    icon
+  } = _ref5;
+  const alert = new Alert({
+    heading,
+    button,
+    icon
+  });
+  requestAnimationFrame(() => alert.open());
+  return alert;
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * simple-filter-slider.js
  */
@@ -1361,6 +1380,11 @@ document.querySelectorAll('.catalog__sorting').forEach(initCatalogSorting);
 document.querySelectorAll('.catalog').forEach(initCatalogFilter);
 document.querySelectorAll('.select').forEach(initSelect);
 document.querySelectorAll('.checkout-order__products').forEach(initCheckoutProductsSlider);
+let subscriptionForm = null;
+let subscriptionFormElement = document.querySelector('.subscription-form');
+if (subscriptionFormElement) {
+  subscriptionForm = new Form(subscriptionFormElement);
+}
 let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {
