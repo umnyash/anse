@@ -28,7 +28,9 @@ document.querySelectorAll('[data-modal="manager-contacts"]').forEach((modalEleme
 document.querySelectorAll('.set').forEach(initSet);
 document.querySelectorAll('.cart__form, .product__cart').forEach(initProductsCounters);
 document.querySelectorAll('.catalog__sorting').forEach(initCatalogSorting);
-document.querySelectorAll('.catalog').forEach(initCatalogFilter);
+document.querySelectorAll('.catalog').forEach((catalogElement) => {
+  initCatalogFilter(catalogElement, simpleBar.getScrollElement());
+});
 document.querySelectorAll('.select').forEach(initSelect);
 document.querySelectorAll('.checkout-order__products').forEach(initCheckoutProductsSlider);
 

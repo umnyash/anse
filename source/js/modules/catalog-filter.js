@@ -1,7 +1,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * catalog-sorting.js
  */
-function initCatalogFilter(catalogElement) {
+function initCatalogFilter(catalogElement, pageScrollWrapperElement) {
   const filterToggleButtonElement = catalogElement.querySelector('.catalog__filter-button');
   const filterWrapperElement = catalogElement.querySelector('.catalog__filter-wrapper');
   const catalogHeaderElement = catalogElement.querySelector('.catalog__header');
@@ -9,6 +9,12 @@ function initCatalogFilter(catalogElement) {
   const catalogBodyElement = catalogElement.querySelector('.catalog__body');
   const checkerElements = filterWrapperElement.querySelectorAll('.checker__control');
   const clearButtonElement = filterWrapperElement.querySelector('.catalog-filter__clear-button');
+
+  const onPageScroll = () => {
+    if (catalogElement.classList.contains('catalog--filter-open')) {
+      setFilterHeight();
+    }
+  }
 
   const clearFilter = () => {
     checkerElements.forEach((checkerElement) => {
@@ -18,7 +24,7 @@ function initCatalogFilter(catalogElement) {
   };
 
   const setFilterHeight = () => {
-    filterWrapperElement.style.height = `${document.documentElement.clientHeight - catalogHeaderElement.getBoundingClientRect().bottom}px`;
+    filterWrapperElement.style.height = `${Math.min(document.documentElement.clientHeight, document.documentElement.clientHeight - catalogHeaderElement.getBoundingClientRect().bottom)}px`;
   };
 
   const onWindowResize = () => {
@@ -28,7 +34,6 @@ function initCatalogFilter(catalogElement) {
   };
 
   function openFilter() {
-    lockPageScroll();
     setFilterHeight();
     catalogElement.classList.add('catalog--filter-open');
     catalogBodyElement.addEventListener('click', onCatalogBodyClick);
@@ -36,7 +41,6 @@ function initCatalogFilter(catalogElement) {
 
   function closeFilter() {
     catalogElement.classList.remove('catalog--filter-open');
-    unlockPageScroll();
     catalogBodyElement.removeEventListener('click', onCatalogBodyClick);
   };
 
@@ -58,17 +62,15 @@ function initCatalogFilter(catalogElement) {
     closeFilter();
   });
 
-  window.addEventListener('resize', throttleAndDebounce(onWindowResize, 500));
+  window.addEventListener('resize', onWindowResize);
 
   new SimpleBar(catalogElement.querySelector('.catalog-filter__sections'), { autoHide: false });
-
-  laptopWidthMediaQueryList.addEventListener('change', () => {
-    closeFilter();
-  });
 
   clearButtonElement.addEventListener('click', () => {
     clearFilter();
   })
+
+  pageScrollWrapperElement.addEventListener('scroll', onPageScroll);
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * */

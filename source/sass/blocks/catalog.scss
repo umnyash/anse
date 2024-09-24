@@ -1,4 +1,4 @@
-.catalog {
+.catalog:not(.catalog--filter-open) {
   @media (min-width: $laptop-width) {
     position: relative;
     z-index: 0;
