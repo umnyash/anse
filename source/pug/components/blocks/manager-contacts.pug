@@ -1,0 +1,8 @@
+mixin manager-contacts
+  section.manager-contacts&attributes(attributes)
+    h2.manager-contacts__heading Связаться с менеджером
+    .manager-contacts__list-wrapper
+      +contacts-list({
+        items: ['whatsapp', 'telegram', 'email', 'phone'],
+        whatsApp: true
+      })(class='contacts-list--column contacts-list--bordered contacts-list--colored contacts-list--size_s')

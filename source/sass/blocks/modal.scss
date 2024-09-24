@@ -140,6 +140,48 @@
   display: none;
 }
 
+// Самый частый вариант: на мобильной внизу, а на десктопе по центру.
+.modal--default {
+  padding-top: 60px;
+
+  @media (min-width: $wide-tablet-width) {
+    padding: 36px;
+  }
+
+  .modal__inner {
+    margin: auto 0 0;
+    transform: translateY(100%);
+    border-radius: 12px 12px 0 0;
+    background: var(--background-color);
+
+    @media (min-width: $wide-tablet-width) {
+      margin: auto;
+      border-radius: 12px;
+      opacity: 0;
+      transform: scale(0.8);
+      transition-property: opacity, transform;
+      transition-duration: calc($duration-l / 1.5);
+    }
+  }
+
+  .modal__button--close {
+    right: 16px;
+    bottom: calc(100% + 16px);
+
+    @media (min-width: $wide-tablet-width) {
+      right: auto;
+      bottom: 100%;
+      left: 100%;
+    }
+  }
+
+  &[open] .modal__inner {
+    @media (min-width: $wide-tablet-width) {
+      transition-timing-function: ease-in;
+    }
+  }
+}
+
 
 // Политика конфиденциальности
 .modal--with_offer {
@@ -217,6 +259,21 @@
   }
 }
 
+.modal--with_manager-contacts {
+  .modal__inner {
+    padding: 20px 20px 25px;
+
+    @media (min-width: $wide-tablet-width) {
+      max-width: 556px;
+      padding: 30px 36px 36px;
+    }
+
+    @media (min-width: $desktop-width) {
+      max-width: 624px;
+      padding: 30px;
+    }
+  }
+}
 
 // .modal--position_cover {
 //   .modal__inner {

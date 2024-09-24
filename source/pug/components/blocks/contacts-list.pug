@@ -2,7 +2,7 @@ mixin contacts-list__icon({ icon, width, height })
   svg(width= width height=height aria-hidden='true')&attributes(attributes)
     use(href= icon)
 
-mixin contacts-list({ items } = {})
+mixin contacts-list({ items, whatsApp } = {})
   .contacts-list&attributes(attributes)
     ul.contacts-list__items
       each item in items
@@ -15,7 +15,7 @@ mixin contacts-list({ items } = {})
             when 'whatsapp'
               a.contacts-list__link.contacts-list__link--whatsapp(href='https://wa.me/79312252158' target='_blank' rel='noopener')
                 +contacts-list__icon({ icon: 'img/icons.svg#socials_whatsapp', width: 22, height: 22 })
-                span.contacts-list__text  Whats App
+                span.contacts-list__text= whatsApp ? 'WhatsApp' : 'Whats App'
             when 'telegram'
               a.contacts-list__link.contacts-list__link--telegram(href='https://t.me/my_anse' target='_blank' rel='noopener')
                 +contacts-list__icon({ icon: 'img/icons.svg#socials_telegram', width: 22, height: 19 })
@@ -24,3 +24,7 @@ mixin contacts-list({ items } = {})
               a.contacts-list__link.contacts-list__link--phone(href='tel:+78005006127')
                 +contacts-list__icon({ icon: 'img/icons.svg#phone', width: 22, height: 22 })
                 span.contacts-list__text 8 800 500 61 27
+            when 'email'
+              a.contacts-list__link.contacts-list__link--email(href='mailto:info@anse-shop.ru')
+                +contacts-list__icon({ icon: 'img/icons.svg#email', width: 22, height: 22 })
+                span.contacts-list__text info@anse-shop.ru

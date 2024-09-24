@@ -1,0 +1,17 @@
+.manager-contacts {
+  background: var(--background-color);
+}
+
+.manager-contacts__heading {
+  margin: 0 0 20px;
+  font: 400 24px/1 $main-font-family;
+
+  @media (min-width: $laptop-width) {
+    text-align: center;
+    font-size: 28px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 32px;
+  }
+}

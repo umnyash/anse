@@ -31,14 +31,14 @@ mixin order-card({ status, open })
               text: 'Оплатить заказ',
               href: '#'
             })(class='order-card__primary-button button--solid-primary')
+            +button({
+              tag: 'a',
+              text: 'Связаться с менеджером',
+              href: '#'
+            })(class='button--simple-secondary' data-modal-opener='manager-contacts')
           if status.modifier === 'cancelled'|| status.modifier === 'delivered'
             +button({
               tag: 'a',
               text: 'Оставить отзыв',
               href: '#'
-            })(class='order-card__primary-button button--solid-primary')
-          +button({
-            tag: 'a',
-            text: 'Связаться с менеджером',
-            href: '#'
-          })(class='button--simple-secondary')
+            })(class='order-card__primary-button button--solid-primary' data-modal-opener='manager-contacts')

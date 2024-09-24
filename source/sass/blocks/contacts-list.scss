@@ -1,5 +1,5 @@
 .contacts-list {
-  font: 400 16px/1 $main-font-family;
+  font: 400 16px/20px $main-font-family;
 
   @media (min-width: $laptop-width) {
     font-family: $additional-font-family;
@@ -22,7 +22,9 @@
   align-items: center;
   text-decoration: none;
   color: inherit;
-  transition: color $duration-m ease-in-out;
+  transition-property: border-color, color;
+  transition-duration: $duration-m;
+  transition-timing-function: ease-in-out;
 }
 
 .contacts-list__text {
@@ -40,7 +42,7 @@
     transform $duration-xs ease-in;
 }
 
-.contacts-list__link:hover {
+.contacts-list:not(.contacts-list--colored) .contacts-list__link:hover {
   color: var(--text-weak-color);
 
   svg {
@@ -123,6 +125,62 @@
     height: 24px;
   }
 }
+
+.contacts-list--colored {
+  .contacts-list__link--whatsapp svg {
+    fill: #2cb742;
+  }
+
+  .contacts-list__link--telegram svg {
+    fill: #24a1de;
+  }
+}
+
+.contacts-list--bordered {
+  font-family: $main-font-family;
+
+  .contacts-list__link {
+    padding: 13px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    justify-content: center;
+    font-weight: 500;
+
+    &:hover {
+      border-color: currentColor;
+    }
+  }
+}
+
+/* stylelint-disable */
+.contacts-list--size_s {
+
+  .contacts-list__link--whatsapp svg,
+  .contacts-list__link--whatsapp img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .contacts-list__link--telegram svg,
+  .contacts-list__link--telegram img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .contacts-list__link--email svg,
+  .contacts-list__link--email img {
+    width: 19px;
+    height: 19px;
+  }
+
+  .contacts-list__link--phone svg,
+  .contacts-list__link--phone img {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+/* stylelint-enable */
 
 .contacts-list--size_l {
   @media (min-width: $laptop-width) {
@@ -231,4 +289,9 @@
   @media (min-width: $desktop-width) {
     gap: 24px 48px;
   }
+}
+
+.contacts-list--column .contacts-list__items {
+  display: grid;
+  row-gap: 10px;
 }

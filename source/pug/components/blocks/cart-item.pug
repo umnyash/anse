@@ -18,7 +18,7 @@ mixin cart-item({ product, headingTag = 'h3' })
       .cart-item__details
         if !product.available
           .cart-item__status Нет в наличии
-          +button({ tag: 'a', text: 'Узнать о поступлении', href: '#' })(class='cart-item__request button--simple-primary button--simple-alter')
+          +button({ tag: 'a', text: 'Узнать о поступлении', href: '#' })(class='cart-item__request button--simple-primary button--simple-alter' data-modal-opener='manager-contacts')
         else
           .cart-item__counter-wrapper
             if product.isGift
