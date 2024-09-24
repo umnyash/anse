@@ -1,4 +1,6 @@
 .search-form {
+  color: var(--text-color);
+
   @media (min-width: $tablet-width) {
     display: grid;
     min-height: 50px;
