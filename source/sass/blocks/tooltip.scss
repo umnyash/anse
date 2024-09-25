@@ -1,27 +1,6 @@
-// .tooltip__button {
-//   display: block;
-//   padding: 0;
-//   border: none;
-//   background: transparent;
-//   cursor: pointer;
-
-//   &::after {
-//     content: "";
-//     display: block;
-//     width: 24px;
-//     aspect-ratio: 1 / 1;
-//     background: var(--brand-color);
-//     mask: url("../img/icons.svg#info-fancy");
-
-//     @media (min-width: $laptop-width) {
-//       width: 36px;
-//     }
-
-//     @media (min-width: $desktop-width) {
-//       width: 40px;
-//     }
-//   }
-// }
+.tooltip {
+  position: relative;
+}
 
 .tooltip__button.tooltip__button::after {
   width: 24px;
@@ -35,24 +14,11 @@
   }
 }
 
-.tooltip__content-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 3;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  background: var(--overlay-color);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition-property: opacity, visibility;
-  transition-duration: $duration-m;
-  transition-timing-function: ease-in-out;
-}
-
 .tooltip__content {
+  position: absolute;
+  top: -29px;
+  right: -29px;
+  z-index: 3;
   display: flex;
   box-sizing: border-box;
   width: 265px;
@@ -63,14 +29,25 @@
   text-align: center;
   font: 500 14px/17px $main-font-family;
   border-radius: 12px;
-  margin: auto;
   color: var(--text-color);
   background: var(--background-color);
+  box-shadow: 0 0 0 100000vmax var(--overlay-color);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition-property: opacity, visibility;
+  transition-duration: $duration-m;
+  transition-timing-function: ease-in-out;
+
+  @media (min-width: $wide-tablet-width) {
+    top: -24px;
+    right: auto;
+    left: -6px;
+  }
 
   @media (min-width: $laptop-width) {
     width: 420px;
     padding: 23px 22px;
-    margin: 63px auto auto;
     flex-direction: row;
     column-gap: 16px;
     text-align: left;
@@ -91,9 +68,24 @@
       width: 40px;
     }
   }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 100%;
+    width: 24px;
+    height: 24px;
+    background: var(--text-light-color);
+    mask: url("../img/icons.svg#controls_cross");
+
+    @media (min-width: $laptop-width) {
+      display: none;
+    }
+  }
 }
 
-.tooltip__button:hover + .tooltip__content-wrapper {
+.tooltip__button:hover + .tooltip__content {
   opacity: 1;
   visibility: visible;
 }

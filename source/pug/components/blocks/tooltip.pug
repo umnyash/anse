@@ -1,5 +1,6 @@
 mixin tooltip({ tooltipText })
   .tooltip&attributes(attributes)
     +info-button({ text: 'Иформация.' })(class='tooltip__button')
-    .tooltip__content-wrapper
-      .tooltip__content= tooltipText
+    //- .tooltip__content-wrapper
+    //-   .tooltip__content= tooltipText
+    .tooltip__content= tooltipText
