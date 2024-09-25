@@ -95,6 +95,620 @@ function getPaginationButtonCreator() {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
+ * api.js
+ */
+async function sendData(url, body) {
+  let onSuccess = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : () => {};
+  let onFail = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : () => {};
+  let onFinally = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : () => {};
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      body
+    });
+    if (!response.ok) {
+      const errorData = await response.text();
+      throw new Error(`${response.status} – ${response.statusText}: ${errorData}`);
+    }
+    const data = await response.json();
+    onSuccess(data);
+  } catch (err) {
+    console.error(err.message);
+    onFail();
+  } finally {
+    onFinally();
+  }
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+class PubSub {
+  constructor() {
+    this.listeners = {};
+  }
+  addListener(event, fn) {
+    if (!this.listeners[event]) {
+      this.listeners[event] = [];
+    }
+    this.listeners[event].push(fn);
+  }
+  removeListener(event, fn) {
+    if (!this.listeners[event]) {
+      return;
+    }
+    this.listeners[event] = this.listeners[event].filter(listener => listener !== fn);
+  }
+  emit(event, data) {
+    if (!this.listeners[event]) {
+      return;
+    }
+    this.listeners[event].forEach(listener => listener(data));
+  }
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * modal.js
+ */
+class Modal {
+  // static openModalsCount = 0;
+
+  constructor(modalElement) {
+    let {
+      onOpenerClick
+    } = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    this.modalElement = modalElement;
+    this.name = modalElement?.dataset.modal;
+    this.initOpeners();
+    this.modalElement.addEventListener('close', () => this.onModalClose());
+    this.onOpenerClick = onOpenerClick;
+    this.modalElement.addEventListener('click', evt => {
+      if (evt.target === this.modalElement || evt.target.closest('[data-modal-close-button]') || !evt.target.closest('.modal__inner')) {
+        evt.preventDefault();
+        this.close();
+      }
+    });
+    if (!document.body.contains(this.modalElement)) {
+      document.body.append(this.modalElement);
+    }
+  }
+  initOpeners = () => {
+    const openerElements = document.querySelectorAll(`[data-modal-opener="${this.name}"]`);
+    openerElements.forEach(openerElement => {
+      openerElement.addEventListener('click', evt => {
+        evt.preventDefault();
+        if (this.onOpenerClick) {
+          this.onOpenerClick(evt);
+        }
+        this.open();
+      });
+    });
+  };
+  open = () => {
+    this.modalElement.showModal();
+  };
+  close = () => {
+    this.modalElement.close();
+  };
+  onModalClose = () => {
+    setTimeout(() => {
+      if (this.modalElement.classList.contains('modal--with_alert')) {
+        this.modalElement.remove();
+        this.modalElement = null;
+      }
+    }, MODAL_ANIMATION_DURATION);
+  };
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * alert.js
+ */
+class Alert extends Modal {
+  constructor(_ref) {
+    let {
+      heading,
+      button,
+      icon
+    } = _ref;
+    const modalElement = Alert.createElement({
+      heading,
+      button,
+      icon
+    });
+    document.body.append(modalElement);
+    super(modalElement);
+    this.button = modalElement.querySelector('.alert__button');
+  }
+  static createElement(_ref2) {
+    let {
+      heading,
+      button,
+      icon
+    } = _ref2;
+    const modalString = `
+      <dialog class="modal modal--default modal--with_alert">
+        <div class="modal__inner">
+          <button class="modal__button modal__button--close" type="button" data-modal-close-button>
+            <span class="visually-hidden">Закрыть</span>
+          </button>
+          <section class="alert modal__alert ${icon && "alert--with-icon"}">
+            <h2 class="alert__heading">${heading}</h2>
+            <button class="alert__button button button--solid-primary ${button.classes || ''}" ${!button.text && "data-modal-close-button"}>
+              <span class="button__inner">
+                <span class="button__text">${button.text || "Закрыть"}</span>
+              </span>
+            </button>
+          </section>
+        </div>
+      </dialog>
+    `;
+    return createElementByString(modalString);
+  }
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * form-validator.js
+ */
+class FormValidator {
+  constructor(formElement) {
+    this.formElement = formElement;
+    this.addCustomErrorMessages();
+    this.init();
+  }
+  addCustomErrorMessages() {
+    const nameFieldElement = this.formElement.querySelector('[data-name="name"]');
+    const surnameFieldElement = this.formElement.querySelector('[data-name="surname"]');
+    const addressFieldElement = this.formElement.querySelector('[data-name="address"]');
+    const phoneFieldElement = this.formElement.querySelector('[data-name="phone"]');
+    const emailFieldElement = this.formElement.querySelector('[data-name="email"]');
+    const messageFieldElement = this.formElement.querySelector('[data-name="message"]');
+    const subscriptionFieldElement = this.formElement.querySelector('.subscription-form__field-control');
+    if (subscriptionFieldElement) {
+      subscriptionFieldElement.closest('.subscription-form__field').classList.add('pristine-item');
+      subscriptionFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле';
+      subscriptionFieldElement.dataset.pristineEmailMessage = 'Email введен неправильно';
+    }
+    if (nameFieldElement) {
+      nameFieldElement.closest('.text-field').classList.add('pristine-item');
+      nameFieldElement.dataset.pristinePattern = '/^[a-zа-яЁё -]+$/i';
+      nameFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+      nameFieldElement.dataset.pristinePatternMessage = 'Допустимы только буквы, дефисы и пробелы.';
+    }
+    if (surnameFieldElement) {
+      surnameFieldElement.closest('.text-field').classList.add('pristine-item');
+      surnameFieldElement.dataset.pristinePattern = '/^[a-zа-яЁё -]+$/i';
+      surnameFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+      surnameFieldElement.dataset.pristinePatternMessage = 'Допустимы только буквы, дефисы и пробелы.';
+    }
+    if (addressFieldElement) {
+      addressFieldElement.closest('.text-field').classList.add('pristine-item');
+      addressFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+    if (phoneFieldElement) {
+      phoneFieldElement.closest('.text-field').classList.add('pristine-item');
+      phoneFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+    if (emailFieldElement) {
+      emailFieldElement.closest('.text-field').classList.add('pristine-item');
+      emailFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+      emailFieldElement.dataset.pristineEmailMessage = 'Введите корректный e-mail адрес.';
+    }
+    if (messageFieldElement) {
+      messageFieldElement.closest('.text-area').classList.add('pristine-item');
+      messageFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+  }
+  validate() {
+    return this.pristine.validate();
+  }
+  reset() {
+    this.pristine.reset();
+    this.formElement.querySelectorAll('.shake').forEach(element => element.classList.remove('shake'));
+  }
+  init() {
+    this.pristine = new Pristine(this.formElement, {
+      classTo: 'pristine-item',
+      errorClass: 'pristine-item--invalid',
+      errorTextParent: 'pristine-item',
+      errorTextTag: 'p',
+      errorTextClass: 'pristine-item__error-text'
+    });
+  }
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * form.js
+ */
+class Form extends PubSub {
+  constructor(formElement) {
+    super();
+    this.formElement = formElement;
+    this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control, .simple-form__control, .text-area__control');
+    this.imagesFieldElement = this.formElement.querySelector('.images-field');
+    this.imagesFieldListElement = this.formElement.querySelector('.images-field__list');
+    this.actionUrl = this.formElement.action;
+    this.submitButtonElement = this.formElement.querySelector('[data-submit-button]');
+    this.validator = new FormValidator(this.formElement);
+    this.siteHeaderElement = document.querySelector('.page__site-header');
+    this.successHandler = null;
+    this.errorHandler = null;
+    this.imagesFieldErrorTextElement = null;
+    this.init();
+  }
+  setHandlers = (successHandler, errorHandler) => {
+    this.successHandler = successHandler;
+    this.errorHandler = errorHandler;
+  };
+  resetImagesField = () => {
+    if (this.imagesFieldListElement) {
+      this.imagesFieldListElement.querySelectorAll('img').forEach(imageElement => {
+        URL.revokeObjectURL(imageElement.src);
+      });
+      this.imagesFieldListElement.innerHTML = '';
+    }
+    if (this.images) {
+      this.images.clear();
+    }
+  };
+  initImagesField = fieldElement => {
+    const controlElement = fieldElement.querySelector('.images-field__control');
+    const listElement = fieldElement.querySelector('.images-field__list');
+    this.images = new Set();
+    controlElement.addEventListener('change', evt => {
+      this.imagesFieldErrorTextElement?.remove();
+      const newFiles = Array.from(evt.target.files);
+      newFiles.forEach(file => {
+        if (file.type.startsWith('image/') && PHOTO_TYPES.some(it => file.name.toLowerCase().endsWith(it))) {
+          this.images.add(file);
+        } else {
+          this.imagesFieldErrorTextElement = createElementByString(`<p class="images-field__error-text">Не удалось загрузить фото, попробуйте снова</p>`);
+          listElement.insertAdjacentElement('beforebegin', this.imagesFieldErrorTextElement);
+        }
+      });
+      updateList();
+    });
+    const updateList = () => {
+      const fragment = document.createDocumentFragment();
+      this.images.forEach(file => {
+        const listItemElement = createElementByString(`
+          <li class="images-field__list-item">
+            <img class="images-field__preview" src=${URL.createObjectURL(file)} alt=''>
+            <button class="images-field__delete-button image-button image-button--size_xs image-button--primary image-button--icon_cross" type="button">
+              <span class="visually-hidden">Удалить фото</span>
+            </button>
+          </li>
+        `);
+        const previewElement = listItemElement.querySelector('.images-field__preview');
+        const deleteButtonElement = listItemElement.querySelector('.images-field__delete-button');
+        deleteButtonElement.addEventListener('click', evt => {
+          this.images.delete(file);
+          updateList();
+          URL.revokeObjectURL(previewElement.src);
+        });
+        fragment.append(listItemElement);
+      });
+      listElement.innerHTML = '';
+      listElement.append(fragment);
+    };
+  };
+  init = () => {
+    if (this.imagesFieldElement) {
+      this.initImagesField(this.imagesFieldElement);
+    }
+    this.formElement.addEventListener('submit', evt => {
+      evt.preventDefault();
+      const isValid = this.validator.validate();
+      if (isValid) {
+        console.log('Форма валидна');
+        this.emit(FormEvents.SUBMIT_START);
+        this.submitButtonElement.disabled = true;
+        this.submitButtonElement.classList.add('button--pending');
+        const formData = new FormData(evt.target);
+        this.images?.forEach(file => {
+          formData.append('images[]', file);
+        });
+        sendData(this.actionUrl, formData, data => {
+          this.successHandler(data);
+          if (!this.formElement.matches('.modal-entry__form--code')) {
+            this.formElement.reset();
+          }
+        }, data => {
+          this.errorHandler(data);
+        }, () => {
+          this.emit(FormEvents.SUBMIT_END);
+          this.submitButtonElement.disabled = false;
+          this.submitButtonElement.classList.remove('button--pending');
+        });
+      } else {
+        console.log('Форма невалидна');
+        if (this.formElement.matches('.simple-form')) {
+          const fieldWrapperElement = this.formElement.querySelector('.simple-form__inner');
+          fieldWrapperElement.classList.remove('shake');
+          requestAnimationFrame(() => fieldWrapperElement.classList.add('shake'));
+          fieldWrapperElement.querySelector('input').focus();
+        } else {
+          const firstInvalidItemElement = this.formElement.querySelector('.pristine-item--invalid');
+          const modalElement = firstInvalidItemElement?.closest('.modal');
+          if (modalElement) {
+            modalElement.scrollTo({
+              top: firstInvalidItemElement.offsetTop,
+              behavior: 'smooth'
+            });
+          } else {
+            window.scrollTo({
+              top: firstInvalidItemElement.offsetTop - this.siteHeaderElement.offsetHeight,
+              behavior: 'smooth'
+            });
+          }
+          firstInvalidItemElement.querySelector('input, textarea').focus();
+          firstInvalidItemElement.classList.remove('shake');
+          requestAnimationFrame(() => firstInvalidItemElement.classList.add('shake'));
+        }
+      }
+    });
+    this.formElement.addEventListener('reset', () => {
+      setTimeout(() => {
+        this.textFieldControlElements?.forEach(textFieldElement => {
+          textFieldElement.dispatchEvent(inputEvent);
+        });
+        this.resetImagesField();
+        this.validator.reset();
+      }, 0);
+    });
+  };
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * modal-form.js
+ */
+class ModalForm extends Modal {
+  constructor(modalElement) {
+    super(modalElement);
+    this.formElement = modalElement.querySelector('.modal-form');
+    this.form = new Form(this.formElement);
+  }
+  setHandlers = (successHandler, errorHandler) => {
+    this.form.setHandlers(() => {
+      successHandler();
+      this.modalElement.close();
+    }, () => {
+      errorHandler();
+    });
+  };
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * modal-entry.js
+ */
+class ModalEntry extends Modal {
+  resendTimeInterval = 4;
+  timer = 0;
+  constructor(modalElement) {
+    super(modalElement);
+    this.backButtonElement = modalElement.querySelector('.modal__button--back');
+    this.backButtonElement.addEventListener('click', evt => {
+      evt.preventDefault();
+      this.switchStep(1);
+    });
+    this.codeFormElement = modalElement.querySelector('.modal-entry__form--code');
+    this.codeForm = new Form(this.codeFormElement);
+    this.phoneFieldElement = this.codeFormElement.querySelector('[data-name="phone"]');
+    this.loginFormElement = modalElement.querySelector('.modal-entry__form--login');
+    this.loginForm = new Form(this.loginFormElement);
+    this.currentPhoneTextElement = this.loginFormElement.querySelector('[data-current-phone-text]');
+    this.codeFieldElement = this.loginFormElement.querySelector('[data-name="code"]');
+    this.resendElement = this.loginFormElement.querySelector('.modal-form__resend');
+    this.resendTimerElement = this.resendElement.querySelector('.modal-form__resend-timer');
+    this.resendButtonElement = this.resendElement.querySelector('.modal-form__resend-button');
+    this.loginFormSubmitButtonElement = this.loginFormElement.querySelector('[data-submit-button]');
+    this.codeFieldElement.addEventListener('input', evt => {
+      if (evt.target.value.length > CODE_LENGTH) {
+        evt.target.value = evt.target.value.slice(0, CODE_LENGTH);
+      }
+      if (this.loginFormSubmitButtonElement.classList.contains('button--pending')) {
+        return;
+      }
+      this.loginFormSubmitButtonElement.disabled = !evt.target.value;
+    });
+    this.switchStep(1);
+    this.resendButtonElement.addEventListener('click', evt => {
+      evt.preventDefault();
+      this.codeFormElement.requestSubmit();
+      // this.startTimer();
+    });
+  }
+  startTimer = () => {
+    if (this.timer <= 0) {
+      this.timer = this.resendTimeInterval;
+      this.resendTimerElement.textContent = this.timer;
+      this.resendElement.classList.add('modal-form__resend--waiting');
+      const timerId = setInterval(() => {
+        this.timer--;
+        this.resendTimerElement.textContent = this.timer;
+        if (this.timer <= 0) {
+          clearInterval(timerId);
+          this.resendElement.classList.remove('modal-form__resend--waiting');
+        }
+      }, 1000);
+    }
+  };
+  switchStep = step => {
+    if (step === 1) {
+      this.backButtonElement.classList.add('modal__button--hidden');
+      this.codeFormElement.classList.remove('modal-entry__form--hidden');
+      this.loginFormElement.classList.add('modal-entry__form--hidden');
+    } else if (step === 2) {
+      this.startTimer();
+      const formattedPhone = this.phoneFieldElement.value.replace(/[()]/g, '').replace(/-/g, ' ');
+      this.currentPhoneTextElement.textContent = formattedPhone;
+      this.backButtonElement.classList.remove('modal__button--hidden');
+      this.codeFormElement.classList.add('modal-entry__form--hidden');
+      this.loginFormElement.classList.remove('modal-entry__form--hidden');
+    }
+  };
+
+  // setCodeFormHandlers = (successHandler, errorHandler) => {
+  //   this.codeForm.setHandlers(
+  //     () => {
+  //       successHandler();
+  //       this.modalElement.close();
+  //     },
+  //     () => {
+  //       errorHandler();
+  //     });
+  // };
+
+  // setHandlers = (successHandler, errorHandler) => {
+  //   this.form.setHandlers(
+  //     () => {
+  //       successHandler();
+  //       this.modalElement.close();
+  //     },
+  //     () => {
+  //       errorHandler();
+  //     });
+  // };
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * alert.js
+ */
+class Product {
+  CART_NOTIFICATION_DURATION = 3000;
+  constructor(productElement) {
+    this.formElement = productElement.querySelector('.product__inner');
+    this.cartNotificationElement = document.querySelector('.cart-notification');
+    this.sizeCheckboxElements = Array.from(productElement.querySelectorAll('.size-buttons__control'));
+    this.counterElement = productElement.querySelector('.product__cart-counter .counter__control');
+    this.counterButtonMinusElement = productElement.querySelector('.product__cart-counter .counter__button--minus');
+    this.sizeModalElement = document.querySelector('[data-modal="size"]');
+    this.sizeModalFormElement = this.sizeModalElement.querySelector('.modal-size');
+    this.sizeModalCheckboxElements = Array.from(this.sizeModalFormElement.querySelectorAll('.size-buttons__control'));
+    this.sizeModalSubmitButtonElement = this.sizeModalFormElement.querySelector('.modal-size__button');
+    this.sizeModal = null;
+    this.form = null;
+    this.init();
+  }
+  lockSizeModalSubmitButton = () => {
+    this.sizeModalSubmitButtonElement.disabled = true;
+    this.sizeModalSubmitButtonElement.classList.add('button--disabled');
+  };
+  unlockSizeModalSubmitButton = () => {
+    this.sizeModalSubmitButtonElement.disabled = false;
+    this.sizeModalSubmitButtonElement.classList.remove('button--disabled');
+  };
+  checkSelectedSizeInModalForm = () => {
+    return this.sizeModalCheckboxElements.some(checkboxElement => checkboxElement.checked);
+  };
+  setSizeModalSubmitButtonState = () => {
+    const isSizeSelected = this.checkSelectedSizeInModalForm();
+    if (isSizeSelected) {
+      this.unlockSizeModalSubmitButton();
+    } else {
+      this.lockSizeModalSubmitButton();
+    }
+  };
+  setCounterValue = value => {
+    const minValue = +this.counterElement.min;
+    this.counterElement.value = value;
+    this.counterButtonMinusElement.disabled = +this.counterElement.value <= minValue;
+  };
+  onSizeModalFormChange = () => {
+    this.setSizeModalSubmitButtonState();
+  };
+  checkSelectedSize = () => {
+    return this.sizeCheckboxElements.some(checkboxElement => checkboxElement.checked);
+  };
+  setAddedToCartView = () => {
+    productElement.classList.add('product--in-cart');
+  };
+  setDefaultView = () => {
+    productElement.classList.remove('product--in-cart');
+  };
+  showCartNotification = () => {
+    this.cartNotificationElement.show();
+    setTimeout(() => {
+      this.cartNotificationElement.close();
+    }, this.CART_NOTIFICATION_DURATION);
+  };
+  openSizeModal = () => {
+    this.sizeModal.open();
+  };
+  closeSizeModal = () => {
+    this.sizeModal.close();
+  };
+  init() {
+    this.sizeModal = new Modal(this.sizeModalElement);
+    this.sizeModalFormElement.addEventListener('change', this.onSizeModalFormChange);
+  }
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * cart.js
+ */
+class Cart {
+  constructor(cartElement) {
+    this.siteHeaderElement = document.querySelector('.page__site-header');
+    this.cartElement = cartElement;
+    this.formElement = this.cartElement.querySelector('.cart__form');
+    this.init();
+  }
+  toggleFormFooterStickiness = () => {
+    if (laptopWidthMediaQueryList.matches) {
+      return;
+    }
+    const documentHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
+    const windowHeight = document.documentElement.clientHeight;
+    const scrollPosition = window.scrollY;
+    const isAtBottom = windowHeight + scrollPosition >= documentHeight;
+    this.formFooterElement.classList.toggle('cart-form__footer--sticked', !isAtBottom);
+  };
+  setPageBottomIndent = () => {
+    if (!laptopWidthMediaQueryList.matches) {
+      const bottomValue = parseFloat(getComputedStyle(this.formFooterElement).bottom);
+      document.body.style.paddingBottom = `${this.formFooterElement.offsetHeight + bottomValue}px`;
+    } else {
+      document.body.style.paddingBottom = 0;
+    }
+  };
+  onWindowResize = debounce(this.setPageBottomIndent, 500);
+  onWindowScroll = throttle(this.toggleFormFooterStickiness, 100);
+  onReceivingMethodSectionChange = evt => {
+    if (evt.target.dataset.value === 'delivery') {
+      this.receivingMethodSectionElement.insertAdjacentElement('afterend', this.deliverySectionElement);
+      this.form.validator.reset();
+      this.form.validator.init();
+    } else {
+      this.deliverySectionElement.remove();
+      this.form.validator.reset();
+      this.form.validator.init();
+    }
+  };
+  init() {
+    if (!this.formElement) {
+      return;
+    }
+    this.formFooterElement = this.formElement.querySelector('.cart-form__footer');
+    this.form = new Form(this.formElement);
+    this.productsList = this.formElement.querySelector('.cart-form__products-list');
+    this.deliverySectionElement = this.formElement.querySelector('[data-delivery-section]');
+    this.receivingMethodSectionElement = this.formElement.querySelector('[data-receiving-method-section]');
+    this.deliverySectionElement.querySelectorAll('.text-field').forEach(initTextField);
+    this.deliverySectionElement.remove();
+    this.form.validator.init();
+    this.setPageBottomIndent();
+    this.toggleFormFooterStickiness();
+    window.addEventListener('resize', this.onWindowResize);
+    window.addEventListener('scroll', this.onWindowScroll);
+    this.receivingMethodSectionElement.addEventListener('change', this.onReceivingMethodSectionChange);
+  }
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
  * taber.js
  */
 class Taber {
@@ -253,60 +867,6 @@ class Video {
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
- * modal.js
- */
-class Modal {
-  // static openModalsCount = 0;
-
-  constructor(modalElement) {
-    let {
-      onOpenerClick
-    } = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    this.modalElement = modalElement;
-    this.name = modalElement?.dataset.modal;
-    this.initOpeners();
-    this.modalElement.addEventListener('close', () => this.onModalClose());
-    this.onOpenerClick = onOpenerClick;
-    this.modalElement.addEventListener('click', evt => {
-      if (evt.target === this.modalElement || evt.target.closest('[data-modal-close-button]') || !evt.target.closest('.modal__inner')) {
-        evt.preventDefault();
-        this.close();
-      }
-    });
-    if (!document.body.contains(this.modalElement)) {
-      document.body.append(this.modalElement);
-    }
-  }
-  initOpeners = () => {
-    const openerElements = document.querySelectorAll(`[data-modal-opener="${this.name}"]`);
-    openerElements.forEach(openerElement => {
-      openerElement.addEventListener('click', evt => {
-        evt.preventDefault();
-        if (this.onOpenerClick) {
-          this.onOpenerClick(evt);
-        }
-        this.open();
-      });
-    });
-  };
-  open = () => {
-    this.modalElement.showModal();
-  };
-  close = () => {
-    this.modalElement.close();
-  };
-  onModalClose = () => {
-    setTimeout(() => {
-      if (this.modalElement.classList.contains('modal--with_alert')) {
-        this.modalElement.remove();
-        this.modalElement = null;
-      }
-    }, MODAL_ANIMATION_DURATION);
-  };
-}
-/* * * * * * * * * * * * * * * * * * * * * * * */
-
-/* * * * * * * * * * * * * * * * * * * * * * * *
  * article-photos.js
  */
 let activeButtonElement = null;
@@ -415,7 +975,7 @@ function initBrandsSlider(brandsElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * catalog-sorting.js
  */
-function initCatalogFilter(catalogElement) {
+function initCatalogFilter(catalogElement, pageScrollWrapperElement) {
   const filterToggleButtonElement = catalogElement.querySelector('.catalog__filter-button');
   const filterWrapperElement = catalogElement.querySelector('.catalog__filter-wrapper');
   const catalogHeaderElement = catalogElement.querySelector('.catalog__header');
@@ -423,6 +983,11 @@ function initCatalogFilter(catalogElement) {
   const catalogBodyElement = catalogElement.querySelector('.catalog__body');
   const checkerElements = filterWrapperElement.querySelectorAll('.checker__control');
   const clearButtonElement = filterWrapperElement.querySelector('.catalog-filter__clear-button');
+  const onPageScroll = () => {
+    if (catalogElement.classList.contains('catalog--filter-open')) {
+      setFilterHeight();
+    }
+  };
   const clearFilter = () => {
     checkerElements.forEach(checkerElement => {
       checkerElement.checked = false;
@@ -430,7 +995,7 @@ function initCatalogFilter(catalogElement) {
     });
   };
   const setFilterHeight = () => {
-    filterWrapperElement.style.height = `${document.documentElement.clientHeight - catalogHeaderElement.getBoundingClientRect().bottom}px`;
+    filterWrapperElement.style.height = `${Math.min(document.documentElement.clientHeight, document.documentElement.clientHeight - catalogHeaderElement.getBoundingClientRect().bottom)}px`;
   };
   const onWindowResize = () => {
     if (catalogElement.classList.contains('catalog--filter-open')) {
@@ -438,7 +1003,6 @@ function initCatalogFilter(catalogElement) {
     }
   };
   function openFilter() {
-    lockPageScroll();
     setFilterHeight();
     catalogElement.classList.add('catalog--filter-open');
     catalogBodyElement.addEventListener('click', onCatalogBodyClick);
@@ -446,7 +1010,6 @@ function initCatalogFilter(catalogElement) {
   ;
   function closeFilter() {
     catalogElement.classList.remove('catalog--filter-open');
-    unlockPageScroll();
     catalogBodyElement.removeEventListener('click', onCatalogBodyClick);
   }
   ;
@@ -465,16 +1028,14 @@ function initCatalogFilter(catalogElement) {
   filterCloseButtonElement.addEventListener('click', evt => {
     closeFilter();
   });
-  window.addEventListener('resize', throttleAndDebounce(onWindowResize, 500));
+  window.addEventListener('resize', onWindowResize);
   new SimpleBar(catalogElement.querySelector('.catalog-filter__sections'), {
     autoHide: false
-  });
-  laptopWidthMediaQueryList.addEventListener('change', () => {
-    closeFilter();
   });
   clearButtonElement.addEventListener('click', () => {
     clearFilter();
   });
+  pageScrollWrapperElement.addEventListener('scroll', onPageScroll);
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * */
@@ -640,10 +1201,10 @@ function initConsumersPhotos() {
  * folds.js
  */
 function initFolds(foldsElement) {
-  foldsElement.addEventListener('click', _ref => {
+  foldsElement.addEventListener('click', _ref3 => {
     let {
       target
-    } = _ref;
+    } = _ref3;
     const buttonElement = target.closest('.folds__button');
     if (!buttonElement) {
       return;
@@ -659,10 +1220,10 @@ function initFolds(foldsElement) {
     }, 20);
     buttonElement.ariaExpanded = buttonElement.ariaExpanded === 'true' ? 'false' : 'true';
   });
-  foldsElement.addEventListener('transitionend', _ref2 => {
+  foldsElement.addEventListener('transitionend', _ref4 => {
     let {
       target
-    } = _ref2;
+    } = _ref4;
     const foldElement = target.closest('.folds__item');
     if (!foldElement || !foldElement.classList.contains('folds__item--open')) {
       return;
@@ -750,10 +1311,10 @@ function initProductInfo(productInfoElement) {
     firstItemElement.classList.add('product-info__item--open');
     buttonElement.ariaExpanded = 'true';
   };
-  productInfoElement.addEventListener('click', _ref3 => {
+  productInfoElement.addEventListener('click', _ref5 => {
     let {
       target
-    } = _ref3;
+    } = _ref5;
     const buttonElement = target.closest('.product-info__button');
     if (!buttonElement) {
       return;
@@ -772,10 +1333,10 @@ function initProductInfo(productInfoElement) {
     }, 20);
     buttonElement.ariaExpanded = buttonElement.ariaExpanded === 'true' ? 'false' : 'true';
   });
-  productInfoElement.addEventListener('transitionend', _ref4 => {
+  productInfoElement.addEventListener('transitionend', _ref6 => {
     let {
       target
-    } = _ref4;
+    } = _ref6;
     const foldElement = target.closest('.product-info__item');
     if (!foldElement || !foldElement.classList.contains('product-info__item--open')) {
       return;
@@ -869,8 +1430,7 @@ function initProduct(productElement) {
 function initProductsCounters(productsWrapperElement) {
   const toggleButtonsState = (controlElement, buttonMinusElement) => {
     const minValue = +controlElement.min;
-    buttonMinusElement.disabled = controlElement.value <= minValue;
-    console.log(controlElement.value);
+    buttonMinusElement.disabled = +controlElement.value <= minValue;
   };
   const toggleAllButtonsState = () => {
     productsWrapperElement.querySelectorAll('.counter').forEach(counterElement => {
@@ -1176,12 +1736,12 @@ function initShopSlider(sliderWrapperElement) {
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
-function showAlert(_ref5) {
+function showAlert(_ref7) {
   let {
     heading,
     button = {},
     icon
-  } = _ref5;
+  } = _ref7;
   const alert = new Alert({
     heading,
     button,
@@ -1377,7 +1937,9 @@ document.querySelectorAll('[data-modal="manager-contacts"]').forEach(modalElemen
 document.querySelectorAll('.set').forEach(initSet);
 document.querySelectorAll('.cart__form, .product__cart').forEach(initProductsCounters);
 document.querySelectorAll('.catalog__sorting').forEach(initCatalogSorting);
-document.querySelectorAll('.catalog').forEach(initCatalogFilter);
+document.querySelectorAll('.catalog').forEach(catalogElement => {
+  initCatalogFilter(catalogElement, simpleBar.getScrollElement());
+});
 document.querySelectorAll('.select').forEach(initSelect);
 document.querySelectorAll('.checkout-order__products').forEach(initCheckoutProductsSlider);
 let subscriptionForm = null;
@@ -1389,6 +1951,11 @@ let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {
   reviews = new Reviews(reviewsElement);
+}
+let product = null;
+let productElement = document.querySelector('.product');
+if (productElement) {
+  product = new Product(productElement);
 }
 initReviewsIntroPhotos();
 initConsumersPhotos();
