@@ -150,9 +150,10 @@
 
   .modal__inner {
     margin: auto 0 0;
-    transform: translateY(100%);
+    padding: 20px;
     border-radius: 12px 12px 0 0;
     background: var(--background-color);
+    transform: translateY(100%);
 
     @media (min-width: $wide-tablet-width) {
       margin: auto;
@@ -277,10 +278,16 @@
 
 .modal--with_alert {
   .modal__inner {
-    padding: 20px;
-
     @media (min-width: $wide-tablet-width) {
       max-width: 500px;
+    }
+  }
+}
+
+.modal--with_size {
+  .modal__inner {
+    @media (min-width: $wide-tablet-width) {
+      max-width: 440px;
     }
   }
 }

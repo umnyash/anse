@@ -5,9 +5,7 @@ function initProductsCounters(productsWrapperElement) {
   const toggleButtonsState = (controlElement, buttonMinusElement) => {
     const minValue = +controlElement.min;
 
-    buttonMinusElement.disabled = controlElement.value <= minValue;
-
-    console.log(controlElement.value)
+    buttonMinusElement.disabled = +controlElement.value <= minValue;
   };
 
   const toggleAllButtonsState = () => {

@@ -9,7 +9,6 @@
     },
     {
       value: 's',
-      checked: true
     },
     {
       value: 'm'
@@ -29,4 +28,5 @@ mixin size-buttons
       label.size-buttons__item
         input.size-buttons__control.visually-hidden(name='size' value= size.value type='radio' checked= size.checked && '' disabled= size.disabled && '')
         span.size-buttons__label= size.value
-    .size-buttons__tooltip Осталась 1 шт.
+    .size-buttons__tooltip-wrapper
+      .size-buttons__tooltip Осталась 1 шт.

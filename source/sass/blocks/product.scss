@@ -188,6 +188,7 @@
 
 .product__size-buttons {
   grid-column: 1 / -1;
+  justify-self: start;
 
   @media (min-width: $laptop-width) {
     grid-column: 2 / 3;
@@ -278,6 +279,10 @@
   }
 }
 
+.product__cart-counter {
+  display: none;
+}
+
 .product__cart-button {
   width: 100%;
 }
@@ -354,5 +359,22 @@
 
   @media (max-width: ($laptop-width - 1)) {
     display: none;
+  }
+}
+
+.product--in-cart {
+  .product__cart {
+    @media (max-width: ($wide-tablet-width - 1)) {
+      position: sticky;
+      bottom: 10px;
+    }
+  }
+
+  .product__cart-button {
+    display: none;
+  }
+
+  .product__cart-counter {
+    display: block;
   }
 }

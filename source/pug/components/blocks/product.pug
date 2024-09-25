@@ -57,6 +57,7 @@ mixin product
             type: 'submit',
             text: 'Добавить в корзину'
           })(class='product__cart-button button--solid-primary')
+          +counter(class='product__cart-counter counter--big')
         .product__info-wrapper
           +product-info(class='product__info')
 

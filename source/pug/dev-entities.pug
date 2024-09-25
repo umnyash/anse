@@ -1,0 +1,30 @@
+extends layout/layout
+
+block variables
+  - var title = 'Entities | Anse'
+  - var page = 'entities'
+
+block content
+  style
+    .
+      .ui-kit__section {
+        margin-bottom: 80px;
+      }
+
+      .ui-kit__group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .ui-kit__group + .ui-kit__group {
+        margin-top: 16px;
+      }
+
+  .container
+    section
+      h2 Продукт
+      p Методы:
+      ul
+        li

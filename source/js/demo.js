@@ -79,3 +79,42 @@ if (subscriptionForm) {
   );
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Имитация добавления обработчиков на страницу продукта
+ */
+if (product) {
+  product.formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = product.checkSelectedSize();
+
+    if (isValid) {
+      product.setCounterValue(1);
+      product.setAddedToCartView();
+      product.showCartNotification();
+    } else {
+      console.log('Размер не выбран.')
+      product.openSizeModal();
+    }
+  });
+
+  product.sizeModalFormElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    product.closeSizeModal();
+    product.setCounterValue(1);
+    product.setAddedToCartView();
+    product.showCartNotification();
+  });
+
+  product.counterElement.addEventListener('input', (evt) => {
+    const value = +evt.target.value;
+
+    if (value === 0) {
+      product.setDefaultView();
+    }
+  })
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */

@@ -1,9 +1,10 @@
-mixin button({ tag, text, type, href, target, rel, counter } = {})
+mixin button({ tag, text, type, href, target, rel, disabled, counter } = {})
   #{tag}.button(
     type= type
     href= href
     target= target
     rel= rel
+    disabled= disabled && ''
   )&attributes(attributes)
     span.button__inner
       span.button__text!= text

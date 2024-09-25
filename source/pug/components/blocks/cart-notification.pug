@@ -1,0 +1,18 @@
+mixin cart-notification
+  dialog.cart-notification&attributes(attributes)
+    h2.cart-notification__heading Товар добавлен в корзину
+    .cart-notification__product
+      .cart-notification__product-text-content
+        h3.cart-notification__product-heading Шуба SETTE BLACK
+        p.cart-notification__product-text Размер: S
+        p.cart-notification__product-text Количество: 1
+        .cart-notification__price-wrapper
+          s.cart-notification__price.cart-notification__price--old 34 980 ₽
+          p.cart-notification__price 20 985 ₽
+      picture.cart-notification__product-image-wrapper.media.media--cover.media--position_top
+        img.media__image(src='img/product/1.webp' width='126' height='160' alt='' loading='lazy')
+    +button({
+      tag: 'a',
+      href: 'cart.html',
+      text: 'Перейти в корзину'
+    })(class='cart-notification__button button button--solid-primary')

@@ -14,6 +14,7 @@
   border-radius: 8px;
   grid-template-columns: auto 1fr auto;
   align-items: center;
+  background: var(--background-color);
 }
 
 .counter__control {
@@ -89,6 +90,21 @@
 
     &::after {
       background: var(--text-weak-color-3);
+    }
+  }
+}
+
+.counter--big {
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .counter__button {
+    height: 46px;
+
+    @media (min-width: $desktop-width) {
+      height: 48px;
     }
   }
 }

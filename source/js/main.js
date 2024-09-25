@@ -46,6 +46,12 @@ if (reviewsElement) {
   reviews = new Reviews(reviewsElement);
 }
 
+let product = null;
+let productElement = document.querySelector('.product');
+if (productElement) {
+  product = new Product(productElement);
+}
+
 initReviewsIntroPhotos()
 initConsumersPhotos();
 /* * * * * * * * * * * * * * * * * * * * * * * */

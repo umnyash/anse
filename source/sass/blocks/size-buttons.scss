@@ -1,6 +1,6 @@
 .size-buttons {
   position: relative;
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   gap: 8px;
   font: 400 14px/17px $main-font-family;
@@ -57,10 +57,21 @@
   color: var(--text-weak-color-2);
 }
 
-.size-buttons__tooltip {
+.size-buttons__tooltip-wrapper {
   position: absolute;
   top: calc(100% + 10px);
   left: 0;
+  display: grid;
+  width: 100%;
+
+  @media (min-width: $laptop-width) {
+    top: auto;
+    bottom: calc(100% + 3px);
+    justify-content: center;
+  }
+}
+
+.size-buttons__tooltip {
   box-sizing: border-box;
   width: 100%;
   padding: 6px 12px;
@@ -73,11 +84,31 @@
   background: var(--background-additional-color);
 
   @media (min-width: $laptop-width) {
-    top: auto;
-    bottom: calc(100% + 3px);
-    left: 50%;
-    width: auto;
     padding: 4px 6px;
-    transform: translateX(-50%);
+  }
+}
+
+.size-buttons--alter {
+  gap: 7px;
+
+  @media (min-width: $laptop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .size-buttons__label {
+    @media (min-width: $laptop-width) {
+      min-width: 52px;
+      padding: 8px;
+    }
+  }
+
+  .size-buttons__tooltip-wrapper {
+    top: calc(100% + 5px);
+    justify-content: center;
+  }
+
+  .size-buttons__tooltip {
+    padding: 4px 6px;
   }
 }

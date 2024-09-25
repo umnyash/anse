@@ -1,0 +1,17 @@
+mixin modal-size
+  form.modal-size&attributes(attributes)
+    h2.modal-size__heading.heading.heading--size_s Выберите размер
+    .modal-size__product
+      .modal-size__product-text-content
+        h3.modal-size__product-heading Шуба SETTE BLACK
+        p.modal-size__product-text Декоративный элемент в виде нагрудного кармана.
+        p.modal-size__product-text Меховой пояс: идет в комплекте
+      picture.modal-size__product-image-wrapper.media.media--cover.media--position_top
+        img.media__image(src='img/products/product-1.webp' width='72' height='91' alt='' loading='lazy')
+    +size-buttons(class='modal-size__size-buttons size-buttons--alter')
+    +button({
+      tag: 'button',
+      type: 'submit',
+      text: 'Добавить в корзину',
+      disabled: true
+    })(class='modal-size__button button--solid-primary button--disabled')
