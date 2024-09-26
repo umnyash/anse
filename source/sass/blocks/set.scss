@@ -117,6 +117,7 @@
 }
 
 .set__list-item {
+  position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 10px;
@@ -159,6 +160,23 @@
   text-decoration: none;
   color: inherit;
   transition: color $duration-m ease-in-out;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 110px;
+
+    @media (min-width: $laptop-width) {
+      width: 100px;
+    }
+
+    @media (min-width: $desktop-width) {
+      width: 140px;
+    }
+  }
 
   &:hover {
     color: var(--brand-color);
