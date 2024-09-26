@@ -118,3 +118,29 @@ if (product) {
   })
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Добавление обработчиков в форме авторизации
+ */
+if (modalEntry) {
+  modalEntry.codeFormElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = modalEntry.validatePhoneField();
+
+    if (isValid) {
+      console.log('valid')
+      modalEntry.switchStep(2);
+    } else {
+      modalEntry.showCodeFormErrorMessage();
+    }
+  });
+
+  modalEntry.loginFormElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    window.location.href = 'https://umnyash.github.io/anse/account.html';
+  })
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */

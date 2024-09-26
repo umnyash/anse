@@ -28,9 +28,12 @@ html.page(lang='ru')
         block content
       +site-footer(class='page__site-footer')
     block modals
+      +modal(class='modal--with_entry' data-modal='entry' open)
+        +modal-entry(class='modal__entry')
     script(src='vendor/swiper/swiper-bundle.min.js')
     script(src='vendor/simplebar/simplebar.min.js')
     script(src='vendor/choices/choices.min.js')
     script(src='vendor/pristine/pristine.min.js')
+    script(src='vendor/imask/imask.js')
     script(src='js/script.js')
     script(src='js/demo.js')

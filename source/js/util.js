@@ -38,6 +38,10 @@ function isSpaceEvent(evt) {
   return evt.code === KeyCode.SPACE;
 }
 
+function isBackspaceEvent(evt) {
+  return evt.code === KeyCode.BACKSPACE;
+}
+
 function isUpArrowEvent(evt) {
   return evt.code === KeyCode.UP_ARROW;
 }

@@ -58,3 +58,22 @@
 }
 
 /* stylelint-enable */
+
+.text-field--alter {
+  .text-field__control-wrapper {
+    display: block;
+  }
+
+  .text-field__control {
+    text-align: center;
+  }
+}
+
+.text-field--big {
+  font-size: 18px;
+  line-height: 28px;
+
+  .text-field__control {
+    padding: 10px 0;
+  }
+}

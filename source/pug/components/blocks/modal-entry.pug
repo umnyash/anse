@@ -1,0 +1,52 @@
+mixin modal-entry
+  .modal-entry&attributes(attributes)
+    form.modal-entry__form.modal-entry__form--code(action='https://fakestoreapi.com/products' method='post' target='_blank')
+      .modal-entry__header
+        h2.modal-entry__heading Введите номер телефона для авторизации
+      +text-field({
+        type: 'tel',
+        name: 'phone',
+        label: {
+          text: 'Телефон',
+          hidden: true
+        },
+        placeholder: 'Введите имя и фамилию'
+      })(class='modal-entry__phone-field')
+      +button({ tag: 'button', type: 'button', text: 'Другой формат номера' })(class='modal-entry__phone-format-toggler button--simple-secondary')
+      .modal-entry__footer
+        small.modal-entry__comment Нажимая кнопку, я соглашаюсь с #[a.modal-entry__comment-link(href='public-offer.html' target='_blank') Публичной офертой] и #[a.modal-entry__comment-link(href='privacy-policy.html' target='_blank') Политикой конфиденциальности]
+        +button({
+          tag: 'button',
+          type: 'submit',
+          text: 'Получить код'
+        })(class='modal-entry__submit-button button--solid-primary')
+      .modal-entry__form-error-message
+        p.modal-entry__form-error-message-text Номер телефона введен неправильно. Попробуйте еще раз.
+
+    form.modal-entry__form.modal-entry__form--login.modal-entry__form--hidden(action='https://fakestoreapi.com/products' method='post' target='_blank')
+      .modal-entry__header
+        h2.modal-entry__heading Введите код из SMS
+        p.modal-entry__header-text Код был отправлен на номер #[span.modal-form__header-text-accent(data-current-phone-text) +7 (915) 111-11-11]
+      fieldset.modal-entry__code-fields
+        each item in ['Первая', 'Вторая', 'Третья', 'Четвёртая']
+          +text-field({
+            type: 'number',
+            label: {
+              text: `${item} цифра кода`,
+              hidden: true
+            },
+          })(class='modal-entry__code-field text-field--big text-field--alter')
+      input(type="hidden" name="code")
+      .modal-entry__footer
+        +button({
+          tag: 'button',
+          type: 'submit',
+          text: 'Отправить',
+          disabled: true
+        })(class='modal-entry__submit-button button--solid-primary button--disabled')
+        .modal-entry__resend
+          p.modal-entry__resend-text Новый код можно будет запросить через #[span.modal-entry__resend-timer 23] секунд
+          p.modal-entry__resend-button-wrapper Не пришел код?
+            +button({ tag: 'button', type: 'button', text: 'Отправить повторно' })(class='modal-entry__resend-button button--simple-primary')
+      .modal-entry__form-error-message
+        .modal-entry__form-error-message-text Код введен неправильно. Попробуйте еще раз

@@ -15,6 +15,7 @@ const KeyCode = Object.freeze({
   DOWN_ARROW: 'ArrowDown',
   UP_ARROW: 'ArrowUp',
   SPACE: 'Space',
+  BACKSPACE: 'Backspace',
   ESCAPE: 'Escape',
 });
 /* * * * * * * * * * * * * * * * * * * * * * * */

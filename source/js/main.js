@@ -52,6 +52,12 @@ if (productElement) {
   product = new Product(productElement);
 }
 
+let modalEntry = null;
+const modalEntryElement = document.querySelector('[data-modal="entry"]');
+if (modalEntryElement) {
+  modalEntry = new ModalEntry(modalEntryElement);
+}
+
 initReviewsIntroPhotos()
 initConsumersPhotos();
 /* * * * * * * * * * * * * * * * * * * * * * * */
