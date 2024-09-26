@@ -592,6 +592,13 @@ class ModalEntry extends Modal {
       this.loginFormElement.classList.remove('modal-entry__form--hidden');
     }
   };
+  reset = () => {
+    this.codeFormElement.reset();
+    this.loginFormElement.reset();
+    this.loginFormSubmitButtonElement.disabled = true;
+    this.loginFormSubmitButtonElement.classList.add('button--disabled');
+    this.switchStep(1);
+  };
   init = () => {
     this.enableRussianPhoneFormat();
     this.phoneFormatTogglerElement.addEventListener('click', this.onPhoneFormatTogglerClick);
@@ -613,6 +620,9 @@ class ModalEntry extends Modal {
       });
     });
     this.codeFieldsWrapperElement.addEventListener('input', this.onCodeFieldsWrapperInput);
+    this.onOpenerClick = () => {
+      this.reset();
+    };
   };
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
