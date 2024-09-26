@@ -1,9 +1,6 @@
 .product-card {
   position: relative;
   z-index: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
   font-family: $main-font-family;
   font-weight: 400;
 }

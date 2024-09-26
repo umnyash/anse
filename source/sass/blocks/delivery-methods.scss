@@ -20,6 +20,7 @@
   grid-template-columns: auto 1fr;
   gap: 5px 10px;
   align-items: center;
+  cursor: pointer;
   transition: color $duration-xs ease-in-out;
 
   &::before {
