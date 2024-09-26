@@ -130,7 +130,6 @@ if (modalEntry) {
     const isValid = modalEntry.validatePhoneField();
 
     if (isValid) {
-      console.log('valid')
       modalEntry.switchStep(2);
     } else {
       modalEntry.showCodeFormErrorMessage();

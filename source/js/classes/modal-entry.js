@@ -130,6 +130,14 @@ class ModalEntry extends Modal {
     }
   }
 
+  reset = () => {
+    this.codeFormElement.reset();
+    this.loginFormElement.reset();
+    this.loginFormSubmitButtonElement.disabled = true;
+    this.loginFormSubmitButtonElement.classList.add('button--disabled');
+    this.switchStep(1);
+  };
+
   init = () => {
     this.enableRussianPhoneFormat();
 
@@ -157,6 +165,10 @@ class ModalEntry extends Modal {
     });
 
     this.codeFieldsWrapperElement.addEventListener('input', this.onCodeFieldsWrapperInput);
+
+    this.onOpenerClick = () => {
+      this.reset();
+    };
   };
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
