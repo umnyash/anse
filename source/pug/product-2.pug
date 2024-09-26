@@ -1,0 +1,40 @@
+extends layout/layout
+
+block variables
+  - var title = 'Товар | Anse'
+  - var page = 'product'
+
+block content
+  +product-2
+  +products({
+    heading: 'Добавьте к образу',
+    tooltipText: 'При покупке шубы, Вы сможете применить скидку 30% на все аксессуары в корзине'
+  })
+  +products({
+    heading: 'Рекомендуем'
+  })
+  +consultant-contacts
+  +advantages
+
+append modals
+  +modal(class='modal--with_offer' data-modal='offer')
+    +modal-offer(class='modal__offer')
+  +modal(class='modal--with_size-chart' data-modal='size-chart')
+    +size-chart(class='modal__size-chart')
+  +modal(class='modal--default modal--with_size' data-modal='size')
+    +modal-size(class='modal__size')
+  +modal(class='modal--with_gallery' data-modal='product-gallery')
+    +modal-gallery({
+      items: [
+        'img/product-2/1.webp',
+        'files/3_4.mp4',
+        'img/product-2/2.webp',
+        'img/product-2/3.webp',
+        'img/product-2/4.webp',
+        'img/product-2/5.webp',
+        'img/product-2/6.webp',
+        'img/product-2/7.webp',
+        'img/product-2/8.webp',
+      ]
+    })(class='modal__gallery')
+  +cart-notification
