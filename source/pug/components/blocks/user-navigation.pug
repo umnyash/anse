@@ -2,7 +2,10 @@ mixin user-navigation
   .user-navigation&attributes(attributes)
     ul.user-navigation__list
       li.user-navigation__item
-        a.user-navigation__link.user-navigation__link--user(href='account.html')
+        a.user-navigation__link.user-navigation__link--user(
+          href= (page === 'login') ? '#' : 'account.html'
+          data-modal-opener= (page === 'login') ? 'entry' : false
+        )
           span.visually-hidden Личный кабинет
       li.user-navigation__item
         a.user-navigation__link.user-navigation__link--cart(href='cart.html')

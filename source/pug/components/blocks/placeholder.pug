@@ -8,4 +8,4 @@ mixin placeholder({ heading, text, link })
       tag: 'a',
       text: link.text,
       href: link.href,
-    })(class='placeholder__button button--solid-primary')
+    })(class='placeholder__button button--solid-primary' data-modal-opener= link.opener || false)
