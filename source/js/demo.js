@@ -143,3 +143,25 @@ if (modalEntry) {
   })
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Выход из личного кабинета
+ */
+const logoutButtonElement = document.querySelector('.account-menu__logout-button');
+
+if (logoutButtonElement) {
+  logoutButtonElement.addEventListener('click', (evt) => {
+    evt.preventDefault();
+
+    showAlert({
+      heading: 'Вы уверены, что хотите выйти из личного кабинета?',
+      button: {
+        text: 'Выйти',
+        classes: 'jsLogoutUser'
+      }
+    });
+  });
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * */
