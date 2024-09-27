@@ -1,0 +1,62 @@
+.modal-info {
+  font: 400 14px/17px $main-font-family;
+
+  @media (min-width: $wide-tablet-width) {
+    text-align: center;
+  }
+
+  @media (min-width: $laptop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+.modal-info__heading-wrapper {
+  display: grid;
+  margin: 0 0 10px;
+  grid-template-columns: auto 1fr;
+  column-gap: 12px;
+  align-items: center;
+
+  @media (min-width: $wide-tablet-width) {
+    grid-template-columns: auto auto;
+    justify-content: center;
+  }
+
+  &::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: var(--brand-color);
+    mask: url("../img/icons.svg#info-fancy");
+
+    @media (min-width: $laptop-width) {
+      width: 24px;
+      height: 24px;
+    }
+
+    @media (min-width: $desktop-width) {
+      width: 27px;
+      height: 27px;
+    }
+  }
+}
+
+.modal-info__heading {
+  margin: 0;
+}
+
+.modal-info__text {
+  margin: 10px 0;
+  color: var(--text-weak-color);
+}
+
+.modal-info__accent {
+  font-weight: 500;
+  color: var(--brand-color);
+}
+
+.modal-info__button {
+  width: 100%;
+  margin: 10px 0 0;
+}

@@ -23,7 +23,7 @@ mixin profile-form({ birthDate })
     .profile-form__section
       .profile-form__phone
         p.profile-form__phone-label.field-label Номер телефона
-        p.profile__phone-number +7 (222) 222-22-22
+        p.profile-form__phone-number +7 (222) 222-22-22
     fieldset.profile-form__section
       .profile-form__section-header
         legend.profile-form__section-heading Личные данные
@@ -46,7 +46,7 @@ mixin profile-form({ birthDate })
       .profile-form__birth-date
         p.profile-form__birth-date-label.field-label Дата рождения
         if birthDate
-          +info-button({ text: 'Изменить дату рождения' })
+          +info-button({ text: 'Изменить дату рождения' })(data-modal-opener='birth-date-info')
         p.profile-form__birth-date-text Поздравим вас с Днем рождения!
         if  birthDate
           p.profile-form__birth-date-value

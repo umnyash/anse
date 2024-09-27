@@ -276,6 +276,19 @@
   }
 }
 
+.modal--with_info {
+  .modal__inner {
+    @media (min-width: $wide-tablet-width) {
+      max-width: 624px;
+      padding: 33px 30px;
+    }
+
+    @media (min-width: $desktop-width) {
+      padding: 30px;
+    }
+  }
+}
+
 .modal--with_alert {
   .modal__inner {
     @media (min-width: $wide-tablet-width) {

@@ -67,7 +67,7 @@
   }
 }
 
-.profile__phone-number {
+.profile-form__phone-number {
   padding: 16px;
   border: 1px solid var(--border-light-color);
   border-radius: 8px;
@@ -75,6 +75,7 @@
   font-size: 16px;
   line-height: 1;
   font-weight: 500;
+  cursor: default;
 }
 
 .profile-form__section-header {
@@ -159,6 +160,7 @@
   font-size: 16px;
   line-height: 24px;
   color: var(--text-weak-color);
+  cursor: default;
 
   @media (min-width: $tablet-width) {
     grid-template-columns: 102px 1fr 141px;

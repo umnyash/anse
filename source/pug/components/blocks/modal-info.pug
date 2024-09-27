@@ -1,0 +1,10 @@
+mixin modal-info
+  section.modal-info&attributes(attributes)
+    .modal-info__heading-wrapper
+      h2.modal-info__heading.heading.heading--size_s Изменить дату рождения
+    p.modal-info__text #[strong.modal-info__accent Дату рождения можно ввести только один раз!] Чтобы ее сменить, обратитесь, пожалуйста, к нашему менеджеру
+    +button({
+      tag: 'a',
+      href: '#',
+      text: 'Связаться с менеджером'
+    })(class='modal-info__button button--solid-primary' data-modal-opener='birth-date' data-modal-close-button)
