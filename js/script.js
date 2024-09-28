@@ -19,6 +19,7 @@ const KeyCode = Object.freeze({
   BACKSPACE: 'Backspace',
   ESCAPE: 'Escape'
 });
+const MONTHS_NAMES = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
@@ -95,6 +96,24 @@ function getPaginationButtonCreator() {
       <span class='visually-hidden'>${slideName} ${index + 1}.</span>
     </button>
   `;
+}
+function initFormResending(form, alert) {
+  alert.button.addEventListener('click', evt => {
+    evt.preventDefault();
+    form.addListener(FormEvents.SUBMIT_START, onFormSubmitStart);
+    form.formElement.requestSubmit();
+  });
+  function onFormSubmitStart() {
+    form.removeListener(FormEvents.SUBMIT_START, onFormSubmitStart);
+    form.addListener(FormEvents.SUBMIT_END, onFormSubmitEnd);
+    alert.button.disabled = true;
+    alert.button.classList.add('button--pending');
+  }
+  ;
+  function onFormSubmitEnd() {
+    form.removeListener(FormEvents.SUBMIT_END, onFormSubmitEnd);
+    alert.close();
+  }
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -174,17 +193,18 @@ class Modal {
       document.body.append(this.modalElement);
     }
   }
+  initOpener = openerElement => {
+    openerElement.addEventListener('click', evt => {
+      evt.preventDefault();
+      if (this.onOpenerClick) {
+        this.onOpenerClick(evt);
+      }
+      this.open();
+    });
+  };
   initOpeners = () => {
     const openerElements = document.querySelectorAll(`[data-modal-opener="${this.name}"]`);
-    openerElements.forEach(openerElement => {
-      openerElement.addEventListener('click', evt => {
-        evt.preventDefault();
-        if (this.onOpenerClick) {
-          this.onOpenerClick(evt);
-        }
-        this.open();
-      });
-    });
+    openerElements.forEach(this.initOpener);
   };
   open = () => {
     this.modalElement.showModal();
@@ -404,7 +424,6 @@ class Form extends PubSub {
       evt.preventDefault();
       const isValid = this.validator.validate();
       if (isValid) {
-        console.log('Форма валидна');
         this.emit(FormEvents.SUBMIT_START);
         this.submitButtonElement.disabled = true;
         this.submitButtonElement.classList.add('button--pending');
@@ -425,7 +444,6 @@ class Form extends PubSub {
           this.submitButtonElement.classList.remove('button--pending');
         });
       } else {
-        console.log('Форма невалидна');
         if (this.formElement.matches('.simple-form')) {
           const fieldWrapperElement = this.formElement.querySelector('.simple-form__inner');
           fieldWrapperElement.classList.remove('shake');
@@ -623,6 +641,118 @@ class ModalEntry extends Modal {
     this.onOpenerClick = () => {
       this.reset();
     };
+  };
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ *  birth-date-modal-form.js
+ */
+class BirthDateModalForm extends Modal {
+  constructor(modalElement, infoModal) {
+    super(modalElement);
+    this.formElement = modalElement.querySelector('.birth-date-modal-form');
+    this.dayFieldElement = this.formElement.querySelector('.birth-date-modal-form__item-day input');
+    this.monthFieldElement = this.formElement.querySelector('.birth-date-modal-form__month-select');
+    this.yearFieldElement = this.formElement.querySelector('.birth-date-modal-form__item-year input');
+    this.submitButtonElement = this.formElement.querySelector('.birth-date-modal-form__submit-button');
+    this.backButtonElement = this.formElement.querySelector('.birth-date-modal-form__back-button');
+    this.actionUrl = this.formElement.action;
+    this.infoModal = infoModal;
+    this.form = new PubSub();
+    this.form.formElement = this.formElement;
+    this.step = 1;
+    this.init();
+  }
+  validate = () => this.dayFieldElement.value && this.monthFieldElement.value;
+  disableSubmitButton = () => {
+    this.submitButtonElement.classList.add('button--disabled');
+    this.submitButtonElement.disabled = true;
+  };
+  enableSubmitButton = () => {
+    this.submitButtonElement.classList.remove('button--disabled');
+    this.submitButtonElement.disabled = false;
+  };
+  setSumbitButtonState = () => {
+    const isValid = this.validate();
+    if (isValid) {
+      this.enableSubmitButton();
+    } else {
+      this.disableSubmitButton();
+    }
+  };
+  switchStep = step => {
+    if (step === 1) {
+      this.formElement.classList.remove('birth-date-modal-form--step-2');
+      this.step = 1;
+    } else if (step === 2) {
+      this.formElement.classList.add('birth-date-modal-form--step-2');
+      this.step = 2;
+    }
+  };
+  updateBlockOnPage = () => {
+    const wrapperElement = document.querySelector('.profile-form__birth-date');
+    const labelElement = wrapperElement.querySelector('.profile-form__birth-date-label');
+    const formOpenerElement = wrapperElement.querySelector('.profile-form__birth-date-button');
+    const buttonElement = createElementByString(`
+      <button class="profile-form__birth-data-info-button info-button" type="button" data-modal-opener="birth-date-info">
+        <span class="visually-hidden">Изменить дату рождения</span>
+      </button>
+    `);
+    this.infoModal.initOpener(buttonElement);
+    const dateElement = createElementByString(`
+      <p class="profile-form__birth-date-value">
+        <span>${this.dayFieldElement.value}</span>
+        <span>${MONTHS_NAMES[this.monthFieldElement.value - 1]}</span>
+        <span>${this.yearFieldElement.value}</span>
+      </p>
+    `);
+    labelElement.insertAdjacentElement('afterend', buttonElement);
+    formOpenerElement.replaceWith(dateElement);
+  };
+  onFormInput = evt => {
+    this.setSumbitButtonState();
+  };
+  onFormSubmit = evt => {
+    evt.preventDefault();
+    if (this.step === 1) {
+      this.switchStep(2);
+    } else if (this.step === 2) {
+      this.form.emit(FormEvents.SUBMIT_START);
+      this.submitButtonElement.disabled = true;
+      this.submitButtonElement.classList.add('button--pending');
+      const formData = new FormData(evt.target);
+      sendData(this.actionUrl, formData, data => {
+        this.close();
+        showNotification({
+          text: 'Данные профиля<br> успешно сохранены',
+          status: 'success'
+        });
+        this.updateBlockOnPage();
+      }, data => {
+        const alert = showAlert({
+          heading: 'Не получилось сохранить дату',
+          button: {
+            text: 'Попробовать еще раз'
+          }
+        });
+        initFormResending(this.form, alert);
+      }, () => {
+        this.form.emit(FormEvents.SUBMIT_END);
+        this.submitButtonElement.disabled = false;
+        this.submitButtonElement.classList.remove('button--pending');
+      });
+    }
+  };
+  onBackButtonClick = () => {
+    this.switchStep(1);
+  };
+  init = () => {
+    this.setSumbitButtonState();
+    this.formElement.addEventListener('change', this.onFormInput);
+    this.formElement.addEventListener('input', this.onFormInput);
+    this.formElement.addEventListener('submit', this.onFormSubmit);
+    this.backButtonElement.addEventListener('click', this.onBackButtonClick);
   };
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
@@ -1729,17 +1859,14 @@ function initSetSlider(sliderElement) {
 function initSet(setElement) {
   const sliderElement = setElement.querySelector('.set__slider');
   const slideElements = Array.from(sliderElement.querySelectorAll('.set__slider-item'));
-  console.log(slideElements);
   const modalElement = document.querySelector('[data-modal="set-gallery"]');
   const modalMediaElements = modalElement.querySelectorAll('.modal-gallery__list-item');
   new SimpleBar(modalElement, {
     autoHide: false
   });
-  console.log(modalMediaElements);
   new Modal(modalElement, {
     onOpenerClick: evt => {
       const slideElementIndex = slideElements.indexOf(evt.currentTarget);
-      console.log('Click on', evt.currentTarget);
       setTimeout(() => {
         modalMediaElements[slideElementIndex].scrollIntoView({
           behavior: 'smooth'
@@ -1805,6 +1932,32 @@ function showAlert(_ref7) {
   requestAnimationFrame(() => alert.open());
   return alert;
 }
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * simple-filter-slider.js
+ */
+function showNotification(_ref8) {
+  let {
+    text,
+    status
+  } = _ref8;
+  const notificationElement = createElementByString(`
+    <dialog class="info-popup ${status && `info-popup--${status}`}">
+      <p class="info-popup__text">${text}</p>
+    </dialog>
+  `);
+  document.body.append(notificationElement);
+  requestAnimationFrame(() => notificationElement.show());
+  setTimeout(() => {
+    notificationElement.close();
+  }, 3000000000000);
+  notificationElement.addEventListener('close', () => {
+    setTimeout(() => {
+      notificationElement.remove();
+    }, MODAL_ANIMATION_DURATION);
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * simple-filter-slider.js
@@ -2016,6 +2169,16 @@ let modalEntry = null;
 const modalEntryElement = document.querySelector('[data-modal="entry"]');
 if (modalEntryElement) {
   modalEntry = new ModalEntry(modalEntryElement);
+}
+let birthDateInfoModal = null;
+const birthDateInfoModalElement = document.querySelector('[data-modal="birth-date-info"]');
+if (birthDateInfoModalElement) {
+  birthDateInfoModal = new Modal(birthDateInfoModalElement);
+}
+let birthDateModalForm = null;
+const birthDateModalFormElement = document.querySelector('[data-modal="birth-date"]');
+if (birthDateModalFormElement && birthDateInfoModal) {
+  birthDateModalForm = new BirthDateModalForm(birthDateModalFormElement, birthDateInfoModal);
 }
 initReviewsIntroPhotos();
 initConsumersPhotos();
