@@ -1,0 +1,3 @@
+mixin info-popup({ status, text })
+  dialog.info-popup(class= status && `info-popup--${status}`)&attributes(attributes)
+    .info-popup__text!= text

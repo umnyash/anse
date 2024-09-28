@@ -25,7 +25,6 @@ document.querySelectorAll('.product').forEach(initProduct);
 document.querySelectorAll('[data-modal="offer"]').forEach((modalElement) => new Modal(modalElement));
 document.querySelectorAll('[data-modal="size-chart"]').forEach((modalElement) => new Modal(modalElement));
 document.querySelectorAll('[data-modal="manager-contacts"]').forEach((modalElement) => new Modal(modalElement));
-document.querySelectorAll('[data-modal="birth-date-info"]').forEach((modalElement) => new Modal(modalElement));
 document.querySelectorAll('.set').forEach(initSet);
 document.querySelectorAll('.cart__form, .product__cart').forEach(initProductsCounters);
 document.querySelectorAll('.catalog__sorting').forEach(initCatalogSorting);
@@ -57,6 +56,18 @@ let modalEntry = null;
 const modalEntryElement = document.querySelector('[data-modal="entry"]');
 if (modalEntryElement) {
   modalEntry = new ModalEntry(modalEntryElement);
+}
+
+let birthDateInfoModal = null;
+const birthDateInfoModalElement = document.querySelector('[data-modal="birth-date-info"]');
+if (birthDateInfoModalElement) {
+  birthDateInfoModal = new Modal(birthDateInfoModalElement);
+}
+
+let birthDateModalForm = null;
+const birthDateModalFormElement = document.querySelector('[data-modal="birth-date"]');
+if (birthDateModalFormElement && birthDateInfoModal) {
+  birthDateModalForm = new BirthDateModalForm(birthDateModalFormElement, birthDateInfoModal);
 }
 
 initReviewsIntroPhotos()

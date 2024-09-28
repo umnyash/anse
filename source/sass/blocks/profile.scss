@@ -21,6 +21,10 @@
 
 .profile__inner {
   @media (min-width: $wide-tablet-width) {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1600px;
     padding: 0 var(--edge-indent);
+    margin: 0 auto;
   }
 }

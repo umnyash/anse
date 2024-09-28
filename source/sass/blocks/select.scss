@@ -1,6 +1,7 @@
 .choices {
   border: none;
   border-radius: 8px;
+  text-align: left;
   font: 500 16px/1 $main-font-family;
 }
 
@@ -11,7 +12,7 @@
   height: 100%;
   border: none;
   margin: 0;
-  background: currentColor;
+  background: var(--text-weak-color);
   mask: url("../img/icons.svg#controls_arrow-without-tail");
   transition: transform $duration-m ease-in-out;
 }

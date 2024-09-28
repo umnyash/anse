@@ -121,7 +121,7 @@
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: auto 1fr;
-  align-items: center;
+  place-items: center start;
   gap: 10px;
 
   @media (min-width: $laptop-width) {
@@ -154,6 +154,7 @@
 .profile-form__birth-date-value {
   grid-column: 1 / -1;
   display: grid;
+  width: 100%;
   margin: 0;
   column-gap: 10px;
   grid-template-columns: 85px 1fr 85px;

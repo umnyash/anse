@@ -99,8 +99,6 @@ class Form extends PubSub {
       const isValid = this.validator.validate();
 
       if (isValid) {
-        console.log('Форма валидна')
-
         this.emit(FormEvents.SUBMIT_START);
         this.submitButtonElement.disabled = true;
         this.submitButtonElement.classList.add('button--pending');
@@ -130,8 +128,6 @@ class Form extends PubSub {
           }
         );
       } else {
-        console.log('Форма невалидна')
-
         if (this.formElement.matches('.simple-form')) {
           const fieldWrapperElement = this.formElement.querySelector('.simple-form__inner');
           fieldWrapperElement.classList.remove('shake');

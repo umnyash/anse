@@ -1,0 +1,97 @@
+.info-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 7px 10px 11px;
+  border: none;
+  margin: 0;
+  text-align: center;
+  font: 400 16px/19px $main-font-family;
+  color: var(--text-color);
+  background: var(--background-additional-color);
+  transition: transform $duration-m ease-in-out;
+
+  @media (max-width: ($wide-tablet-width - 1)) {
+    transform: translateY(-100%);
+  }
+
+  @media (min-width: $wide-tablet-width) {
+    top: 175px;
+    right: var(--edge-indent);
+    left: auto;
+    display: grid;
+    width: 295px;
+    padding: 19px;
+    border: 1px solid currentColor;
+    border-radius: 8px;
+    grid-template-columns: auto 1fr;
+    column-gap: 20px;
+    align-items: center;
+    text-align: left;
+    font-size: 20px;
+    line-height: 22px;
+    opacity: 0;
+    visibility: hidden;
+    transition-property: opacity, visibility;
+
+    &::before {
+      content: "";
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
+  }
+
+  @media (min-width: $desktop-width) {
+    top: 200px;
+    right: calc((100% - 1520px) / 2);
+    width: 338px;
+    font-size: 24px;
+    line-height: 26px;
+
+    &::before {
+      width: 41px;
+      height: 41px;
+    }
+  }
+}
+
+.info-popup__text {
+  margin: 0;
+}
+
+.info-popup--success {
+  @media (max-width: ($wide-tablet-width - 1)) {
+    color: var(--text-light-color);
+    background: var(--success-color);
+  }
+
+  @media (min-width: $wide-tablet-width) {
+    border-color: var(--success-color);
+
+    &::before {
+      background: var(--success-color) url("../img/icons.svg#controls_checkmark") no-repeat 50% 50% / 14px 14px;
+    }
+  }
+
+  @media (min-width: $desktop-width) {
+    &::before {
+      background-size: 16px 16px;
+    }
+  }
+}
+
+.info-popup[open] {
+  @media (max-width: ($wide-tablet-width - 1)) {
+    transform: translateY(0);
+  }
+
+  @media (min-width: $wide-tablet-width) {
+    opacity: 1;
+    visibility: visible;
+  }
+}

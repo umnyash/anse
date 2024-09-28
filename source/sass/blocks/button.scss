@@ -51,6 +51,12 @@
   pointer-events: none;
 }
 
+.button--solid-primary.button--disabled:not(.button--pending):not(.button--pending-with-text) {
+  border-color: var(--text-weak-color-3);
+  background: var(--text-weak-color-3);
+  opacity: 1;
+}
+
 [class*="button--simple"] {
   position: relative;
   font-size: 16px;

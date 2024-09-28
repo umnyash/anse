@@ -50,15 +50,15 @@ mixin profile-form({ birthDate })
         p.profile-form__birth-date-text Поздравим вас с Днем рождения!
         if  birthDate
           p.profile-form__birth-date-value
-            span 10
-            span августа
-            span 1991
+            span.profile-form__birth-date-value-day 10
+            span.profile-form__birth-date-value-month августа
+            span.profile-form__birth-date-value-year 1991
         else
           +button({
             tag: 'button',
             type: 'button',
             text: 'Добавить дату рождения'
-          })(class='profile-form__birth-date-button button--solid-brand')
+          })(class='profile-form__birth-date-button button--solid-brand' data-modal-opener='birth-date')
     fieldset.profile-form__section.profile-form__section--address
       .profile-form__section-header
         legend.profile-form__section-heading Адрес

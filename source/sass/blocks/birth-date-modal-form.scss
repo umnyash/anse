@@ -1,0 +1,132 @@
+.birth-date-modal-form {
+  font: 400 14px/17px $main-font-family;
+
+  @media (min-width: $wide-tablet-width) {
+    text-align: center;
+  }
+
+  @media (min-width: $laptop-width) {
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+.birth-date-modal-form__inner {
+  display: grid;
+  align-content: center;
+
+  @media (min-width: $wide-tablet-width) {
+    min-height: 241px;
+  }
+
+  @media (min-width: $desktop-width) {
+    min-height: 262px;
+  }
+}
+
+.birth-date-modal-form__heading {
+  margin: 0 0 10px;
+
+  @media (min-width: $wide-tablet-width) {
+    max-width: 520px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  @media (min-width: $desktop-width) {
+    max-width: none;
+  }
+}
+
+.birth-date-modal-form__text {
+  margin: 0;
+  color: var(--text-weak-color);
+}
+
+.birth-date-modal-form__accent {
+  font-weight: 500;
+  color: var(--brand-color);
+}
+
+.birth-date-modal-form__fields {
+  display: grid;
+  margin: 20px 0;
+  grid-template-columns: 85px 1fr 95px;
+  column-gap: 10px;
+  align-items: start;
+
+  .choices {
+    margin: 0;
+  }
+
+  .choices.is-open {
+    margin-bottom: 166px;
+
+    @media (min-width: $tablet-width) {
+      margin-bottom: 160px;
+    }
+  }
+
+  .choices__list--dropdown {
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 52px;
+      background: linear-gradient(to top, var(--background-additional-color), transparent);
+      pointer-events: none;
+    }
+  }
+
+  .choices__list--dropdown .choices__list.choices__list.choices__list {
+    width: calc(100% + 20px);
+    max-height: 246px;
+    overflow: auto;
+  }
+
+  @media (min-width: $tablet-width) {
+    grid-template-columns: 111px 1fr 168px;
+  }
+
+  @media (min-width: $wide-tablet-width) {
+    margin-bottom: 0;
+  }
+}
+
+.birth-date-modal-form__footer {
+  display: grid;
+  row-gap: 10px;
+  margin: 20px 0 0;
+}
+
+.birth-date-modal-form:not(.birth-date-modal-form--step-2) {
+  .birth-date-modal-form__back-button {
+    display: none;
+  }
+
+  .birth-date-modal-form__heading-step-2-text {
+    display: none;
+  }
+}
+
+.birth-date-modal-form--step-2 {
+  .birth-date-modal-form__heading-step-1-text {
+    display: none;
+  }
+
+  .birth-date-modal-form__fields {
+    display: none;
+  }
+
+  .birth-date-modal-form__footer {
+    @media (min-width: $wide-tablet-width) {
+      margin-top: 30px;
+    }
+
+    @media (min-width: $desktop-width) {
+      margin-top: 40px;
+    }
+  }
+}

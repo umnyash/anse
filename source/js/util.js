@@ -82,4 +82,27 @@ function getPaginationButtonCreator(slideName = 'Слайд') {
     </button>
   `;
 }
+
+function initFormResending(form, alert) {
+  alert.button.addEventListener('click', (evt) => {
+    evt.preventDefault();
+
+    form.addListener(FormEvents.SUBMIT_START, onFormSubmitStart);
+    form.formElement.requestSubmit();
+  });
+
+  function onFormSubmitStart() {
+    form.removeListener(FormEvents.SUBMIT_START, onFormSubmitStart);
+
+    form.addListener(FormEvents.SUBMIT_END, onFormSubmitEnd);
+
+    alert.button.disabled = true;
+    alert.button.classList.add('button--pending');
+  };
+
+  function onFormSubmitEnd() {
+    form.removeListener(FormEvents.SUBMIT_END, onFormSubmitEnd);
+    alert.close();
+  }
+}
 /* * * * * * * * * * * * * * * * * * * * * * * */

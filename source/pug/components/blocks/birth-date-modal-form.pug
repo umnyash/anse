@@ -1,0 +1,95 @@
+-
+  var monthSelect = {
+    name: 'month',
+    placeholder: 'месяц',
+    options: [
+      {
+        text: 'январь',
+        value: '1',
+      },
+      {
+        text: 'февраль',
+        value: '2',
+      },
+      {
+        text: 'март',
+        value: '3',
+      },
+      {
+        text: 'апрель',
+        value: '4',
+      },
+      {
+        text: 'май',
+        value: '5',
+      },
+      {
+        text: 'июнь',
+        value: '6',
+      },
+      {
+        text: 'июль',
+        value: '7',
+      },
+      {
+        text: 'август',
+        value: '8',
+      },
+      {
+        text: 'сентябрь',
+        value: '9',
+      },
+      {
+        text: 'октябрь',
+        value: '10',
+      },
+      {
+        text: 'ноябрь',
+        value: '11',
+      },
+      {
+        text: 'декабрь',
+        value: '12',
+      },
+    ],
+  };
+
+mixin birth-date-modal-form
+  form.birth-date-modal-form(action='https://fakestoreapi.com/products' method='post' target='_blank')&attributes(attributes)
+    .birth-date-modal-form__inner
+      h2.birth-date-modal-form__heading.heading.heading--size_s
+        span.birth-date-modal-form__heading-step-1-text Добавить дату рождения
+        span.birth-date-modal-form__heading-step-2-text Вы уверены, что хотите сохранить дату рождения?
+      p.birth-date-modal-form__text #[strong.birth-date-modal-form__accent Будьте внимательны - дату рождения можно ввести только один раз!] Чтобы ее сменить, нужно будет обратиться к нашему менеджеру
+      .birth-date-modal-form__fields
+        +text-field({
+          type: 'number',
+          name: 'day',
+          label: {
+            text: 'День',
+            hidden: 'true'
+          },
+          placeholder: 'день',
+        })(class='birth-date-modal-form__item-day text-field--alter')
+        +select(monthSelect)(class='birth-date-modal-form__month-select')
+        +text-field({
+          type: 'number',
+          name: 'year',
+          label: {
+            text: 'Год',
+            hidden: 'true'
+          },
+          placeholder: 'год'
+        })(class='birth-date-modal-form__item-year text-field--alter')
+      .birth-date-modal-form__footer
+        +button({
+          tag: 'button',
+          type: 'submit',
+          text: 'Сохранить',
+          disabled: true,
+        })(class='birth-date-modal-form__submit-button button--solid-primary button--disabled')
+        +button({
+          tag: 'button',
+          type: 'button',
+          text: 'Вернуться назад'
+        })(class='birth-date-modal-form__back-button button--solid-brand')

@@ -23,20 +23,22 @@ class Modal {
     }
   }
 
+  initOpener = (openerElement) => {
+    openerElement.addEventListener('click', (evt) => {
+      evt.preventDefault();
+
+      if (this.onOpenerClick) {
+        this.onOpenerClick(evt);
+      }
+
+      this.open();
+    });
+  };
+
   initOpeners = () => {
     const openerElements = document.querySelectorAll(`[data-modal-opener="${this.name}"]`);
 
-    openerElements.forEach((openerElement) => {
-      openerElement.addEventListener('click', (evt) => {
-        evt.preventDefault();
-
-        if (this.onOpenerClick) {
-          this.onOpenerClick(evt);
-        }
-
-        this.open();
-      });
-    });
+    openerElements.forEach(this.initOpener);
   }
 
   open = () => {
