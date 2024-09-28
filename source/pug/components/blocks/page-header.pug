@@ -1,7 +1,7 @@
-mixin page-header({ heading })
+mixin page-header({ heading, backButtonLink })
   header.page-header&attributes(attributes)
     .container
       .page-header__inner
         h1.page-header__heading.heading.heading--size_l.heading--alter= heading
-        a.page-header__back-button(href='#')
+        a.page-header__back-button(href= backButtonLink || '#')
           span.visually-hidden Назад
