@@ -1950,7 +1950,7 @@ function showNotification(_ref8) {
   requestAnimationFrame(() => notificationElement.show());
   setTimeout(() => {
     notificationElement.close();
-  }, 3000000000000);
+  }, 3000);
   notificationElement.addEventListener('close', () => {
     setTimeout(() => {
       notificationElement.remove();
