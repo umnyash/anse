@@ -346,80 +346,26 @@ class FormValidator {
  */
 class Form extends PubSub {
   constructor(formElement) {
+    let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+      resetAfterSubmit: true
+    };
     super();
     this.formElement = formElement;
     this.textFieldControlElements = this.formElement.querySelectorAll('.text-field__control, .simple-form__control, .text-area__control');
-    this.imagesFieldElement = this.formElement.querySelector('.images-field');
-    this.imagesFieldListElement = this.formElement.querySelector('.images-field__list');
     this.actionUrl = this.formElement.action;
     this.submitButtonElement = this.formElement.querySelector('[data-submit-button]');
     this.validator = new FormValidator(this.formElement);
     this.siteHeaderElement = document.querySelector('.page__site-header');
     this.successHandler = null;
     this.errorHandler = null;
-    this.imagesFieldErrorTextElement = null;
+    this.resetAfterSubmit = options.resetAfterSubmit;
     this.init();
   }
   setHandlers = (successHandler, errorHandler) => {
     this.successHandler = successHandler;
     this.errorHandler = errorHandler;
   };
-  resetImagesField = () => {
-    if (this.imagesFieldListElement) {
-      this.imagesFieldListElement.querySelectorAll('img').forEach(imageElement => {
-        URL.revokeObjectURL(imageElement.src);
-      });
-      this.imagesFieldListElement.innerHTML = '';
-    }
-    if (this.images) {
-      this.images.clear();
-    }
-  };
-  initImagesField = fieldElement => {
-    const controlElement = fieldElement.querySelector('.images-field__control');
-    const listElement = fieldElement.querySelector('.images-field__list');
-    this.images = new Set();
-    controlElement.addEventListener('change', evt => {
-      this.imagesFieldErrorTextElement?.remove();
-      const newFiles = Array.from(evt.target.files);
-      newFiles.forEach(file => {
-        if (file.type.startsWith('image/') && PHOTO_TYPES.some(it => file.name.toLowerCase().endsWith(it))) {
-          this.images.add(file);
-        } else {
-          this.imagesFieldErrorTextElement = createElementByString(`<p class="images-field__error-text">Не удалось загрузить фото, попробуйте снова</p>`);
-          listElement.insertAdjacentElement('beforebegin', this.imagesFieldErrorTextElement);
-        }
-      });
-      updateList();
-    });
-    const updateList = () => {
-      const fragment = document.createDocumentFragment();
-      this.images.forEach(file => {
-        const listItemElement = createElementByString(`
-          <li class="images-field__list-item">
-            <img class="images-field__preview" src=${URL.createObjectURL(file)} alt=''>
-            <button class="images-field__delete-button image-button image-button--size_xs image-button--primary image-button--icon_cross" type="button">
-              <span class="visually-hidden">Удалить фото</span>
-            </button>
-          </li>
-        `);
-        const previewElement = listItemElement.querySelector('.images-field__preview');
-        const deleteButtonElement = listItemElement.querySelector('.images-field__delete-button');
-        deleteButtonElement.addEventListener('click', evt => {
-          this.images.delete(file);
-          updateList();
-          URL.revokeObjectURL(previewElement.src);
-        });
-        fragment.append(listItemElement);
-      });
-      listElement.innerHTML = '';
-      listElement.append(fragment);
-    };
-  };
   init = () => {
-    if (this.imagesFieldElement) {
-      this.initImagesField(this.imagesFieldElement);
-    }
     this.formElement.addEventListener('submit', evt => {
       evt.preventDefault();
       const isValid = this.validator.validate();
@@ -428,12 +374,9 @@ class Form extends PubSub {
         this.submitButtonElement.disabled = true;
         this.submitButtonElement.classList.add('button--pending');
         const formData = new FormData(evt.target);
-        this.images?.forEach(file => {
-          formData.append('images[]', file);
-        });
         sendData(this.actionUrl, formData, data => {
           this.successHandler(data);
-          if (!this.formElement.matches('.modal-entry__form--code')) {
+          if (this.resetAfterSubmit) {
             this.formElement.reset();
           }
         }, data => {
@@ -474,7 +417,6 @@ class Form extends PubSub {
         this.textFieldControlElements?.forEach(textFieldElement => {
           textFieldElement.dispatchEvent(inputEvent);
         });
-        this.resetImagesField();
         this.validator.reset();
       }, 0);
     });
@@ -824,7 +766,18 @@ class Product {
   closeSizeModal = () => {
     this.sizeModal.close();
   };
+  initColorButtons = () => {
+    const colorSectionElement = this.formElement.querySelector('.product__color-section');
+    const colorOutputElement = colorSectionElement.querySelector('.product__color-value');
+    const colorListElement = colorSectionElement.querySelector('.product__colors');
+    colorListElement.addEventListener('change', evt => {
+      const colorElement = evt.target.closest('.color');
+      const colorTitle = colorElement.querySelector('.color__title').textContent;
+      colorOutputElement.textContent = colorTitle;
+    });
+  };
   init() {
+    this.initColorButtons();
     this.sizeModal = new Modal(this.sizeModalElement);
     this.sizeModalFormElement.addEventListener('change', this.onSizeModalFormChange);
   }
@@ -2169,6 +2122,30 @@ let modalEntry = null;
 const modalEntryElement = document.querySelector('[data-modal="entry"]');
 if (modalEntryElement) {
   modalEntry = new ModalEntry(modalEntryElement);
+}
+let profileForm = null;
+const profileFormElement = document.querySelector('.profile-form');
+if (profileFormElement) {
+  profileForm = new Form(profileFormElement, {
+    resetAfterSubmit: false
+  });
+  profileForm.setHandlers(data => {
+    //
+    console.log('Распарсенный ответ сервера:', data);
+    showNotification({
+      text: 'Данные профиля<br> успешно сохранены',
+      status: 'success'
+    });
+  }, data => {
+    console.log('Распарсенный ответ сервера:', data);
+    const alert = showAlert({
+      heading: 'Не удалось сохранить данные',
+      button: {
+        text: 'Попробовать еще раз'
+      }
+    });
+    initFormResending(profileForm, alert);
+  });
 }
 let birthDateInfoModal = null;
 const birthDateInfoModalElement = document.querySelector('[data-modal="birth-date-info"]');
