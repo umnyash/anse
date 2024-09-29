@@ -83,7 +83,20 @@ class Product {
     this.sizeModal.close();
   };
 
+  initColorButtons = () => {
+    const colorSectionElement = this.formElement.querySelector('.product__color-section');
+    const colorOutputElement = colorSectionElement.querySelector('.product__color-value');
+    const colorListElement = colorSectionElement.querySelector('.product__colors');
+
+    colorListElement.addEventListener('change', (evt) => {
+      const colorElement = evt.target.closest('.color');
+      const colorTitle = colorElement.querySelector('.color__title').textContent;
+      colorOutputElement.textContent = colorTitle;
+    });
+  };
+
   init() {
+    this.initColorButtons();
     this.sizeModal = new Modal(this.sizeModalElement);
     this.sizeModalFormElement.addEventListener('change', this.onSizeModalFormChange);
   }

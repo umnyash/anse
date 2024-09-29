@@ -1,0 +1,32 @@
+.color {
+  display: inline-block;
+}
+
+.color__image {
+  display: block;
+  width: 28px;
+  height: 28px;
+  padding: 1px;
+  border: 1px solid var(--border-light-color-2);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+
+  @media (min-width: $laptop-width) {
+    width: 24px;
+    height: 24px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.color__control:enabled + .color__image {
+  cursor: pointer;
+}
+
+.color__control:checked + .color__image {
+  border-color: var(--text-color);
+}

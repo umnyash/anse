@@ -1,0 +1,11 @@
+mixin color({ title, value, src, checked, disabled })
+  label.color&attributes(attributes)
+    input.color__control.visually-hidden(
+      name='color'
+      type='radio'
+      value= value
+      checked= checked && ''
+      disabled= disabled && ''
+    )
+    img.color__image(src= src width='28' height='28' alt='')
+    span.color__title.visually-hidden= title

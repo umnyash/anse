@@ -33,6 +33,46 @@ mixin product
           h1.product__heading Шуба SETTE BLACK
           +product-badges({ badges: ['sale','new'] })(class='product__badges')
         +price-section(class='product__price-section')
+        section.product__color-section
+          h2.product__color-heading Цвет:
+          p.product__color-value Розовый фламинго
+          .product__colors
+            +color({
+              title: 'Розовый фламинго',
+              value: 'pink-flamingo',
+              src: 'img/colors/pink-flamingo.webp',
+              checked: true
+            })
+            +color({
+              title: 'Цвет 1',
+              value: 'color-1-value',
+              src: 'img/colors/1.webp'
+            })
+            +color({
+              title: 'Цвет 2',
+              value: 'color-2-value',
+              src: 'img/colors/2.webp'
+            })
+            +color({
+              title: 'Цвет 3',
+              value: 'color-3-value',
+              src: 'img/colors/3.webp'
+            })
+            +color({
+              title: 'Цвет 4',
+              value: 'color-4-value',
+              src: 'img/colors/4.webp'
+            })
+            +color({
+              title: 'Цвет 5',
+              value: 'color-5-value',
+              src: 'img/colors/5.webp'
+            })
+            +color({
+              title: 'Цвет 6',
+              value: 'color-6-value',
+              src: 'img/colors/6.webp'
+            })
         section.product__size-section
           h2.product__size-heading Размер
           a.product__size-link(href='#' data-modal-opener='size-chart') Таблица размеров
