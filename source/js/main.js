@@ -58,6 +58,36 @@ if (modalEntryElement) {
   modalEntry = new ModalEntry(modalEntryElement);
 }
 
+let profileForm = null;
+const profileFormElement = document.querySelector('.profile-form');
+if (profileFormElement) {
+  profileForm = new Form(profileFormElement, { resetAfterSubmit: false });
+
+  profileForm.setHandlers(
+    (data) => { //
+      console.log('Распарсенный ответ сервера:', data);
+
+      showNotification({
+        text: 'Данные профиля<br> успешно сохранены',
+        status: 'success'
+      });
+    },
+
+    (data) => {
+      console.log('Распарсенный ответ сервера:', data);
+
+      const alert = showAlert({
+        heading: 'Не удалось сохранить данные',
+        button: {
+          text: 'Попробовать еще раз'
+        }
+      });
+
+      initFormResending(profileForm, alert);
+    }
+  );
+}
+
 let birthDateInfoModal = null;
 const birthDateInfoModalElement = document.querySelector('[data-modal="birth-date-info"]');
 if (birthDateInfoModalElement) {

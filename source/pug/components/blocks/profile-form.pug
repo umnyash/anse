@@ -36,12 +36,14 @@ mixin profile-form({ birthDate })
         placeholder: 'Введите имя и фамилию'
       })(class='profile-form__name-field')
       +text-field({
-        type: 'text',
-        name: 'name',
+        type: 'email',
+        name: 'email',
         label: {
           text: 'Электронная почта',
         },
-        placeholder: 'Email'
+        placeholder: 'Email',
+        required: true,
+        dataName: 'email'
       })(class='profile-form__email-field')
       .profile-form__birth-date
         p.profile-form__birth-date-label.field-label Дата рождения
@@ -101,4 +103,4 @@ mixin profile-form({ birthDate })
         tag: 'button',
         type: 'submit',
         text: 'Сохранить'
-      })(class='profile-form__submit-button button--solid-primary-secondary')
+      })(class='profile-form__submit-button button--solid-primary-secondary' data-submit-button)

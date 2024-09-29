@@ -1,4 +1,4 @@
-mixin text-field({ label, name, type, value, maxlength, placeholder, required, readonly })
+mixin text-field({ label, name, type, value, maxlength, placeholder, required, readonly, dataName })
   .text-field&attributes(attributes)
     label.text-field__inner
       span(class= label.hidden ? 'visually-hidden' : 'text-field__label field-label')= label.text
@@ -11,4 +11,5 @@ mixin text-field({ label, name, type, value, maxlength, placeholder, required, r
           required= required && ''
           readonly= readonly && ''
           maxlength= maxlength
+          data-name= dataName
         )
