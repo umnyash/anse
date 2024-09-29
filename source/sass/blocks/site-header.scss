@@ -610,6 +610,11 @@
     .site-header__container {
       background: transparent;
     }
+
+    .user-navigation__counter {
+      color: var(--text-color);
+      background: var(--background-color);
+    }
   }
 
   @media (min-width: $laptop-width) {
@@ -620,6 +625,11 @@
 
     .site-header__container {
       background: transparent;
+    }
+
+    .user-navigation__counter {
+      color: var(--text-color);
+      background: var(--background-color);
     }
   }
 }
@@ -633,6 +643,11 @@
 
     .site-header__container {
       background: transparent;
+    }
+
+    .user-navigation__counter {
+      color: var(--text-color);
+      background: var(--background-color);
     }
   }
 }

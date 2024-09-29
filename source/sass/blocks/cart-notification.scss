@@ -88,7 +88,7 @@
   display: flex;
   margin: 15px 0 0;
   flex-wrap: wrap;
-  align-items: end;
+  align-items: flex-end;
   gap: 10px;
 
   @media (min-width: $desktop-width) {

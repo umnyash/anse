@@ -179,6 +179,18 @@
   }
 }
 
+.site-navigation__item--simple-submenu {
+  @media (min-width: $laptop-width) {
+    position: relative;
+
+    .site-navigation__list--level_2 {
+      min-width: 200px;
+      grid-template-columns: 100%;
+      gap: 10px;
+    }
+  }
+}
+
 // Скрытие вложенного меню на мобильной версии
 @media (max-width: ($laptop-width - 1)) {
   .site-navigation__link--opener.site-navigation__link--active {

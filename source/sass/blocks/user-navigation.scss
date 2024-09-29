@@ -53,6 +53,9 @@
   line-height: 1;
   color: var(--text-light-color);
   background: var(--background-dark-color);
+  transition-property: color, background-color;
+  transition-duration: $duration-m;
+  transition-timing-function: ease-in-out;
 
   @media (min-width: $desktop-width) {
     top: 0;
