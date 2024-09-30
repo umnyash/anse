@@ -1,6 +1,7 @@
 mixin select(select)
-  select.select(name= select.name)&attributes(attributes)
-    if select.placeholder
-      option(value='')= select.placeholder
-    each option in select.options
-      option(value= option.value)= option.text
+  .select&attributes(attributes)
+    select.select__control(name= select.name)
+      if select.placeholder
+        option(value='')= select.placeholder
+      each option in select.options
+        option(value= option.value)= option.text

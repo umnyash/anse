@@ -1,0 +1,27 @@
+mixin region-modal-form
+  form.modal-form.modal-form--region(action='https://fakestoreapi.com/products' method='post' target='_blank')&attributes(attributes)
+    .modal-form__header
+      h2.modal-form__heading.heading.heading--size_s Выберите регион
+    +button({
+      tag: 'button',
+      type: 'button',
+      text: 'Определить местоположение'
+    })(class='modal-form__location-button button--simple-primary button--simple-with-icon_location')
+    .modal-form__select-wrapper
+      p.modal-form__select-label.field-label Страна
+      +select(countrySelect)(class='modal-form__country-select')
+    +text-field({
+      type: 'text',
+      name: 'city',
+      label: {
+        text: 'Город, населённый пункт',
+      },
+      placeholder: 'Введите название города',
+      dataList: true
+    })(class='modal-form__text-field modal-form__city-field')
+    .modal-form__footer
+      +button({
+        tag: 'button',
+        type: 'button',
+        text: 'Сохранить'
+      })(class='modal-form__submit-button button--solid-primary')

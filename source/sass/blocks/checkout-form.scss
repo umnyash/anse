@@ -60,19 +60,71 @@
   }
 }
 
+.checkout-form__pick-up-point-field {
+  cursor: default;
+  pointer-events: none;
+
+  .text-field__control {
+    color: var(--text-weak-color-3);
+  }
+
+  .text-field__control.text-field__control::placeholder {
+    color: var(--text-weak-color-3);
+  }
+}
+
+.checkout-form__delivery-address-field.checkout-form__delivery-address-field {
+  display: none;
+  grid-column: 1 / -1;
+
+  .text-field__control.text-field__control::placeholder {
+    color: var(--brand-color);
+  }
+
+  .text-field__control:placeholder-shown {
+    text-align: center;
+  }
+}
+
 .checkout-form__section--user {
   gap: 10px;
 
   @media (min-width: $laptop-width) {
-    display: grid;
+    grid-template-columns: repeat(6, 1fr);
     row-gap: 20px;
+  }
+
+  @media (min-width: $desktop-width) {
+    column-gap: 20px;
   }
 
   .checkout-form__section-header {
     margin-bottom: 10px;
 
     @media (min-width: $laptop-width) {
+      grid-column: 1 / -1;
       margin-bottom: 0;
+    }
+  }
+
+  .checkout-form__name-field,
+  .checkout-form__email-field {
+    @media (min-width: $laptop-width) {
+      grid-column: span 3;
+    }
+  }
+
+  .checkout-form__phone-field,
+  .checkout-form__postal-code-field,
+  .checkout-form__pick-up-point-field {
+    @media (min-width: $laptop-width) {
+      grid-column: span 2;
+    }
+  }
+
+  .checkout-form__comment {
+    @media (min-width: $laptop-width) {
+      grid-column: 1 / -1;
     }
   }
 }
@@ -137,8 +189,19 @@
   display: grid;
 }
 
-.checkout-form__delivery-company,
+.checkout-form__delivery-company {
+  @media (max-width: ($laptop-width - 1)) {
+    margin-top: 10px;
+  }
+
+  &--hidden {
+    display: none;
+  }
+}
+
 .checkout-form__delivery-method {
+  display: none;
+
   @media (max-width: ($laptop-width - 1)) {
     margin-top: 10px;
   }
@@ -180,6 +243,7 @@
 }
 
 .checkout-form__self-pickup {
+  display: none;
   max-width: 370px;
   font-size: 16px;
   line-height: 19px;
@@ -202,4 +266,72 @@
 
 .checkout-form__self-pickup-link {
   margin: 0 0 20px;
+}
+
+.checkout-form--delivery-company_sdek {
+  .checkout-form__delivery-method {
+    display: block;
+  }
+
+  .delivery-methods__item--courier,
+  .delivery-methods__item--point {
+    display: block;
+  }
+}
+
+.checkout-form--delivery-company_post {
+  .checkout-form__delivery-method {
+    display: block;
+  }
+
+  .delivery-methods__item--courier,
+  .delivery-methods__item--point {
+    display: block;
+  }
+}
+
+.delivery-methods__item {
+  display: none;
+}
+
+.checkout-form--delivery-company_self-pickup {
+  .checkout-form__self-pickup {
+    display: block;
+  }
+}
+
+.checkout-form--delivery-company_sdek.checkout-form--delivery-method_point,
+.checkout-form--delivery-company_post.checkout-form--delivery-method_point {
+  .checkout-form__pick-up-point-field {
+    cursor: pointer;
+    pointer-events: auto;
+
+    .text-field__control {
+      color: inherit;
+    }
+
+    .text-field__control.text-field__control::placeholder {
+      color: var(--text-weak-color);
+    }
+  }
+}
+
+.checkout-form--delivery-company_sdek.checkout-form--delivery-method_courier,
+.checkout-form--delivery-company_post.checkout-form--delivery-method_courier {
+  .checkout-form__delivery-address-field.checkout-form__delivery-address-field {
+    display: block;
+  }
+
+  .checkout-form__pick-up-point-field,
+  .checkout-form__postal-code-field {
+    display: none;
+  }
+
+  .checkout-form__name-field,
+  .checkout-form__phone-field,
+  .checkout-form__email-field {
+    @media (min-width: $laptop-width) {
+      grid-column: span 2;
+    }
+  }
 }

@@ -1,13 +1,13 @@
 mixin delivery-methods
   .delivery-methods&attributes(attributes)
     ul.delivery-methods__list
-      li.delivery-methods__item
-        input.delivery-methods__control.visually-hidden(id='courier-delivery-method-control' type='radio' name='delivery-method' value='courier')
+      li.delivery-methods__item.delivery-methods__item--courier
+        input.delivery-methods__control.visually-hidden(id='courier-delivery-method-control' type='radio' name='delivery-method' value='courier' data-title='courier')
         label.delivery-methods__label.delivery-methods__label--courier(for='courier-delivery-method-control') Курьером
           span.delivery-methods__text 499 ₽
-        button.delivery-methods__button(type='button') Ввести адрес
-      li.delivery-methods__item
-        input.delivery-methods__control.visually-hidden(id='pick-up-point-delivery-method-control' type='radio' name='delivery-method' value='pick-up-point')
+        button.delivery-methods__button(type='button' data-modal-opener='address-form') Ввести адрес
+      li.delivery-methods__item.delivery-methods__item--point
+        input.delivery-methods__control.visually-hidden(id='pick-up-point-delivery-method-control' type='radio' name='delivery-method' value='pick-up-point' data-title='pick-up-point')
         label.delivery-methods__label.delivery-methods__label--point(for='pick-up-point-delivery-method-control') До ПВЗ
           span.delivery-methods__text 699 ₽
         button.delivery-methods__button(type='button') Выбрать ПВЗ

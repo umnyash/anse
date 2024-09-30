@@ -6,7 +6,7 @@ class BirthDateModalForm extends Modal {
     super(modalElement);
     this.formElement = modalElement.querySelector('.birth-date-modal-form');
     this.dayFieldElement = this.formElement.querySelector('.birth-date-modal-form__item-day input');
-    this.monthFieldElement = this.formElement.querySelector('.birth-date-modal-form__month-select');
+    this.monthFieldElement = this.formElement.querySelector('.birth-date-modal-form__item-month .select__control');
     this.yearFieldElement = this.formElement.querySelector('.birth-date-modal-form__item-year input');
     this.submitButtonElement = this.formElement.querySelector('.birth-date-modal-form__submit-button');
     this.backButtonElement = this.formElement.querySelector('.birth-date-modal-form__back-button');

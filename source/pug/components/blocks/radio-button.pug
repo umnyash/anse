@@ -1,4 +1,4 @@
-mixin radio-button({ name, value, label })
+mixin radio-button({ name, value, label, title })
   label.radio-button&attributes(attributes)
-    input.radio-button__control.visually-hidden(type='radio' name= name value= value)
+    input.radio-button__control.visually-hidden(type='radio' name= name value= value data-title= title)
     span.radio-button__label= label

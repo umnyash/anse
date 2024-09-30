@@ -1,4 +1,4 @@
-mixin text-field({ label, name, type, value, maxlength, placeholder, required, readonly, dataName })
+mixin text-field({ label, name, type, value, maxlength, placeholder, required, readonly, dataName, dataList })
   .text-field&attributes(attributes)
     label.text-field__inner
       span(class= label.hidden ? 'visually-hidden' : 'text-field__label field-label')= label.text
@@ -13,3 +13,20 @@ mixin text-field({ label, name, type, value, maxlength, placeholder, required, r
           maxlength= maxlength
           data-name= dataName
         )
+    if dataList
+      .text-field__data-list-wrapper
+        ul.text-field__data-list
+          li.text-field__data-option
+            a.text-field__data-link(href='#!') г Нижний Новгород
+          li.text-field__data-option
+            a.text-field__data-link(href='#!') Свердловская обл, г Нижний Тагил
+          li.text-field__data-option
+            a.text-field__data-link(href='#!') Пензенская обл, г Нижний Ломов
+          li.text-field__data-option
+            a.text-field__data-link(href='#!') г Москва, ул Нижние Мневники
+          li.text-field__data-option
+            a.text-field__data-link(href='#!') г Москва, ул Нижние Поля
+          li.text-field__data-option
+            a.text-field__data-link(href='#!') г Москва, ул Нижние Растения
+          li.text-field__data-option
+            a.text-field__data-link(href='#!') г Москва, ул Нижние Садовники

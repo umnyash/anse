@@ -122,3 +122,50 @@ if (logoutButtonElement) {
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Добавление обработчиков для отправки формы оформления заказов
+ */
+if (checkoutForm) {
+  checkoutForm.setHandlers(
+    // Колбэк, вызываемый при успешной отправке данных
+    (data) => { //
+      console.log('Распарсенный ответ сервера:', data);
+
+      window.location.href = 'https://umnyash.github.io/anse/checkout-success.html';
+    },
+    // Колбэк, вызываемый при ошибке отправки данных
+    (data) => {
+      console.log('Распарсенный ответ сервера:', data);
+
+      window.location.href = 'https://umnyash.github.io/anse/checkout-error.html';
+    }
+  );
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Отображение списка вариантов при вводе адреса.
+ */
+
+document.querySelectorAll('.text-field').forEach((fieldElement) => {
+  const dataListElement = fieldElement.querySelector('.text-field__data-list');
+
+  if (!dataListElement) {
+    return;
+  }
+
+  const controlElement = fieldElement.querySelector('.text-field__control');
+
+  controlElement.addEventListener('focus', () => {
+    fieldElement.classList.add('text-field--list-open');
+  });
+
+  dataListElement.addEventListener('click', (evt) => {
+    const itemText = evt.target.textContent;
+    controlElement.value = itemText;
+    fieldElement.classList.remove('text-field--list-open');
+  });
+});
+
+/* * * * * * * * * * * * * * * * * * * * * * * */

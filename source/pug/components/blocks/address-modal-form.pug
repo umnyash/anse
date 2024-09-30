@@ -1,0 +1,68 @@
+mixin address-modal-form
+  form.modal-form(action='https://fakestoreapi.com/products' method='post' target='_blank')&attributes(attributes)
+    .modal-form__header
+      h2.modal-form__heading.heading.heading--size_s Выберите регион
+    +button({
+      tag: 'button',
+      type: 'button',
+      text: 'Определить местоположение'
+    })(class='modal-form__location-button button--simple-primary button--simple-with-icon_location')
+    .modal-form__select-wrapper
+      p.modal-form__select-label.field-label Страна
+      +select(countrySelect)(class='modal-form__country-select')
+    +text-field({
+      type: 'text',
+      name: 'city',
+      label: {
+        text: 'Город, населённый пункт',
+      },
+      placeholder: 'Введите название города',
+      dataList: true
+    })(class='modal-form__text-field modal-form__city-field')
+    +text-field({
+      type: 'text',
+      name: 'city',
+      label: {
+        text: 'Город, населённый пункт',
+      },
+      placeholder: 'Введите название города',
+    })(class='modal-form__text-field modal-form__city-field')
+
+    +text-field({
+      type: 'number',
+      name: 'postal-code',
+      label: {
+        text: 'Индекс:',
+      },
+    })(class='checkout-form__postal-code-field')
+
+    +text-field({
+      type: 'text',
+      name: 'street-house',
+      label: {
+        text: 'Улица, номер дома',
+      },
+    })(class='modal-form__text-field modal-form__street-house-field')
+
+    +text-field({
+      type: 'text',
+      name: 'entrance',
+      label: {
+        text: 'Подъезд',
+      },
+    })(class='modal-form__text-field modal-form__text-field--small modal-form__entrance-field')
+
+    +text-field({
+      type: 'text',
+      name: 'apartment-office',
+      label: {
+        text: 'Квартира, офис',
+      },
+    })(class='modal-form__text-field modal-form__text-field--small modal-form__apartment-office-field')
+
+    .modal-form__footer
+      +button({
+        tag: 'button',
+        type: 'button',
+        text: 'Сохранить'
+      })(class='modal-form__submit-button button--solid-primary')

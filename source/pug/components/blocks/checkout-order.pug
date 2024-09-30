@@ -40,6 +40,6 @@ mixin checkout-order({ isReceipt } = {})
         tag: 'button',
         type: 'submit',
         text: 'Оплатить'
-      })(class='checkout-order__button button--solid-primary')
+      })(class='checkout-order__button button--solid-primary' data-submit-button)
     if !isReceipt
       small.checkout-order__comment Нажимая кнопку, я соглашаюсь с #[a.checkout-order__comment-link(href='privacy-policy.html' target='_blank') Политикой конфиденциальности] и #[a.checkout-order__comment-link(href='#' target='_blank') Условиями продажи товаров]

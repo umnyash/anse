@@ -66,6 +66,7 @@ export default {
       `${pathSrc}/js/classes/modal-form.js`,
       `${pathSrc}/js/classes/modal-entry.js`,
       `${pathSrc}/js/classes/birth-date-modal-form.js`,
+      `${pathSrc}/js/classes/checkout-form.js`,
       `${pathSrc}/js/classes/product.js`,
       `${pathSrc}/js/classes/cart.js`,
       `${pathSrc}/js/classes/taber.js`,

@@ -55,35 +55,12 @@
   column-gap: 10px;
   align-items: start;
 
-  .choices {
-    margin: 0;
-  }
-
   .choices.is-open {
     margin-bottom: 166px;
 
     @media (min-width: $tablet-width) {
       margin-bottom: 160px;
     }
-  }
-
-  .choices__list--dropdown {
-    &::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      height: 52px;
-      background: linear-gradient(to top, var(--background-additional-color), transparent);
-      pointer-events: none;
-    }
-  }
-
-  .choices__list--dropdown .choices__list.choices__list.choices__list {
-    width: calc(100% + 20px);
-    max-height: 246px;
-    overflow: auto;
   }
 
   @media (min-width: $tablet-width) {

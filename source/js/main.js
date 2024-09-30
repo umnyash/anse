@@ -31,7 +31,13 @@ document.querySelectorAll('.catalog__sorting').forEach(initCatalogSorting);
 document.querySelectorAll('.catalog').forEach((catalogElement) => {
   initCatalogFilter(catalogElement, simpleBar.getScrollElement());
 });
-document.querySelectorAll('.select').forEach(initSelect);
+
+document.querySelectorAll(`
+  .birth-date-modal-form .select__control,
+  .modal-form--region .select__control,
+  .profile-form .select__control
+`).forEach(initSelect);
+
 document.querySelectorAll('.checkout-order__products').forEach(initCheckoutProductsSlider);
 
 let subscriptionForm = null;
@@ -56,6 +62,12 @@ let modalEntry = null;
 const modalEntryElement = document.querySelector('[data-modal="entry"]');
 if (modalEntryElement) {
   modalEntry = new ModalEntry(modalEntryElement);
+}
+
+let checkoutForm = null;
+const checkoutFormElement = document.querySelector('.checkout-form');
+if (checkoutFormElement) {
+  checkoutForm = new CheckoutForm(checkoutFormElement);
 }
 
 let profileForm = null;

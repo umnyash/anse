@@ -1,0 +1,37 @@
+.modal-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 10px;
+
+  @media (min-width: $wide-tablet-width) {
+    column-gap: 20px;
+  }
+}
+
+.modal-form > * {
+  grid-column: 1 / -1;
+}
+
+.modal-form__text-field--small {
+  grid-column: span 1;
+}
+
+.modal-form__heading {
+  margin: 0;
+}
+
+.modal-form__location-button {
+  justify-self: start;
+}
+
+.modal-form__select-label {
+  margin: 0 0 10px;
+}
+
+.modal-form__submit-button {
+  width: 100%;
+}
+
+.modal-form--region .text-field--list-open {
+  margin-bottom: 168px;
+}

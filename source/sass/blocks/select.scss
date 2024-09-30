@@ -1,5 +1,6 @@
 .choices {
   border: none;
+  margin: 0;
   border-radius: 8px;
   text-align: left;
   font: 500 16px/1 $main-font-family;
@@ -89,4 +90,28 @@
 
 .choices__list--dropdown .choices__placeholder {
   display: none;
+}
+
+[class*="select--list-max-height"] {
+  .choices__list--dropdown {
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 52px;
+      background: linear-gradient(to top, var(--background-additional-color), transparent);
+      pointer-events: none;
+    }
+  }
+
+  .choices__list--dropdown .choices__list {
+    overflow: auto;
+    width: calc(100% + 20px);
+  }
+}
+
+.select--list-max-height_6 .choices__list--dropdown .choices__list {
+  max-height: 246px;
 }

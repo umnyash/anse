@@ -289,19 +289,28 @@
   }
 }
 
+.modal--with_form {
+  .modal__inner {
+    padding: 20px 20px 26px;
+
+    @media (min-width: $wide-tablet-width) {
+      max-width: 575px;
+      padding: 30px;
+    }
+  }
+}
+
 .modal--with_birth-date-form {
   .modal__inner {
     @media (min-width: $wide-tablet-width) {
       display: grid;
       max-width: 660px;
-      // min-height: 313px;
       padding: 36px 48px;
       align-content: center;
     }
 
     @media (min-width: $desktop-width) {
       max-width: 692px;
-      // min-height: 356px;
       padding: 47px 64px;
     }
   }

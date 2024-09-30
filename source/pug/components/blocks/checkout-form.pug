@@ -11,17 +11,18 @@ mixin checkout-form
             text: 'Выберите Ваш регион',
           },
           placeholder: 'Выберите регион',
-          readonly: true
-        })(class='checkout-form__region-field text-field--button')
-      .checkout-form__delivery-company
+          readonly: true,
+          dataName: 'region'
+        })(class='checkout-form__region-field text-field--button' data-modal-opener='region-form')
+      .checkout-form__delivery-company.checkout-form__delivery-company--hidden
         p.checkout-form__field-label.field-label Выберите компанию доставки
         ul.checkout-form__delivery-company-list
           li.checkout-form__delivery-company-item
-            +radio-button({ name: 'delivery-company', value: 'sdek', label: 'СДЭК' })
+            +radio-button({ name: 'delivery-company', value: 'sdek', label: 'СДЭК', title: 'sdek' })
           li.checkout-form__delivery-company-item
-            +radio-button({ name: 'delivery-company', value: 'russian-post', label: 'Почта России' })
+            +radio-button({ name: 'delivery-company', value: 'russian-post', label: 'Почта России', title: 'post' })
           li.checkout-form__delivery-company-item
-            +radio-button({ name: 'delivery-company', value: 'self-pickup', label: 'Самовывоз' })
+            +radio-button({ name: 'delivery-company', value: 'self-pickup', label: 'Самовывоз', title: 'self-pickup' })
       .checkout-form__delivery-method
         p.checkout-form__field-label.field-label Выберите способ доставки
         +delivery-methods(class='checkout-form__delivery-methods')
@@ -57,7 +58,8 @@ mixin checkout-form
           hidden: 'true'
         },
         placeholder: 'Email*',
-        required: true
+        required: true,
+        dataName: 'email'
       })(class='checkout-form__email-field')
       +text-field({
         type: 'tel',
@@ -67,8 +69,22 @@ mixin checkout-form
           hidden: 'true'
         },
         placeholder: 'Телефон*',
-        required: true
+        required: true,
+        dataName: 'phone'
       })(class='checkout-form__phone-field')
+
+      +text-field({
+        type: 'text',
+        name: 'delivery-address',
+        label: {
+          text: 'Адрес доставки',
+          hidden: 'true'
+        },
+        placeholder: 'Добавить адрес доставки',
+        readonly: true,
+        dataName: 'delivery-address'
+      })(class='checkout-form__delivery-address-field text-field--button' data-modal-opener='address-form')
+
       +text-field({
         type: 'number',
         name: 'postal-code',
@@ -77,7 +93,17 @@ mixin checkout-form
           hidden: 'true'
         },
         placeholder: 'Индекс'
-      })(class='checkout-form__phone-field')
+      })(class='checkout-form__postal-code-field')
+      +text-field({
+        type: 'text',
+        name: 'pick-up-point',
+        label: {
+          text: 'ПВЗ',
+          hidden: 'true'
+        },
+        placeholder: 'Адрес выбранного ПВЗ',
+        readonly: true,
+      })(class='checkout-form__pick-up-point-field text-field--button' data-modal-opener='pick-up-point')
       +text-area({
         name: 'commment',
         label: {
@@ -85,7 +111,7 @@ mixin checkout-form
           hidden: 'true'
         },
         placeholder: 'Комментарий к заказу',
-      })
+      })(class='checkout-form__comment')
     fieldset.checkout-form__section.checkout-form__section--payment
       .checkout-form__section-header
         legend.checkout-form__section-heading Оплата
