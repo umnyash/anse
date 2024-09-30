@@ -1,22 +1,22 @@
-mixin product__slider-item-image(name)
+mixin product__slider-item-image(item)
   li.product__slider-item.swiper-slide(data-modal-opener='product-gallery')
     picture.product__slider-image-wrapper.media.media--cover.media--position_top
-      img.media__image(src=`img/product/${name}.webp` width='1140' height='1520' alt='' loading='lazy')
+      img.media__image(src= item width='1140' height='1520' alt='' loading='lazy')
 
-mixin product__slider-item-video(name)
+mixin product__slider-item-video(item)
   li.product__slider-item.swiper-slide(data-modal-opener='product-gallery')
     .product__slider-video-wrapper.media.media--cover.media--position_top
-      video.media__video(src=`files/${name}.mp4` playsinline muted autoplay loop)
+      video.media__video(src= item playsinline muted autoplay loop)
 
-mixin product__image-wrapper(name)
+mixin product__image-wrapper(item)
   picture.product__image-wrapper.media.media--cover.media--position_top(data-modal-opener='product-gallery')
-    img.media__image(src=`img/product/${name}.webp` width='1140' height='1520' alt='' loading='lazy')
+    img.media__image(src= item width='1140' height='1520' alt='' loading='lazy')
 
-mixin product__video-wrapper(name)
+mixin product__video-wrapper(item)
   .product__video-wrapper.media.media--cover.media--position_top(data-modal-opener='product-gallery')
-    video.media__video(src=`files/${name}.mp4` playsinline muted autoplay loop)
+    video.media__video(src= item playsinline muted autoplay loop)
 
-mixin product
+mixin product({ sizes, colors, media })
   article.product&attributes(attributes)
     form.product__inner(action='https://fakestoreapi.com/products' method='post' target='_blank')
       .product__text-content
@@ -33,50 +33,52 @@ mixin product
           h1.product__heading Шуба SETTE BLACK
           +product-badges({ badges: ['sale','new'] })(class='product__badges')
         +price-section(class='product__price-section')
-        section.product__color-section
-          h2.product__color-heading Цвет:
-          p.product__color-value Розовый фламинго
-          .product__colors
-            +color({
-              title: 'Розовый фламинго',
-              value: 'pink-flamingo',
-              src: 'img/colors/pink-flamingo.webp',
-              checked: true
-            })
-            +color({
-              title: 'Цвет 1',
-              value: 'color-1-value',
-              src: 'img/colors/1.webp'
-            })
-            +color({
-              title: 'Цвет 2',
-              value: 'color-2-value',
-              src: 'img/colors/2.webp'
-            })
-            +color({
-              title: 'Цвет 3',
-              value: 'color-3-value',
-              src: 'img/colors/3.webp'
-            })
-            +color({
-              title: 'Цвет 4',
-              value: 'color-4-value',
-              src: 'img/colors/4.webp'
-            })
-            +color({
-              title: 'Цвет 5',
-              value: 'color-5-value',
-              src: 'img/colors/5.webp'
-            })
-            +color({
-              title: 'Цвет 6',
-              value: 'color-6-value',
-              src: 'img/colors/6.webp'
-            })
-        section.product__size-section
-          h2.product__size-heading Размер
-          a.product__size-link(href='#' data-modal-opener='size-chart') Таблица размеров
-          +size-buttons(class='product__size-buttons')
+        if colors
+          section.product__color-section
+            h2.product__color-heading Цвет:
+            p.product__color-value Розовый фламинго
+            .product__colors
+              +color({
+                title: 'Розовый фламинго',
+                value: 'pink-flamingo',
+                src: 'img/colors/pink-flamingo.webp',
+              })
+              +color({
+                title: 'Цвет 1',
+                value: 'color-1-value',
+                src: 'img/colors/1.webp'
+              })
+              +color({
+                title: 'Цвет 2',
+                value: 'color-2-value',
+                src: 'img/colors/2.webp'
+              })
+              +color({
+                title: 'Цвет 3',
+                value: 'color-3-value',
+                src: 'img/colors/3.webp',
+                disabled: true
+              })
+              +color({
+                title: 'Цвет 4',
+                value: 'color-4-value',
+                src: 'img/colors/4.webp'
+              })
+              +color({
+                title: 'Цвет 5',
+                value: 'color-5-value',
+                src: 'img/colors/5.webp'
+              })
+              +color({
+                title: 'Цвет 6',
+                value: 'color-6-value',
+                src: 'img/colors/6.webp'
+              })
+        if sizes
+          section.product__size-section
+            h2.product__size-heading Размер
+            a.product__size-link(href='#' data-modal-opener='size-chart') Таблица размеров
+            +size-buttons(class='product__size-buttons')
         section.product__section.product__section--design
           h2 Заметки дизайнера
           div
@@ -101,19 +103,17 @@ mixin product
         .product__info-wrapper
           +product-info(class='product__info')
 
-      +product__image-wrapper(1)
-      +product__video-wrapper('fur-coat-1')
-      +product__image-wrapper(2)
-      +product__image-wrapper(3)
-      +product__video-wrapper('fur-coat-2')
-      +product__image-wrapper(4)
+      each item in media
+        if item.endsWith('webp')
+          +product__image-wrapper(item)
+        else
+          +product__video-wrapper(item)
 
       .product__slider.swiper
         ul.product__slider-list.swiper-wrapper
-          +product__slider-item-image(1)
-          +product__slider-item-video('fur-coat-1')
-          +product__slider-item-image(2)
-          +product__slider-item-image(3)
-          +product__slider-item-video('fur-coat-2')
-          +product__slider-item-image(4)
+          each item in media
+            if item.endsWith('webp')
+              +product__slider-item-image(item)
+            else
+              +product__slider-item-video(item)
         .product__slider-pagination

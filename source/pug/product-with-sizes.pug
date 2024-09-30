@@ -5,7 +5,17 @@ block variables
   - var page = 'product'
 
 block content
-  +product
+  +product({
+    sizes: true,
+    media: [
+      'img/product/1.webp',
+      'files/fur-coat-1.mp4',
+      'img/product/2.webp',
+      'img/product/3.webp',
+      'files/fur-coat-2.mp4',
+      'img/product/4.webp',
+    ]
+  })
   +products({
     heading: 'Добавьте к образу',
     tooltipText: 'При покупке шубы, Вы сможете применить скидку 30% на все аксессуары в корзине'

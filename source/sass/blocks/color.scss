@@ -27,6 +27,17 @@
   cursor: pointer;
 }
 
+.color__control:disabled + .color__image {
+  opacity: 0.2;
+}
+
 .color__control:checked + .color__image {
   border-color: var(--text-color);
+}
+
+.color--big .color__image {
+  @media (min-width: $laptop-width) {
+    width: 28px;
+    height: 28px;
+  }
 }

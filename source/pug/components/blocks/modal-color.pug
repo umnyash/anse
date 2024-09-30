@@ -1,0 +1,56 @@
+mixin modal-color
+  form.modal-color&attributes(attributes)
+    h2.modal-color__heading.heading.heading--size_s Выберите цвет
+    .modal-color__product
+      .modal-color__product-text-content
+        h3.modal-color__product-heading Шуба SETTE BLACK
+        p.modal-color__product-text Декоративный элемент в виде нагрудного кармана.
+        p.modal-color__product-text Меховой пояс: идет в комплекте
+      picture.modal-color__product-image-wrapper.media.media--cover.media--position_top
+        img.media__image(src='img/products/product-1.webp' width='72' height='91' alt='' loading='lazy')
+    section.modal-color__section
+      p.modal-color__color-heading Цвет:
+      p.modal-color__color-value Розовый фламинго
+      .modal-color__buttons
+        +color({
+          title: 'Розовый фламинго',
+          value: 'pink-flamingo',
+          src: 'img/colors/pink-flamingo.webp',
+        })(class='color--big')
+        +color({
+          title: 'Цвет 1',
+          value: 'color-1-value',
+          src: 'img/colors/1.webp'
+        })(class='color--big')
+        +color({
+          title: 'Цвет 2',
+          value: 'color-2-value',
+          src: 'img/colors/2.webp'
+        })(class='color--big')
+        +color({
+          title: 'Цвет 3',
+          value: 'color-3-value',
+          src: 'img/colors/3.webp',
+          disabled: true
+        })(class='color--big')
+        +color({
+          title: 'Цвет 4',
+          value: 'color-4-value',
+          src: 'img/colors/4.webp'
+        })(class='color--big')
+        +color({
+          title: 'Цвет 5',
+          value: 'color-5-value',
+          src: 'img/colors/5.webp'
+        })(class='color--big')
+        +color({
+          title: 'Цвет 6',
+          value: 'color-6-value',
+          src: 'img/colors/6.webp'
+        })(class='color--big')
+    +button({
+      tag: 'button',
+      type: 'submit',
+      text: 'Добавить в корзину',
+      disabled: true
+    })(class='modal-color__button button--solid-primary button--disabled')

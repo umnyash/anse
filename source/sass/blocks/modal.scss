@@ -332,6 +332,14 @@
   }
 }
 
+.modal--with_color {
+  .modal__inner {
+    @media (min-width: $wide-tablet-width) {
+      max-width: 440px;
+    }
+  }
+}
+
 // .modal--position_cover {
 //   .modal__inner {
 //     transform: translateY(-100%);

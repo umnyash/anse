@@ -45,22 +45,35 @@ if (product) {
   product.formElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    const isValid = product.checkSelectedSize();
+    const isSizeSelected = product.checkSelectedSize();
+    const isColorSelected = product.checkSelectedColor();
 
-    if (isValid) {
+    if (isSizeSelected && isColorSelected) {
       product.setCounterValue(1);
       product.setAddedToCartView();
       product.showCartNotification();
-    } else {
+    } else if (!isSizeSelected) {
       console.log('Размер не выбран.')
       product.openSizeModal();
+    } else if (!isColorSelected) {
+      console.log('Цвет не выбран.')
+      product.openColorModal();
     }
   });
 
-  product.sizeModalFormElement.addEventListener('submit', (evt) => {
+  product.sizeModalFormElement?.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     product.closeSizeModal();
+    product.setCounterValue(1);
+    product.setAddedToCartView();
+    product.showCartNotification();
+  });
+
+  product.colorModalFormElement?.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    product.closeColorModal();
     product.setCounterValue(1);
     product.setAddedToCartView();
     product.showCartNotification();

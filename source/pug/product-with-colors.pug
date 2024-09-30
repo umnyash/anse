@@ -6,17 +6,14 @@ block variables
 
 block content
   +product({
-    sizes: true,
+    colors: true,
     media: [
-      'img/product-2/1.webp',
-      'files/3_4.mp4',
-      'img/product-2/2.webp',
-      'img/product-2/3.webp',
-      'img/product-2/4.webp',
-      'img/product-2/5.webp',
-      'img/product-2/6.webp',
-      'img/product-2/7.webp',
-      'img/product-2/8.webp',
+      'img/product/1.webp',
+      'files/fur-coat-1.mp4',
+      'img/product/2.webp',
+      'img/product/3.webp',
+      'files/fur-coat-2.mp4',
+      'img/product/4.webp',
     ]
   })
   +products({
@@ -34,20 +31,17 @@ append modals
     +modal-offer(class='modal__offer')
   +modal(class='modal--with_size-chart' data-modal='size-chart')
     +size-chart(class='modal__size-chart')
-  +modal(class='modal--default modal--with_size' data-modal='size')
-    +modal-size(class='modal__size')
+  +modal(class='modal--default modal--with_color' data-modal='color')
+    +modal-color(class='modal__color')
   +modal(class='modal--with_gallery' data-modal='product-gallery')
     +modal-gallery({
       items: [
-        'img/product-2/1.webp',
-        'files/3_4.mp4',
-        'img/product-2/2.webp',
-        'img/product-2/3.webp',
-        'img/product-2/4.webp',
-        'img/product-2/5.webp',
-        'img/product-2/6.webp',
-        'img/product-2/7.webp',
-        'img/product-2/8.webp',
+        'img/product/1.webp',
+        'files/fur-coat-1.mp4',
+        'img/product/2.webp',
+        'img/product/3.webp',
+        'files/fur-coat-2.mp4',
+        'img/product/4.webp',
       ]
     })(class='modal__gallery')
   +cart-notification
