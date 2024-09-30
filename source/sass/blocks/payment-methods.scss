@@ -12,6 +12,7 @@
   column-gap: 10px;
   align-items: center;
   font: 400 16px/19px $main-font-family;
+  cursor: pointer;
 
   @media (min-width: $desktop-width) {
     font-size: 18px;
