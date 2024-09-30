@@ -31,6 +31,7 @@ document.querySelectorAll('.catalog__sorting').forEach(initCatalogSorting);
 document.querySelectorAll('.catalog').forEach((catalogElement) => {
   initCatalogFilter(catalogElement, simpleBar.getScrollElement());
 });
+document.querySelectorAll('.products-list__items, .products-slider__list').forEach(initProductCardColors);
 
 document.querySelectorAll(`
   .birth-date-modal-form .select__control,

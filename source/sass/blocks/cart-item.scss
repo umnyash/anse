@@ -90,6 +90,42 @@
   }
 }
 
+.cart-item__color {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px;
+  align-items: center;
+
+  @media (min-width: $laptop-width) {
+    grid-template-columns: auto auto 1fr;
+    align-items: start;
+  }
+
+  @media (min-width: $desktop-width) {
+    gap: 8px;
+  }
+}
+
+.cart-item__color-value {
+  grid-column: 1 / -1;
+
+  @media (min-width: $laptop-width) {
+    grid-column: auto;
+  }
+}
+
+.cart-item__color-image {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+
+  @media (min-width: $laptop-width) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 .cart-item__link {
   text-decoration: none;
   color: inherit;

@@ -12,8 +12,14 @@ mixin cart-item({ product, headingTag = 'h3' })
         #{headingTag}.cart-item__heading
           a.cart-item__link(href='product.html' target='_blank')= product.title
         if !product.isGift
-          p.cart-item__text.cart-item__text--big Размер: S
-          p.cart-item__text Комплектация: шуба, чехол для шубы, инструкция по возврату, памятка по уходу, плечики
+          if product.color
+            .cart-item__color
+              p.cart-item__text.cart-item__text--big Цвет:
+              img.cart-item__color-image(src='img/colors/pink-flamingo.webp' width='20' height='20' alt='')
+              p.cart-item__text.cart-item__color-value Пудровый под поперечную норку
+          else
+            p.cart-item__text.cart-item__text--big Размер: S
+            p.cart-item__text Комплектация: шуба, чехол для шубы, инструкция по возврату, памятка по уходу, плечики
 
       .cart-item__details
         if !product.available

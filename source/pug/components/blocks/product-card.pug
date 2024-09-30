@@ -12,9 +12,17 @@ mixin product-card({ product, headingTag })
           img.product-card__image.media__image(src='img/products/product-additional.webp' width='365' height='563' alt='' loading='lazy')
         if badges.length
           +product-badges({ badges })(class='product-card__badges product-badges--light')
-        ol.product-card__sizes
-          each size in ['xxs', 'xs', 's', 'm', 'l', 'xl']
-            li.product-card__sizes-item(class= size !== 'xs' && size !== 'l' && 'product-card__sizes-item--active')= size
+        if product.sizes
+          ol.product-card__sizes
+            each size in ['xxs', 'xs', 's', 'm', 'l', 'xl']
+              li.product-card__sizes-item(class= size !== 'xs' && size !== 'l' && 'product-card__sizes-item--active')= size
+        if product.colors
+          .product-card__colors
+            ul.product-card__colors-list
+              each color, i in product.colors
+                li.product-card__colors-item(class= i === 2 && 'proudct-card__colors-item--disabled')
+                  img.product-card__colors-image(src=`img/colors/${color}.webp` width='28' height='28' alt='')
+            p.product-card__colors-counter.product-card__colors-counter--hidden
     .product-card__price-wrapper
       if product.sale
         s.product-card__price.product-card__price--old= `${product.price} ₽`
