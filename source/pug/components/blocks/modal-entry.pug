@@ -46,7 +46,7 @@ mixin modal-entry
         })(class='modal-entry__submit-button button--solid-primary button--disabled')
         .modal-entry__resend
           p.modal-entry__resend-text Новый код можно будет запросить через #[span.modal-entry__resend-timer 23] секунд
-          p.modal-entry__resend-button-wrapper Не пришел код?
+          p.modal-entry__resend-button-wrapper Не пришел код?&nbsp;
             +button({ tag: 'button', type: 'button', text: 'Отправить повторно' })(class='modal-entry__resend-button button--simple-primary')
       .modal-entry__form-error-message
         .modal-entry__form-error-message-text Код введен неправильно. Попробуйте еще раз
