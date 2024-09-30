@@ -1,0 +1,29 @@
+extends layout/layout
+
+block variables
+  - var title = 'Окна | Anse'
+  - var page = 'dev-alerts'
+
+block content
+  h1.visually-hidden Некоторые окна
+  button(type='button' data-subs) Не удалось подписаться
+  button(type='button' data-del) Удаление товаров
+  script.
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelector('[data-subs]').addEventListener('click', () => {
+        showAlert({
+          heading: 'Не получилось оформить подписку',
+          button: {
+            text: 'Попробовать еще раз'
+          }
+        });
+      });
+      document.querySelector('[data-del]').addEventListener('click', () => {
+        showAlert({
+          heading: 'Вы уверены, что хотите удалить товар из корзины?',
+          button: {
+            text: 'Удалить'
+          }
+        });
+      });
+    });
