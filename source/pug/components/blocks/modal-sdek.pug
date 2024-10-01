@@ -1,0 +1,13 @@
+mixin modal-sdek({ heading })
+  .modal-sdek&attributes(attributes)
+    .modal-sdek__header
+      .modal-sdek__header-message
+        .container
+          a(href='#!') Доступна оплата в рассрочку
+      .container
+        .modal-sdek__header-inner
+          h1.modal-sdek__heading.heading.heading--size_l.heading--alter= heading
+          a.modal-sdek__header-back-button(href='#' data-modal-close-button)
+            span.visually-hidden Назад
+    .modal-sdek__map-wrapper
+      .modal-sdek__map

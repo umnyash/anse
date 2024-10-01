@@ -17,3 +17,7 @@ append modals
     +region-modal-form(class='modal__form')
   +modal(class='modal--default modal--with_form' data-modal='address-form')
     +address-modal-form(class='modal__form')
+  +modal(class='modal--with_sdek' data-modal='sdek-sdek')
+    +modal-sdek({ heading: 'Пункты выдачи СДЭК' })(class='modal__sdek modal-sdek--style_sdek')
+  +modal(class='modal--with_sdek' data-modal='sdek-post')
+    +modal-sdek({ heading: 'ПВЗ Почта России' })(class='modal__sdek modal-sdek--style_post')

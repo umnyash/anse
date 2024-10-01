@@ -10,4 +10,5 @@ mixin delivery-methods
         input.delivery-methods__control.visually-hidden(id='pick-up-point-delivery-method-control' type='radio' name='delivery-method' value='pick-up-point' data-title='pick-up-point')
         label.delivery-methods__label.delivery-methods__label--point(for='pick-up-point-delivery-method-control') До ПВЗ
           span.delivery-methods__text 699 ₽
-        button.delivery-methods__button(type='button') Выбрать ПВЗ
+        button.delivery-methods__button.delivery-methods__button--sdek-point(type='button' data-modal-opener='sdek-sdek') Выбрать ПВЗ
+        button.delivery-methods__button.delivery-methods__button--post-point(type='button' data-modal-opener='sdek-post') Выбрать ПВЗ

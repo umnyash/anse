@@ -335,3 +335,11 @@
     }
   }
 }
+
+.checkout-form.checkout-form:not(.checkout-form--delivery-company_sdek) .delivery-methods__button--sdek-point {
+  display: none;
+}
+
+.checkout-form.checkout-form:not(.checkout-form--delivery-company_post) .delivery-methods__button--post-point {
+  display: none;
+}
