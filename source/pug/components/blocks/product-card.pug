@@ -20,7 +20,7 @@ mixin product-card({ product, headingTag })
           .product-card__colors
             ul.product-card__colors-list
               each color, i in product.colors
-                li.product-card__colors-item(class= i === 2 && 'proudct-card__colors-item--disabled')
+                li.product-card__colors-item(class= i === 2 && 'product-card__colors-item--disabled')
                   img.product-card__colors-image(src=`img/colors/${color}.webp` width='28' height='28' alt='')
             p.product-card__colors-counter.product-card__colors-counter--hidden
     .product-card__price-wrapper
