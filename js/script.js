@@ -1610,6 +1610,7 @@ function initProductCardColors(listElement) {
       if (!colorListElement) {
         continue;
       }
+      colorListElement.className = 'product-card__colors-list';
       const counterElement = item.querySelector('.product-card__colors-counter');
       counterElement.classList.add('product-card__colors-counter--hidden');
       let listWidth = colorListElement.offsetWidth;
@@ -1624,12 +1625,13 @@ function initProductCardColors(listElement) {
       counterElement.classList.remove('product-card__colors-counter--hidden');
       listWidth = colorListElement.offsetWidth;
       maxItems = Math.floor((listWidth + gap) / (itemWidth + gap));
+      colorListElement.classList.add(`product-card__colors-list--max_${maxItems}`);
       quantityOverflowItems = colorListElement.children.length - maxItems;
       counterElement.textContent = `+${quantityOverflowItems}`;
     }
   };
   calculateFittingItems();
-  window.addEventListener('resize', throttleAndDebounce(calculateFittingItems, 500));
+  window.addEventListener('resize', debounce(calculateFittingItems, 500));
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * */
@@ -2372,4 +2374,5 @@ if (birthDateModalFormElement && birthDateInfoModal) {
 }
 initReviewsIntroPhotos();
 initConsumersPhotos();
+document.querySelectorAll('[data-modal="sdek-sdek"], [data-modal="sdek-post"]').forEach(modalElement => new Modal(modalElement));
 /* * * * * * * * * * * * * * * * * * * * * * * */
