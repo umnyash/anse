@@ -1,13 +1,6 @@
-.modal-offer {
-  padding: 20px;
-  padding-right: 22px;
-  border-radius: 12px 12px 0 0;
+.modal-offer__content {
+  padding-right: 2px;
   font: 400 16px/19px $main-font-family;
-  background: var(--background-color);
-
-  @media (min-width: $wide-tablet-width) {
-    border-radius: 12px;
-  }
 
   @media (min-width: $desktop-width) {
     font-size: 18px;

@@ -81,27 +81,10 @@
   }
 }
 
-.modal__button--back {
-  left: 24px;
-  transform: scale(-1);
-
-  @media (min-width: $tablet-width) {
-    left: 56px;
-  }
-
-  &::after {
-    mask: url("../img/icons.svg#controls_arrow");
-  }
-}
-
 .modal__button--close {
   &::after {
     mask: url("../img/icons.svg#controls_cross");
   }
-}
-
-.modal__button--hidden {
-  display: none;
 }
 
 // Самый частый вариант: на мобильной внизу, а на десктопе по центру.
@@ -147,78 +130,20 @@
   }
 }
 
-// Политика конфиденциальности
+// Программа лояльности
 .modal--with_offer {
-  padding-top: 60px;
-
   .modal__inner {
-    margin: auto 0 0;
-    transform: translateY(100%);
-
     @media (min-width: $wide-tablet-width) {
-      margin: auto;
       max-width: 698px;
-      opacity: 0;
-      transform: scale(0.8);
-      transition-property: opacity, transform;
-      transition-duration: calc($duration-m / 1.5);
-    }
-  }
-
-  .modal__button--close {
-    right: 16px;
-    bottom: calc(100% + 16px);
-
-    @media (min-width: $wide-tablet-width) {
-      right: auto;
-      bottom: 100%;
-      left: 100%;
-    }
-  }
-
-  &[open] .modal__inner {
-    @media (min-width: $wide-tablet-width) {
-      transition-timing-function: ease-in;
     }
   }
 }
 
-// Политика конфиденциальности
+// Таблица размеров
 .modal--with_size-chart {
-  padding-top: 60px;
-
   .modal__inner {
-    margin: auto 0 0;
-    transform: translateY(100%);
-    padding: 20px;
-    border-radius: 12px 12px 0 0;
-    background: var(--background-color);
-
     @media (min-width: $wide-tablet-width) {
-      margin: auto;
       max-width: 790px;
-      border-radius: 12px;
-      opacity: 0;
-      transform: scale(0.8);
-      transition-property: opacity, transform;
-      transition-duration: calc($duration-m / 1.5);
-    }
-  }
-
-  .modal__button--close {
-    right: 16px;
-    bottom: calc(100% + 16px);
-
-    @media (min-width: $wide-tablet-width) {
-      right: auto;
-      bottom: 100%;
-      left: 100%;
-    }
-  }
-
-  &[open] .modal__inner {
-    @media (min-width: $wide-tablet-width) {
-      transition-timing-function: ease-in;
     }
   }
 }
