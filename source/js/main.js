@@ -115,6 +115,4 @@ if (birthDateModalFormElement && birthDateInfoModal) {
 
 initReviewsIntroPhotos()
 initConsumersPhotos();
-
-document.querySelectorAll('[data-modal="sdek-sdek"], [data-modal="sdek-post"]').forEach((modalElement) => new Modal(modalElement));
 /* * * * * * * * * * * * * * * * * * * * * * * */

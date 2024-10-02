@@ -2,8 +2,6 @@
  * modal.js
  */
 class Modal {
-  // static openModalsCount = 0;
-
   constructor(modalElement, { onOpenerClick } = {}) {
     this.modalElement = modalElement;
     this.name = modalElement?.dataset.modal;
@@ -26,6 +24,10 @@ class Modal {
   initOpener = (openerElement) => {
     openerElement.addEventListener('click', (evt) => {
       evt.preventDefault();
+
+      if (openerElement.dataset.modalOpener !== this.name) {
+        return;
+      }
 
       if (this.onOpenerClick) {
         this.onOpenerClick(evt);

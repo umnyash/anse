@@ -21,6 +21,7 @@ class CheckoutForm extends Form {
     this.regionFieldElement = this.formElement.querySelector('[data-name="region"]');
     this.deliveryCompanyButtonsWrapper = this.formElement.querySelector('.checkout-form__delivery-company');
     this.phoneFieldElement = this.formElement.querySelector('.checkout-form__phone-field .text-field__control');
+    this.pickupPointFieldWrapperElement = this.formElement.querySelector('.checkout-form__pick-up-point-field');
 
     this.regionModalElement = document.querySelector('[data-modal="region-form"]');
     this.regionFormElement = this.regionModalElement.querySelector('.modal-form');
@@ -43,6 +44,14 @@ class CheckoutForm extends Form {
         this.addressFormCityFieldElement.value = this.regionFormCityFieldElement.value;
       },
     });
+
+    this.sdekModalElement = document.querySelector('[data-modal="sdek-sdek"]');
+    this.sdekModal = new Modal(this.sdekModalElement);
+    this.sdekModal.initOpener(this.pickupPointFieldWrapperElement);
+
+    this.postModalElement = document.querySelector('[data-modal="sdek-post"]');
+    this.postModal = new Modal(this.postModalElement);
+    this.postModal.initOpener(this.pickupPointFieldWrapperElement);
 
     this.init();
   }
@@ -99,9 +108,11 @@ class CheckoutForm extends Form {
       switch (buttonTitle) {
         case 'sdek':
           this.setDeliveryCompanySdekState();
+          this.pickupPointFieldWrapperElement.dataset.modalOpener = 'sdek-sdek';
           break;
         case 'post':
           this.setDeliveryCompanyPostState();
+          this.pickupPointFieldWrapperElement.dataset.modalOpener = 'sdek-post';
           break;
         case 'self-pickup':
           this.setDeliveryCompanySelfPickupState();

@@ -19,6 +19,7 @@
   border-radius: 8px;
   grid-template-columns: 1fr auto;
   column-gap: 12px;
+  align-items: center;
   background: var(--background-additional-color);
 }
 
@@ -44,6 +45,21 @@
   }
 }
 
+// [class*="text-field--with-icon_"] {
+//   .text-field__inner::after {
+//     content: "";
+//   }
+// }
+
+.text-field--with-icon_edit {
+  .text-field__control-wrapper::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background: var(--text-weak-color);
+    mask: url("../img/icons.svg#edit");
+  }
+}
 
 /* stylelint-disable */
 .text-field--button {
