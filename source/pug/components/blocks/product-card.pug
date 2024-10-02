@@ -4,7 +4,7 @@ mixin product-card({ product, headingTag })
   article.product-card&attributes(attributes)
     .product-card__link-wrapper
       #{headingTag}.product-card__heading
-        a.product-card__link(href='product.html')= product.title
+        a.product-card__link(href= product.sizes ? 'product-with-sizes.html' : 'product-with-colors.html')= product.title
       .product-card__images
         picture.product-card__image-wrapper-primary.media.media--cover.media--position_top
           img.product-card__image.media__image(src= product.image width='365' height='563' alt='' loading='lazy')
