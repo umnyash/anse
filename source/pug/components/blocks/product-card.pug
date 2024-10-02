@@ -6,9 +6,9 @@ mixin product-card({ product, headingTag })
       #{headingTag}.product-card__heading
         a.product-card__link(href= product.sizes ? 'product-with-sizes.html' : 'product-with-colors.html')= product.title
       .product-card__images
-        picture.product-card__image-wrapper-primary.media.media--cover.media--position_top
+        picture.product-card__image-wrapper-primary.media.media--cover.media--position_top.skeleton
           img.product-card__image.media__image(src= product.image width='365' height='563' alt='' loading='lazy')
-        picture.product-card__image-wrapper-secondary.media.media--cover.media--position_top
+        picture.product-card__image-wrapper-secondary.media.media--cover.media--position_top.skeleton
           img.product-card__image.media__image(src= product.image2 width='365' height='563' alt='' loading='lazy')
         if badges.length
           +product-badges({ badges })(class='product-card__badges product-badges--light')

@@ -34,6 +34,6 @@ mixin categories
         ul.categories__list
           each item in categories
             li.categories__item
-              picture.categories__image-wrapper.media.media--cover.media--position_top
+              picture.categories__image-wrapper.media.media--cover.media--position_top.skeleton
                 img.categories__image.media__image(src=`img/categories/${item.image}.webp` srcset=`img/categories/${item.image}@2x.webp` width='237' height='376' alt='' loading='lazy')
               a.categories__link(href='catalog.html')= item.name

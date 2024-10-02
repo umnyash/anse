@@ -6,10 +6,10 @@ mixin advantages
         ul.advantages__list
           each i in [1, 2, 3, 4]
             li.advantages__item
-              picture.advantages__image-wrapper.media.media--cover
+              picture.advantages__image-wrapper.media.media--cover.skeleton
                 img.advantages__image.media__image(src=`img/advantages/${i}.webp` width='288' height='195' alt='' loading='lazy')
               p.advantages__text Ручная работа
           li.advantages__item
-            picture.advantages__image-wrapper.media.media--cover
+            picture.advantages__image-wrapper.media.media--cover.skeleton
               img.advantages__image.media__image(src=`img/advantages/5.webp` width='560' height='296' alt='' loading='lazy')
             p.advantages__text Ручная работа

@@ -15,5 +15,5 @@ mixin review({ review })
         ul.review__slider-list.swiper-wrapper
           each photo in review.photos
             li.review__slider-item.swiper-slide
-              picture.review__slider-image-wrapper.media.media--cover.media--position_top
+              picture.review__slider-image-wrapper.media.media--cover.media--position_top.skeleton
                 img.review__slider-image.media__image(src= photo width='102' height='128' alt='' loading='lazy')

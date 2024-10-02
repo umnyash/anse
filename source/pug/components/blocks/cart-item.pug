@@ -46,5 +46,5 @@ mixin cart-item({ product, headingTag = 'h3' })
         if !product.isGift
           button.cart-item__delete-button(type='button')
             span.visually-hidden Удалить
-    picture.cart-item__image-wrapper.media.media--cover.media--position_top
+    picture.cart-item__image-wrapper.media.media--cover.media--position_top.skeleton
       img.cart-item__image.media__image(src= product.image width='180' height='228' alt='' loading='lazy')

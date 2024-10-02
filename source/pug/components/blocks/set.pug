@@ -30,19 +30,19 @@ mixin set({ sizeSelected } = {})
                   text: sizeSelected ? 'Выбрать другой размер' : 'Выбрать размер',
                   href: '#'
                 })(class='button--simple-primary')
-              picture.set__list-item-image-wrapper.media.media--cover.media--position_top
+              picture.set__list-item-image-wrapper.media.media--cover.media--position_top.skeleton
                 img.media__image(src='img/set/product-1.webp' width='140' height='177' alt='' loading='lazy')
             li.set__list-item
               .set__list-item__description
                 h3.set__list-item-heading
                   a.set__list-item-link(href='product.html' target='_blank') Сумка
-              picture.set__list-item-image-wrapper.media.media--cover.media--position_top
+              picture.set__list-item-image-wrapper.media.media--cover.media--position_top.skeleton
                 img.media__image(src='img/set/product-3.webp' width='140' height='177' alt='' loading='lazy')
             li.set__list-item
               .set__list-item__description
                 h3.set__list-item-heading
                   a.set__list-item-link(href='product.html' target='_blank') Варежки
-              picture.set__list-item-image-wrapper.media.media--cover.media--position_top
+              picture.set__list-item-image-wrapper.media.media--cover.media--position_top.skeleton
                 img.media__image(src='img/set/product-5.webp' width='140' height='177' alt='' loading='lazy')
         .set__cart
           +button({
@@ -54,6 +54,6 @@ mixin set({ sizeSelected } = {})
         ul.set__slider-list
           each number in [1, 2, 3, 4]
             li.set__slider-item(data-modal-opener='set-gallery')
-              picture.set__slider-image-wrapper.media.media--cover.media--position_top
+              picture.set__slider-image-wrapper.media.media--cover.media--position_top.skeleton
                 img.media__image(src=`img/set/product-${number}.webp` width='395' height='526' alt='' loading='lazy')
         .set__slider-pagination

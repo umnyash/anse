@@ -12,7 +12,7 @@ mixin order-card({ status, open })
           each item in [2, 3]
             li.order-card__products-item
               a.order-card__products-item-link(href='product.html')
-                picture.order-card__products-item-image-wrapper.media.media--cover.media--position_top
+                picture.order-card__products-item-image-wrapper.media.media--cover.media--position_top.skeleton
                   img.media__image(src=`img/products/product-${item}.webp` width='72' height='91' alt='' loading='lazy')
                 p.order-card__products-item-title Шуба SETTE BLACK
         dl.order-card__list

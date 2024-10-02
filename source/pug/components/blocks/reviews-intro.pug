@@ -31,7 +31,7 @@ mixin reviews-intro
           .reviews-intro__slider.swiper
             ul.reviews-intro__slider-list.swiper-wrapper
               li.reviews-intro__slider-item.swiper-slide(data-modal-opener='reviews-intro-photos')
-                picture.reviews-intro__slider-image-wrapper.media.media--cover.media--position_top
+                picture.reviews-intro__slider-image-wrapper.media.media--cover.media--position_top.skeleton
                   img.reviews-intro__slider-image.media__image(src='img/reviews-intro/1.webp' width='365' height='471' alt='' loading='lazy')
               li.reviews-intro__slider-item.reviews-intro__slider-item--quote.swiper-slide
                 .reviews-intro__quote
@@ -39,6 +39,6 @@ mixin reviews-intro
                   p – Мария Кошкина, основатель Anse
               each i in [2, 3, 1, 2]
                 li.reviews-intro__slider-item.swiper-slide(data-modal-opener='reviews-intro-photos')
-                  picture.reviews-intro__slider-image-wrapper.media.media--cover.media--position_top
+                  picture.reviews-intro__slider-image-wrapper.media.media--cover.media--position_top.skeleton
                     img.reviews-intro__slider-image.media__image(src=`img/reviews-intro/${i}.webp` width='365' height='471' alt='' loading='lazy')
           +slider-arrows(class='reviews-intro__slider-arrows')

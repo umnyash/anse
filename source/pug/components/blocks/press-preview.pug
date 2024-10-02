@@ -12,4 +12,5 @@ mixin press-preview({ preview })
       target: '_blank',
       rel: 'nofollow noopener'
     })(class='press-preview__link button--simple-primary')
-    img.press-preview__image(src= preview.image alt='' loading='lazy')
+    picture.press-preview__image-wrapper.skeleton
+      img.press-preview__image(src= preview.image alt='' loading='lazy')

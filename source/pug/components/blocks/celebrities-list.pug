@@ -3,7 +3,7 @@ mixin celebrities-list({ celebrities = [], button } = {})
     ul.celebrities-list__items
       each celebrity in celebrities
         li.celebrities-list__item
-          picture.celebrities-list__image-wrapper
+          picture.celebrities-list__image-wrapper.skeleton
             img.celebrities-list__image(src=`img/celebrities/${celebrity.image}` width='750' height='1030' alt= celebrity.title loading='lazy')
           p.celebrities-list__title= celebrity.title
     +button({

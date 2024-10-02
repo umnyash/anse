@@ -12,7 +12,7 @@ mixin checkout-order({ isReceipt } = {})
                 each i in [1, 2, 3, 4, 1, 2, 3, 4]
                   li.checkout-order__products-item.swiper-slide
                     a.checkout-order__products-item-link(href='product.html')
-                      picture.checkout-order__products-item-image-wrapper.media.media--cover.media--position_top
+                      picture.checkout-order__products-item-image-wrapper.media.media--cover.media--position_top.skeleton
                         img.media__image(src=`img/products/product-${i}.webp` width='72' height='91' alt='' loading='lazy')
                       p.checkout-order__products-item-title Шуба SETTE BLACK
     dl.checkout-order__list

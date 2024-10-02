@@ -4,6 +4,6 @@ mixin consumers-photos-modal-gallery-slider
       ul.gallery-slider__list.swiper-wrapper
         each i in [1, 2, 3, 4, 5, 6, 7]
           li.gallery-slider__item.swiper-slide
-            picture.gallery-slider__image-wrapper.media.media--cover.media--position_top
+            picture.gallery-slider__image-wrapper.media.media--cover.media--position_top.skeleton
               img.gallery-slider__image.media__image(src=`img/consumers/consumer-${i}.webp` width='622' height='786' alt='' loading='lazy')
     +slider-arrows(class='gallery-slider__arrows slider-arrows--big')
