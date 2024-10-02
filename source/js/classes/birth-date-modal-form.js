@@ -132,6 +132,10 @@ class BirthDateModalForm extends Modal {
     this.formElement.addEventListener('input', this.onFormInput);
     this.formElement.addEventListener('submit', this.onFormSubmit);
     this.backButtonElement.addEventListener('click', this.onBackButtonClick);
+
+    this.onOpenerClick = () => {
+      this.switchStep(1);
+    };
   };
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
