@@ -22,10 +22,6 @@ function isDownArrowEvent(evt) {
   return evt.code === KeyCode.DOWN_ARROW;
 }
 
-function isEscapeEvent(evt) {
-  return evt.code === KeyCode.ESCAPE;
-}
-
 function isLeftArrowEvent(evt) {
   return evt.code === KeyCode.LEFT_ARROW;
 }
@@ -34,16 +30,8 @@ function isRightArrowEvent(evt) {
   return evt.code === KeyCode.RIGHT_ARROW;
 }
 
-function isSpaceEvent(evt) {
-  return evt.code === KeyCode.SPACE;
-}
-
 function isBackspaceEvent(evt) {
   return evt.code === KeyCode.BACKSPACE;
-}
-
-function isUpArrowEvent(evt) {
-  return evt.code === KeyCode.UP_ARROW;
 }
 
 function debounce(callback, timeoutDelay = 500) {
