@@ -172,8 +172,6 @@ class PubSub {
  * modal.js
  */
 class Modal {
-  // static openModalsCount = 0;
-
   constructor(modalElement) {
     let {
       onOpenerClick
@@ -196,6 +194,9 @@ class Modal {
   initOpener = openerElement => {
     openerElement.addEventListener('click', evt => {
       evt.preventDefault();
+      if (openerElement.dataset.modalOpener !== this.name) {
+        return;
+      }
       if (this.onOpenerClick) {
         this.onOpenerClick(evt);
       }
@@ -722,6 +723,7 @@ class CheckoutForm extends Form {
     this.regionFieldElement = this.formElement.querySelector('[data-name="region"]');
     this.deliveryCompanyButtonsWrapper = this.formElement.querySelector('.checkout-form__delivery-company');
     this.phoneFieldElement = this.formElement.querySelector('.checkout-form__phone-field .text-field__control');
+    this.pickupPointFieldWrapperElement = this.formElement.querySelector('.checkout-form__pick-up-point-field');
     this.regionModalElement = document.querySelector('[data-modal="region-form"]');
     this.regionFormElement = this.regionModalElement.querySelector('.modal-form');
     this.regionFormCountryFieldElement = this.regionFormElement.querySelector('.modal-form__country-select select');
@@ -742,6 +744,12 @@ class CheckoutForm extends Form {
         this.addressFormCityFieldElement.value = this.regionFormCityFieldElement.value;
       }
     });
+    this.sdekModalElement = document.querySelector('[data-modal="sdek-sdek"]');
+    this.sdekModal = new Modal(this.sdekModalElement);
+    this.sdekModal.initOpener(this.pickupPointFieldWrapperElement);
+    this.postModalElement = document.querySelector('[data-modal="sdek-post"]');
+    this.postModal = new Modal(this.postModalElement);
+    this.postModal.initOpener(this.pickupPointFieldWrapperElement);
     this.init();
   }
   getSelectedOption = (selectElement, optionElements) => optionElements.find(optionElement => optionElement.value === selectElement.value);
@@ -784,9 +792,11 @@ class CheckoutForm extends Form {
       switch (buttonTitle) {
         case 'sdek':
           this.setDeliveryCompanySdekState();
+          this.pickupPointFieldWrapperElement.dataset.modalOpener = 'sdek-sdek';
           break;
         case 'post':
           this.setDeliveryCompanyPostState();
+          this.pickupPointFieldWrapperElement.dataset.modalOpener = 'sdek-post';
           break;
         case 'self-pickup':
           this.setDeliveryCompanySelfPickupState();
@@ -2377,5 +2387,4 @@ if (birthDateModalFormElement && birthDateInfoModal) {
 }
 initReviewsIntroPhotos();
 initConsumersPhotos();
-document.querySelectorAll('[data-modal="sdek-sdek"], [data-modal="sdek-post"]').forEach(modalElement => new Modal(modalElement));
 /* * * * * * * * * * * * * * * * * * * * * * * */
