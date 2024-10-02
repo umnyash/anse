@@ -24,6 +24,29 @@
   column-gap: 10px;
 }
 
+.button__counter {
+  display: flex;
+  box-sizing: border-box;
+  width: 21px;
+  height: 21px;
+  padding: 1px 2px 0;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 500;
+  transition-property: color, background-color;
+  transition-duration: $duration-m;
+  transition-timing-function: ease-in-out;
+
+  @media (min-width: $desktop-width) {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+  }
+}
+
 .button--pending .button__inner::after {
   content: "";
   width: 20px;
@@ -148,16 +171,33 @@
   mask: url("../img/icons.svg#location");
 }
 
-.button--solid-primary {
+[class*="button--solid"] {
   position: relative;
   padding: 0 15px;
-  border: 1px solid var(--background-dark-color);
+  border: 1px solid currentColor;
   border-radius: 8px;
   font-size: 16px;
   line-height: 1;
+  background-origin: border-box;
+
+  &:not(.button--pending):active {
+    transition-duration: $duration-xs;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 18px;
+  }
+
+  .button__text {
+    padding: 15px 0;
+  }
+}
+
+.button--solid-primary {
+  border-color: var(--background-dark-color);
   color: var(--text-light-color);
   background: linear-gradient(var(--background-dark-color), var(--background-dark-color)) no-repeat bottom center / 100% 100%;
-  background-origin: border-box;
+
 
   &:not(.button--pending):hover {
     color: var(--text-color);
@@ -167,28 +207,13 @@
   &:not(.button--pending):active {
     color: var(--brand-color);
     background-size: 100% 0;
-    transition-duration: $duration-xs;
-  }
-
-  @media (min-width: $desktop-width) {
-    font-size: 18px;
-  }
-
-  .button__text {
-    padding: 15px 0;
   }
 }
 
 .button--solid-primary-light {
-  position: relative;
-  padding: 0 15px;
-  border: 1px solid var(--background-color);
-  border-radius: 8px;
-  font-size: 16px;
-  line-height: 1;
+  border-color: var(--background-color);
   color: var(--text-color);
   background: linear-gradient(var(--background-color), var(--background-color)) no-repeat bottom center / 100% 100%;
-  background-origin: border-box;
 
   &:hover {
     color: var(--text-light-color);
@@ -198,28 +223,13 @@
   &:active {
     color: var(--brand-color);
     background-size: 100% 0;
-    transition-duration: $duration-xs;
-  }
-
-  @media (min-width: $desktop-width) {
-    font-size: 18px;
-  }
-
-  .button__text {
-    padding: 15px 0;
   }
 }
 
 .button--solid-brand {
-  position: relative;
-  padding: 0 15px;
-  border: 1px solid var(--background-additional-color);
-  border-radius: 8px;
-  font-size: 16px;
-  line-height: 1;
+  border-color: var(--background-additional-color);
   color: var(--brand-color);
   background: linear-gradient(var(--background-additional-color), var(--background-additional-color)) no-repeat bottom center / 100% 100%;
-  background-origin: border-box;
 
   &:hover {
     background-size: 100% 0;
@@ -228,59 +238,13 @@
   &:active {
     color: var(--text-weak-color);
     background-size: 100% 0;
-    transition-duration: $duration-xs;
-  }
-
-  @media (min-width: $desktop-width) {
-    font-size: 18px;
-  }
-
-  .button__text {
-    padding: 15px 0;
-  }
-}
-
-.button--solid-secondary {
-  position: relative;
-  padding: 0 15px;
-  border: 1px solid var(--background-dark-color);
-  border-radius: 8px;
-  font-size: 16px;
-  line-height: 1;
-  color: var(--text-color);
-  background: linear-gradient(var(--background-dark-color), var(--background-dark-color)) no-repeat top center / 100% 0%;
-  background-origin: border-box;
-
-  &:hover {
-    color: var(--text-light-color);
-    background-size: 100% 100%;
-  }
-
-  &:active {
-    color: var(--brand-color);
-    background-size: 100% 100%;
-    transition-duration: $duration-xs;
-  }
-
-  @media (min-width: $desktop-width) {
-    font-size: 18px;
-  }
-
-  .button__text {
-    padding: 15px 0;
   }
 }
 
 .button--solid-primary-secondary {
-  position: relative;
-  padding: 0 15px;
-  border: 1px solid var(--background-dark-color);
-  border-radius: 8px;
-  font-size: 16px;
-  line-height: 1;
+  border-color: var(--background-dark-color);
   color: var(--text-light-color);
   background: linear-gradient(var(--background-dark-color), var(--background-dark-color)) no-repeat bottom center / 100% 100%;
-  background-origin: border-box;
 
   &:hover {
     color: var(--text-color);
@@ -290,7 +254,6 @@
   &:active {
     color: var(--brand-color);
     background-size: 100% 0;
-    transition-duration: $duration-xs;
   }
 
   @media (min-width: $laptop-width) {
@@ -303,63 +266,18 @@
     }
 
     &:active {
-      color: var(--brand-color);
       background-size: 100% 100%;
-      transition-duration: $duration-xs;
     }
-  }
-
-  @media (min-width: $desktop-width) {
-    font-size: 18px;
-  }
-
-  .button__text {
-    padding: 15px 0;
   }
 }
 
 .button--solid-secondary-alter {
-  position: relative;
-  padding: 0 15px;
-  border: 1px solid var(--border-light-color-4);
-  border-radius: 4px;
-  font-size: 16px;
-  line-height: 1;
-  font-weight: 400;
+  border-color: var(--border-light-color-4);
   color: var(--text-color);
   background: linear-gradient(var(--background-dark-color), var(--background-dark-color)) no-repeat top center / 100% 0%;
-  background-origin: border-box;
-
-  @media (min-width: $desktop-width) {
-    font-size: 18px;
-  }
-
-  .button__text {
-    padding: 15px 0;
-  }
 
   .button__counter {
-    display: flex;
-    box-sizing: border-box;
-    width: 21px;
-    height: 21px;
-    padding: 1px 2px 0;
-    border-radius: 50%;
-    justify-content: center;
-    align-items: center;
-    font-size: 10px;
-    line-height: 1;
-    font-weight: 500;
     background: var(--background-additional-color-2);
-    transition-property: color, background-color;
-    transition-duration: $duration-m;
-    transition-timing-function: ease-in-out;
-
-    @media (min-width: $desktop-width) {
-      width: 25px;
-      height: 25px;
-      font-size: 12px;
-    }
   }
 
   &:hover {
@@ -375,7 +293,6 @@
   &:active {
     color: var(--brand-color);
     background-size: 100% 100%;
-    transition-duration: $duration-xs;
 
     .button__counter {
       color: var(--text-color);
