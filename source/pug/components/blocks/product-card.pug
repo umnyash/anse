@@ -9,7 +9,7 @@ mixin product-card({ product, headingTag })
         picture.product-card__image-wrapper-primary.media.media--cover.media--position_top
           img.product-card__image.media__image(src= product.image width='365' height='563' alt='' loading='lazy')
         picture.product-card__image-wrapper-secondary.media.media--cover.media--position_top
-          img.product-card__image.media__image(src='img/products/product-additional.webp' width='365' height='563' alt='' loading='lazy')
+          img.product-card__image.media__image(src= product.image2 width='365' height='563' alt='' loading='lazy')
         if badges.length
           +product-badges({ badges })(class='product-card__badges product-badges--light')
         if product.sizes
