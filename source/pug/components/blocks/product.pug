@@ -1,19 +1,19 @@
 mixin product__slider-item-image(item)
   li.product__slider-item.swiper-slide(data-modal-opener='product-gallery')
-    picture.product__slider-image-wrapper.media.media--cover.media--position_top
+    picture.product__slider-image-wrapper.media.media--cover.media--position_top.skeleton
       img.media__image(src= item width='1140' height='1520' alt='' loading='lazy')
 
 mixin product__slider-item-video(item)
   li.product__slider-item.swiper-slide(data-modal-opener='product-gallery')
-    .product__slider-video-wrapper.media.media--cover.media--position_top
+    .product__slider-video-wrapper.media.media--cover.media--position_top.skeleton
       video.media__video(src= item playsinline muted autoplay loop)
 
 mixin product__image-wrapper(item)
-  picture.product__image-wrapper.media.media--cover.media--position_top(data-modal-opener='product-gallery')
+  picture.product__image-wrapper.media.media--cover.media--position_top.skeleton(data-modal-opener='product-gallery')
     img.media__image(src= item width='1140' height='1520' alt='' loading='lazy')
 
 mixin product__video-wrapper(item)
-  .product__video-wrapper.media.media--cover.media--position_top(data-modal-opener='product-gallery')
+  .product__video-wrapper.media.media--cover.media--position_top.skeleton(data-modal-opener='product-gallery')
     video.media__video(src= item playsinline muted autoplay loop)
 
 mixin product({ sizes, colors, media })

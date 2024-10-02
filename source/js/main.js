@@ -6,6 +6,8 @@ const inputEvent = new Event('input', { bubbles: true });
 const changeEvent = new Event('change', { bubbles: true });
 const simpleBar = initPageScrollbar(document.querySelector('.page__scroll-wrapper'));
 
+initSkeleton();
+
 initSiteHeader(document.querySelector('.site-header'), simpleBar.getScrollElement());
 initSiteNavigation(document.querySelector('.site-navigation'));
 document.querySelectorAll('.article__photos').forEach(initArticlePhotos);
