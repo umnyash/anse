@@ -14,10 +14,7 @@ const KeyCode = Object.freeze({
   LEFT_ARROW: 'ArrowLeft',
   RIGHT_ARROW: 'ArrowRight',
   DOWN_ARROW: 'ArrowDown',
-  UP_ARROW: 'ArrowUp',
-  SPACE: 'Space',
-  BACKSPACE: 'Backspace',
-  ESCAPE: 'Escape'
+  BACKSPACE: 'Backspace'
 });
 const MONTHS_NAMES = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 /* * * * * * * * * * * * * * * * * * * * * * * */
@@ -41,23 +38,14 @@ function createElementByString(template) {
 function isDownArrowEvent(evt) {
   return evt.code === KeyCode.DOWN_ARROW;
 }
-function isEscapeEvent(evt) {
-  return evt.code === KeyCode.ESCAPE;
-}
 function isLeftArrowEvent(evt) {
   return evt.code === KeyCode.LEFT_ARROW;
 }
 function isRightArrowEvent(evt) {
   return evt.code === KeyCode.RIGHT_ARROW;
 }
-function isSpaceEvent(evt) {
-  return evt.code === KeyCode.SPACE;
-}
 function isBackspaceEvent(evt) {
   return evt.code === KeyCode.BACKSPACE;
-}
-function isUpArrowEvent(evt) {
-  return evt.code === KeyCode.UP_ARROW;
 }
 function debounce(callback) {
   var _this = this;
@@ -2283,31 +2271,32 @@ function initSizeChart(sizeChartElement) {
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
-function initSkeleton() {
-  document.querySelectorAll('.skeleton img').forEach(imgElement => {
+function initSkeleton(skeletonElement) {
+  const imgElement = skeletonElement.querySelector('img');
+  if (imgElement) {
     if (imgElement.complete) {
-      const skeletonElement = imgElement.closest('.skeleton');
       skeletonElement.classList.add('skeleton--loaded');
     } else {
-      imgElement.addEventListener('load', () => {
-        const skeletonElement = imgElement.closest('.skeleton');
-        skeletonElement.classList.add('skeleton--loaded');
+      imgElement.addEventListener('load', () => skeletonElement.classList.add('skeleton--loaded'), {
+        once: true
       });
     }
-  });
-  document.querySelectorAll('.skeleton video').forEach(videoElement => {
+  } else {
+    const videoElement = skeletonElement.querySelector('video');
     if (videoElement.readyState >= 1) {
-      const skeletonElement = videoElement.closest('.skeleton');
       skeletonElement.classList.add('skeleton--loaded');
     } else {
-      videoElement.addEventListener('loadeddata', () => {
-        const skeletonElement = videoElement.closest('.skeleton');
-        skeletonElement.classList.add('skeleton--loaded');
+      videoElement.addEventListener('loadeddata', () => skeletonElement.classList.add('skeleton--loaded'), {
+        once: true
       });
     }
-  });
+  }
 }
-;
+function initSkeletons() {
+  let wrapperElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+  const skeletonElements = wrapperElement.querySelectorAll('.skeleton');
+  skeletonElements.forEach(initSkeleton);
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * main.js
@@ -2320,7 +2309,7 @@ const changeEvent = new Event('change', {
   bubbles: true
 });
 const simpleBar = initPageScrollbar(document.querySelector('.page__scroll-wrapper'));
-initSkeleton();
+initSkeletons();
 initSiteHeader(document.querySelector('.site-header'), simpleBar.getScrollElement());
 initSiteNavigation(document.querySelector('.site-navigation'));
 document.querySelectorAll('.article__photos').forEach(initArticlePhotos);
