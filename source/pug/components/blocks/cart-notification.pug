@@ -1,10 +1,15 @@
-mixin cart-notification
+mixin cart-notification({ size, color })
   dialog.cart-notification&attributes(attributes)
     h2.cart-notification__heading Товар добавлен в корзину
     .cart-notification__product
       .cart-notification__product-text-content
         h3.cart-notification__product-heading Шуба SETTE BLACK
-        p.cart-notification__product-text Размер: S
+        if size
+          p.cart-notification__product-text Размер: S
+        if color
+          .cart-notification__product-color
+            p.cart-notification__product-color-text Цвет: Розовый фламинго
+            img.cart-notification__product-color-image(src='img/colors/pink-flamingo.webp' width='20' height='20' alt='')
         p.cart-notification__product-text Количество: 1
         .cart-notification__price-wrapper
           s.cart-notification__price.cart-notification__price--old 34 980 ₽
