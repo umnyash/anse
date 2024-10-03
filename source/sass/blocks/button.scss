@@ -197,7 +197,7 @@
   border-color: var(--background-dark-color);
   color: var(--text-light-color);
   background: linear-gradient(var(--background-dark-color), var(--background-dark-color)) no-repeat bottom center / 100% 100%;
-
+  background-origin: border-box;
 
   &:not(.button--pending):hover {
     color: var(--text-color);
@@ -214,6 +214,7 @@
   border-color: var(--background-color);
   color: var(--text-color);
   background: linear-gradient(var(--background-color), var(--background-color)) no-repeat bottom center / 100% 100%;
+  background-origin: border-box;
 
   &:hover {
     color: var(--text-light-color);
@@ -230,6 +231,7 @@
   border-color: var(--background-additional-color);
   color: var(--brand-color);
   background: linear-gradient(var(--background-additional-color), var(--background-additional-color)) no-repeat bottom center / 100% 100%;
+  background-origin: border-box;
 
   &:hover {
     background-size: 100% 0;
@@ -245,6 +247,7 @@
   border-color: var(--background-dark-color);
   color: var(--text-light-color);
   background: linear-gradient(var(--background-dark-color), var(--background-dark-color)) no-repeat bottom center / 100% 100%;
+  background-origin: border-box;
 
   &:hover {
     color: var(--text-color);
@@ -275,6 +278,7 @@
   border-color: var(--border-light-color-4);
   color: var(--text-color);
   background: linear-gradient(var(--background-dark-color), var(--background-dark-color)) no-repeat top center / 100% 0%;
+  background-origin: border-box;
 
   .button__counter {
     background: var(--background-additional-color-2);
