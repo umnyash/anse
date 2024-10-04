@@ -1,16 +1,3 @@
-// .simple-filter {
-//   font: 300 28px/1 $main-font-family;
-//   color: var(--brand-color);
-
-//   @media (min-width: $laptop-width) {
-//     font-size: 44px;
-//   }
-
-//   @media (min-width: $desktop-width) {
-//     font-size: 58px;
-//   }
-// }
-
 .simple-filter__slider-wrapper {
   position: relative;
   z-index: 0;
@@ -35,7 +22,7 @@
   width: auto;
 }
 
-.simple-filter__button {
+.simple-filter__link {
   position: relative;
   display: block;
   box-sizing: border-box;
@@ -43,9 +30,13 @@
   border: none;
   text-align: center;
   font: 300 28px/1 $main-font-family;
+  text-decoration: none;
   color: var(--brand-color);
   background: transparent;
-  cursor: pointer;
+
+  &[href] {
+    cursor: pointer;
+  }
 
   @media (min-width: $laptop-width) {
     padding: 10px 0;
@@ -75,8 +66,19 @@
   }
 }
 
-.simple-filter__control:checked + .simple-filter__button::after {
+.simple-filter__link .simple-filter__link--active::after,
+.simple-filter__link:hover::after,
+.simple-filter__link:active::after {
   transform: scaleX(1);
+}
+
+.simple-filter__link:active::after {
+  transform: translateY(-2px) scaleX(1);
+  transition-duration: $duration-xs;
+
+  @media (min-width: $laptop-width) {
+    transform: translateY(-4px) scaleX(1);
+  }
 }
 
 .simple-filter__slider-arrows {

@@ -1,16 +1,12 @@
-mixin simple-filter({ buttons })
-  form.simple-filter(action='https://fakestoreapi.com/products' method='get' target='_blank')&attributes(attributes)
+mixin simple-filter({ links })
+  .simple-filter&attributes(attributes)
     .simple-filter__slider-wrapper
       .simple-filter__slider.swiper
         ul.simple-filter__slider-list.swiper-wrapper
-          each button in buttons
+          each link in links
             li.simple-filter__slider-item.swiper-slide
-              label.simple-filter__button-wrapper
-                input.simple-filter__control.visually-hidden(
-                  type='radio'
-                  name= buttons[0].name
-                  value= button.value
-                  checked= button.checked && ''
-                )
-                span.simple-filter__button= button.text
+              a.simple-filter__link(
+                class= link.active && 'simple-filter__link--active'
+                href= !link.active && '#'
+              )= link.text
       +slider-arrows(class='simple-filter__slider-arrows slider-arrows--alter')

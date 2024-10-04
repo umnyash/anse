@@ -1,41 +1,31 @@
 -
-  const reviewsFilterButtons = [
+  const reviewsFilterLinks = [
     {
-      name: 'period',
-      value: '2023-2022',
       text: '2023/22',
-      checked: true
+      active: true
     },
     {
-      value: '2021-2020',
       text: '2021/20'
     },
     {
-      value: '2019-2018',
       text: '2019/18'
     },
     {
-      value: '2017-2016',
       text: '2017/16'
     },
     {
-      value: '2015-2014',
       text: '2015/14'
     },
     {
-      value: '2013-2012',
       text: '2013/12'
     },
     {
-      value: '2011-2010',
       text: '2011/10'
     },
     {
-      value: '2009-2008',
       text: '2009/08'
     },
     {
-      value: '2007-2006',
       text: '2007/06'
     },
   ];
@@ -48,6 +38,6 @@ mixin reviews({ reviews })
           h2.reviews__heading.heading.heading--size_l.heading--alter Нас ценят уже 10 лет
           p Каждый отзыв - это история радости и счастья. Для нас это важнейший стимул соответствовать. Ведь то, что сделано своими руками и с любовью, вызывает такие же эмоции для тех, для кого это сделано.
           .reviews__filter-wrapper
-            +simple-filter({ buttons: reviewsFilterButtons })
+            +simple-filter({ links: reviewsFilterLinks })
         .reviews__list-wrapper
           +reviews-list({ reviews, button: true })
