@@ -1108,25 +1108,79 @@ class Reviews {
   constructor(reviewsElement) {
     this.reviewsElement = reviewsElement;
     this.listElement = reviewsElement.querySelector('.reviews-list');
+    this.reviewsWrapperElement = this.listElement.querySelector('.reviews-list__items');
     this.init();
   }
   updateReviewsTextWrappersList = () => {
     this.reviewTextWrapperElements = this.listElement.querySelectorAll('.review__text-wrapper');
   };
+  setReviewTextWrapperMode = textWrapperElement => {
+    const isClipped = textWrapperElement.classList.contains('review__text-wrapper--clipped');
+    textWrapperElement.classList.add('review__text-wrapper--clipped');
+    const textElement = textWrapperElement.querySelector('.review__text');
+    if (textElement.scrollHeight - textElement.offsetHeight > 5) {
+      textWrapperElement.classList.add('review__text-wrapper--clippable');
+    } else {
+      textWrapperElement.classList.remove('review__text-wrapper--clippable');
+    }
+    if (!isClipped) {
+      textWrapperElement.classList.remove('review__text-wrapper--clipped');
+    }
+  };
   setReviewsTextWrappersMode = () => {
-    this.reviewTextWrapperElements.forEach(textWrapperElement => {
-      const isClipped = textWrapperElement.classList.contains('review__text-wrapper--clipped');
-      textWrapperElement.classList.add('review__text-wrapper--clipped');
-      const textElement = textWrapperElement.querySelector('.review__text');
-      if (textElement.scrollHeight - textElement.offsetHeight > 5) {
-        textWrapperElement.classList.add('review__text-wrapper--clippable');
-      } else {
-        textWrapperElement.classList.remove('review__text-wrapper--clippable');
-      }
-      if (!isClipped) {
-        textWrapperElement.classList.remove('review__text-wrapper--clipped');
-      }
+    this.reviewTextWrapperElements.forEach(this.setReviewTextWrapperMode);
+  };
+  initReviewSlider = sliderWrapperElement => {
+    const sliderElement = sliderWrapperElement.querySelector('.review__slider');
+    new Swiper(sliderElement, {
+      slidesPerView: 'auto',
+      spaceBetween: 10,
+      grabCursor: true
     });
+  };
+  createReviewElement = review => {
+    const formattedDate = new Date(review.date).toLocaleDateString('ru-RU');
+    const reviewSliderItemsString = review.photos?.map(photo => `
+      <li class="review__slider-item swiper-slide">
+        <picture class="review__slider-image-wrapper media media--cover media--position_top skeleton">
+          <img class="media__image" src="${photo}" width="102" height="128" alt="" loading="lazy">
+        </picture>
+      </li>
+    `).join('');
+    const reviewString = `
+      <li class="reviews-list__item">
+        <article class="review">
+          <footer class="review__footer">
+            <p class="review__author">${review.author}</p>
+            <time class="review__date" datetime="${review.date}">${formattedDate}</time>
+          </footer>
+          <div class="review__text-wrapper review__text-wrapper--clipped">
+            <blockquote class="review__text">${review.text}</blockquote>
+            <button class="review__toggle-button" type="button">
+              <span class="review__toggle-button-text">Скрыть</span>
+              <span class="review__toggle-button-text-clipped">Читать полностью</span>
+            </button>
+          </div>
+          <div class="review__slider-wrapper">
+            <div class="review__slider swiper">
+              <ul class="review__slider-list swiper-wrapper">
+                ${reviewSliderItemsString}
+              </ul>
+          </div>
+        </article>
+      </li>
+    `;
+    return createElementByString(reviewString);
+  };
+  renderReviews = reviews => {
+    const reviewElements = reviews.map(this.createReviewElement);
+    this.reviewsWrapperElement.append(...reviewElements);
+    for (const reviewElement of reviewElements) {
+      initSkeletons(reviewElement);
+      this.initReviewSlider(reviewElement);
+      this.setReviewTextWrapperMode(reviewElement.querySelector('.review__text-wrapper'));
+    }
+    this.updateReviewsTextWrappersList();
   };
   onWindowResize = debounce(this.setReviewsTextWrappersMode, 500);
   onListClick = evt => {
@@ -1139,6 +1193,7 @@ class Reviews {
   init() {
     this.updateReviewsTextWrappersList();
     this.setReviewsTextWrappersMode();
+    this.reviewsWrapperElement.querySelectorAll('.review__slider-wrapper').forEach(this.initReviewSlider);
     window.addEventListener('resize', this.onWindowResize);
     this.listElement.addEventListener('click', this.onListClick);
   }
@@ -1171,6 +1226,120 @@ class Video {
       this.posterElement.classList.remove('video__poster--hidden');
     });
   }
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * catalog.js
+ */
+class Catalog {
+  constructor(catalogElement, pageScrollWrapperElement) {
+    this.catalogElement = catalogElement;
+    this.pageScrollWrapperElement = pageScrollWrapperElement;
+    this.productsWrapperElement = catalogElement.querySelector('.products-list__items');
+    this.sortingElement = catalogElement.querySelector('.catalog__sorting');
+    this.init();
+  }
+  createProductListItemElement = product => {
+    const badgesString = product.new || product.sale ? `
+      <div class="product-badges product-card__badges product-badges--light">
+        <ul class="product-badges__list">
+          ${product.sale ? '<li class="product-badges__item">sale</li>' : ''}
+          ${product.new ? '<li class="product-badges__item">new</li>' : ''}
+        </ul>
+      </div>
+    ` : '';
+    const sizesString = product.sizes ? `
+      <ol class="product-card__sizes">
+        ${product.sizes.map(size => `
+          <li class="product-card__sizes-item ${!size.disabled ? 'product-card__sizes-item--active' : ''}">
+            ${size.title}
+          </li>
+        `).join('')}
+      </ol>
+    ` : '';
+    const colorsString = product.colors ? `
+      <div class="product-card__colors">
+        <ul class="product-card__colors-list">
+          ${product.colors.map(color => `
+            <li class="product-card__colors-item ${color.disabled ? 'product-card__colors-item--disabled' : ''}">
+              <img class="product-card__colors-image" src="${color.src}" width="28" height="28" alt="${color.title}">
+            </li>
+          `).join('')}
+        </ul>
+        <p class="product-card__colors-counter product-card__colors-counter--hidden"></p>
+      </div>
+    ` : '';
+    const productListItemString = `
+      <li class="products-list__item">
+        <article class="product-card">
+          <div class="product-card__link-wrapper">
+            <h2 class="product-card__heading">
+              <a class="product-card__link" href="${product.link}">${product.title}</a>
+            </h2>
+            <div class="product-card__images">
+              <picture class="product-card__image-wrapper-primary media media--cover media--position_top skeleton skeleton--loaded">
+                <img class="product-card__image media__image" src="${product.image}" width="365" height="563" alt="" loading="lazy">
+              </picture>
+              <picture class="product-card__image-wrapper-secondary media media--cover media--position_top skeleton skeleton--loaded">
+                <img class="product-card__image media__image" src="${product.image2}" width="365" height="563" alt="" loading="lazy">
+              </picture>
+              ${badgesString}
+              ${colorsString}
+              ${sizesString}
+            </div>
+          </div>
+          <div class="product-card__price-wrapper">
+            ${product.oldPrice ? `<s class="product-card__price product-card__price--old">${product.oldPrice} ₽</s>` : ''}
+            ${product.price ? `<p class="product-card__price">${product.price} ₽</p>` : ''}
+          </div>
+          ${product.installments ? `<p class="product-card__installments">Долями по ${product.installments} ₽</p>` : ''}
+        </article>
+      </li>
+    `;
+    return createElementByString(productListItemString);
+  };
+  renderProducts = products => {
+    const productListItemElements = products.map(this.createProductListItemElement);
+    this.productsWrapperElement.append(...productListItemElements);
+    for (const itemElement of productListItemElements) {
+      initSkeletons(itemElement);
+      setProductCardColorsCounter(itemElement);
+    }
+  };
+  init = () => {
+    initCatalogFilter(this.catalogElement, this.pageScrollWrapperElement);
+    initCatalogSorting(this.sortingElement);
+  };
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * reviews.js
+ */
+class Celebrities {
+  constructor(celebritiesElement) {
+    this.celebritiesElement = celebritiesElement;
+    this.celebritiesWrapperElement = this.celebritiesElement.querySelector('.celebrities-list__items');
+  }
+  createCelebritiesListItemElement = celebrity => {
+    const celebrityString = `
+      <li class="celebrities-list__item">
+        <picture class="celebrities-list__image-wrapper skeleton">
+          <img class="celebrities-list__image" src=${celebrity.image} width="750" height="1030" alt=${celebrity.title} loading="lazy">
+        </picture>
+        <p class="celebrities-list__title">${celebrity.title}</p>
+      </li>
+    `;
+    return createElementByString(celebrityString);
+  };
+  renderCelebrities = celebrities => {
+    const celebritiesElements = celebrities.map(this.createCelebritiesListItemElement);
+    this.celebritiesWrapperElement.append(...celebritiesElements);
+    for (const celebritiesElement of celebritiesElements) {
+      initSkeletons(celebritiesElement);
+    }
+  };
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -1604,37 +1773,41 @@ function initPageScrollbar(pageInnerElement) {
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * product-card-colors.js
  */
-function initProductCardColors(listElement) {
-  const calculateFittingItems = () => {
-    for (const item of listElement.children) {
-      const colorListElement = item.querySelector('.product-card__colors-list');
-      if (!colorListElement) {
-        continue;
-      }
-      colorListElement.className = 'product-card__colors-list';
-      const counterElement = item.querySelector('.product-card__colors-counter');
-      counterElement.classList.add('product-card__colors-counter--hidden');
-      let listWidth = colorListElement.offsetWidth;
-      const itemWidth = parseInt(getComputedStyle(colorListElement.querySelector('.product-card__colors-item')).width);
-      const gap = parseInt(getComputedStyle(colorListElement).columnGap);
-      let maxItems = Math.floor((listWidth + gap) / (itemWidth + gap));
-      let quantityOverflowItems = colorListElement.children.length - maxItems;
-      if (!quantityOverflowItems) {
-        continue;
-      }
-      counterElement.textContent = `+${quantityOverflowItems}`;
-      counterElement.classList.remove('product-card__colors-counter--hidden');
-      listWidth = colorListElement.offsetWidth;
-      maxItems = Math.floor((listWidth + gap) / (itemWidth + gap));
-      colorListElement.classList.add(`product-card__colors-list--max_${maxItems}`);
-      quantityOverflowItems = colorListElement.children.length - maxItems;
-      counterElement.textContent = `+${quantityOverflowItems}`;
-    }
-  };
-  calculateFittingItems();
-  window.addEventListener('resize', debounce(calculateFittingItems, 500));
+function setProductCardColorsCounter(itemElement) {
+  const colorListElement = itemElement.querySelector('.product-card__colors-list');
+  if (!colorListElement) {
+    return;
+  }
+  colorListElement.className = 'product-card__colors-list';
+  const counterElement = itemElement.querySelector('.product-card__colors-counter');
+  counterElement.classList.add('product-card__colors-counter--hidden');
+  let listWidth = colorListElement.offsetWidth;
+  const itemWidth = parseInt(getComputedStyle(colorListElement.querySelector('.product-card__colors-item')).width);
+  const gap = parseInt(getComputedStyle(colorListElement).columnGap);
+  let maxItems = Math.floor((listWidth + gap) / (itemWidth + gap));
+  let quantityOverflowItems = colorListElement.children.length - maxItems;
+  if (!quantityOverflowItems) {
+    return;
+  }
+  counterElement.textContent = `+${quantityOverflowItems}`;
+  counterElement.classList.remove('product-card__colors-counter--hidden');
+  listWidth = colorListElement.offsetWidth;
+  maxItems = Math.floor((listWidth + gap) / (itemWidth + gap));
+  colorListElement.classList.add(`product-card__colors-list--max_${maxItems}`);
+  quantityOverflowItems = colorListElement.children.length - maxItems;
+  counterElement.textContent = `+${quantityOverflowItems}`;
 }
-
+;
+function setProductsListColorsCounter(listElement) {
+  for (const item of listElement.children) {
+    setProductCardColorsCounter(item);
+  }
+}
+;
+function initProductCardColors(listElement) {
+  setProductsListColorsCounter(listElement);
+  window.addEventListener('resize', debounce(() => setProductsListColorsCounter(listElement), 500));
+}
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
@@ -1847,19 +2020,6 @@ function initProducts(productsElement) {
         spaceBetween: 20
       }
     }
-  });
-}
-/* * * * * * * * * * * * * * * * * * * * * * * */
-
-/* * * * * * * * * * * * * * * * * * * * * * * *
- * review-slider.js
- */
-function initReviewSlider(sliderWrapperElement) {
-  const sliderElement = sliderWrapperElement.querySelector('.review__slider');
-  new Swiper(sliderElement, {
-    slidesPerView: 'auto',
-    spaceBetween: 10,
-    grabCursor: true
   });
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
@@ -2199,9 +2359,11 @@ function initSiteHeader(headerElement, pageScrollWrapperElement) {
   // Поиск
   const searchOpenerElements = headerElement.querySelectorAll('.site-header__search-button');
   const searchCloserElements = headerElement.querySelectorAll('[class^="site-header__search-close-button"]');
+  const searchFieldElement = headerElement.querySelector('.search-form__field-control');
   const openSearchPanel = () => {
     headerElement.classList.add('site-header--search-open');
     lockPageScroll();
+    searchFieldElement.focus();
   };
   const closeSearchPanel = () => {
     headerElement.classList.remove('site-header--search-open');
@@ -2319,7 +2481,6 @@ document.querySelectorAll('.size-chart').forEach(initSizeChart);
 document.querySelectorAll('.video').forEach(videoElement => new Video(videoElement));
 document.querySelectorAll('.shop__slider-wrapper').forEach(initShopSlider);
 document.querySelectorAll('.simple-filter__slider-wrapper').forEach(initSimpleFilterSlider);
-document.querySelectorAll('.review__slider-wrapper').forEach(initReviewSlider);
 document.querySelectorAll('.brands').forEach(initBrandsSlider);
 document.querySelectorAll('.catalog-preview .products-slider').forEach(initCatalogPreviewSlider);
 document.querySelectorAll('.search, .site-header__search').forEach(initSearch);
@@ -2331,10 +2492,6 @@ document.querySelectorAll('[data-modal="size-chart"]').forEach(modalElement => n
 document.querySelectorAll('[data-modal="manager-contacts"]').forEach(modalElement => new Modal(modalElement));
 document.querySelectorAll('.set').forEach(initSet);
 document.querySelectorAll('.cart__form, .product__cart').forEach(initProductsCounters);
-document.querySelectorAll('.catalog__sorting').forEach(initCatalogSorting);
-document.querySelectorAll('.catalog').forEach(catalogElement => {
-  initCatalogFilter(catalogElement, simpleBar.getScrollElement());
-});
 document.querySelectorAll('.products-list__items, .products-slider__list').forEach(initProductCardColors);
 document.querySelectorAll(`
   .birth-date-modal-form .select__control,
@@ -2351,6 +2508,16 @@ let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {
   reviews = new Reviews(reviewsElement);
+}
+let catalog = null;
+const catalogElement = document.querySelector('.catalog');
+if (catalogElement) {
+  catalog = new Catalog(catalogElement, simpleBar.getScrollElement());
+}
+let celebrities = null;
+const celebritiesElement = document.querySelector('.celebrities');
+if (celebritiesElement) {
+  celebrities = new Celebrities(celebritiesElement);
 }
 let product = null;
 let productElement = document.querySelector('.product');
