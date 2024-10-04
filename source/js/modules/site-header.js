@@ -55,10 +55,12 @@ function initSiteHeader(headerElement, pageScrollWrapperElement) {
   // Поиск
   const searchOpenerElements = headerElement.querySelectorAll('.site-header__search-button');
   const searchCloserElements = headerElement.querySelectorAll('[class^="site-header__search-close-button"]');
+  const searchFieldElement = headerElement.querySelector('.search-form__field-control');
 
   const openSearchPanel = () => {
     headerElement.classList.add('site-header--search-open');
     lockPageScroll();
+    searchFieldElement.focus();
   };
 
   const closeSearchPanel = () => {
