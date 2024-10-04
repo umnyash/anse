@@ -182,3 +182,17 @@ document.querySelectorAll('.text-field').forEach((fieldElement) => {
 });
 
 /* * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Добавление отзывов
+ */
+if (reviews) {
+  const showMoreButton = document.querySelector('.reviews-list__button');
+
+  showMoreButton.addEventListener('click', () => {
+    reviews.renderReviews(mockReviews);
+  });
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * */

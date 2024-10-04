@@ -17,7 +17,6 @@ document.querySelectorAll('.size-chart').forEach(initSizeChart);
 document.querySelectorAll('.video').forEach((videoElement) => new Video(videoElement));
 document.querySelectorAll('.shop__slider-wrapper').forEach(initShopSlider);
 document.querySelectorAll('.simple-filter__slider-wrapper').forEach(initSimpleFilterSlider);
-document.querySelectorAll('.review__slider-wrapper').forEach(initReviewSlider);
 document.querySelectorAll('.brands').forEach(initBrandsSlider);
 document.querySelectorAll('.catalog-preview .products-slider').forEach(initCatalogPreviewSlider);
 document.querySelectorAll('.search, .site-header__search').forEach(initSearch);

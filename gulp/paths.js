@@ -72,6 +72,7 @@ export default {
       `${pathSrc}/js/classes/taber.js`,
       `${pathSrc}/js/classes/reviews.js`,
       `${pathSrc}/js/classes/video.js`,
+      `${pathSrc}/js/classes/catalog.js`,
       `${pathSrc}/js/modules/*.js`,
       `${pathSrc}/js/main.js`,
     ],
@@ -80,8 +81,14 @@ export default {
   },
 
   processDemoScript: {
-    src: `${pathSrc}/js/demo.js`,
-    watch: `${pathSrc}/js/demo.js`,
+    src: [
+      `${pathSrc}/js/mock.js`,
+      `${pathSrc}/js/demo.js`,
+    ],
+    watch: [
+      `${pathSrc}/js/mock.js`,
+      `${pathSrc}/js/demo.js`,
+    ],
     dest: `${pathDest}/js`
   },
 
