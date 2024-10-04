@@ -42,9 +42,10 @@
   padding: 0;
   border: none;
   border-radius: 7px;
+  color: var(--text-light-color);
   background: var(--background-dark-color);
-  color: var(--text-weak-color-3);
   cursor: pointer;
+  transition: color $duration-m ease-in-out;
 
   &::before {
     content: "";
@@ -53,15 +54,50 @@
     margin: auto;
     background: currentColor;
     mask: url("../img/icons.svg#controls_plus");
+    transition: transform $duration-xs ease-in;
+  }
+
+  &:not(.promocode__button--pending):hover {
+    color: var(--brand-color);
+  }
+
+  &:not(.promocode__button--pending):active {
+    color: var(--brand-color);
+
+    &::before {
+      transform: scale(0.85);
+    }
   }
 
   &--delete {
-    color: var(--text-light-color);
+    color: var(--text-weak-color-3);
 
     &::before {
       width: 22px;
       mask: url("../img/icons.svg#trash");
     }
+  }
+}
+
+.promocode__button--pending {
+  position: relative;
+  pointer-events: none;
+
+  &::before {
+    opacity: 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: currentColor;
+    mask: url("../img/spinner.svg");
+    mask-size: contain;
+    transform: translate(-50%, -50%);
   }
 }
 

@@ -11,7 +11,7 @@
   color: inherit;
   background: transparent;
   cursor: pointer;
-  transition-property: border-color, text-decoration-color, color, background-size, box-shadow;
+  transition-property: border-color, text-decoration-color, color, background-size;
   transition-duration: $duration-m;
   transition-timing-function: ease;
 }
