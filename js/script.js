@@ -1278,10 +1278,10 @@ class Catalog {
               <a class="product-card__link" href="${product.link}">${product.title}</a>
             </h2>
             <div class="product-card__images">
-              <picture class="product-card__image-wrapper-primary media media--cover media--position_top skeleton skeleton--loaded">
+              <picture class="product-card__image-wrapper-primary media media--cover media--position_top skeleton">
                 <img class="product-card__image media__image" src="${product.image}" width="365" height="563" alt="" loading="lazy">
               </picture>
-              <picture class="product-card__image-wrapper-secondary media media--cover media--position_top skeleton skeleton--loaded">
+              <picture class="product-card__image-wrapper-secondary media media--cover media--position_top skeleton">
                 <img class="product-card__image media__image" src="${product.image2}" width="365" height="563" alt="" loading="lazy">
               </picture>
               ${badgesString}
@@ -1290,10 +1290,10 @@ class Catalog {
             </div>
           </div>
           <div class="product-card__price-wrapper">
-            ${product.oldPrice ? `<s class="product-card__price product-card__price--old">${product.oldPrice} ₽</s>` : ''}
-            ${product.price ? `<p class="product-card__price">${product.price} ₽</p>` : ''}
+            ${product.oldPrice ? `<s class="product-card__price product-card__price--old">${product.oldPrice.toLocaleString('ru-RU')} ₽</s>` : ''}
+            ${product.price ? `<p class="product-card__price">${product.price.toLocaleString('ru-RU')} ₽</p>` : ''}
           </div>
-          ${product.installments ? `<p class="product-card__installments">Долями по ${product.installments} ₽</p>` : ''}
+          ${product.installments ? `<p class="product-card__installments">Долями по ${product.installments.toLocaleString('ru-RU')} ₽</p>` : ''}
         </article>
       </li>
     `;
