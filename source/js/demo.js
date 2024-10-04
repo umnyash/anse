@@ -207,3 +207,16 @@ if (catalog) {
   });
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Добавление фотографий знаменитостей
+ */
+if (celebrities) {
+  const showMoreButton = document.querySelector('.celebrities-list__button');
+
+  showMoreButton.addEventListener('click', () => {
+    celebrities.renderCelebrities(mockCelebrities);
+  });
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */

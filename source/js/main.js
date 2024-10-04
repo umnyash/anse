@@ -56,6 +56,12 @@ if (catalogElement) {
   catalog = new Catalog(catalogElement, simpleBar.getScrollElement());
 }
 
+let celebrities = null;
+const celebritiesElement = document.querySelector('.celebrities');
+if (celebritiesElement) {
+  celebrities = new Celebrities(celebritiesElement);
+}
+
 let product = null;
 let productElement = document.querySelector('.product');
 if (productElement) {

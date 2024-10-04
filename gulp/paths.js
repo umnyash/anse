@@ -73,6 +73,7 @@ export default {
       `${pathSrc}/js/classes/reviews.js`,
       `${pathSrc}/js/classes/video.js`,
       `${pathSrc}/js/classes/catalog.js`,
+      `${pathSrc}/js/classes/celebrities.js`,
       `${pathSrc}/js/modules/*.js`,
       `${pathSrc}/js/main.js`,
     ],

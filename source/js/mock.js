@@ -223,3 +223,18 @@ const mockProducts = [
     ]
   },
 ];
+
+const mockCelebrities = [
+  {
+    title: 'Родиана Новикова',
+    image: 'img/celebrities/rodiana-novikova.webp',
+  },
+  {
+    title: 'Екатерина Ратундалова',
+    image: 'img/celebrities/ekaterina-ratundalova.webp',
+  },
+  {
+    title: 'Виктория Дайнеко',
+    image: 'img/celebrities/viktoriya-dayneko.webp',
+  },
+];
