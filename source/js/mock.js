@@ -51,3 +51,175 @@ const mockReviews = [
     date: '2024-10-03'
   },
 ];
+
+const mockProducts = [
+  {
+    title: 'Шуба SETTE BLACK',
+    image: 'img/products/product-1.webp',
+    image2: 'img/products/product-additional.webp',
+    link: 'product-with-sizes.html',
+    price: '8 980',
+    oldPrice: '8 980',
+    installments: '6 995',
+    sizes: [
+      {
+        title: 'xxs',
+        disabled: true
+      },
+      {
+        title: 'xs'
+      },
+      {
+        title: 's',
+      },
+      {
+        title: 'm'
+      },
+      {
+        title: 'l',
+        disabled: true
+      },
+      {
+        title: 'xl'
+      },
+    ],
+  },
+  {
+    title: 'Шуба SETTE BLACK',
+    image: 'img/products/product-2.webp',
+    image2: 'img/products/product-3.webp',
+    link: 'product-with-sizes.html',
+    new: true,
+    price: '8 980',
+    oldPrice: '8 980',
+    sizes: [
+      {
+        title: 'xxs',
+        disabled: true
+      },
+      {
+        title: 'xs'
+      },
+      {
+        title: 's',
+      },
+      {
+        title: 'm'
+      },
+      {
+        title: 'l',
+        disabled: true
+      },
+      {
+        title: 'xl'
+      },
+    ]
+  },
+  {
+    title: 'Шуба SETTE BLACK с длинным названием',
+    image: 'img/products/product-3.webp',
+    image2: 'img/products/product-additional.webp',
+    link: 'product-with-colors.html',
+    sale: true,
+    price: '8 980',
+    installments: '6 995',
+    colors: [
+      {
+        title: 'Цвет 6',
+        src: 'img/colors/6.webp',
+        disabled: true
+      },
+      {
+        title: 'Цвет 6',
+        src: 'img/colors/6.webp',
+        disabled: true
+      },
+      {
+        title: 'Розовый фламинго',
+        src: 'img/colors/pink-flamingo.webp',
+      },
+      {
+        title: 'Цвет 1',
+        src: 'img/colors/1.webp'
+      },
+      {
+        title: 'Цвет 2',
+        src: 'img/colors/2.webp'
+      },
+      {
+        title: 'Цвет 3',
+        src: 'img/colors/3.webp',
+        disabled: true
+      },
+      {
+        title: 'Цвет 4',
+        src: 'img/colors/4.webp'
+      },
+      {
+        title: 'Цвет 1',
+        src: 'img/colors/1.webp'
+      },
+      {
+        title: 'Цвет 2',
+        src: 'img/colors/2.webp'
+      },
+      {
+        title: 'Цвет 5',
+        src: 'img/colors/5.webp'
+      },
+      {
+        title: 'Цвет 1',
+        src: 'img/colors/1.webp'
+      }
+    ]
+  },
+  {
+    title: 'Шуба SETTE BLACK',
+    image: 'img/products/product-4.webp',
+    image2: 'img/products/product-additional.webp',
+    link: 'product-with-colors.html',
+    sale: true,
+    new: true,
+    price: '8 980', // [6, 6, 'pink-flamingo', 1, 2, 3, 4, 5, 1]
+    colors: [
+      {
+        title: 'Цвет 6',
+        src: 'img/colors/6.webp'
+      },
+      {
+        title: 'Цвет 6',
+        src: 'img/colors/6.webp'
+      },
+      {
+        title: 'Розовый фламинго',
+        src: 'img/colors/pink-flamingo.webp',
+        disabled: true
+      },
+      {
+        title: 'Цвет 1',
+        src: 'img/colors/1.webp'
+      },
+      {
+        title: 'Цвет 2',
+        src: 'img/colors/2.webp'
+      },
+      {
+        title: 'Цвет 3',
+        src: 'img/colors/3.webp',
+        disabled: true
+      },
+      {
+        title: 'Цвет 4',
+        src: 'img/colors/4.webp'
+      },
+      {
+        title: 'Цвет 5',
+        src: 'img/colors/5.webp'
+      },
+      {
+        title: 'Цвет 1',
+        src: 'img/colors/1.webp'
+      }
+    ]
+  },
+];

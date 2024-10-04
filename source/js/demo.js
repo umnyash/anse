@@ -194,5 +194,16 @@ if (reviews) {
     reviews.renderReviews(mockReviews);
   });
 }
+/* * * * * * * * * * * * * * * * * * * * * * * */
 
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Добавление товаров в каталоге
+ */
+if (catalog) {
+  const showMoreButton = document.querySelector('.catalog__more-button-wrapper .button');
+
+  showMoreButton.addEventListener('click', () => {
+    catalog.renderProducts(mockProducts);
+  });
+}
 /* * * * * * * * * * * * * * * * * * * * * * * */

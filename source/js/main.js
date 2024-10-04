@@ -28,10 +28,6 @@ document.querySelectorAll('[data-modal="size-chart"]').forEach((modalElement) =>
 document.querySelectorAll('[data-modal="manager-contacts"]').forEach((modalElement) => new Modal(modalElement));
 document.querySelectorAll('.set').forEach(initSet);
 document.querySelectorAll('.cart__form, .product__cart').forEach(initProductsCounters);
-document.querySelectorAll('.catalog__sorting').forEach(initCatalogSorting);
-document.querySelectorAll('.catalog').forEach((catalogElement) => {
-  initCatalogFilter(catalogElement, simpleBar.getScrollElement());
-});
 document.querySelectorAll('.products-list__items, .products-slider__list').forEach(initProductCardColors);
 
 document.querySelectorAll(`
@@ -52,6 +48,12 @@ let reviews = null;
 let reviewsElement = document.querySelector('.reviews');
 if (reviewsElement) {
   reviews = new Reviews(reviewsElement);
+}
+
+let catalog = null;
+const catalogElement = document.querySelector('.catalog');
+if (catalogElement) {
+  catalog = new Catalog(catalogElement, simpleBar.getScrollElement());
 }
 
 let product = null;
