@@ -58,9 +58,9 @@ const mockProducts = [
     image: 'img/products/product-1.webp',
     image2: 'img/products/product-additional.webp',
     link: 'product-with-sizes.html',
-    price: '8 980',
-    oldPrice: '8 980',
-    installments: '6 995',
+    price: 8980,
+    oldPrice: 8980,
+    installments: 6995,
     sizes: [
       {
         title: 'xxs',
@@ -90,8 +90,8 @@ const mockProducts = [
     image2: 'img/products/product-3.webp',
     link: 'product-with-sizes.html',
     new: true,
-    price: '8 980',
-    oldPrice: '8 980',
+    price: 8980,
+    oldPrice: 8980,
     sizes: [
       {
         title: 'xxs',
@@ -121,8 +121,8 @@ const mockProducts = [
     image2: 'img/products/product-additional.webp',
     link: 'product-with-colors.html',
     sale: true,
-    price: '8 980',
-    installments: '6 995',
+    price: 8980,
+    installments: 6995,
     colors: [
       {
         title: 'Цвет 6',
@@ -180,7 +180,7 @@ const mockProducts = [
     link: 'product-with-colors.html',
     sale: true,
     new: true,
-    price: '8 980', // [6, 6, 'pink-flamingo', 1, 2, 3, 4, 5, 1]
+    price: 8980,
     colors: [
       {
         title: 'Цвет 6',
