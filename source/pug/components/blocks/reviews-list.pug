@@ -5,8 +5,9 @@ mixin reviews-list({ reviews, button })
         li.reviews-list__item
           +review({ review })
     if button
-      +button({
-        tag: 'button',
-        type: 'button',
-        text: 'Показать ещё отзывы'
-      })(class='reviews-list__button button--solid-primary')
+      .js-navigation
+        +button({
+          tag: 'button',
+          type: 'button',
+          text: 'Показать ещё отзывы'
+        })(class='reviews-list__button button--solid-primary')
