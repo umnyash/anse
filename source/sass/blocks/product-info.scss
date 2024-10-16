@@ -5,9 +5,13 @@
 
   @media (min-width: $laptop-width) {
     display: flex;
-    justify-content: space-between;
+    column-gap: 42px;
     align-items: center;
     background-image: linear-gradient(to top, var(--border-light-color), transparent 2px);
+  }
+
+  @media (min-width: $desktop-width) {
+    column-gap: 76px;
   }
 }
 
