@@ -134,7 +134,7 @@
 .product__color-section {
   grid-area: size-or-color;
   display: grid;
-  padding: 20px 0;
+  padding: 20px 0 50px;
   border-top: 1px solid var(--border-light-color);
   border-bottom: 1px solid var(--border-light-color);
   margin: 0 0 20px;
@@ -179,13 +179,20 @@
 }
 
 .product__colors {
+  position: relative;
   grid-column: 1 / -1;
   display: flex;
+  min-width: 66px;
   flex-wrap: wrap;
   gap: 10px;
 
+  @media (min-width: 420px) {
+    justify-self: start;
+  }
+
   @media (min-width: $laptop-width) {
     grid-column: 3 / 4;
+    justify-self: end;
     margin-left: 20px;
     justify-content: flex-end;
   }

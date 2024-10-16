@@ -64,11 +64,22 @@
 }
 
 .modal-color__buttons {
+  position: relative;
   grid-column: 1 / -1;
+  justify-self: start;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 0 0 20px;
+  margin: 0 0 45px;
+
+  .size-buttons__tooltip-wrapper {
+    top: calc(100% + 5px);
+    justify-content: center;
+  }
+
+  .size-buttons__tooltip {
+    padding: 4px 6px;
+  }
 }
 
 .modal-color__button {
