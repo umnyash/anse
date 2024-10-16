@@ -870,8 +870,10 @@ class Product {
         this.lockColorModalSubmitButton();
       }
     };
-    this.onColorModalFormChange = () => {
+    this.onColorModalFormChange = evt => {
       this.setColorModalSubmitButtonState();
+      const associatedButtonElement = this.colorButtonElements.find(buttonElement => buttonElement.value === evt.target.value);
+      associatedButtonElement.checked = true;
     };
     this.checkSelectedColor = () => {
       return this.colorButtonElements.some(buttonElement => buttonElement.checked);
@@ -915,8 +917,10 @@ class Product {
         this.lockSizeModalSubmitButton();
       }
     };
-    this.onSizeModalFormChange = () => {
+    this.onSizeModalFormChange = evt => {
       this.setSizeModalSubmitButtonState();
+      const associatedCheckboxElement = this.sizeCheckboxElements.find(checkboxElement => checkboxElement.value === evt.target.value);
+      associatedCheckboxElement.checked = true;
     };
     this.checkSelectedSize = () => {
       return this.sizeCheckboxElements.some(checkboxElement => checkboxElement.checked);
@@ -950,6 +954,14 @@ class Product {
   init() {
     this.initColors();
     this.initSizes();
+    this.formElement.addEventListener('change', evt => {
+      const colorControlElement = evt.target.classList.contains('color__control');
+      const sizeContolElement = evt.target.classList.contains('size-buttons__control');
+      if (colorControlElement || sizeContolElement) {
+        this.setDefaultView();
+        this.setCounterValue(1);
+      }
+    });
   }
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
