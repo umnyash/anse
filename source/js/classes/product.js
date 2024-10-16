@@ -66,8 +66,11 @@ class Product {
       }
     };
 
-    this.onColorModalFormChange = () => {
+    this.onColorModalFormChange = (evt) => {
       this.setColorModalSubmitButtonState();
+
+      const associatedButtonElement = this.colorButtonElements.find((buttonElement) => buttonElement.value === evt.target.value);
+      associatedButtonElement.checked = true;
     };
 
     this.checkSelectedColor = () => {
@@ -125,8 +128,11 @@ class Product {
       }
     };
 
-    this.onSizeModalFormChange = () => {
+    this.onSizeModalFormChange = (evt) => {
       this.setSizeModalSubmitButtonState();
+
+      const associatedCheckboxElement = this.sizeCheckboxElements.find((checkboxElement) => checkboxElement.value === evt.target.value);
+      associatedCheckboxElement.checked = true;
     };
 
     this.checkSelectedSize = () => {
@@ -170,6 +176,16 @@ class Product {
   init() {
     this.initColors();
     this.initSizes();
+
+    this.formElement.addEventListener('change', (evt) => {
+      const colorControlElement = evt.target.classList.contains('color__control');
+      const sizeContolElement = evt.target.classList.contains('size-buttons__control');
+
+      if (colorControlElement || sizeContolElement) {
+        this.setDefaultView();
+        this.setCounterValue(1);
+      }
+    });
   }
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */

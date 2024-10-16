@@ -34,10 +34,6 @@
   box-sizing: border-box;
   height: 100%;
   flex-direction: column;
-  // overflow-y: auto;
-
-  // overflow: hidden;
-
 
   > .simplebar-track .simplebar-scrollbar::before {
     background: #000000;
@@ -55,7 +51,6 @@
 }
 
 .page__site-header {
-  // position: sticky;
   position: fixed;
   z-index: 3;
   top: 0;
