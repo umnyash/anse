@@ -16,7 +16,7 @@ mixin product__video-wrapper(item)
   .product__video-wrapper.media.media--cover.media--position_top.skeleton(data-modal-opener='product-gallery')
     video.media__video(src= item playsinline muted autoplay loop)
 
-mixin product({ sizes, colors, media })
+mixin product({ sizes, colors, accessory, media })
   article.product&attributes(attributes)
     form.product__inner(action='https://fakestoreapi.com/products' method='post' target='_blank')
       .product__text-content
@@ -84,10 +84,11 @@ mixin product({ sizes, colors, media })
           div
             p Декоративный элемент в виде нагрудного кармана.
             p Рост модели 168 cм, грудь 87 cм, талия 62 cм, бедра 90 cм.
-        section.product__section.product__section--accessory
-          h2 Меховой пояс
-          div
-            p Идет в комплекте
+        if accessory
+          section.product__section.product__section--accessory
+            h2 Меховой пояс
+            div
+              p Идет в комплекте
         +button({
           tag: 'a',
           text: 'Программа лояльности',

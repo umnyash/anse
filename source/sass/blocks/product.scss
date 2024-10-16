@@ -44,7 +44,9 @@
     "size-or-color"
     "offer"
     "design"
-    "accessory";
+    "accessory"
+    "cart"
+    "info";
 
   @media (min-width: $tablet-width) {
     padding: 0 20px;
@@ -63,7 +65,9 @@
       "size-or-color"
       "design"
       "accessory"
-      "offer";
+      "offer"
+      "cart"
+      "info";
   }
 }
 
@@ -143,7 +147,7 @@
     padding-bottom: 16px;
     margin: 50px 0 10px;
     border-top: none;
-    grid-template-columns: auto auto 1fr;
+    grid-template-columns: auto 180px 1fr;
   }
 
   @media (min-width: $desktop-width) {
@@ -333,6 +337,7 @@
 }
 
 .product__cart {
+  grid-area: cart;
   margin: 0 0 20px;
 
   @media (min-width: $laptop-width) {
@@ -361,6 +366,8 @@
 }
 
 .product__info-wrapper {
+  grid-area: info;
+
   @media (min-width: $laptop-width) {
     position: relative;
   }
