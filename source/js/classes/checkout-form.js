@@ -26,6 +26,7 @@ class CheckoutForm extends Form {
     this.regionModalElement = document.querySelector('[data-modal="region-form"]');
     this.regionFormElement = this.regionModalElement.querySelector('.modal-form');
     this.regionFormCountryFieldElement = this.regionFormElement.querySelector('.modal-form__country-select select');
+    this.regionFormCountrySelect = initSelect(this.regionFormCountryFieldElement);
     this.regionFormCountryOptionElements = Array.from(this.regionFormElement.querySelectorAll('.modal-form__country-select option'));
     this.regionFormCityFieldElement = this.regionFormElement.querySelector('.modal-form__city-field .text-field__control');
     this.regionFormSubmitButtonElement = this.regionFormElement.querySelector('.modal-form__submit-button');
@@ -39,7 +40,6 @@ class CheckoutForm extends Form {
     this.addressFormCityFieldElement = this.addressFormElement.querySelector('.modal-form__city-field .text-field__control');
     this.addressModal = new Modal(this.addressModalElement, {
       onOpenerClick: () => {
-        // console.log(this.regionFormCountryFieldElement.value)
         this.addressFormCountrySelect.setChoiceByValue(this.regionFormCountryFieldElement.value);
         this.addressFormCityFieldElement.value = this.regionFormCityFieldElement.value;
       },

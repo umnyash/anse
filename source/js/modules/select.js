@@ -3,7 +3,5 @@ function initSelect(selectElement) {
     searchEnabled: false,
     itemSelectText: '',
     shouldSort: false,
-    // placeholder: true,
-    // placeholderValue: 'fff',
   });
 }

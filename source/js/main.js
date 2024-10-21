@@ -30,11 +30,7 @@ document.querySelectorAll('.set').forEach(initSet);
 document.querySelectorAll('.cart__form, .product__cart').forEach(initProductsCounters);
 document.querySelectorAll('.products-list__items, .products-slider__list').forEach(initProductCardColors);
 
-document.querySelectorAll(`
-  .birth-date-modal-form .select__control,
-  .modal-form--region .select__control,
-  .profile-form .select__control
-`).forEach(initSelect);
+document.querySelectorAll('.birth-date-modal-form .select__control').forEach(initSelect);
 
 document.querySelectorAll('.checkout-order__products').forEach(initCheckoutProductsSlider);
 
@@ -83,31 +79,7 @@ if (checkoutFormElement) {
 let profileForm = null;
 const profileFormElement = document.querySelector('.profile-form');
 if (profileFormElement) {
-  profileForm = new Form(profileFormElement, { resetAfterSubmit: false });
-
-  profileForm.setHandlers(
-    (data) => { //
-      console.log('Распарсенный ответ сервера:', data);
-
-      showNotification({
-        text: 'Данные профиля<br> успешно сохранены',
-        status: 'success'
-      });
-    },
-
-    (data) => {
-      console.log('Распарсенный ответ сервера:', data);
-
-      const alert = showAlert({
-        heading: 'Не удалось сохранить данные',
-        button: {
-          text: 'Попробовать еще раз'
-        }
-      });
-
-      initFormResending(profileForm, alert);
-    }
-  );
+  profileForm = new ProfileForm(profileFormElement, { resetAfterSubmit: false });
 }
 
 let birthDateInfoModal = null;

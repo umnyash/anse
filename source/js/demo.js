@@ -220,3 +220,33 @@ if (celebrities) {
   });
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * Добавление обработчиков сохранения формы профиля
+ */
+if (profileForm) {
+  profileForm.setHandlers(
+    (data) => { //
+      console.log('Распарсенный ответ сервера:', data);
+
+      showNotification({
+        text: 'Данные профиля<br> успешно сохранены',
+        status: 'success'
+      });
+    },
+
+    (data) => {
+      console.log('Распарсенный ответ сервера:', data);
+
+      const alert = showAlert({
+        heading: 'Не удалось сохранить данные',
+        button: {
+          text: 'Попробовать еще раз'
+        }
+      });
+
+      initFormResending(profileForm, alert);
+    }
+  );
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
