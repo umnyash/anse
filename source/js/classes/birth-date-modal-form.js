@@ -20,7 +20,12 @@ class BirthDateModalForm extends Modal {
     this.init();
   }
 
-  validate = () => this.dayFieldElement.value && this.monthFieldElement.value;
+  validate = () => this.dayFieldElement.value
+    && this.dayFieldElement.value <= 31
+    && this.monthFieldElement.value
+    && this.yearFieldElement.value
+    && +this.yearFieldElement.value > 1900
+    && +this.yearFieldElement.value <= new Date().getFullYear();
 
   disableSubmitButton = () => {
     this.submitButtonElement.classList.add('button--disabled');
