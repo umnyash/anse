@@ -715,6 +715,7 @@ class CheckoutForm extends Form {
     this.regionModalElement = document.querySelector('[data-modal="region-form"]');
     this.regionFormElement = this.regionModalElement.querySelector('.modal-form');
     this.regionFormCountryFieldElement = this.regionFormElement.querySelector('.modal-form__country-select select');
+    this.regionFormCountrySelect = initSelect(this.regionFormCountryFieldElement);
     this.regionFormCountryOptionElements = Array.from(this.regionFormElement.querySelectorAll('.modal-form__country-select option'));
     this.regionFormCityFieldElement = this.regionFormElement.querySelector('.modal-form__city-field .text-field__control');
     this.regionFormSubmitButtonElement = this.regionFormElement.querySelector('.modal-form__submit-button');
@@ -727,7 +728,6 @@ class CheckoutForm extends Form {
     this.addressFormCityFieldElement = this.addressFormElement.querySelector('.modal-form__city-field .text-field__control');
     this.addressModal = new Modal(this.addressModalElement, {
       onOpenerClick: () => {
-        // console.log(this.regionFormCountryFieldElement.value)
         this.addressFormCountrySelect.setChoiceByValue(this.regionFormCountryFieldElement.value);
         this.addressFormCityFieldElement.value = this.regionFormCityFieldElement.value;
       }
@@ -812,6 +812,19 @@ class CheckoutForm extends Form {
     this.regionFormSubmitButtonElement.addEventListener('click', this.onRegionFormSubmitButtonClick);
     this.formElement.addEventListener('change', this.onFormChange);
   };
+}
+/* * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ *  checkout-form.js
+ */
+class ProfileForm extends Form {
+  constructor(formElement, options) {
+    super(formElement, options);
+    this.formElement = formElement;
+    this.countryFieldElement = this.formElement.querySelector('.profile-form__country select');
+    this.countrySelect = initSelect(this.countryFieldElement);
+  }
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -2129,8 +2142,6 @@ function initSelect(selectElement) {
     searchEnabled: false,
     itemSelectText: '',
     shouldSort: false
-    // placeholder: true,
-    // placeholderValue: 'fff',
   });
 }
 
@@ -2505,11 +2516,7 @@ document.querySelectorAll('[data-modal="manager-contacts"]').forEach(modalElemen
 document.querySelectorAll('.set').forEach(initSet);
 document.querySelectorAll('.cart__form, .product__cart').forEach(initProductsCounters);
 document.querySelectorAll('.products-list__items, .products-slider__list').forEach(initProductCardColors);
-document.querySelectorAll(`
-  .birth-date-modal-form .select__control,
-  .modal-form--region .select__control,
-  .profile-form .select__control
-`).forEach(initSelect);
+document.querySelectorAll('.birth-date-modal-form .select__control').forEach(initSelect);
 document.querySelectorAll('.checkout-order__products').forEach(initCheckoutProductsSlider);
 let subscriptionForm = null;
 let subscriptionFormElement = document.querySelector('.subscription-form');
@@ -2549,25 +2556,8 @@ if (checkoutFormElement) {
 let profileForm = null;
 const profileFormElement = document.querySelector('.profile-form');
 if (profileFormElement) {
-  profileForm = new Form(profileFormElement, {
+  profileForm = new ProfileForm(profileFormElement, {
     resetAfterSubmit: false
-  });
-  profileForm.setHandlers(data => {
-    //
-    console.log('Распарсенный ответ сервера:', data);
-    showNotification({
-      text: 'Данные профиля<br> успешно сохранены',
-      status: 'success'
-    });
-  }, data => {
-    console.log('Распарсенный ответ сервера:', data);
-    const alert = showAlert({
-      heading: 'Не удалось сохранить данные',
-      button: {
-        text: 'Попробовать еще раз'
-      }
-    });
-    initFormResending(profileForm, alert);
   });
 }
 let birthDateInfoModal = null;
