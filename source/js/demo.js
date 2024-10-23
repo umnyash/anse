@@ -154,6 +154,19 @@ if (checkoutForm) {
       window.location.href = 'https://umnyash.github.io/anse/checkout-error.html';
     }
   );
+
+  const onRegionFormSubmitButtonClick = () => {
+    const countryText = checkoutForm.getSelectedOption(checkoutForm.regionFormCountryFieldElement, checkoutForm.regionFormCountryOptionElements).textContent;
+    const cityText = checkoutForm.regionFormCityFieldElement.value;
+
+    const regionText = `${countryText}, ${cityText}`;
+
+    checkoutForm.regionFieldElement.value = regionText;
+    checkoutForm.deliveryCompanyButtonsWrapper.classList.remove('checkout-form__delivery-company--hidden');
+    checkoutForm.regionModal.close();
+  };
+
+  checkoutForm.regionFormSubmitButtonElement.addEventListener('click', onRegionFormSubmitButtonClick);
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 

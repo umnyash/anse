@@ -54,17 +54,6 @@ class CheckoutForm extends Form {
   getSelectedOption = (selectElement, optionElements) =>
     optionElements.find((optionElement) => optionElement.value === selectElement.value);
 
-  onRegionFormSubmitButtonClick = () => {
-    const countryText = this.getSelectedOption(this.regionFormCountryFieldElement, this.regionFormCountryOptionElements).textContent;
-    const cityText = this.regionFormCityFieldElement.value;
-
-    const regionText = `${countryText}, ${cityText}`;
-
-    this.regionFieldElement.value = regionText;
-    this.deliveryCompanyButtonsWrapper.classList.remove('checkout-form__delivery-company--hidden');
-    this.regionModal.close();
-  };
-
   setDeliveryCompanySdekState = () => {
     this.formElement.classList.remove(this.deliveryCompanyStateClasses.post);
     this.formElement.classList.remove(this.deliveryCompanyStateClasses.selfPickup);
@@ -138,7 +127,6 @@ class CheckoutForm extends Form {
       mask: '[+]00000000000000000',
     });
 
-    this.regionFormSubmitButtonElement.addEventListener('click', this.onRegionFormSubmitButtonClick);
     this.formElement.addEventListener('change', this.onFormChange);
   };
 }
