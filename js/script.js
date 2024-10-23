@@ -726,12 +726,7 @@ class CheckoutForm extends Form {
     this.addressFormCountrySelect = initSelect(this.addressFormCountryFieldElement);
     this.addressFormCountryOptionElements = Array.from(this.addressFormElement.querySelectorAll('.modal-form__country-select option'));
     this.addressFormCityFieldElement = this.addressFormElement.querySelector('.modal-form__city-field .text-field__control');
-    this.addressModal = new Modal(this.addressModalElement, {
-      onOpenerClick: () => {
-        this.addressFormCountrySelect.setChoiceByValue(this.regionFormCountryFieldElement.value);
-        this.addressFormCityFieldElement.value = this.regionFormCityFieldElement.value;
-      }
-    });
+    this.addressModal = new Modal(this.addressModalElement);
     this.sdekModalElement = document.querySelector('[data-modal="sdek-sdek"]');
     this.sdekModal = new Modal(this.sdekModalElement);
     this.sdekModal.initOpener(this.pickupPointFieldWrapperElement);
@@ -741,14 +736,6 @@ class CheckoutForm extends Form {
     this.init();
   }
   getSelectedOption = (selectElement, optionElements) => optionElements.find(optionElement => optionElement.value === selectElement.value);
-  onRegionFormSubmitButtonClick = () => {
-    const countryText = this.getSelectedOption(this.regionFormCountryFieldElement, this.regionFormCountryOptionElements).textContent;
-    const cityText = this.regionFormCityFieldElement.value;
-    const regionText = `${countryText}, ${cityText}`;
-    this.regionFieldElement.value = regionText;
-    this.deliveryCompanyButtonsWrapper.classList.remove('checkout-form__delivery-company--hidden');
-    this.regionModal.close();
-  };
   setDeliveryCompanySdekState = () => {
     this.formElement.classList.remove(this.deliveryCompanyStateClasses.post);
     this.formElement.classList.remove(this.deliveryCompanyStateClasses.selfPickup);
@@ -809,7 +796,6 @@ class CheckoutForm extends Form {
     new IMask(this.phoneFieldElement, {
       mask: '[+]00000000000000000'
     });
-    this.regionFormSubmitButtonElement.addEventListener('click', this.onRegionFormSubmitButtonClick);
     this.formElement.addEventListener('change', this.onFormChange);
   };
 }
