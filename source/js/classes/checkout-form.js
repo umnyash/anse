@@ -38,12 +38,7 @@ class CheckoutForm extends Form {
     this.addressFormCountrySelect = initSelect(this.addressFormCountryFieldElement);
     this.addressFormCountryOptionElements = Array.from(this.addressFormElement.querySelectorAll('.modal-form__country-select option'));
     this.addressFormCityFieldElement = this.addressFormElement.querySelector('.modal-form__city-field .text-field__control');
-    this.addressModal = new Modal(this.addressModalElement, {
-      onOpenerClick: () => {
-        this.addressFormCountrySelect.setChoiceByValue(this.regionFormCountryFieldElement.value);
-        this.addressFormCityFieldElement.value = this.regionFormCityFieldElement.value;
-      },
-    });
+    this.addressModal = new Modal(this.addressModalElement);
 
     this.sdekModalElement = document.querySelector('[data-modal="sdek-sdek"]');
     this.sdekModal = new Modal(this.sdekModalElement);
