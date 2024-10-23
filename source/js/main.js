@@ -96,4 +96,5 @@ if (birthDateModalFormElement && birthDateInfoModal) {
 
 initReviewsIntroPhotos()
 initConsumersPhotos();
+document.querySelectorAll('.text-field').forEach(initTextField);
 /* * * * * * * * * * * * * * * * * * * * * * * */
