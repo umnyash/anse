@@ -765,27 +765,27 @@ class CheckoutForm extends Form {
     if (deliveryCompanyButtonElement) {
       const buttonTitle = evt.target.dataset.title;
       switch (buttonTitle) {
-        case 'sdek':
+        case 'SDEK':
           this.setDeliveryCompanySdekState();
           this.pickupPointFieldWrapperElement.dataset.modalOpener = 'sdek-sdek';
           break;
-        case 'post':
+        case 'POST':
           this.setDeliveryCompanyPostState();
           this.pickupPointFieldWrapperElement.dataset.modalOpener = 'sdek-post';
           break;
-        case 'self-pickup':
+        case 'PICKUP':
           this.setDeliveryCompanySelfPickupState();
           break;
       }
       return;
     }
     if (deliveryMethodButtonElement) {
-      const buttonTitle = evt.target.dataset.title;
-      switch (buttonTitle) {
+      const buttonType = evt.target.dataset.type;
+      switch (buttonType) {
         case 'courier':
           this.setDeliveryMethodCourierState();
           break;
-        case 'pick-up-point':
+        case 'point':
           this.setDeliveryMethodPointState();
           break;
       }
