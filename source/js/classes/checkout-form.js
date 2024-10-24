@@ -90,15 +90,15 @@ class CheckoutForm extends Form {
       const buttonTitle = evt.target.dataset.title;
 
       switch (buttonTitle) {
-        case 'sdek':
+        case 'SDEK':
           this.setDeliveryCompanySdekState();
           this.pickupPointFieldWrapperElement.dataset.modalOpener = 'sdek-sdek';
           break;
-        case 'post':
+        case 'POST':
           this.setDeliveryCompanyPostState();
           this.pickupPointFieldWrapperElement.dataset.modalOpener = 'sdek-post';
           break;
-        case 'self-pickup':
+        case 'PICKUP':
           this.setDeliveryCompanySelfPickupState();
           break;
       }
@@ -107,13 +107,13 @@ class CheckoutForm extends Form {
     }
 
     if (deliveryMethodButtonElement) {
-      const buttonTitle = evt.target.dataset.title;
+      const buttonType = evt.target.dataset.type;
 
-      switch (buttonTitle) {
+      switch (buttonType) {
         case 'courier':
           this.setDeliveryMethodCourierState();
           break;
-        case 'pick-up-point':
+        case 'point':
           this.setDeliveryMethodPointState();
           break;
       }

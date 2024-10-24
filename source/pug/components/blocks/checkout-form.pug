@@ -18,11 +18,11 @@ mixin checkout-form
         p.checkout-form__field-label.field-label Выберите компанию доставки
         ul.checkout-form__delivery-company-list
           li.checkout-form__delivery-company-item
-            +radio-button({ name: 'delivery-company', value: 'sdek', label: 'СДЭК', title: 'sdek' })
+            +radio-button({ name: 'delivery-company', value: 'sdek', label: 'СДЭК', title: 'SDEK' })
           li.checkout-form__delivery-company-item
-            +radio-button({ name: 'delivery-company', value: 'russian-post', label: 'Почта России', title: 'post' })
+            +radio-button({ name: 'delivery-company', value: 'russian-post', label: 'Почта России', title: 'POST' })
           li.checkout-form__delivery-company-item
-            +radio-button({ name: 'delivery-company', value: 'self-pickup', label: 'Самовывоз', title: 'self-pickup' })
+            +radio-button({ name: 'delivery-company', value: 'self-pickup', label: 'Самовывоз', title: 'PICKUP' })
       .checkout-form__delivery-method
         p.checkout-form__field-label.field-label Выберите способ доставки
         +delivery-methods(class='checkout-form__delivery-methods')
