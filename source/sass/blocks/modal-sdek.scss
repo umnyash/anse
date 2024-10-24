@@ -5,8 +5,9 @@
   background: var(--background-additional-color);
 
   @media (min-width: $laptop-width) {
-    position: relative;
-    display: block;
+    // position: relative;
+    gap: 0;
+    // display: block;
   }
 }
 
@@ -50,13 +51,15 @@
 }
 
 .modal-sdek__header {
+  position: relative;
+  z-index: 1;
   border-radius: 0 0 12px 12px;
   background: var(--background-color);
 
   @media (min-width: $laptop-width) {
-    position: absolute;
-    top: 0;
-    left: 0;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
     width: 100%;
     border-radius: 0 0 16px 16px;
   }
@@ -137,7 +140,8 @@
   overflow: hidden;
 
   @media (min-width: $laptop-width) {
-    height: 100%;
+    border-radius: 0;
+    // height: 100%;
   }
 }
 
