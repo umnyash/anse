@@ -162,6 +162,7 @@ if (checkoutForm) {
     const regionText = `${countryText}, ${cityText}`;
 
     checkoutForm.regionFieldElement.value = regionText;
+    checkoutForm.regionFieldElement.dispatchEvent(inputEvent);
     checkoutForm.deliveryCompanyButtonsWrapper.classList.remove('checkout-form__delivery-company--hidden');
     checkoutForm.regionModal.close();
   };

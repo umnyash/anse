@@ -12,17 +12,18 @@ mixin checkout-form
           },
           placeholder: 'Выберите регион',
           readonly: true,
+          required: true,
           dataName: 'region'
         })(class='checkout-form__region-field text-field--button' data-modal-opener='region-form')
       .checkout-form__delivery-company.checkout-form__delivery-company--hidden
         p.checkout-form__field-label.field-label Выберите компанию доставки
         ul.checkout-form__delivery-company-list
           li.checkout-form__delivery-company-item
-            +radio-button({ name: 'delivery-company', value: 'sdek', label: 'СДЭК', title: 'SDEK' })
+            +radio-button({ name: 'delivery-company', value: 'SDEK', label: 'СДЭК', title: 'SDEK' })
           li.checkout-form__delivery-company-item
-            +radio-button({ name: 'delivery-company', value: 'russian-post', label: 'Почта России', title: 'POST' })
+            +radio-button({ name: 'delivery-company', value: 'POST', label: 'Почта России', title: 'POST' })
           li.checkout-form__delivery-company-item
-            +radio-button({ name: 'delivery-company', value: 'self-pickup', label: 'Самовывоз', title: 'PICKUP' })
+            +radio-button({ name: 'delivery-company', value: 'PICKUP', label: 'Самовывоз', title: 'PICKUP' })
       .checkout-form__delivery-method
         p.checkout-form__field-label.field-label Выберите способ доставки
         +delivery-methods(class='checkout-form__delivery-methods')
