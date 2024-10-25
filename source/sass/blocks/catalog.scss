@@ -66,6 +66,7 @@
 
 .catalog__sorting {
   position: relative;
+  grid-column: -1 / -2;
   justify-self: end;
   font: 400 16px/19px $main-font-family;
 
@@ -336,12 +337,6 @@
     @media (min-width: $laptop-width) {
       grid-column: 1 / 2;
       margin: 0;
-    }
-  }
-
-  .catalog__sorting {
-    @media (min-width: $laptop-width) {
-      grid-column: -1 / -2;
     }
   }
 
