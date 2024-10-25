@@ -1,5 +1,4 @@
 .brands__inner {
-  // width: 100%;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 21px 20px;
@@ -10,29 +9,33 @@
     "button  button";
 
   @media (min-width: $laptop-width) {
-    gap: 41px 40px;
+    gap: 41px 4px;
+    grid-template-columns: auto 1fr auto auto;
     grid-template-areas:
-      "heading button"
-      "slider  slider";
+      "heading     heading button button"
+      "prev-button slider  slider next-button";
   }
 
   @media (min-width: $desktop-width) {
-    gap: 61px 60px;
+    row-gap: 61px;
   }
 }
 
 .brands__heading {
+  grid-area: heading;
   align-self: start;
   margin: 0;
 }
 
 .brands__button {
   grid-area: button;
+  justify-self: center;
   margin: 12px 0 0;
 
   @media (min-width: $laptop-width) {
+    justify-self: end;
     align-self: end;
-    margin: 0 0 2px;
+    margin: 0 0 2px 40px;
   }
 }
 
@@ -75,7 +78,25 @@
   align-self: center;
 
   @media (min-width: $laptop-width) {
-    grid-area: slider;
-    z-index: 1;
+    grid-area: auto;
+    display: contents;
+  }
+}
+
+.brands__slider-arrows .slider-arrows__list {
+  @media (min-width: $laptop-width) {
+    display: contents;
+  }
+}
+
+.brands__slider-arrows .slider-arrows__item:nth-child(1) {
+  @media (min-width: $laptop-width) {
+    grid-area: prev-button;
+  }
+}
+
+.brands__slider-arrows .slider-arrows__item:nth-child(2) {
+  @media (min-width: $laptop-width) {
+    grid-area: next-button;
   }
 }
