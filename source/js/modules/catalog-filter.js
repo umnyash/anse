@@ -4,6 +4,11 @@
 function initCatalogFilter(catalogElement, pageScrollWrapperElement) {
   const filterToggleButtonElement = catalogElement.querySelector('.catalog__filter-button');
   const filterWrapperElement = catalogElement.querySelector('.catalog__filter-wrapper');
+
+  if (!filterToggleButtonElement || !filterWrapperElement) {
+    return;
+  }
+
   const catalogHeaderElement = catalogElement.querySelector('.catalog__header');
   const filterCloseButtonElement = filterWrapperElement.querySelector('.catalog-filter__close-button');
   const catalogBodyElement = catalogElement.querySelector('.catalog__body');
