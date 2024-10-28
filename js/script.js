@@ -265,16 +265,19 @@ class Alert extends Modal {
 class FormValidator {
   constructor(formElement) {
     this.formElement = formElement;
+    this.deliveryCompanyElement = this.formElement.querySelector('.checkout-form__delivery-company');
+    this.deliveryMethodElement = this.formElement.querySelector('.checkout-form__delivery-method');
     this.addCustomErrorMessages();
     this.init();
   }
-  addCustomErrorMessages() {
+  addCustomErrorMessages = () => {
     const nameFieldElement = this.formElement.querySelector('[data-name="name"]');
     const surnameFieldElement = this.formElement.querySelector('[data-name="surname"]');
     const addressFieldElement = this.formElement.querySelector('[data-name="address"]');
     const phoneFieldElement = this.formElement.querySelector('[data-name="phone"]');
     const emailFieldElement = this.formElement.querySelector('[data-name="email"]');
     const messageFieldElement = this.formElement.querySelector('[data-name="message"]');
+    const regionFieldElement = this.formElement.querySelector('[data-name="region"]');
     const subscriptionFieldElement = this.formElement.querySelector('.subscription-form__field-control');
     if (subscriptionFieldElement) {
       subscriptionFieldElement.closest('.subscription-form__field').classList.add('pristine-item');
@@ -310,15 +313,64 @@ class FormValidator {
       messageFieldElement.closest('.text-area').classList.add('pristine-item');
       messageFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
     }
+    if (regionFieldElement) {
+      regionFieldElement.closest('.text-field').classList.add('pristine-item');
+      regionFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+  };
+  resetRadiobuttonsGroupValidation(wrapperElement) {
+    wrapperElement.querySelector('.pristine-item__error-text')?.remove();
+    wrapperElement.classList.remove('pristine-item--invalid');
+    wrapperElement.classList.remove('shake');
   }
-  validate() {
-    return this.pristine.validate();
+  validateRadiobuttonsGroup(wrapperElement) {
+    const isDeiveryMethodButtons = wrapperElement.classList.contains('checkout-form__delivery-method');
+    const deliveryCompanyValue = this.deliveryCompanyElement.querySelector('.radio-button__control:checked')?.value;
+    if (isDeiveryMethodButtons && deliveryCompanyValue === 'PICKUP') {
+      return true;
+    }
+    const radiobuttonElements = Array.from(wrapperElement.querySelectorAll('.radio-button__control, .delivery-methods__control'));
+    if (!radiobuttonElements.length) {
+      return true;
+    }
+    const isChecked = radiobuttonElements.some(buttonElement => buttonElement.checked);
+    if (isChecked) {
+      this.resetRadiobuttonsGroupValidation(wrapperElement);
+    } else {
+      wrapperElement.querySelector('.pristine-item__error-text')?.remove();
+      wrapperElement.classList.add('pristine-item--invalid');
+      wrapperElement.insertAdjacentHTML('beforeend', '<p class="pristine-item__error-text">Выберите один из вариантов.</p>');
+    }
+    return isChecked;
   }
-  reset() {
+  validate = () => {
+    if (this.formElement.classList.contains('checkout-form')) {
+      const isCompanyChecked = this.validateRadiobuttonsGroup(this.deliveryCompanyElement);
+      const isMethodChecked = this.validateRadiobuttonsGroup(this.deliveryMethodElement);
+      return this.pristine.validate() && isCompanyChecked && isMethodChecked;
+    } else {
+      return this.pristine.validate();
+    }
+  };
+  reset = () => {
     this.pristine.reset();
     this.formElement.querySelectorAll('.shake').forEach(element => element.classList.remove('shake'));
-  }
-  init() {
+    if (this.formElement.classList.contains('checkout-form')) {
+      this.resetRadiobuttonsGroupValidation(this.deliveryCompanyElement);
+      this.resetRadiobuttonsGroupValidation(this.deliveryMethodElement);
+    }
+  };
+  onCheckoutFormChange = evt => {
+    if (evt.target.closest('.checkout-form__delivery-company')) {
+      this.resetRadiobuttonsGroupValidation(this.deliveryCompanyElement);
+      if (evt.target.value === 'PICKUP') {
+        this.resetRadiobuttonsGroupValidation(this.deliveryMethodElement);
+      }
+    } else if (evt.target.closest('.checkout-form__delivery-method')) {
+      this.resetRadiobuttonsGroupValidation(this.deliveryMethodElement);
+    }
+  };
+  init = () => {
     this.pristine = new Pristine(this.formElement, {
       classTo: 'pristine-item',
       errorClass: 'pristine-item--invalid',
@@ -326,7 +378,11 @@ class FormValidator {
       errorTextTag: 'p',
       errorTextClass: 'pristine-item__error-text'
     });
-  }
+    if (!this.formElement.classList.contains('checkout-form')) {
+      return;
+    }
+    this.formElement.addEventListener('change', this.onCheckoutFormChange);
+  };
 }
 /* * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -1466,6 +1522,9 @@ function initBrandsSlider(brandsElement) {
 function initCatalogFilter(catalogElement, pageScrollWrapperElement) {
   const filterToggleButtonElement = catalogElement.querySelector('.catalog__filter-button');
   const filterWrapperElement = catalogElement.querySelector('.catalog__filter-wrapper');
+  if (!filterToggleButtonElement || !filterWrapperElement) {
+    return;
+  }
   const catalogHeaderElement = catalogElement.querySelector('.catalog__header');
   const filterCloseButtonElement = filterWrapperElement.querySelector('.catalog-filter__close-button');
   const catalogBodyElement = catalogElement.querySelector('.catalog__body');
