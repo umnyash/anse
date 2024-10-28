@@ -14,8 +14,8 @@ mixin product-card({ product, headingTag })
           +product-badges({ badges })(class='product-card__badges product-badges--light')
         if product.sizes
           ol.product-card__sizes
-            each size in ['xxs', 'xs', 's', 'm', 'l', 'xl']
-              li.product-card__sizes-item(class= size !== 'xs' && size !== 'l' && 'product-card__sizes-item--active')= size
+            each size in ['s', 'l', 'xl']
+              li.product-card__sizes-item.product-card__sizes-item--active= size
         if product.colors
           .product-card__colors
             ul.product-card__colors-list
