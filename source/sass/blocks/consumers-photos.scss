@@ -48,6 +48,7 @@
 
 .consumers-photos__slider-wrapper {
   display: grid;
+  width: 100%;
   margin: 20px calc(var(--edge-indent) * (-1)) 0;
   grid-template-columns: 100%;
   row-gap: 20px;
