@@ -1,5 +1,11 @@
 mixin site-header
-  header.site-header(class= page === 'index' && 'site-header--transparent')&attributes(attributes)
+  -
+    var headerClasses = []
+    if (page === 'index') headerClasses.push('site-header--transparent');
+    if (lightHeader) headerClasses.push('site-header--light');
+    var headerClassesString = headerClasses.join(' ');
+
+  header.site-header(class= headerClassesString)&attributes(attributes)
     .site-header__message
       .container
         a(href='#!') Доступна оплата в рассрочку

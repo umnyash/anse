@@ -66,21 +66,16 @@
   grid-area: 1 / 1 / 2 / 2;
   width: 100%;
   max-width: 1920px;
-  height: 100vh;
+  height: 820px;
   min-height: 500px;
-  max-height: 820px;
   margin: 0 auto;
   background: var(--background-dark-color);
 
-  @supports (height: 100dvh) {
-    height: 100dvh;
-  }
-
   @media (min-width: $laptop-width) {
-    max-height: 800px;
+    height: 800px;
   }
 
   @media (min-width: $desktop-width) {
-    max-height: 970px;
+    height: 970px;
   }
 }

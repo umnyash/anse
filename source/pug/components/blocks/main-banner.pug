@@ -1,9 +1,13 @@
-mixin main-banner
+mixin main-banner({ light } = {})
   .main-banner&attributes(attributes)
     .main-banner__container-wrapper
       .main-banner__container.container
         .main-banner__inner
           p.main-banner__slogan Надень ANSE #[span.main-banner__slogan-accent тебя увидят]
     picture.main-banner__background-wrappper.media.media--cover.media--position_top.skeleton
-      source(media='(min-width: 769px)' srcset='img/banners/main/main-banner-wide-desktop.webp')
-      img.main-banner__background.media__image(src='img/banners/main/main-banner-tablet@2x.webp' alt='Девушка красуется в стильной шубе.')
+      if light
+        source(media='(min-width: 769px)' srcset='img/banners/main/main-banner-light-wide-desktop.webp')
+        img.main-banner__background.media__image(src='img/banners/main/main-banner-light-tablet@2x.webp' alt='Девушка красуется в стильной шубе.')
+      else
+        source(media='(min-width: 769px)' srcset='img/banners/main/main-banner-wide-desktop.webp')
+        img.main-banner__background.media__image(src='img/banners/main/main-banner-tablet@2x.webp' alt='Девушка красуется в стильной шубе.')
