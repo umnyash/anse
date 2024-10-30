@@ -604,7 +604,6 @@
 .site-header--transparent:not(.site-header--sticked):not(.site-header--menu-open):not(.site-header--search-open) {
   @media (max-width: ($laptop-width - 1)) {
     .site-header__inner {
-      // color: var(--text-light-color);
       background: transparent;
     }
 
@@ -615,11 +614,6 @@
     .site-header__container {
       background: transparent;
     }
-
-    // .user-navigation__counter {
-    //   color: var(--text-color);
-    //   background: var(--background-color);
-    // }
 
     &.site-header--light .user-navigation__counter {
       color: var(--text-color);
@@ -629,7 +623,6 @@
 
   @media (min-width: $laptop-width) {
     .site-header__inner {
-      // color: var(--text-light-color);
       background: transparent;
     }
 
@@ -640,11 +633,6 @@
     .site-header__container {
       background: transparent;
     }
-
-    // .user-navigation__counter {
-    //   color: var(--text-color);
-    //   background: var(--background-color);
-    // }
 
     &.site-header--light .user-navigation__counter {
       color: var(--text-color);
@@ -656,7 +644,6 @@
 .site-header--transparent:not(.site-header--sticked):not(.site-header--menu-open).site-header--search-open {
   @media (min-width: $laptop-width) {
     .site-header__inner {
-      // color: var(--text-light-color);
       background: transparent;
     }
 
@@ -668,10 +655,6 @@
       background: transparent;
     }
 
-    // .user-navigation__counter {
-    //   color: var(--text-color);
-    //   background: var(--background-color);
-    // }
 
     &.site-header--light .user-navigation__counter {
       color: var(--text-color);
