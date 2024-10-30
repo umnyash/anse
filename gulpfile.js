@@ -9,6 +9,7 @@ import browser from 'browser-sync';
 
 // Tasks
 import processStyles from './gulp/tasks/process-styles.js';
+import processSdekStyles from './gulp/tasks/process-sdek-styles.js';
 import copyAssets from './gulp/tasks/copy-assets.js';
 import createVectorStack from './gulp/tasks/create-vector-stack.js';
 import createWebp from './gulp/tasks/create-webp.js';
@@ -39,6 +40,7 @@ function watchFiles() {
   gulp.watch(paths.processScripts.watch, processScripts);
   gulp.watch(paths.processDemoScript.watch, processDemoScript);
   gulp.watch(paths.processStyles.watch, processStyles);
+  gulp.watch(paths.processSdekStyles.watch, processSdekStyles);
 }
 
 function compileProject(done) {
@@ -51,6 +53,7 @@ function compileProject(done) {
     processScripts,
     processDemoScript,
     processStyles,
+    processSdekStyles,
   )(done);
 }
 

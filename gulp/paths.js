@@ -95,8 +95,20 @@ export default {
   },
 
   processStyles: {
-    src: `${pathSrc}/sass/*.scss`,
-    watch: `${pathSrc}/sass/**/*.scss`,
+    src: `${pathSrc}/sass/style.scss`,
+    watch: [
+      `${pathSrc}/sass/**/*.scss`,
+      `!${pathSrc}/sass/sdek.scss`,
+    ],
+    dest: `${pathDest}/css`
+  },
+
+  processSdekStyles: {
+    src: `${pathSrc}/sass/sdek.scss`,
+    watch: [
+      `${pathSrc}/sass/sdek.scss`,
+      `${pathSrc}/sass/global/variables.scss`,
+    ],
     dest: `${pathDest}/css`
   },
 };

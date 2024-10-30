@@ -1,0 +1,380 @@
+@import "global/variables.scss";
+
+/* stylelint-disable */
+.modal-sdek__map {
+  #SDEK_pvz {
+    padding: 0 !important;
+  }
+
+  #SDEK_info {
+    inset: auto 0 0 0 !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-height: min(100%, 585px) !important;
+    // max-height: 200px !important;
+
+    padding: 48px 10px 10px !important;
+    border-radius: 12px 12px 0 0 !important;
+    box-shadow: none !important;
+    background: var(--background-color) !important;
+    transform: translateY(-100%) !important;
+
+    &::after {
+      content: "" !important;
+      position: absolute !important;
+      inset: 26px 16px auto auto !important;
+      width: 18px !important;
+      height: 10px !important;
+      background: currentColor !important;
+      mask: url("../img/icons.svg#controls_arrow-without-tail") !important;
+      pointer-events: none !important;
+      transition: transform $duration-s ease-in-out !important;
+    }
+
+    &:hover::after {
+      background: var(--brand-color) !important;
+    }
+
+    @media (min-width: $wide-tablet-width) {
+      left: 40px !important;
+      width: 365px !important;
+      max-height: calc(100% - 20px) !important;
+      border-radius: 16px 16px 0 0 !important;
+    }
+  }
+
+  .jspTrack {
+    background: transparent !important;
+  }
+
+  .jspDrag {
+    width: 3px !important;
+    background: var(--brand-color) !important;
+  }
+
+  #SDEK_sign {
+    position: absolute !important;
+    top: 10px !important;
+    right: 0 !important;
+    left: 0 !important;
+  }
+
+  .ymaps-2-1-79-controls__control {
+    inset: 108px 10px auto auto !important;
+  }
+
+  .ymaps-2-1-79-zoom {
+    width: 30px !important;
+    height: 70px !important;
+    padding: 0 !important;
+  }
+
+  .ymaps-2-1-79-zoom__scale {
+    display: none !important;
+  }
+
+  .ymaps-2-1-79-zoom__plus,
+  .ymaps-2-1-79-zoom__minus {
+    display: grid !important;
+    width: 30px !important;
+    height: 30px !important;
+    padding: 0 !important;
+    border-radius: 4px !important;
+    place-items: center;
+    background-color: var(--background-color) !important;
+    box-shadow: none !important;
+
+    @media (min-width: $desktop-width) {
+      width: 40px !important;
+      height: 40px !important;
+    }
+  }
+
+  .ymaps-2-1-79-zoom__plus::before,
+  .ymaps-2-1-79-zoom__minus::before {
+    content: "" !important;
+    width: 12px !important;
+    height: 12px !important;
+    background: var(--brand-color) !important;
+
+    @media (min-width: $desktop-width) {
+      width: 16px !important;
+      height: 16px !important;
+    }
+  }
+
+  .ymaps-2-1-79-zoom__plus::before {
+    mask: url("../img/icons.svg#controls_plus") !important;
+  }
+
+  .ymaps-2-1-79-zoom__minus::before {
+    mask: url("../img/icons.svg#controls_minus") !important;
+  }
+
+  .ymaps-2-1-79-zoom__plus .ymaps-2-1-79-zoom__icon,
+  .ymaps-2-1-79-zoom__minus .ymaps-2-1-79-zoom__icon {
+    display: none !important;
+  }
+
+  #SDEK_baloon {
+    display: grid !important;
+    box-sizing: border-box !important;
+    max-width: none !important;
+    padding: 20px !important;
+    border-radius: 12px 12px 0 0 !important;
+    grid-template-columns: auto 1fr !important;
+    font: 400 16px/19px "Onest", "Arial", sans-serif !important;
+    color: var(--text-weak-color) !important;
+    background: var(--background-color) !important;
+
+    @media (min-width: 380px) {
+      border-radius: 12px !important;
+    }
+
+    @media (min-width: 1280px) {
+      border-radius: 16px !important;
+    }
+  }
+
+  .SDEK_iTime.sdek_icon {
+    display: none !important;
+  }
+
+  .SDEK_iTime.sdek_icon ~ .sdek_baloonDiv {
+    padding: 0 !important;
+  }
+
+  #SDEK_button {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 16px 20px !important;
+    text-align: center;
+    border-radius: 8px !important;
+    font: 500 16px/1 "Onest", "Arial", sans-serif !important;
+    background: var(--background-dark-color) !important;
+    color: var(--text-light-color) !important;
+
+    &::before {
+      content: "Выбрать этот пункт" !important;
+    }
+
+    @media (min-width: $laptop-width) {
+      font-size: 18px;
+    }
+  }
+
+  .ymaps-2-1-79-balloon__close {
+    position: absolute !important;
+    top: 20px !important;
+    right: 20px !important;
+  }
+
+  .ymaps-2-1-79-balloon__close-button {
+    width: 20px !important;
+    height: 20px !important;
+    color: #E0E0E0 !important;
+    cursor: pointer !important;
+    background: transparent !important;
+    opacity: 1 !important;
+
+    &:hover {
+      color: var(--brand-color) !important;
+    }
+
+    &::before {
+      content: "" !important;
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      background: currentColor !important;
+      mask: url("../img/icons.svg#controls_cross") !important;
+    }
+  }
+
+  .ymaps-2-1-79-balloon {
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .ymaps-2-1-79-balloon__layout {
+    background: transparent !important;
+  }
+
+  .ymaps-2-1-79-balloon__content {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+  }
+
+  .ymaps-2-1-79-balloon__content > * {
+    height: auto !important;
+
+    @media (min-width: 380px) {
+      width: 340px !important;
+    }
+
+    @media (min-width: 420px) {
+      width: 365px !important;
+    }
+  }
+
+  .ymaps-2-1-79-balloon__tail {
+    display: none !important;
+  }
+
+  #SDEK_baloon > * {
+    grid-column: 1 / -1 !important;
+
+    &:first-child {
+      margin-top: 20px !important;
+
+      @media (min-width: 1280px) {
+        margin-top: 16px !important;
+      }
+
+      @media (min-width: 1600px) {
+        margin-top: 20px !important;
+      }
+    }
+  }
+
+  #SDEK_baloon::before {
+    content: "Пункт выдачи СДЭК" !important;
+    grid-row: 1 / 2 !important;
+    grid-column: 2 / 3 !important;
+    margin-right: 32px !important;
+    font-size: 24px !important;
+    line-height: 1 !important;
+    color: var(--text-color) !important;
+
+    @media (min-width: 1280px) {
+      font-size: 20px !important;
+    }
+
+    @media (min-width: 1600px) {
+      font-size: 24px !important;
+    }
+  }
+
+  .SDEK_iAdress {
+    font-size: 16px !important;
+    line-height: 1 !important;
+    font-weight: 500 !important;
+    color: var(--text-color) !important;
+  }
+
+  .SDEK_iAdress ~ div {
+    display: none !important;
+  }
+
+  .SDEK_iAdress ~ div:nth-child(3) {
+    display: block !important;
+  }
+
+  .SDEK_iAdress ~ div:last-child {
+    display: block !important;
+    margin-top: 20px !important;
+
+    @media (min-width: 1280px) {
+      margin-top: 16px !important;
+    }
+  }
+
+  #SDEK_baloon::after {
+    content: "" !important;
+    grid-column: 1 / 2 !important;
+    grid-row: 1 / 2 !important;
+    width: 24px !important;
+    height: 24px !important;
+    margin-right: 10px !important;
+    background: url("../img/icons/sdek.webp") 50% 50% / contain !important;
+
+    @media (min-width: 1280px) {
+      width: 20px !important;
+      height: 20px !important;
+    }
+
+    @media (min-width: 1600px) {
+      width: 24px !important;
+      ;
+      height: 24px !important;
+      ;
+    }
+  }
+
+  #SDEK_wrapper {
+    width: 100% !important;
+    background-color: var(--background-color) !important;
+  }
+
+  #SDEK_wrapper p {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 10px;
+    padding: 16px 0 !important;
+    border-bottom: 1px solid var(--border-light-color) !important;
+    margin: 0 !important;
+    font: 500 16px/1 "Onest", "Arial", sans-serif !important;
+    color: var(--text-color) !important;
+  }
+
+  #SDEK_wrapper p::before {
+    content: "" !important;
+    width: 24px !important;
+    height: 24px !important;
+    background: url("../img/icons/sdek.webp") 50% 50% / contain !important;
+  }
+
+  .jspVerticalBar {
+    right: 0 !important;
+    width: 3px !important;
+  }
+
+  #SDEK_info > div:not(#SDEK_sign) {
+    height: 100% !important;
+  }
+
+  #SDEK_wrapper {
+    height: 100% !important;
+  }
+
+  .ymaps-2-1-79-places-pane .ymaps-2-1-79-image {
+    width: 24px !important;
+    height: 24px !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+
+    @media (min-width: $desktop-width) {
+      width: 40px !important;
+      height: 40px !important;
+    }
+  }
+
+  #SDEK_ten {
+    width: 100% !important;
+  }
+
+  #SDEK_info.closed {
+    height: auto !important;
+
+    &::after {
+      transform: rotate(-180deg) !important;
+    }
+  }
+
+  #SDEK_info.closed > div:not(#SDEK_sign) {
+    position: absolute !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+
+  &:has(#SDEK_baloon) #SDEK_info {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+}
+
+/* stylelint-enable */
