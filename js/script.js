@@ -170,7 +170,7 @@ class Modal {
     this.modalElement.addEventListener('close', () => this.onModalClose());
     this.onOpenerClick = onOpenerClick;
     this.modalElement.addEventListener('click', evt => {
-      if (evt.target === this.modalElement || evt.target.closest('[data-modal-close-button]') || !evt.target.closest('.modal__inner')) {
+      if (document.contains(evt.target) && (evt.target === this.modalElement || evt.target.closest('[data-modal-close-button]') || !evt.target.closest('.modal__inner'))) {
         evt.preventDefault();
         this.close();
       }
@@ -267,6 +267,8 @@ class FormValidator {
     this.formElement = formElement;
     this.deliveryCompanyElement = this.formElement.querySelector('.checkout-form__delivery-company');
     this.deliveryMethodElement = this.formElement.querySelector('.checkout-form__delivery-method');
+    this.pickUpPointFieldElement = this.formElement.querySelector('.checkout-form__pick-up-point-field .text-field__control');
+    this.deliveryAddressFieldElement = this.formElement.querySelector('.checkout-form__delivery-address-field .text-field__control');
     this.addCustomErrorMessages();
     this.init();
   }
@@ -278,6 +280,26 @@ class FormValidator {
     const emailFieldElement = this.formElement.querySelector('[data-name="email"]');
     const messageFieldElement = this.formElement.querySelector('[data-name="message"]');
     const regionFieldElement = this.formElement.querySelector('[data-name="region"]');
+    const postalCodeFieldElement = this.formElement.querySelector('.modal-form__postal-code-field .text-field__control');
+    const streetHouseFieldElement = this.formElement.querySelector('.modal-form__street-house-field .text-field__control');
+    const entranceFieldElement = this.formElement.querySelector('.modal-form__entrance-field .text-field__control');
+    const apartmentOfficeFieldElement = this.formElement.querySelector('.modal-form__apartment-office-field .text-field__control');
+    if (postalCodeFieldElement) {
+      postalCodeFieldElement.closest('.text-field').classList.add('pristine-item');
+      postalCodeFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+    if (streetHouseFieldElement) {
+      streetHouseFieldElement.closest('.text-field').classList.add('pristine-item');
+      streetHouseFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+    if (entranceFieldElement) {
+      entranceFieldElement.closest('.text-field').classList.add('pristine-item');
+      entranceFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+    if (apartmentOfficeFieldElement) {
+      apartmentOfficeFieldElement.closest('.text-field').classList.add('pristine-item');
+      apartmentOfficeFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
     const subscriptionFieldElement = this.formElement.querySelector('.subscription-form__field-control');
     if (subscriptionFieldElement) {
       subscriptionFieldElement.closest('.subscription-form__field').classList.add('pristine-item');
@@ -295,6 +317,12 @@ class FormValidator {
       surnameFieldElement.dataset.pristinePattern = '/^[a-zа-яЁё -]+$/i';
       surnameFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
       surnameFieldElement.dataset.pristinePatternMessage = 'Допустимы только буквы, дефисы и пробелы.';
+    }
+    if (this.pickUpPointFieldElement) {
+      this.pickUpPointFieldElement.closest('.text-field').classList.add('pristine-item');
+    }
+    if (this.deliveryAddressFieldElement) {
+      this.deliveryAddressFieldElement.closest('.text-field').classList.add('pristine-item');
     }
     if (addressFieldElement) {
       addressFieldElement.closest('.text-field').classList.add('pristine-item');
@@ -378,6 +406,24 @@ class FormValidator {
       errorTextTag: 'p',
       errorTextClass: 'pristine-item__error-text'
     });
+    if (this.pickUpPointFieldElement) {
+      this.pristine.addValidator(this.pickUpPointFieldElement, () => {
+        const hasRequiredClasses = (this.formElement.classList.contains('checkout-form--delivery-company_post') || this.formElement.classList.contains('checkout-form--delivery-company_sdek')) && this.formElement.classList.contains('checkout-form--delivery-method_point');
+        if (hasRequiredClasses) {
+          return this.pickUpPointFieldElement.value.trim() !== '';
+        }
+        return true;
+      }, 'Заполните это поле.');
+    }
+    if (this.deliveryAddressFieldElement) {
+      this.pristine.addValidator(this.deliveryAddressFieldElement, () => {
+        const hasRequiredClasses = (this.formElement.classList.contains('checkout-form--delivery-company_post') || this.formElement.classList.contains('checkout-form--delivery-company_sdek')) && this.formElement.classList.contains('checkout-form--delivery-method_courier');
+        if (hasRequiredClasses) {
+          return this.deliveryAddressFieldElement.value.trim() !== '';
+        }
+        return true;
+      }, 'Заполните это поле.');
+    }
     if (!this.formElement.classList.contains('checkout-form')) {
       return;
     }
@@ -768,6 +814,7 @@ class CheckoutForm extends Form {
     this.deliveryCompanyButtonsWrapper = this.formElement.querySelector('.checkout-form__delivery-company');
     this.phoneFieldElement = this.formElement.querySelector('.checkout-form__phone-field .text-field__control');
     this.pickupPointFieldWrapperElement = this.formElement.querySelector('.checkout-form__pick-up-point-field');
+    this.deliveryAddressFieldElement = this.formElement.querySelector('[data-name="delivery-address"]');
     this.regionModalElement = document.querySelector('[data-modal="region-form"]');
     this.regionFormElement = this.regionModalElement.querySelector('.modal-form');
     this.regionFormCountryFieldElement = this.regionFormElement.querySelector('.modal-form__country-select select');
@@ -778,11 +825,53 @@ class CheckoutForm extends Form {
     this.regionModal = new Modal(this.regionModalElement);
     this.addressModalElement = document.querySelector('[data-modal="address-form"]');
     this.addressFormElement = this.addressModalElement.querySelector('.modal-form');
-    this.addressFormCountryFieldElement = this.addressFormElement.querySelector('.modal-form__country-select select');
-    this.addressFormCountrySelect = initSelect(this.addressFormCountryFieldElement);
-    this.addressFormCountryOptionElements = Array.from(this.addressFormElement.querySelectorAll('.modal-form__country-select option'));
-    this.addressFormCityFieldElement = this.addressFormElement.querySelector('.modal-form__city-field .text-field__control');
     this.addressModal = new Modal(this.addressModalElement);
+    this.addressFormValidator = new FormValidator(this.addressFormElement);
+    this.addressFormSubmitButtonElement = this.addressFormElement.querySelector('.modal-form__submit-button');
+    this.addressFieldControlElements = Array.from(this.addressFormElement.querySelectorAll(`
+        .modal-form__postal-code-field .text-field__control,
+        .modal-form__street-house-field .text-field__control,
+        .modal-form__entrance-field .text-field__control,
+        .modal-form__apartment-office-field .text-field__control
+      `));
+    this.addressFormSubmitButtonElement.addEventListener('click', evt => {
+      evt.preventDefault();
+      const isValid = this.addressFormValidator.validate();
+      if (isValid) {
+        const address = this.addressFieldControlElements.filter(controlElement => controlElement.value.trim()).map(controlElement => {
+          const controlWrapperElement = controlElement.closest('.text-field');
+          let label = '';
+          switch (true) {
+            case controlWrapperElement.matches('.modal-form__street-house-field'):
+              label = 'улица';
+              break;
+            case controlWrapperElement.matches('.modal-form__entrance-field'):
+              label = 'подъезд';
+              break;
+            case controlWrapperElement.matches('.modal-form__apartment-office-field'):
+              label = 'кв/офис';
+              break;
+          }
+          return `${label} ${controlElement.value}`;
+        }).join(', ');
+        this.deliveryAddressFieldElement.value = address;
+        this.deliveryAddressFieldElement.dispatchEvent(inputEvent);
+        this.addressModal.close();
+      } else {
+        const firstInvalidItemElement = this.addressFormElement.querySelector('.pristine-item--invalid');
+        firstInvalidItemElement.querySelector('input').focus();
+        firstInvalidItemElement.classList.remove('shake');
+        requestAnimationFrame(() => firstInvalidItemElement.classList.add('shake'));
+      }
+    });
+    this.addressFormCountryFieldElement = this.addressFormElement.querySelector('.modal-form__country-select select');
+    if (this.addressFormCountryFieldElement) {
+      this.addressFormCountrySelect = initSelect(this.addressFormCountryFieldElement);
+      this.addressFormCountryOptionElements = Array.from(this.addressFormElement.querySelectorAll('.modal-form__country-select option'));
+    }
+    if (this.addressFormCityFieldElement) {
+      this.addressFormCityFieldElement = this.addressFormElement.querySelector('.modal-form__city-field .text-field__control');
+    }
     this.sdekModalElement = document.querySelector('[data-modal="sdek-sdek"]');
     this.sdekModal = new Modal(this.sdekModalElement);
     this.sdekModal.initOpener(this.pickupPointFieldWrapperElement);
