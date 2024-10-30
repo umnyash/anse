@@ -6,6 +6,8 @@ class FormValidator {
     this.formElement = formElement;
     this.deliveryCompanyElement = this.formElement.querySelector('.checkout-form__delivery-company');
     this.deliveryMethodElement = this.formElement.querySelector('.checkout-form__delivery-method');
+    this.pickUpPointFieldElement = this.formElement.querySelector('.checkout-form__pick-up-point-field .text-field__control');
+    this.deliveryAddressFieldElement = this.formElement.querySelector('.checkout-form__delivery-address-field .text-field__control');
     this.addCustomErrorMessages();
     this.init();
   }
@@ -18,6 +20,31 @@ class FormValidator {
     const emailFieldElement = this.formElement.querySelector('[data-name="email"]');
     const messageFieldElement = this.formElement.querySelector('[data-name="message"]');
     const regionFieldElement = this.formElement.querySelector('[data-name="region"]');
+
+    const postalCodeFieldElement = this.formElement.querySelector('.modal-form__postal-code-field .text-field__control');
+    const streetHouseFieldElement = this.formElement.querySelector('.modal-form__street-house-field .text-field__control');
+    const entranceFieldElement = this.formElement.querySelector('.modal-form__entrance-field .text-field__control');
+    const apartmentOfficeFieldElement = this.formElement.querySelector('.modal-form__apartment-office-field .text-field__control');
+
+    if (postalCodeFieldElement) {
+      postalCodeFieldElement.closest('.text-field').classList.add('pristine-item');
+      postalCodeFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+
+    if (streetHouseFieldElement) {
+      streetHouseFieldElement.closest('.text-field').classList.add('pristine-item');
+      streetHouseFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+
+    if (entranceFieldElement) {
+      entranceFieldElement.closest('.text-field').classList.add('pristine-item');
+      entranceFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
+
+    if (apartmentOfficeFieldElement) {
+      apartmentOfficeFieldElement.closest('.text-field').classList.add('pristine-item');
+      apartmentOfficeFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
+    }
 
     const subscriptionFieldElement = this.formElement.querySelector('.subscription-form__field-control');
 
@@ -39,6 +66,14 @@ class FormValidator {
       surnameFieldElement.dataset.pristinePattern = '/^[a-zа-яЁё -]+$/i';
       surnameFieldElement.dataset.pristineRequiredMessage = 'Заполните это поле.';
       surnameFieldElement.dataset.pristinePatternMessage = 'Допустимы только буквы, дефисы и пробелы.';
+    }
+
+    if (this.pickUpPointFieldElement) {
+      this.pickUpPointFieldElement.closest('.text-field').classList.add('pristine-item');
+    }
+
+    if (this.deliveryAddressFieldElement) {
+      this.deliveryAddressFieldElement.closest('.text-field').classList.add('pristine-item');
     }
 
     if (addressFieldElement) {
@@ -143,6 +178,44 @@ class FormValidator {
       errorTextTag: 'p',
       errorTextClass: 'pristine-item__error-text',
     });
+
+    if (this.pickUpPointFieldElement) {
+      this.pristine.addValidator(
+        this.pickUpPointFieldElement,
+        () => {
+          const hasRequiredClasses = (
+            (this.formElement.classList.contains('checkout-form--delivery-company_post') || this.formElement.classList.contains('checkout-form--delivery-company_sdek')) &&
+            this.formElement.classList.contains('checkout-form--delivery-method_point')
+          );
+
+          if (hasRequiredClasses) {
+            return this.pickUpPointFieldElement.value.trim() !== '';
+          }
+
+          return true;
+        },
+        'Заполните это поле.'
+      );
+    }
+
+    if (this.deliveryAddressFieldElement) {
+      this.pristine.addValidator(
+        this.deliveryAddressFieldElement,
+        () => {
+          const hasRequiredClasses = (
+            (this.formElement.classList.contains('checkout-form--delivery-company_post') || this.formElement.classList.contains('checkout-form--delivery-company_sdek')) &&
+            this.formElement.classList.contains('checkout-form--delivery-method_courier')
+          );
+
+          if (hasRequiredClasses) {
+            return this.deliveryAddressFieldElement.value.trim() !== '';
+          }
+
+          return true;
+        },
+        'Заполните это поле.'
+      );
+    }
 
     if (!this.formElement.classList.contains('checkout-form')) {
       return;

@@ -77,7 +77,6 @@ class Form extends PubSub {
             })
           }
 
-
           firstInvalidItemElement.querySelector('input, textarea').focus();
           firstInvalidItemElement.classList.remove('shake');
           requestAnimationFrame(() => firstInvalidItemElement.classList.add('shake'));

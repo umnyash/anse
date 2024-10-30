@@ -26,7 +26,7 @@ mixin address-modal-form
       label: {
         text: 'Индекс:',
       },
-    })(class='checkout-form__postal-code-field')
+    })(class='modal-form__postal-code-field')
 
     +text-field({
       type: 'text',
@@ -34,6 +34,7 @@ mixin address-modal-form
       label: {
         text: 'Улица, номер дома',
       },
+      required: true,
     })(class='modal-form__text-field modal-form__street-house-field')
 
     +text-field({
