@@ -2675,6 +2675,11 @@ function initSkeleton(skeletonElement) {
         attributes: true,
         attributeFilter: ['src']
       });
+      setTimeout(() => {
+        if (imgElement && imgElement.complete || videoElement && videoElement.readyState >= 1) {
+          skeletonElement.classList.add('skeleton--loaded');
+        }
+      }, 1500);
     }
   }
 }
@@ -2809,4 +2814,7 @@ if (birthDateModalFormElement && birthDateInfoModal) {
 initReviewsIntroPhotos();
 initConsumersPhotos();
 document.querySelectorAll('.text-field').forEach(initTextField);
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(initSkeletons, 3000);
+});
 /* * * * * * * * * * * * * * * * * * * * * * * */
