@@ -1,0 +1,46 @@
+extends layout/layout
+
+block variables
+  - var title = 'Товар | Anse'
+  - var page = 'product'
+
+block content
+  +product({
+    media: [
+      'img/product/1.webp',
+      'files/fur-coat-1.mp4',
+      'img/product/2.webp',
+      'img/product/3.webp',
+      'files/fur-coat-2.mp4',
+      'img/product/4.webp',
+    ]
+  })
+  +products({
+    heading: 'Добавьте к образу',
+    tooltipText: 'При покупке шубы, Вы сможете применить скидку 30% на все аксессуары в корзине'
+  })
+  +products({
+    heading: 'Рекомендуем'
+  })
+  +consultant-contacts
+  +advantages
+
+append modals
+  +modal(class='modal--default modal--with_offer' data-modal='offer')
+    +modal-offer
+  +modal(class='modal--default modal--with_size-chart' data-modal='size-chart')
+    +size-chart
+  +modal(class='modal--default modal--with_color' data-modal='color')
+    +modal-color(class='modal__color')
+  +modal(class='modal--with_gallery' data-modal='product-gallery')
+    +modal-gallery({
+      items: [
+        'img/product/1.webp',
+        'files/fur-coat-1.mp4',
+        'img/product/2.webp',
+        'img/product/3.webp',
+        'files/fur-coat-2.mp4',
+        'img/product/4.webp',
+      ]
+    })(class='modal__gallery')
+  +cart-notification({ color: true })
