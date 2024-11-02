@@ -104,10 +104,6 @@
     font-weight: 300;
     color: var(--text-color);
 
-    @media (min-width: $laptop-width) {
-      letter-spacing: -2px;
-    }
-
     @media (min-width: $desktop-width) {
       font-size: 28px;
     }

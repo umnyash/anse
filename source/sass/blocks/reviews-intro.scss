@@ -35,21 +35,22 @@
   blockquote {
     margin: 0;
     font-size: 20px;
-    line-height: 1;
+    line-height: 24px;
     font-weight: 300;
-
-    @media (min-width: $laptop-width) {
-      letter-spacing: -2px;
-    }
 
     @media (min-width: $desktop-width) {
       font-size: 28px;
+      line-height: 32px;
     }
   }
 
   p {
-    margin: 10px 0 0;
+    margin: 16px 0 0;
     color: var(--text-weak-color);
+
+    @media (min-width: $desktop-width) {
+      margin-top: 20px;
+    }
   }
 }
 
