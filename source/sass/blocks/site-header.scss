@@ -499,9 +499,18 @@
     display: grid;
     height: 100vh;
     grid-template-rows: auto 1fr;
+    grid-template-areas: "message" "inner";
 
     @supports (height: 100dvh) {
       height: 100dvh;
+    }
+
+    .site-header__message {
+      grid-area: message;
+    }
+
+    .site-header__inner {
+      grid-area: inner;
     }
 
     .site-header__container {

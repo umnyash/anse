@@ -1,4 +1,4 @@
-mixin site-header
+mixin site-header({ message } = {})
   -
     var headerClasses = []
     if (page === 'index') headerClasses.push('site-header--transparent');
@@ -6,9 +6,10 @@ mixin site-header
     var headerClassesString = headerClasses.join(' ');
 
   header.site-header(class= headerClassesString)&attributes(attributes)
-    .site-header__message
-      .container
-        a(href='#!') Доступна оплата в рассрочку
+    if specialOffer
+      .site-header__message
+        .container
+          a(href='#!') Доступна оплата в рассрочку
     .site-header__inner
       .site-header__container.container
         nav.site-header__main-navigation
