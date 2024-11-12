@@ -2592,6 +2592,9 @@ function initSiteHeader(headerElement, pageScrollWrapperElement) {
   searchCloserElements.forEach(closerElement => {
     closerElement.addEventListener('click', closeSearchPanel);
   });
+  const calcHeaderHeight = () => {
+    document.body.style.setProperty('--site-header-height', `${headerElement.offsetHeight}px`);
+  };
 
   // Изменение цвета шапки при открытии меню на декстопной версии (нужно для главной страницы, где шапка transparent)
   const siteNavigationLinkOpenerElements = headerElement.querySelectorAll('.site-navigation__link--opener');
@@ -2609,6 +2612,16 @@ function initSiteHeader(headerElement, pageScrollWrapperElement) {
       }
     });
   });
+
+  // Уточнение высоты шапки
+
+  document.addEventListener('DOMContentLoaded', () => {
+    calcHeaderHeight();
+  });
+  window.addEventListener('load', () => {
+    calcHeaderHeight();
+  });
+  window.addEventListener('resize', debounce(calcHeaderHeight, 500));
 
   // Закрытие меню и панели поиска при ресайзе
 
