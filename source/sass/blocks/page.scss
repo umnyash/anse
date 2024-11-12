@@ -70,15 +70,7 @@
 }
 
 .page__site-header:not(.site-header--transparent) + .page__content {
-  padding-top: 76px;
-
-  @media (min-width: $laptop-width) {
-    padding-top: 165px;
-  }
-
-  @media (min-width: $desktop-width) {
-    padding-top: 185px;
-  }
+  padding-top: var(--site-header-height);
 }
 
 .page__content > * {

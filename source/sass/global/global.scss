@@ -22,6 +22,7 @@
   --border-light-color-4: rgba(69, 69, 69, 0.1);
   --overlay-color: rgba(45, 45, 45, 0.2);
 
+  --site-header-height: 76px;
   --edge-indent: 10px;
   --grid-column-gap: 10px;
 
@@ -30,8 +31,13 @@
   }
 
   @media (min-width: $laptop-width) {
+    --site-header-height: 166px;
     --edge-indent: 40px;
     --grid-column-gap: 20px;
+  }
+
+  @media (min-width: $desktop-width) {
+    --site-header-height: 186px;
   }
 }
 
