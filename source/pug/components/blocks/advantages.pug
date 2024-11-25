@@ -13,3 +13,9 @@ mixin advantages
             picture.advantages__image-wrapper.media.media--cover.skeleton
               img.advantages__image.media__image(src=`img/advantages/5.webp` width='560' height='296' alt='' loading='lazy')
             p.advantages__text Ручная работа
+        .advantages__button-wrapper
+          +button({
+            tag: 'a',
+            text: 'Подробнее о бренде',
+            href: 'production.html'
+          })(class='advantages__button button--solid-primary')

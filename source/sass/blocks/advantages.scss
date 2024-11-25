@@ -74,3 +74,30 @@
     }
   }
 }
+
+.advantages__button-wrapper {
+  display: grid;
+  margin: 20px 0 0;
+
+  @media (min-width: $tablet-width) {
+    justify-content: center;
+  }
+
+  @media (min-width: $laptop-width) {
+    margin-top: 24px;
+  }
+
+  @media (min-width: $desktop-width) {
+    margin-top: 32px;
+  }
+}
+
+.advantages__button {
+  @media (min-width: $tablet-width) {
+    min-width: 251px;
+  }
+
+  @media (min-width: $desktop-width) {
+    min-width: 273px;
+  }
+}
