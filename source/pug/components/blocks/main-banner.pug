@@ -1,13 +1,26 @@
-mixin main-banner({ light } = {})
-  .main-banner&attributes(attributes)
+mixin main-banner({ light, alter } = {})
+  .main-banner(class= alter && 'main-banner--alter')&attributes(attributes)
     .main-banner__container-wrapper
       .main-banner__container.container
         .main-banner__inner
-          p.main-banner__slogan Надень ANSE #[span.main-banner__slogan-accent тебя увидят]
+          if alter
+            h2.main-banner__slogan Magic collection 24/25
+            p.main-banner__text #[span.main-banner__text-accent зимняя сказка] начинается с Ansé
+            +button({
+              tag: 'a',
+              text: 'Перейти в каталог',
+              href: 'main-catalog.html'
+            })(class='main-banner__button button--solid-brand-2')
+          else
+            p.main-banner__slogan Надень ANSE #[span.main-banner__slogan-accent тебя увидят]
     picture.main-banner__background-wrappper.media.media--cover.media--position_top.skeleton
-      if light
-        source(media='(min-width: 769px)' srcset='img/banners/main/main-banner-light-wide-desktop.webp')
-        img.main-banner__background.media__image(src='img/banners/main/main-banner-light-tablet@2x.webp' alt='Девушка красуется в стильной шубе.')
+      if alter
+        source(media='(min-width: 769px)' srcset='img/banners/main/magic-collection-1600.webp')
+        img.main-banner__background.media__image(src='img/banners/main/magic-collection-tablet@2x.webp' alt='Девушка в зимней шубе.')
       else
-        source(media='(min-width: 769px)' srcset='img/banners/main/main-banner-wide-desktop.webp')
-        img.main-banner__background.media__image(src='img/banners/main/main-banner-tablet@2x.webp' alt='Девушка красуется в стильной шубе.')
+        if light
+          source(media='(min-width: 769px)' srcset='img/banners/main/main-banner-light-wide-desktop.webp')
+          img.main-banner__background.media__image(src='img/banners/main/main-banner-light-tablet@2x.webp' alt='Девушка красуется в стильной шубе.')
+        else
+          source(media='(min-width: 769px)' srcset='img/banners/main/main-banner-wide-desktop.webp')
+          img.main-banner__background.media__image(src='img/banners/main/main-banner-tablet@2x.webp' alt='Девушка красуется в стильной шубе.')

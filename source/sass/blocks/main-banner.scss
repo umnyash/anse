@@ -14,9 +14,11 @@
 }
 
 .main-banner__inner {
-  display: grid;
+  display: flex;
   height: 100%;
-  place-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
 
@@ -62,6 +64,48 @@
   }
 }
 
+.main-banner__text {
+  margin: 0;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 300;
+
+  @media (min-width: $tablet-width) {
+    font-size: 28px;
+  }
+
+  @media (min-width: $laptop-width) {
+    font-size: 43px;
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 56px;
+  }
+}
+
+.main-banner__text-accent {
+  vertical-align: baseline;
+  font-family: $decorative-font-family;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--brand-color);
+
+  @media (min-width: $tablet-width) {
+    font-size: 50px;
+  }
+
+  @media (min-width: $laptop-width) {
+    font-size: 80px;
+    display: inline-block;
+    transform: translateY(-4px);
+  }
+
+  @media (min-width: $desktop-width) {
+    font-size: 100px;
+  }
+}
+
 .main-banner__background-wrappper {
   grid-area: 1 / 1 / 2 / 2;
   width: 100%;
@@ -77,5 +121,46 @@
 
   @media (min-width: $desktop-width) {
     height: 970px;
+  }
+}
+
+.main-banner--alter {
+  .main-banner__inner {
+    justify-content: flex-end;
+  }
+
+  .main-banner__slogan {
+    padding: 0;
+    margin: 0;
+  }
+
+  .main-banner__text {
+    margin-top: -10px;
+
+    @media (min-width: $laptop-width) {
+      margin-top: -12px;
+    }
+
+    @media (min-width: $desktop-width) {
+      margin-top: -24px;
+    }
+  }
+
+  .main-banner__button {
+    margin: 212px 0 60px;
+
+    @media (max-width: ($wide-tablet-width - 1)) {
+      width: 100%;
+    }
+
+    @media (min-width: $wide-tablet-width) {
+      min-width: 273px;
+      margin: 70px 0 120px;
+    }
+
+    @media (min-width: $desktop-width) {
+      min-width: 273px;
+      margin: 112px 0 163px;
+    }
   }
 }

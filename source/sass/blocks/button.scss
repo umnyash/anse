@@ -243,6 +243,23 @@
   }
 }
 
+.button--solid-brand-2 {
+  border-color: var(--brand-color);
+  color: var(--text-color);
+  background: linear-gradient(var(--brand-color), var(--brand-color)) no-repeat bottom center / 100% 100%;
+  background-origin: border-box;
+
+  &:hover {
+    background-size: 100% 0;
+    color: var(--brand-color);
+  }
+
+  &:active {
+    color: var(--brand-color);
+    background-size: 100% 0;
+  }
+}
+
 .button--solid-primary-secondary {
   border-color: var(--background-dark-color);
   color: var(--text-light-color);
